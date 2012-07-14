@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<turboprop_engine name="pw127f">
+	<milthrust> 6210.0 </milthrust>
+	<maxpower unit="HP">2700.0 </maxpower>
+	<psfc unit="LBS/HR/HP">0.55 </psfc>
+	<itt_delay>      0.05 </itt_delay>
+	<idlen1>         50.0 </idlen1>
+	<startern1>      20.0 </startern1>
+	<maxn1>         100.0 </maxn1>
+	<maxstartenginetime>16</maxstartenginetime>
+
+<table name="EnginePowerVC">
+  <description> Engine power, function of airspeed and pressure </description>
+  <independentVar lookup="row">atmosphere/P-sl-psf</independentVar>
+  <independentVar lookup="column">velocities/ve-kts</independentVar>
+  <tableData>
+               0     50    100    150    200    250		270
+     503   0.357  0.380  0.400  0.425  0.457  0.486		0.512
+    1048   0.586  0.589  0.600  0.621  0.650  0.686		0.720
+    1328   0.707  0.721  0.731  0.757  0.786  0.821		0.874
+    1496   0.779  0.786  0.808  0.821  0.857  0.900		0.981
+    1684   0.850  0.857  0.874  0.900  0.943  0.979		1.210
+    1896   0.914  0.929  0.946  0.971  1      1.057		1.341
+    2135   1      1.011  1.029  1.043  1.083  1.150		1.450
+    2213   1.029  1.043  1.057  1.079  1.114  1.171		1.500
+  </tableData>
+</table>
+
+<table name="EnginePowerRPM_N1" type="internal">
+  <description> Engine Power, function of RPM and N1 </description>
+  <tableData>
+          0		5		60	    86		92		96		98		100
+       0  0   	0		0		0		0		0		0		0
+     800  0   	1		280		900		880		960		1200	1400
+    1200  0   	1		320		1400	1900	2250	2400	2500
+    1400  0   	1		360		1600	2100	2350	2550	2700	
+    1800  0   	2		400		1800	2200	2400	2580	2700	
+    2200  0   	3		480		1900	2300	2450	2600	2700
+  </tableData>
+</table>
+ 
+<table name="ITT_N1" type="internal">
+	<description> Inter-Turbine Temperature ITT [deg C] depending on N1 and engine run </description>
+   <tableData>
+             0     1
+       0     0     0
+      15   100   100
+      60   180   520
+      96   270   680
+     100   280   730
+   </tableData>
+</table>
+	
+</turboprop_engine>

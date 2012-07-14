@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ATR72-500 Lateral Automatic Flight Control System -->
+
+<PropertyList>
+
+	<!-- IAS -->
+	
+<!--
+	Activate IAS Hold with pitch PID under the following conditions:
+	1.	prop:/aircraft/afcs/ap-master -> value:true (bool)
+	2.	prop:/aircraft/afcs/ver-mode -> value:ias (string)
+	
+	Input Property -> /aircraft/afcs/ias-setting
+	
+	Output Property -> /controls/flight/elevator
+	
+	NOTE: The IAS Hold may be a complicated concept here but actually, it's just holding speed with pitch, not throttle. I THINK the generic FG autopilot uses that, so you could probably take that an simply fine-tune it.
+-->	
+
+	
+	
+	<!-- VS -->
+	
+<!--
+	Activate VS Hold PID under the following conditions:
+	1.	prop:/aircraft/afcs/ap-master -> value:true (bool)
+	2.	prop:/aircraft/afcs/ver-mode -> value:vs (string)
+	
+	Input Property -> /aircraft/afcs/vs-setting
+	
+	Output Property -> /controls/flight/elevator
+-->	
+
+	
+
+	<!-- ALT -->
+	
+<!--
+	Activate ALT Hold PID under the following conditions:
+	1.	prop:/aircraft/afcs/ap-master -> value:true (bool)
+	2.	prop:/aircraft/afcs/ver-mode -> value:alt (string)
+	
+	Input Property -> /aircraft/afcs/alt-setting
+	
+	Output Property -> /controls/flight/elevator
+-->
+
+	
+
+	<!-- APP -->
+	
+<!--
+	Activate Approach VS Hold PID under the following conditions:
+	1.	prop:/aircraft/afcs/ap-master -> value:true (bool)
+	2.	prop:/aircraft/afcs/ver-mode -> value:app (string)
+	
+	Input Property -> /aircraft/afcs/approach-vs-fps
+	
+	Output Property -> /controls/flight/elevator
+	
+	NOTE: Use this as a vertical speed hold pid (in feet-per-second), it's kinda different with the ATR72, as it's activated along with the lateral APP. So, I'll write a nasal script that sets the required GS Vertical Speed into the input property and you can use that for the PID. But then it's important to note that this needs to be 'quicker' than the normal VS hold.
+-->
+
+</PropertyList>

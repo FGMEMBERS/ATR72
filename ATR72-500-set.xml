@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+	<sim>
+		<description>Avions Transportation Regional ATR72-500</description>
+		<flight-model>jsb</flight-model>
+		<aero>ATR72-500</aero>
+		<authors>Narendran Muraleedharan</authors>
+		<engine>pw127f</engine>
+
+		<model>
+			<path>Aircraft/ATR72/Models/ATR72-500.xml</path>
+            <livery>
+               <file type="string">blank</file>
+            </livery> 
+		</model>
+
+	<flaps>
+		<setting>0.000</setting> <!-- Flaps up -->
+		<setting>0.428</setting> <!-- 15 Degrees (take-off) -->
+		<setting>0.714</setting> <!-- 25 Degrees (light landing) -->
+		<setting>1.000</setting> <!-- 35 Degrees (heavy landing) -->
+	</flaps>
+
+		<startup>
+			<splash-texture>Aircraft/ATR72/splash.png</splash-texture>
+		</startup>
+	
+		<chase-distance-m>-60</chase-distance-m>
+
+		<!-- sound>
+			<path>Aircraft/ATR72/j170-sound.xml</path>
+		</sound-->
+
+		<instrumentation>
+			<path>Aircraft/ATR72/Systems/instrumentation.xml</path>
+		</instrumentation>
+        
+	<view n="0">
+		<name>Pilot View</name>
+		<type>lookfrom</type>
+		<internal type="bool">true</internal>
+		<cockpit type="bool">true</cockpit>
+		<config>
+			<x-offset-m type="double">-0.59</x-offset-m>
+			<y-offset-m type="double">1.0333</y-offset-m>
+			<z-offset-m type="double">-10.2479</z-offset-m>
+			<pitch-offset-deg>-3</pitch-offset-deg>
+			<default-field-of-view-deg type="double">60.0</default-field-of-view-deg>
+		</config>
+	</view>
+
+		<menubar>
+			<default>
+                <menu n="3">
+                    <item n="0">
+		                <label>Autopilot Dialog</label>
+		                <enabled type="bool">false</enabled>
+                        <binding>
+							<command>nasal</command>
+							<script>
+							<!-- Disabled -->
+							</script>
+                        </binding>
+                    </item>
+                </menu>
+                <menu n="100">
+                	<label>ATR72-500</label>
+                    <item n="0">
+		                <label>Autostart Aircraft</label>
+                        <binding>
+							<command>nasal</command>
+							<script>
+								atr.autostart();
+							</script>
+                        </binding>
+                    </item>
+                </menu>
+			</default>
+		</menubar>
+
+	</sim>
+	
+	<aircraft>
+		<prop-brake type="bool">false</prop-brake>
+		<afcs>
+			<lat-mode type="string">hdg</lat-mode>
+			<ver-mode type="string">alt</ver-mode>
+			<ap-master type="bool">false</ap-master>
+			<yd type="bool">false</yd>
+			<hdg-setting type="int">0</hdg-setting>
+			<crs1 type="int">0</crs1>
+			<crs2 type="int">0</crs2>
+			<alt-setting type="int">10000</alt-setting>
+			<vs-setting type="int">0</vs-setting>
+			<ias-setting type="int">180</ias-setting>
+		</afcs>
+	</aircraft>
+	
+	<controls>
+		<electric>
+			<engine n="0">
+				<generator type="bool">true</generator>
+			</engine>
+			<engine n="1">
+				<generator type="bool">true</generator>
+			</engine>
+		</electric>
+		<engines>
+			<engine n="0">
+				<master-alt type="bool">true</master-alt>
+				<master-bat type="bool">true</master-bat>
+			</engine>
+			<engine n="1">
+				<master-alt type="bool">true</master-alt>
+				<master-bat type="bool">true</master-bat>
+			</engine>
+		</engines>
+	</controls>
+
+	<consumables>
+		<fuel>
+			<tank n="0">
+				<name>Left Wing Fuel Tank</name>
+			</tank>
+			<tank n="1">
+				<name>Right Wing Fuel Tank</name>
+			</tank>
+		</fuel>
+	</consumables>
+
+	<payload>
+
+	<weight n="0">
+		<name>Crew</name>
+		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]">380</weight-lb>
+		<max-lb>480</max-lb>
+		<min-lb>100</min-lb>
+	</weight>
+
+	<weight n="1">
+		<name>Cargo</name>
+		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]">750</weight-lb>
+		<max-lb>960</max-lb>
+		<min-lb>0</min-lb>
+	</weight>
+
+	<weight n="2">
+		<name>Passengers</name>
+		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]">12000</weight-lb>
+		<max-lb>13320</max-lb>
+		<min-lb>0</min-lb>
+	</weight>
+	</payload>
+
+	<input>
+		<keyboard>
+			<key n="357">
+				<name>Up</name>
+				<repeatable type="bool">true</repeatable>
+				  <mod-alt>
+				   <desc>Tilt View Up</desc>
+				   <binding>
+					<command>nasal</command>
+					<script>
+						setprop("/sim/current-view/pitch-offset-deg", getprop("/sim/current-view/pitch-offset-deg") + 1);
+					</script>
+				   </binding>
+				  </mod-alt>
+			</key>
+			<key n="359">
+				<name>Down</name>
+				<repeatable type="bool">true</repeatable>
+				  <mod-alt>
+				   <desc>Tilt View Down</desc>
+				   <binding>
+					<command>nasal</command>
+					<script>
+						setprop("/sim/current-view/pitch-offset-deg", getprop("/sim/current-view/pitch-offset-deg") - 1);
+					</script>
+				   </binding>
+				  </mod-alt>
+			</key>
+			<key n="356">
+				<name>Left</name>
+				<repeatable type="bool">true</repeatable>
+				  <mod-alt>
+				   <desc>Pan View Left</desc>
+				   <binding>
+					<command>nasal</command>
+					<script>
+						setprop("/sim/current-view/heading-offset-deg", getprop("/sim/current-view/heading-offset-deg") + 1);
+					</script>
+				   </binding>
+				  </mod-alt>
+			</key>
+			<key n="358">
+				<name>Right</name>
+				<repeatable type="bool">true</repeatable>
+				  <mod-alt>
+				   <desc>Pan View Right</desc>
+				   <binding>
+					<command>nasal</command>
+					<script>
+						setprop("/sim/current-view/heading-offset-deg", getprop("/sim/current-view/heading-offset-deg") - 1);
+					</script>
+				   </binding>
+				  </mod-alt>
+			</key>
+		</keyboard>
+	</input>
+
+	<nasal>
+		<walk>
+			<file>Aircraft/ATR72/Nasal/walk.nas</file>
+		</walk>
+		<atr>
+			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
+			<file>Aircraft/ATR72/Engines/propeller.nas</file>
+			<file>Aircraft/ATR72/Nasal/general_loop.nas</file>
+		</atr>
+	</nasal>
+
+</PropertyList>
