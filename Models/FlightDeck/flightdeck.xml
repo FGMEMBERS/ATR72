@@ -6,5 +6,22 @@
 	<path>flightdeck.ac</path>
 	
 	<!-- Animations are included in the separate animations.xml file -->
+	
+	<model>
+		<name>EADI</name>
+		<path>Aircraft/ATR72/Models/Instruments/EADI/eadi.xml</path>
+		<!--condition>
+			<greater-than>
+				<property>/systems/electric/bus-volt</property>
+				<value>9</value>
+			</greater-than>
+		</condition-->
+		<offsets>
+			<x-m>-11.2991</x-m>
+			<y-m>-0.5730</y-m>
+			<z-m>0.6682</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
 		
 </PropertyList>

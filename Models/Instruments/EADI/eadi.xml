@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+	<name>EADI</name>
+	<path>eadi.ac</path>
+	
+	<animation>
+        <type>texmultiple</type>
+        <object-name>horizon</object-name>
+        <transform>
+            <property>orientation/pitch-deg</property>
+            <subtype>textranslate</subtype>
+            <factor>0.002</factor>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+            </axis>
+        </transform>
+        <transform>
+            <property>orientation/roll-deg</property>
+            <subtype>texrotate</subtype>
+            <center>
+                <x>0.50</x>
+                <y>0.50</y>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>-1</z>
+            </axis>
+        </transform>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>bank</object-name>
+    	<property>orientation/roll-deg</property>
+    	<axis>
+    		<x>1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+     <!-- Glideslope pointer -->
+
+    <!-- animation>
+        <type>select</type>
+        <object-name>gsscale</object-name>
+        <condition>
+            <property>instrumentation/nav/has-gs</property>
+        </condition>
+    </animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>gspointer</object-name>
+        <condition>
+            <and>
+                <property>instrumentation/nav/gs-in-range</property>
+                <property>instrumentation/nav/has-gs</property>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>gspointer</object-name>
+        <property>instrumentation/nav/gs-needle-deflection-norm</property>
+        <factor>0.0284</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+	<!-- LOC pointer -->
+
+    <!-- animation>
+        <type>select</type>
+        <object-name>locscale</object-name>
+        <condition>
+            <property>instrumentation/nav/nav-loc</property>
+        </condition>
+    </animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>locpointer</object-name>
+        <condition>
+            <and>
+                <property>instrumentation/nav/in-range</property>
+                <property>instrumentation/nav/nav-loc</property>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>locpointer</object-name>
+        <property>instrumentation/nav/heading-needle-deflection-norm</property>
+        <factor>-0.0282</factor>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+    
+    <!-- Speed Pointer -->
+
+    <!-- animation>
+        <type>select</type>
+        <object-name>spdscale</object-name>
+        <condition>
+        	<equals>
+		        <property>aircraft/afcs/ver-mode</property>
+		        <value>ias</value>
+            </equals>
+        </condition>
+    </animation -->
+
+    <animation>
+        <type>select</type>
+        <object-name>spdpointer</object-name>
+        <condition>
+            <equals>
+            	<property>aircraft/afcs/spdpointer-show</property>
+            	<value>1</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>spdpointer</object-name>
+        <property>aircraft/afcs/spdpointer-norm</property>
+        <factor>0.0326</factor>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+    
+    <!-- AFCS Indicators -->
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>hdg</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>hdg</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>nav</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>nav</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>loc</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>app</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>gs</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>app</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>ias</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>ias</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>vs</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>vs</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>alt</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>alt</value>
+    			</equals>
+    			<not>
+    				<property>/aircraft/afcs/ap-master</property>
+    			</not>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.hdg</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>hdg</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.nav</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>nav</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.loc</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>app</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.gs</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/lat-mode</property>
+    				<value>app</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.ias</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>ias</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.vs</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>vs</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>active.alt</object-name>
+    	<condition>
+    		<and>
+    			<equals>
+    				<property>/aircraft/afcs/ver-mode</property>
+    				<value>alt</value>
+    			</equals>
+    			<property>/aircraft/afcs/ap-master</property>
+    		</and>
+    	</condition>
+    </animation>
+    
+    <animation>
+    	<type>select</type>
+    	<object-name>ap</object-name>
+    	<condition>
+    		<property>/aircraft/afcs/ap-master</property>
+    	</condition>
+    </animation>
+		
+</PropertyList>
