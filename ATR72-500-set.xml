@@ -98,15 +98,29 @@
 		</afcs>
 	</aircraft>
 	
+	<!-- Disable Generic FlightGear Electrical System for my nasal system to work -->
+	<systems>
+		<electrical>
+			<path></path>
+		</electrical>
+	</systems>
+	
 	<controls>
 		<electric>
 			<engine n="0">
-				<generator type="bool">true</generator>
+				<generator type="bool">false</generator>
 			</engine>
 			<engine n="1">
-				<generator type="bool">true</generator>
+				<generator type="bool">false</generator>
 			</engine>
 		</electric>
+		<elec_panel>
+			<gen1 type="bool">false</gen1>
+			<gen2 type="bool">false</gen2>
+			<batt-main type="bool">false</batt-main>
+			<batt-emer type="bool">false</batt-emer>
+			<ext-pwr type="bool">false</ext-pwr>
+		</elec_panel>
 		<engines>
 			<engine n="0">
 				<master-alt type="bool">true</master-alt>
@@ -219,7 +233,17 @@
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
 			<file>Aircraft/ATR72/Engines/propeller.nas</file>
 			<file>Aircraft/ATR72/Nasal/general_loop.nas</file>
+			<file>Aircraft/ATR72/Nasal/electrical.nas</file>
 		</atr>
+		<hydraulics>
+			<file>Aircraft/ATR72/Nasal/hydraulics/common.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/green.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/blue.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/yellow.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/brakes.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/hyd_loop.nas</file>
+			<file>Aircraft/ATR72/Nasal/hydraulics/brk_loop.nas</file>
+		</hydraulics>
 	</nasal>
 
 </PropertyList>

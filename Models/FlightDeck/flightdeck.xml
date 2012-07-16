@@ -10,12 +10,12 @@
 	<model>
 		<name>EADI</name>
 		<path>Aircraft/ATR72/Models/Instruments/EADI/eadi.xml</path>
-		<!--condition>
-			<greater-than>
-				<property>/systems/electric/bus-volt</property>
-				<value>9</value>
-			</greater-than>
-		</condition-->
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
 		<offsets>
 			<x-m>-11.2991</x-m>
 			<y-m>-0.5730</y-m>
