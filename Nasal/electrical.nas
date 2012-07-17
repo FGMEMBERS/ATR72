@@ -215,6 +215,10 @@ var electrical = {
             
             setprop("/systems/electric/util-volts", 0);
             
+            setprop("/controls/elec_panel/dc-btc", 0);
+            
+            setprop("/controls/elec_panel/ac-btc", 0);
+            
             me.reset();
     },
     	update : func {
@@ -276,7 +280,7 @@ var electrical = {
     	
     	}
     	
-    	if (getprop("/systems/elec_panel/util-bus")) {
+    	if (getprop("/controls/elec_panel/util-bus")) {
     	
     		var volts = 0;
     	
@@ -287,6 +291,48 @@ var electrical = {
     		}
     		
     		setprop("/systems/electric/util-volts", volts);
+    	
+    	}
+    	
+    	if (getprop("/controls/elec_panel/dc-btc")) {
+    	
+    		var dclbus_v = getprop("/systems/electric/elec-buses/dc-bus1/volts");
+    		var dcrbus_v = getprop("/systems/electric/elec-buses/dc-bus2/amps");
+    		
+    		var dclbus_a = getprop("/systems/electric/elec-buses/dc-bus1/volts");
+    		var dcrbus_a = getprop("/systems/electric/elec-buses/dc-bus2/amps");
+    		
+    		if (dclbus_v > dcrbus_v) {
+    			setprop("/systems/electric/elec-buses/dc-bus2/amps", dclbus_v);
+    		} else {
+    			setprop("/systems/electric/elec-buses/dc-bus1/amps", dcrbus_v);
+    		}
+    		
+    		var total_amps = dclbus_a + dcrbus_a;
+    		
+    		setprop("/systems/electric/elec-buses/dc-bus1/amps", total_amps/2);
+    		setprop("/systems/electric/elec-buses/dc-bus2/amps", total_amps/2);
+    	
+    	}
+    	
+    	if (getprop("/controls/elec_panel/ac-btc")) {
+    	
+    		var aclbus_v = getprop("/systems/electric/elec-buses/ac-bus1/volts");
+    		var acrbus_v = getprop("/systems/electric/elec-buses/ac-bus2/amps");
+    		
+    		var aclbus_a = getprop("/systems/electric/elec-buses/ac-bus1/volts");
+    		var acrbus_a = getprop("/systems/electric/elec-buses/ac-bus2/amps");
+    		
+    		if (aclbus_v > acrbus_v) {
+    			setprop("/systems/electric/elec-buses/ac-bus2/amps", aclbus_v);
+    		} else {
+    			setprop("/systems/electric/elec-buses/ac-bus1/amps", acrbus_v);
+    		}
+    		
+    		var total_amps = aclbus_a + acrbus_a;
+    		
+    		setprop("/systems/electric/elec-buses/ac-bus1/amps", total_amps/2);
+    		setprop("/systems/electric/elec-buses/ac-bus2/amps", total_amps/2);
     	
     	}
     	

@@ -186,6 +186,8 @@ var propeller = {
             setprop("/engines/engine/fuelflow_kgph", 0);
             setprop("/engines/engine[1]/fuelflow_kgph", 0);
             
+            setprop("/aircraft/prop-brake-fail", 0);
+            
             me.reset();
     },
     	update : func {
@@ -197,6 +199,10 @@ var propeller = {
     		if (getprop("/aircraft/prop-brake") == 1) {
     		
     			approach_trgt(0, eng_tree ~ "thruster/prop_rpm", 1, 5, 1);
+    			
+    			if (getprop(eng_tree ~ "thruster/prop_torque") > 3400)
+    				setprop("/aircraft/prop-brake", 0);
+    				setprop("/aircraft/prop-brake-fail", 1);
     		
     		} else {
     		

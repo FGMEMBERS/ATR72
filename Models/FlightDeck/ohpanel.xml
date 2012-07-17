@@ -5,6 +5,687 @@
 	<name>OHPanel</name>
 	<path>ohpanel.ac</path>
 	
+	<!-- Pick animations -->
 	
+	<!-- Fuel Control Panel -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng1fuelpump</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/engines/engine/fuel-pump</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng2fuelpump</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/engines/engine[1]/fuel-pump</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng1fuelLP</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/engines/engine/cutoff</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng2fuelLP</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/engines/engine[1]/cutoff</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fuelxfeed</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/engines/x-feed</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<!-- Electrical (Main) Panel -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>bat.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/battery</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>bat.mode</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/battery-mode</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>dcbtc.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/dc-btc</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>util.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/util-bus</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>dcgen1.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/DCgen1</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>dcgen2.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/DCgen2</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>extpwr.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/ext-pwr</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<!-- Engine Starter Panel -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng1start</object-name>
+		<action>
+			<button>0</button>
+			<binding>
+				<command>nasal</command>
+				<script>
+				setprop("/controls/engines/engine/starter", 1);
+				</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>
+					setprop("/controls/engines/engine/starter", 0);
+					</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>eng2start</object-name>
+		<action>
+			<button>0</button>
+			<binding>
+				<command>nasal</command>
+				<script>
+				setprop("/controls/engines/engine[1]/starter", 1);
+				</script>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>nasal</command>
+					<script>
+					setprop("/controls/engines/engine[1]/starter", 0);
+					</script>
+				</binding>
+			</mod-up>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>startmode</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/elec_panel/start-mode</property>
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+				if (getprop("/controls/elec_panel/start-mode") == 0) {
+				
+					setprop("/controls/electric/engine/generator", 0);
+					setprop("/controls/electric/engine[1]/generator", 0);
+				
+				} elsif (getprop("/controls/elec_panel/start-mode") == 2) {
+				
+					setprop("/controls/electric/engine/generator", 1);
+					setprop("/controls/electric/engine[1]/generator", 0);
+				
+				} elsif (getprop("/controls/elec_panel/start-mode") == 3) {
+				
+					setprop("/controls/electric/engine/generator", 0);
+					setprop("/controls/electric/engine[1]/generator", 1);
+				
+				} elsif (getprop("/controls/elec_panel/start-mode") == 4) {
+				
+					setprop("/controls/electric/engine/generator", 1);
+					setprop("/controls/electric/engine[1]/generator", 1);
+				
+				}
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>bluepump.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/hyd_panel/blue-pump</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>aux.pump</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/hyd_panel/aux-pump</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>hydxfeed</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/hyd_panel/x-feed</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>greenpump.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/hyd_panel/green-pump</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>acgen1</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/gen1</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>acgen2</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/elec_panel/gen2</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<!-- Textranslate Animations -->
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng1fuelpump</object-name>
+		<property>/controls/engines/engine[0]/fuel-pump</property>
+		<factor>0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng2fuelpump</object-name>
+		<property>/controls/engines/engine[1]/fuel-pump</property>
+		<factor>0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng1fuelLP</object-name>
+		<property>/controls/engines/engine[0]/cutoff</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng2fuelLP</object-name>
+		<property>/controls/engines/engine[1]/cutoff</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>fuelxfeed</object-name>
+		<property>/controls/engines/x-feed</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>ldggearl</object-name>
+		<property>/controls/ohpanel/ldggearl</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>ldggearn</object-name>
+		<property>/controls/ohpanel/ldggearn</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>ldggearr</object-name>
+		<property>/controls/ohpanel/ldggearr</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>propbrakefail</object-name>
+		<property>/aircraft/prop-brake-fail</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>startmode</object-name>
+		<property>/controls/elec_panel/start-mode</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>-30</dep></entry>
+			<entry><ind>2</ind><dep>-60</dep></entry>
+			<entry><ind>3</ind><dep>-90</dep></entry>
+			<entry><ind>4</ind><dep>-120</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.0833</y-m>
+			<z-m>-0.0987</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng1start</object-name>
+		<property>/controls/engines/engine[0]/starter</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>eng2start</object-name>
+		<property>/controls/engines/engine[1]/starter</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acbus1</object-name>
+		<property>/controls/ohpanel/acbus1</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acbus2</object-name>
+		<property>/controls/ohpanel/acbus2</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>dcbus1</object-name>
+		<property>/controls/ohpanel/dcbus1</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>dcbus2</object-name>
+		<property>/controls/ohpanel/dcbus2</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>dcbtc.sw</object-name>
+		<property>/controls/elec_panel/dc-btc</property>
+		<factor>0.0625</factor>
+		<axis>
+			<x>1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>util.sw</object-name>
+		<property>/controls/ohpanel/util</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>dcgen1.sw</object-name>
+		<property>/controls/ohpanel/dcgen1</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>dcgen2.sw</object-name>
+		<property>/controls/ohpanel/dcgen2</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>extpwr.sw</object-name>
+		<property>/controls/ohpanel/extpwr</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>lfuelind</object-name>
+		<property>/controls/ohpanel/lfuelind</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>rfuelind</object-name>
+		<property>/controls/ohpanel/rfuelind</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>bluepump.sw</object-name>
+		<property>/controls/ohpanel/bluepump</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>aux.pump</object-name>
+		<property>/controls/ohpanel/auxpump</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>greenpump.sw</object-name>
+		<property>/controls/ohpanel/greenpump</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>hydxfeed</object-name>
+		<property>/controls/hyd_panel/x-feed</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>hydblueind</object-name>
+		<property>/controls/ohpanel/hydblueind</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>hydgreenind</object-name>
+		<property>/controls/ohpanel/hydgreenind</property>
+		<factor>-0.125</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acbus1ind</object-name>
+		<property>/controls/ohpanel/acbus1</property>
+		<factor>-0.0625</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acbus2ind</object-name>
+		<property>/controls/ohpanel/acbus2</property>
+		<factor>-0.0625</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>ac.btc</object-name>
+		<property>/controls/elec_panel/ac-btc</property>
+		<factor>0.0625</factor>
+		<axis>
+			<x>1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acgen1</object-name>
+		<property>/controls/ohpanel/gen1</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>acgen2</object-name>
+		<property>/controls/ohpanel/gen2</property>
+		<factor>-0.25</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
 		
 </PropertyList>
