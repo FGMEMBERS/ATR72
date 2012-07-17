@@ -42,7 +42,9 @@ var ccas = {
 #-- PROP BRK --#	
 			var lastPropBrakeStatus = getprop("/aircraft/ccas/prop-brak-fault");
 
-			if (getprop("/aircraft/prop-brake") < 1 and getprop("/aircraft/prop-brake") > 0) {
+			if ((getprop("/aircraft/prop-brake") < 1 and getprop("/aircraft/prop-brake") > 0)
+					or (getprop("/aircraft/prop-brake-fail") == 1)){
+				
 				setprop("/aircraft/ccas/prop-brake-fault", 1);
 				if (lastPropBrakeStatus != 1) {
 					setprop("/aircraft/ccas/master-warning", totalCurrentMasterWarn + 1);
@@ -128,6 +130,52 @@ var ccas = {
 					}					
 				}
 #-- end WHEELS --#	
+#-- FLAPS UNLK --#
+			var lastFlapsUnlockStatus = getprop("/aircraft/ccas/flaps-unlk-fault");
+			var flapPosNorm = getprop("/surface-positions/flap-pos-norm");
+			var flapFlightPos = getprop("/controls/flight/flaps");
+			if (flapPosNorm == nil) flapPosNorm = 0;
+			if (flapFlightPos == nil) flapFlightPos = 0;
+			
+			if ((flapFlightPos == 0.428) and 
+					(flapPosNorm < 0.314 or 
+					 flapPosNorm > 0.542)) {
+				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
+				if (lastFlapsUnlockStatus != 1) {
+					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
+					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
+					}				
+				}
+			elsif ((flapFlightPos == 0.714) and 
+					(flapPosNorm < 0.600 or 
+					 flapPosNorm > 0.828)) {
+				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
+				if (lastFlapsUnlockStatus != 1) {
+					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
+					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
+					}				
+				}
+			elsif ((flapFlightPos == 1) and 
+					(flapPosNorm < 0.886 or 
+					 flapPosNorm > 1.114)) {
+				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
+				if (lastFlapsUnlockStatus != 1) {
+					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
+					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
+					}				
+				}	
+			else {
+				setprop("/aircraft/ccas/flaps-unlk-fault", 0);
+				if (lastFlapsUnlockStatus != 0) {
+					if (totalCurrentMasterCaution > 0) {
+						setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution - 1);
+						}
+					if (totalCurrentActiveCautions > 0) {
+						setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions - 1);
+						}
+					}					
+				}
+#-- end FLAPS UNLK --#	
 
 			settimer(func {me.update();}, me.loopInterval);
 			},
