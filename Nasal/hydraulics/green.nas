@@ -2,9 +2,9 @@ var hyd_green = {
 
 	elec_pump : func(rbus) {
 	
-		if (rbus >= 12) {
+		if (rbus >= 100) {
 		
-			var out_basic = rbus * 125;
+			var out_basic = rbus * 7.5;
 		
 			if (out_basic > 3000)
 				hydraulics.green_psi = 3000; # Filter
