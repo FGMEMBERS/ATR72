@@ -1121,7 +1121,7 @@
 		<name>PROP BRK</name>
 		<type>textranslate</type>
 		<object-name>ccas_prop_brk</object-name>
-		<property>controls/atr72/prop-brake</property>
+		<property>aircraft/ccas/prop-brake-fault</property>
 		<factor>-0.37</factor>
 		<step>1</step>
 		<offset>0</offset>
@@ -1131,5 +1131,19 @@
 			<z>0</z>
 		</axis>
 	</animation>
+	<animation>
+		<name>FUEL</name>
+		<type>textranslate</type>
+		<object-name>ccas_fuel</object-name>
+		<property>aircraft/ccas/fuel-fault</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>	
 <!--=================== end of CCAS =====================-->				
 </PropertyList>

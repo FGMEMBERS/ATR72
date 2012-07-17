@@ -33,8 +33,53 @@ var ccas = {
 						}
 					}
 				}
-#-- end LDG GEAR NOT DOWN --#
 
+#-- end LDG GEAR NOT DOWN --#
+#-- PROP BRK --#	
+			var lastPropBrakeStatus = getprop("/aircraft/ccas/prop-brak-fault");
+			if (getprop("/controls/atr72/prop-brake") != nil) {
+				if (getprop("/controls/atr72/prop-brake") < 1 and getprop("/controls/atr72/prop-brake") > 0) {
+					setprop("/aircraft/ccas/prop-brake-fault", 1);
+					if (lastPropBrakeStatus != 1) {
+						setprop("/aircraft/ccas/master", totalCurrentMaster + 1);
+						setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings + 1);
+						}
+					}
+				else {
+					setprop("/aircraft/ccas/prop-brake-fault", 0);
+					if (lastPropBrakeStatus != 0) {
+						if (totalCurrentMaster > 0) {
+							setprop("/aircraft/ccas/master", totalCurrentMaster - 1);
+							}
+						if (totalCurrentActiveWarnings > 0) {
+							setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings - 1);
+							}
+						}				
+					}
+				}
+#-- end PROP BRK --#
+#-- FUEL --#
+			var lastFuelStatus = getprop("/aircraft/ccas/fuel-fault");
+			#also needs to check for fuel flow psi < 4 in line below
+			if (getprop("/consumables/fuel/total-fuel-kg") < 160) {
+				setprop("/aircraft/ccas/fuel-fault", 1);
+				if (lastFuelStatus != 1) {
+					setprop("/aircraft/ccas/master", totalCurrentMaster + 1);
+					setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings + 1);
+					}				
+				}
+			else {
+				setprop("/aircraft/ccas/fuel-fault", 0);
+				if (lastFuelStatus != 0) {
+					if (totalCurrentMaster > 0) {
+						setprop("/aircraft/ccas/master", totalCurrentMaster - 1);
+						}
+					if (totalCurrentActiveWarnings > 0) {
+						setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings - 1);
+						}
+					}					
+				}
+#-- end FUEL --#			
 			settimer(func {me.update();}, me.loopInterval);
 			},
 			
