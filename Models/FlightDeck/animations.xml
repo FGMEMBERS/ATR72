@@ -1089,8 +1089,8 @@
 	
 <!--============================= END OF AFCS ===============================-->
 <!--=================== CCAS =====================-->
-	<!-- LDG GEAR NOT DOWN -->
 	<animation>
+		<name>LDG GEAR NOT DOWN</name>
 		<type>textranslate</type>
 		<object-name>ccas_ldg_gear_not_down</object-name>
 		<property>aircraft/ccas/ldg_gear_not_down</property>
@@ -1103,6 +1103,19 @@
 			<z>0</z>
 		</axis>
 	</animation>
-
+	<animation>
+		<name>PRKG BRK</name>
+		<type>textranslate</type>
+		<object-name>ccas_prkg_brk</object-name>
+		<property>controls/gear/brake-parking</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 <!--=================== end of CCAS =====================-->				
 </PropertyList>
