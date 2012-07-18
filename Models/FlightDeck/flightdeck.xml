@@ -36,6 +36,23 @@
 	</model>
 	
 	<model>
+		<name>ADU</name>
+		<path>Aircraft/ATR72/Models/Instruments/ADU/adu.xml</path>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+		<offsets>
+			<x-m>-11.1706</x-m>
+			<y-m>0.0095</y-m>
+			<z-m>0.9188</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
 		<name>Brakes</name>
 		<path>Aircraft/ATR72/Models/Instruments/BRK/Brakes.xml</path>
 		<offsets>
@@ -45,5 +62,5 @@
 			<pitch-deg>-10</pitch-deg>
 		</offsets>
 	</model>
-		
+	
 </PropertyList>

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>adu.ac</path>
+	
+	<!-- ADU Display Brightness -->
+	
+	<animation>
+		<type>material</type>
+		<object-name>white</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<factor-prop>/instrumentation/adu/brt</factor-prop>
+		</emission>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>green</object-name>
+		<emission>
+			<red>0</red>
+			<green>0.37</green>
+			<blue>0</blue>
+			<factor-prop>/instrumentation/adu/brt</factor-prop>
+		</emission>
+		<diffuse>
+			<red>0</red>
+			<green>0.37</green>
+			<blue>0</blue>
+		</diffuse>
+	</animation>
+	
+	<!-- ADU Text -->
+	
+	<text>
+		<name>white</name>
+		<offsets>
+			<x-m>0.0002</x-m>
+			<y-m>-0.055</y-m>
+			<z-m>-0.01</z-m>
+		</offsets>
+		<alignment>left-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">text-value</type>
+		<format type="string">%s</format>
+		<property>/instrumentation/adu/left-armed</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">lcd.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>white</name>
+		<offsets>
+			<x-m>0.0002</x-m>
+			<y-m>0.055</y-m>
+			<z-m>0.023</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">text-value</type>
+		<format type="string">%s</format>
+		<property>/instrumentation/adu/right-armed</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">lcd.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>green</name>
+		<offsets>
+			<x-m>0.0002</x-m>
+			<y-m>-0.055</y-m>
+			<z-m>-0.023</z-m>
+		</offsets>
+		<alignment>left-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">text-value</type>
+		<format type="string">%s</format>
+		<property>/instrumentation/adu/left-cap</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">lcd.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>green</name>
+		<offsets>
+			<x-m>0.0002</x-m>
+			<y-m>0.055</y-m>
+			<z-m>-0.022</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">text-value</type>
+		<format type="string">%s</format>
+		<property>/instrumentation/adu/right-cap</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">lcd.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+</PropertyList>

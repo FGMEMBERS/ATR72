@@ -171,7 +171,15 @@
 				<command>nasal</command>
 				<script>
 				
-					setprop("/aircraft/afcs/vs-setting", getprop("/aircraft/afcs/vs-setting") - 100);
+					if (getprop("/aircraft/afcs/ver-mode") == "vs") {
+				
+						setprop("/aircraft/afcs/vs-setting", getprop("/aircraft/afcs/vs-setting") - 100);
+					
+					} else {
+					
+						setprop("/aircraft/afcs/ias-setting", getprop("/aircraft/afcs/ias-setting") + 1);
+					
+					}
 					
 				</script>
 			</binding>
@@ -184,7 +192,15 @@
 				<command>nasal</command>
 				<script>
 					
-					setprop("/aircraft/afcs/vs-setting", getprop("/aircraft/afcs/vs-setting") + 100);
+					if (getprop("/aircraft/afcs/ver-mode") == "vs") {
+				
+						setprop("/aircraft/afcs/vs-setting", getprop("/aircraft/afcs/vs-setting") + 100);
+					
+					} else {
+					
+						setprop("/aircraft/afcs/ias-setting", getprop("/aircraft/afcs/ias-setting") - 1);
+					
+					}
 					
 				</script>
 			</binding>
@@ -370,7 +386,6 @@
 			<binding>
 				<command>nasal</command>
 				<script>
-					setprop("/aircraft/afcs/ias-setting", getprop("/velocities/airspeed-kt"));
 					setprop("/aircraft/afcs/ver-mode", "ias");
 				</script>
 			</binding>
@@ -1188,5 +1203,69 @@
 			<z>0</z>
 		</axis>
 	</animation>	
-<!--============================= END OF CCAS ===============================-->				
+<!--============================= END OF CCAS ===============================-->	
+
+<!--===================== ADU (Advisory Display Unit)========================-->
+
+<animation>
+		<type>pick</type>
+		<object-name>adu-brt</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					setprop("/instrumentation/adu/brt", getprop("/instrumentation/adu/brt") + 0.05);
+					
+				</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					
+					setprop("/instrumentation/adu/brt", getprop("/instrumentation/adu/brt") - 0.05);
+					
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>adu-brt</object-name>
+		<property>/instrumentation/adu/brt</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-120</dep>
+			</entry>
+			<entry>
+				<ind>0.5</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>120</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-11.1555</x1-m>
+			<y1-m>0.0921</y1-m>
+			<z1-m>0.9322</z1-m>
+			<x2-m>-11.1746</x2-m>
+			<y2-m>0.0921</y2-m>
+			<z2-m>0.9288</z2-m>
+		</axis>
+	</animation>
+
+<!--=============================== END OF ADU ==============================-->
+			
 </PropertyList>
