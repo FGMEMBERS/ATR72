@@ -15,7 +15,7 @@
         </offsets>
 
         <condition>
-                <property>gear/gear[0]/tyre-smoke</property>
+                <property>gear/gear[0]/tyresmoke</property>
                 <value>1</value>
         </condition>
 
@@ -31,8 +31,8 @@
             <phi-min-deg>-60</phi-min-deg>
             <phi-max-deg>60</phi-max-deg>
             <speed-mps>
-                <value>50</value>
-                <spread>5</spread>
+                <value>40</value>
+                <spread>10</spread>
             </speed-mps>
             <rotation-speed>
                 <x-max-deg-sec>15</x-max-deg-sec>
@@ -46,7 +46,7 @@
 
         <counter>
             <particles-per-sec>
-                <value>25</value>
+                <value>20</value>
                 <spread>50</spread>
             </particles-per-sec>
         </counter>
@@ -95,7 +95,7 @@
             <life-sec>
                 <value>1</value>
             </life-sec>
-            <mass-kg>0.025</mass-kg>
+            <mass-kg>0.01</mass-kg>
             <radius-m>0.175</radius-m>
         </particle>
 

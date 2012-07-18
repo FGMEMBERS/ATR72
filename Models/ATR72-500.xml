@@ -1276,22 +1276,249 @@
 	</animation>
 
 <!-- tyre smoke -->
-<model>
- <path>Aircraft/ATR72/Models/Effects/tyre-smoke-left.xml</path>
- <name>tyre-smoke-l</name>
- <offsets>
-  <x-m>0.2</x-m>
-  <y-m>-1.9</y-m>
-  <z-m>-1</z-m>
- </offsets>
-</model>
 
-<model>
- <path>Aircraft/ATR72/Models/Effects/tyre-smoke-right.xml</path>
- <name>tyre-smoke-r</name>
- <offsets>
-  <x-m>0.2</x-m>
-  <y-m>1.9</y-m>
-  <z-m>-1</z-m> </offsets>
-</model>
+	<model>
+		<path>Aircraft/ATR72/Models/Effects/tyre-smoke-nose.xml</path>
+		<name>tyre-smoke-n</name>
+		<condition>
+			<property>gear/gear[0]/wow</property>
+		</condition>
+		<offsets>
+			<x-m>-11</x-m>
+			<y-m>0</y-m>
+			<z-m>-1.4</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/ATR72/Models/Effects/tyre-smoke-left.xml</path>
+		<name>tyre-smoke-l</name>
+		<condition>
+			<property>gear/gear[1]/wow</property>
+		</condition>
+		<offsets>
+			<x-m>0.2</x-m>
+			<y-m>-1.9</y-m>
+			<z-m>-1</z-m>
+		</offsets>
+	</model>
+
+	<model>
+		<path>Aircraft/ATR72/Models/Effects/tyre-smoke-right.xml</path>
+		<name>tyre-smoke-r</name>
+		<condition>
+			<property>gear/gear[2]/wow</property>
+		</condition>
+		<offsets>
+			<x-m>0.2</x-m>
+			<y-m>1.9</y-m>
+			<z-m>-1</z-m>
+		</offsets>
+	</model>
+
+<!-- Lighting -->
+	
+	<animation>
+		<type>material</type>
+		<object-name>beacon</object-name>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/controls/lighting/beacon-state</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>beacon</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>/controls/lighting/beacon-state</property>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>nav0</object-name>
+		<object-name>nav1</object-name>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/controls/lighting/nav-lights</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>nav0</object-name>
+		<object-name>nav1</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>/controls/lighting/nav-lights</property>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>beacon</object-name>
+		<property>/controls/lighting/beacon-state</property>
+		<factor>0.04</factor>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>beacon</object-name>
+		<property>/controls/lighting/beacon-state</property>
+		<factor>0.04</factor>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>nav0</object-name>
+		<object-name>nav1</object-name>
+		<property>/controls/lighting/nav-lights</property>
+		<factor>0.04</factor>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<!-- Lighting Models -->
+	
+	<model>
+		<name>nav0-model</name>
+		<path>Lighting/rednav.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/nav-lights</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>-0.805</x-m>
+			<y-m>-13.04</y-m>
+			<z-m>1.925</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>nav1-model</name>
+		<path>Lighting/greennav.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/nav-lights</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>-0.805</x-m>
+			<y-m>13.04</y-m>
+			<z-m>1.925</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>strobe0-model</name>
+		<path>Lighting/strobe.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/strobe-state</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>-0.81</x-m>
+			<y-m>-13.04</y-m>
+			<z-m>1.92</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>strobe1-model</name>
+		<path>Lighting/strobe.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/strobe-state</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>-0.81</x-m>
+			<y-m>13.04</y-m>
+			<z-m>1.92</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>tailstrobe-model</name>
+		<path>Lighting/strobe.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/strobe-state</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>13.83</x-m>
+			<y-m>0</y-m>
+			<z-m>1.01</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>beacon0-model</name>
+		<path>Lighting/beacon.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/beacon-state</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>12.29</x-m>
+			<y-m>0</y-m>
+			<z-m>5.5</z-m>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>beacon0-model</name>
+		<path>Lighting/beacon.xml</path>
+		<condition>
+			<and>
+				<property>/controls/lighting/beacon-state</property>
+				<property>/systems/electric/outputs/lights</property>
+			</and>
+		</condition>
+		<offsets>
+			<x-m>3.13</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.855</z-m>
+		</offsets>
+	</model>
+
 </PropertyList>

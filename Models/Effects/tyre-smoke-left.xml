@@ -16,7 +16,7 @@
 
         <condition>
             <or>
-                <property>gear/gear[1]/tyre-smoke</property>
+                <property>gear/gear[1]/tyresmoke</property>
                 <property>gear/brake-smoke</property>
             </or>
         </condition>
@@ -33,8 +33,8 @@
             <phi-min-deg>-60</phi-min-deg>
             <phi-max-deg>60</phi-max-deg>
             <speed-mps>
-                <value>50</value>
-                <spread>5</spread>
+                <value>60</value>
+                <spread>15</spread>
             </speed-mps>
             <rotation-speed>
                 <x-max-deg-sec>15</x-max-deg-sec>
@@ -48,7 +48,7 @@
 
         <counter>
             <particles-per-sec>
-                <value>25</value>
+                <value>35</value>
                 <spread>50</spread>
             </particles-per-sec>
         </counter>
@@ -95,9 +95,9 @@
                 </size>
             </end>
             <life-sec>
-                <value>1</value>
+                <value>2</value>
             </life-sec>
-            <mass-kg>0.025</mass-kg>
+            <mass-kg>0.01</mass-kg>
             <radius-m>0.175</radius-m>
         </particle>
 

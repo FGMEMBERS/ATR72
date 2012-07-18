@@ -7,6 +7,125 @@
 	
 	<!-- Pick animations -->
 	
+	<animation>
+		<type>pick</type>
+		<object-name>propbrake</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/aircraft/prop-brake</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<!-- Exterior Lighting -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>beacon.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/beacon</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>wing.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/wing</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>strobe.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/strobe</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>logo.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/logo</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>taxi.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/taxi</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>landl.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/landing-left</property>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>landr.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/landing-right</property>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>nav.sw</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/lighting/nav-lights</property>
+			</binding>
+		</action>
+	</animation>
+	
 	<!-- Fuel Control Panel -->
 	
 	<animation>
@@ -253,6 +372,38 @@
 				
 				}
 				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>wiper0.knob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/wipers/left-wiper</property>
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>wiper1.knob</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/wipers/right-wiper</property>
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
 			</binding>
 		</action>
 	</animation>
@@ -685,6 +836,219 @@
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>wiper0.knob</object-name>
+		<property>/controls/wipers/left-wiper</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>30</dep></entry>
+			<entry><ind>2</ind><dep>60</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.0833</y-m>
+			<z-m>-0.0987</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>wiper1.knob</object-name>
+		<property>/controls/wipers/right-wiper</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>30</dep></entry>
+			<entry><ind>2</ind><dep>60</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.2069</y-m>
+			<z-m>-0.2139</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>wiper1.knob</object-name>
+		<property>/controls/wipers/right-wiper</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>30</dep></entry>
+			<entry><ind>2</ind><dep>60</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0.2100</y-m>
+			<z-m>-0.2171</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>bat.sw</object-name>
+		<property>/controls/elec_panel/battery</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>-40</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>-0.01</x-m>
+			<y-m>0</y-m>
+			<z-m>0.1250</z-m>
+		</center>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>bat.mode</object-name>
+		<property>/controls/elec_panel/battery-mode</property>
+		<interpolation>
+			<entry><ind>0</ind><dep>0</dep></entry>
+			<entry><ind>1</ind><dep>-60</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>-0.0077</x-m>
+			<y-m>-0.088</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<z>1</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>beacon.sw</object-name>
+		<property>/controls/lighting/beacon</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0079</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.1908</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>wing.sw</object-name>
+		<property>/controls/lighting/wing</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0079</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.1908</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>strobe.sw</object-name>
+		<property>/controls/lighting/strobe</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0079</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.1908</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>logo.sw</object-name>
+		<property>/controls/lighting/logo</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0079</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.1908</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>taxi.sw</object-name>
+		<property>/controls/lighting/taxi</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0084</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.2263</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>landl.sw</object-name>
+		<property>/controls/lighting/landing-left</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0099</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.2289</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>landr.sw</object-name>
+		<property>/controls/lighting/landing-right</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0099</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.2289</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>nav.sw</object-name>
+		<property>/controls/lighting/nav-lights</property>
+		<factor>60</factor>
+		<center>
+			<x-m>-0.0099</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.2283</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
 		</axis>
 	</animation>
 		

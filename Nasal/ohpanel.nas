@@ -157,6 +157,25 @@ var ohpanel = {
     	} else {
     		setprop(ohp~ "gen2", 0);
     	}
+    	
+    	# Battery Flip Switches
+    	
+    	if (getprop("/controls/elec_panel/battery")) {
+    	
+    		if (getprop("/controls/elec_panel/battery-mode")) {
+    			setprop("/controls/elec_panel/batt-main", 0);
+    			setprop("/controls/elec_panel/batt-emer", 1);
+    		} else {
+    			setprop("/controls/elec_panel/batt-main", 1);
+    			setprop("/controls/elec_panel/batt-emer", 0);
+    		}
+    	
+    	} else {
+    	
+    		setprop("/controls/elec_panel/batt-main", 0);
+    		setprop("/controls/elec_panel/batt-emer", 0);
+    	
+    	}
 
 	},
 

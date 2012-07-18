@@ -29,9 +29,9 @@
 	
 		<chase-distance-m>-60</chase-distance-m>
 
-		<!-- sound>
-			<path>Aircraft/ATR72/j170-sound.xml</path>
-		</sound-->
+		<sound>
+			<path>Aircraft/ATR72/ATR-sound.xml</path>
+		</sound>
 
 		<instrumentation>
 			<path>Aircraft/ATR72/Systems/instrumentation.xml</path>
@@ -106,6 +106,11 @@
 	</systems>
 	
 	<controls>
+		<lighting>
+			<nav-lights type="bool">false</nav-lights>
+			<beacon type="bool">false</beacon>
+			<strobe type="bool">false</strobe>
+		</lighting>
 		<electric>
 			<engine n="0">
 				<generator type="bool">false</generator>
