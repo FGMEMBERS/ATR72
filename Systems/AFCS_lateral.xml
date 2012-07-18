@@ -22,7 +22,100 @@
 	Output Property -> /controls/flight/aileron	
 -->	
 
+	<!-- Heading Bug Hold.  2 stage cascade controller. -->
 	
+	<logic>
+		<input>
+			<and>
+				<property>/aircraft/afcs/ap-master</property>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>hdg</value>
+				</equals>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-hdg</output>
+	</logic>
+	
+	<filter>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<gain>1</gain>
+		<input>
+			<property>aircraft/afcs/hdg-setting</property>
+			<offset>
+				<property>/orientation/heading-magnetic-deg</property>
+				<scale>-1</scale>
+			</offset>
+		</input>
+		<output>autopilot/internal/afcs-heading-bug-error-deg</output>
+		<period>
+			<min>-180</min>
+			<max>180</max>
+		</period>
+	</filter>
+
+  <!-- Stage #1 sets target roll based on diff between current heading -->
+  <!-- and heading bug. -->
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-hdg</prop>
+    </enable>
+    <input>
+      <prop>/autopilot/internal/afcs-heading-bug-error-deg</prop>
+    </input>
+    <reference>
+      <value>0.0</value>
+    </reference>
+    <output>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </output>
+    <config>
+      <Kp>-1.0</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>     <!-- input value weighing factor -->
+      <alpha>0.1</alpha>   <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>   <!-- input value weighing factor for -->
+                           <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>        <!-- integrator time -->
+      <Td>0.00001</Td>     <!-- derivator time -->
+     	<u_min>
+			<property>/aircraft/afcs/bank-limit</property>
+			<scale>-1</scale>
+		</u_min>
+		<u_max>
+			<property>/aircraft/afcs/bank-limit</property>
+		</u_max>
+    </config>
+  </pid-controller>
+
+  <!-- Stage #2 drives the ailerons to achieve the desired roll deg. -->
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-hdg</prop>
+    </enable>
+    <input>
+      <prop>/orientation/roll-deg</prop>
+    </input>
+    <reference>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </reference>
+    <output>
+      <prop>/controls/flight/aileron</prop>
+    </output>
+    <config>
+      <Kp>0.1</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>       <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-1.0</u_min> <!-- minimum output clamp -->
+      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+    </config>
+  </pid-controller>
 	
 	<!-- NAV -->
 	
@@ -36,7 +129,82 @@
 	Final Output Property -> /controls/flight/aileron	
 -->	
 
+	<logic>
+		<input>
+			<and>
+				<property>/aircraft/afcs/ap-master</property>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>nav</value>
+				</equals>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-nav</output>
+	</logic>
 	
+	<!-- True Heading hold.  2 stage cascade controller. -->
+
+  <!-- Stage #1 sets target roll based on diff between current heading -->
+  <!-- and target heading. -->
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-nav</prop>
+    </enable>
+    <input>
+      <prop>/autopilot/internal/true-heading-error-deg</prop>
+    </input>
+    <reference>
+      <value>0.0</value>
+    </reference>
+    <output>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </output>
+    <config>
+      <Kp>-1.0</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>     <!-- input value weighing factor -->
+      <alpha>0.1</alpha>   <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>   <!-- input value weighing factor for -->
+                           <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>        <!-- integrator time -->
+      <Td>0.00001</Td>     <!-- derivator time -->
+      	<u_min>
+			<property>/aircraft/afcs/bank-limit</property>
+			<scale>-1</scale>
+		</u_min>
+		<u_max>
+			<property>/aircraft/afcs/bank-limit</property>
+		</u_max>
+    </config>
+  </pid-controller>
+
+  <!-- Stage #2 drives the ailerons to achieve the desired roll deg. -->
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-nav</prop>
+    </enable>
+    <input>
+      <prop>/orientation/roll-deg</prop>
+    </input>
+    <reference>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </reference>
+    <output>
+      <prop>/controls/flight/aileron</prop>
+    </output>
+    <config>
+      <Kp>0.1</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>       <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-1.0</u_min> <!-- minimum output clamp -->
+      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+    </config>
+  </pid-controller>
 
 	<!-- APP -->
 	
@@ -50,7 +218,83 @@
 	Final Output Property -> /controls/flight/aileron
 -->
 
+	<logic>
+		<input>
+			<and>
+				<property>/aircraft/afcs/ap-master</property>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>app</value>
+				</equals>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-app</output>
+	</logic>
 	
+	<!-- Nav1 hold.  2 stage cascade controller. -->
+
+  <!-- Stage #1 sets target roll based on diff between current heading -->
+  <!-- and target heading. -->
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-app</prop>
+    </enable>
+    <input>
+      <prop>/autopilot/internal/nav1-heading-error-deg</prop>
+    </input>
+    <reference>
+      <value>0.0</value>
+    </reference>
+    <output>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </output>
+    <config>
+      <Kp>-1.0</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>     <!-- input value weighing factor -->
+      <alpha>0.1</alpha>   <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>   <!-- input value weighing factor for -->
+                           <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>        <!-- integrator time -->
+      <Td>0.00001</Td>     <!-- derivator time -->
+      	<u_min>
+			<property>/aircraft/afcs/bank-limit</property>
+			<scale>-1</scale>
+		</u_min>
+		<u_max>
+			<property>/aircraft/afcs/bank-limit</property>
+		</u_max>
+    </config>
+  </pid-controller>
+
+  <!-- Stage #2 drives the ailerons to achieve the desired roll deg. -->
+  <pid-controller>
+    <name>Nav1 Hold Stage 2</name>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/lat-app</prop>
+    </enable>
+    <input>
+      <prop>/orientation/roll-deg</prop>
+    </input>
+    <reference>
+      <prop>/autopilot/internal/target-roll-deg</prop>
+    </reference>
+    <output>
+      <prop>/controls/flight/aileron</prop>
+    </output>
+    <config>
+      <Kp>0.1</Kp>        <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>       <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-1.0</u_min> <!-- minimum output clamp -->
+      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+    </config>
+  </pid-controller>
 
 	<!-- BC -->
 	

@@ -79,6 +79,27 @@
                 </menu>
 			</default>
 		</menubar>
+		
+		<systems>
+		<!-- Disable Generic FlightGear Electrical System for my nasal system to work -->
+		<electrical>
+			<path></path>
+		</electrical>
+		<!-- Automatic Flight Control System PIDs -->
+		<autopilot>
+				<name>AFCS Lateral Axis</name>
+				<path>Aircraft/ATR72/Systems/AFCS_lateral.xml</path>
+		</autopilot>
+		<autopilot>
+				<name>AFCS Vertical Axis</name>
+				<path>Aircraft/ATR72/Systems/AFCS_vertical.xml</path>
+		</autopilot>
+		<!-- Autopilot Internal Helpers -->
+		<autopilot>
+			<name>Autopilot Internal Helpers</name>
+			<path>Aircraft/Generic/generic-autopilot-helper.xml</path>
+		</autopilot>
+	</systems>
 
 	</sim>
 	
@@ -97,13 +118,6 @@
 			<ias-setting type="int">180</ias-setting>
 		</afcs>
 	</aircraft>
-	
-	<!-- Disable Generic FlightGear Electrical System for my nasal system to work -->
-	<systems>
-		<electrical>
-			<path></path>
-		</electrical>
-	</systems>
 	
 	<controls>
 		<lighting>

@@ -58,7 +58,7 @@ var adu = {
 		} elsif (getprop("/aircraft/afcs/lat-mode") == "nav") {
 		
 			var current_wp = getprop("/autopilot/route-manager/current-wp");
-			var current_wp_id = getprop("/autopilot/route-manager/route/wp[" ~ current_wp ~ "]/wp-id");
+			var current_wp_id = getprop("/autopilot/route-manager/route/wp[" ~ current_wp ~ "]/id");
 			
 			if (current_wp_id != nil) {
 		
