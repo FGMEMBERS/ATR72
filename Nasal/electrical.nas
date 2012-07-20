@@ -361,4 +361,5 @@ var electrical = {
 setlistener("sim/signals/fdm-initialized", func
  {
  electrical.init();
+ print("ATR72 Electrical System .... Initialized");
  });

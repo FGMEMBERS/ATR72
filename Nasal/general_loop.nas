@@ -1,3 +1,15 @@
+var get_percent = func(val, max) {
+
+	return (val / max) * 100;
+
+};
+
+var get_degC = func(degF) {
+
+	return (degF - 32) * (5/9);
+
+};
+
 setprop("/instrumentation/fmc/vspeeds/V1", 0);
 setprop("/instrumentation/fmc/vspeeds/VR", 0);
 setprop("/instrumentation/fmc/vspeeds/V2", 0);
@@ -72,6 +84,28 @@ var general_loop_1 = {
     	} else {
     		setprop("/controls/lighting/beacon-state", 0);
     	}
+    	
+    	# Convert ITT degF to degC
+    	
+    	var itt0_degF = getprop("/engines/engine[0]/itt_degf");
+    	var itt1_degF = getprop("/engines/engine[1]/itt_degf");
+    	
+    	setprop("/engines/engine[0]/itt_degc", get_degC(itt0_degF));
+    	setprop("/engines/engine[1]/itt_degc", get_degC(itt1_degF));
+    	
+    	# Convert Torque and RPM to Percentage
+    	
+    	var torque0 = getprop("/engines/engine[0]/thruster/prop_torque");
+    	var torque1 = getprop("/engines/engine[1]/thruster/prop_torque");
+    	
+    	var rpm0 = getprop("/engines/engine[0]/thruster/prop_rpm");
+    	var rpm1 = getprop("/engines/engine[1]/thruster/prop_rpm");
+    	
+    	setprop("/engines/engine[0]/thruster/prop_torque-percent", get_percent(torque0, 3800));
+    	setprop("/engines/engine[1]/thruster/prop_torque-percent", get_percent(torque1, 3800));
+    	
+    	setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1400));
+    	setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1400));
 
 	},
 
@@ -149,5 +183,6 @@ var tyresmoke = {
 setlistener("sim/signals/fdm-initialized", func
  {
  general_loop_1.init();
+ print("ATR72 General System ....... Initialized");
  tyresmoke.init();
  });

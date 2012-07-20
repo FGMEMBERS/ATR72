@@ -40,7 +40,7 @@ var prop = {
 	new: func(id, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
 	
 		var t = {parents:[prop]};
-		
+		 
 		t.propid = id;
 		t.name = arg1;
 		t.numblades = arg2;
@@ -64,13 +64,13 @@ var prop = {
 		
 			var rpm_trgt = 0 + (getprop("/velocities/airspeed-kt")/2);
 		
-			approach_trgt(rpm_trgt, out_prop, 2, 0.4, 10);
+			approach_trgt(rpm_trgt, out_prop, 4, 1, 10);
 			
 		} else {
 		
 			var rpm_trgt = (me.maxrpm * (getprop(in_prop) - start_val)/(100 - start_val)) + (getprop("/velocities/airspeed-kt")/2);
 			
-			approach_trgt(rpm_trgt, out_prop, 2, 0.4, 10);
+			approach_trgt(rpm_trgt, out_prop, 4, 1, 10);
 			
 		}
 	

@@ -1,5 +1,7 @@
 var autostart = func() {
 
+	print("Autostarting Aircraft Engines, please set Electrical configs/settings yourself from the OHPanel depending on your aircraft's needs.");
+
 	# Set Throttles to IDLE
 	setprop("/controls/engines/engine[0]/throttle", 0);
 	setprop("/controls/engines/engine[1]/throttle", 0);
@@ -55,5 +57,7 @@ var autostart = func() {
 	
 	setprop("/controls/elec_panel/gen1", 1);
 	setprop("/controls/elec_panel/gen2", 1);
+	
+	print("Both Aircraft Engines (PW127F) have been started up, have a nice flight!");
 
 };

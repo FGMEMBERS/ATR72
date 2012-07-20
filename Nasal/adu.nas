@@ -117,4 +117,5 @@ var adu = {
 setlistener("sim/signals/fdm-initialized", func
  {
  adu.init();
+ print("Advisory Display Unit ...... Initialized");
  });

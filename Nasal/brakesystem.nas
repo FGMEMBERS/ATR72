@@ -152,5 +152,5 @@ setlistener("/sim/signals/fdm-initialized",
 settimer(func()
          {
            BrakeSys.update();
-           print("Brake System... OK");
+           print("ATR72 Braking System ....... Initialized");
          }, 5);

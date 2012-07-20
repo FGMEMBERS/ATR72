@@ -75,4 +75,5 @@ var hydraulics_loop = {
 setlistener("sim/signals/fdm-initialized", func
  {
  hydraulics_loop.init();
+ print("ATR72 Hydraulic System ..... Initialized");
  });
