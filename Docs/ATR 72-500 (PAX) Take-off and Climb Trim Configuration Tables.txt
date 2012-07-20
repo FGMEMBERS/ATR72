@@ -1,0 +1,65 @@
+﻿Take-off and Climb Trim Configuration Tables (PAX)
+
+The below take-off and climb trim configuration tables are divided by the Total Fuel % on board the aircraft. Each table has values determined by the cargo weight and passenger weight. Note that these tables can only be used for the passenger variant of the ATR 72-500 aircraft. For the cargo variant, please see the other file.
+
+The Trim Configurations are derived under the following flight conditions:
+NH (N1) During Take-off and Climb: 92 – 94%
+Flap Setting: First Setting (15 degrees) Take-off Setting
+Climb Speed: 160 kts (V1, Vr and V2 vary based on weight configurations)
+
+The Trim Configuration is in the format: norm, degree, where norm is the fraction with maximum up trim at -1 and down trim at 1, while the degree is the elevator trim in degrees.
+
+Also note that the aircraft is more fuel-efficient with a smaller trim angle. This is because increasing the elevator trim increases the cross-section area that accounts for drag, and the engines would have to provide larger thrust to accomodate for this extra drag, therefore please fly with just the fuel you need for your trip and your alternate airport reserve.
+
+FUEL:100%
+C=0, P=0 >> TRIM:-0.5274324124313204
+C=0, P=5000 >> TRIM:-0.4856602111939119
+C=0, P=10000 >> TRIM:-0.4544430672585409
+C=480, P=0 >> TRIM:-0.5900232947009176
+C=480, P=5000 >> TRIM:-0.5518549040131329
+C=480, P=10000 >> TRIM:-0.5053383865564578
+C=960, P=0 >> TRIM:-0.6446379914641136
+C=960, P=5000 >> TRIM:-0.6031067457808784
+C=960, P=10000 >> TRIM:-0.5652722446506348
+------------------------------------------
+FUEL:75%
+C=0, P=0 >> TRIM:-0.4854786915634359
+C=0, P=5000 >> TRIM:-0.4439420244848097
+C=0, P=10000 >> TRIM:-0.4058074639493451
+C=480, P=0 >> TRIM:-0.5422531717169741
+C=480, P=5000 >> TRIM:-0.4992741868162889
+C=480, P=10000 >> TRIM:-0.4640461368928367
+C=960, P=0 >> TRIM:-0.6033378266781146
+C=960, P=5000 >> TRIM:-0.5575704709423009
+C=960, P=10000 >> TRIM:-0.5201493515124074
+------------------------------------------
+FUEL:50%
+C=0, P=0 >> TRIM:-0.4310884995647071
+C=0, P=5000 >> TRIM:-0.4009661314525103
+C=0, P=10000 >> TRIM:-0.3576188511230429
+C=480, P=0 >> TRIM:-0.4921036340022997
+C=480, P=5000 >> TRIM:-0.4524398717649599
+C=480, P=10000 >> TRIM:-0.4162928671592418
+C=960, P=0 >> TRIM:-0.5451727619720783
+C=960, P=5000 >> TRIM:-0.5101120205873184
+C=960, P=10000 >> TRIM:-0.4716579618185529
+------------------------------------------
+FUEL:25%
+C=0, P=0 >> TRIM:-0.3769231887148901
+C=0, P=5000 >> TRIM:-0.3340260982866799
+C=0, P=10000 >> TRIM:-0.3002610721175516
+C=480, P=0 >> TRIM:-0.4199695926700536
+C=480, P=5000 >> TRIM:-0.3878447050550277
+C=480, P=10000 >> TRIM:-0.3579164118212063
+C=960, P=0 >> TRIM:-0.4811302084018485
+C=960, P=5000 >> TRIM:-0.444056381202464
+C=960, P=10000 >> TRIM:-0.407355336069834
+
+
+These trim configurations have been achieved using the AFCS's IAS Hold with pitch (controlling elevator trim) while climbing with an NH of 95% and 1 flap setting (15 degrees) with the various fuel contents, cargo weights and passenger weights.
+
+Configurations tested at St. Marteen Intl. Airport (TNCM) on July 20th, 2012 by Narendran Muraleedharan.
+
+If you have any questions regarding trim configurations or anything else about the aircraft , you can contact me at muraleen@my.erau.edu
+
+If you find any bugs/issues in this aircraft, please use our issue tracker: https://bitbucket.org/muraleen/atr72-500-c-project/issues?status=new&status=open
