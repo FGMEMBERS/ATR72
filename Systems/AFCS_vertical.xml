@@ -220,16 +220,17 @@
       <prop>/autopilot/internal/target-climb-rate-fps</prop>
     </reference>
     <output>
-      <prop>/controls/flight/elevator-trim</prop>
+      <!--<prop>/controls/flight/elevator-trim</prop>-->
+      <prop>/autopilot/internal/elevator-cmd</prop>
     </output>
     <config>
-      <Kp>-0.01</Kp>      <!-- proportional gain -->
-      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <Kp>-0.0005</Kp>      <!-- proportional gain -->
+      <beta>1</beta>    <!-- input value weighing factor -->
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>10.0</Ti>       <!-- integrator time -->
-      <Td>0.00001</Td>    <!-- derivator time -->
+      <Ti>10</Ti>       <!-- integrator time -->
+      <Td>0.00005</Td>    <!-- derivator time -->
       <u_min>-1.0</u_min> <!-- minimum output clamp -->
       <u_max>1.0</u_max>  <!-- maximum output clamp -->
     </config>
@@ -333,4 +334,23 @@
     </config>
   </pid-controller>
 
+  	<filter>
+		<name>SERVO-DRIVER:elevator-trim</name>
+		<debug>false</debug>
+		<feedback-if-disabled>true</feedback-if-disabled>
+		<enable>
+			<or>
+				<property>/aircraft/afcs/logic/ver-alt</property>
+				<!--<property>/autopilot/internal/altitude-hold</property>
+				<property>/autopilot/internal/vertical-speed-hold</property>
+				<property>/autopilot/internal/speed-hold</property>
+				<property>/autopilot/internal/pitch-hold</property>-->
+			</or>
+		</enable>
+		<input>/autopilot/internal/elevator-cmd</input>
+		<output>/controls/flight/elevator-trim</output>
+		<type>noise-spike</type>
+		<max-rate-of-change>1</max-rate-of-change>
+	</filter>
+  
 </PropertyList>
