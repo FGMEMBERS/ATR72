@@ -257,6 +257,23 @@
 					<property>/aircraft/afcs/lat-mode</property>
 					<value>app</value>
 				</equals>
+				<not>
+					<property>/instrumentation/nav/gs-in-range</property>
+				</not>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/ver-hold</output>
+	</logic>
+	
+	<logic>
+		<input>
+			<and>
+				<property>/aircraft/afcs/ap-master</property>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>app</value>
+				</equals>
+				<property>/instrumentation/nav/gs-in-range</property>
 			</and>
 		</input>
 		<output>/aircraft/afcs/logic/ver-gs</output>
@@ -272,6 +289,33 @@
     </input>
     <reference>
       <prop>/instrumentation/nav[0]/gs-rate-of-climb</prop>
+    </reference>
+     <output>
+      <prop>/controls/flight/elevator-trim</prop>
+    </output>
+    <config>
+      <Kp>-0.01</Kp>      <!-- proportional gain -->
+      <beta>1.0</beta>    <!-- input value weighing factor -->
+      <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
+      <gamma>0.0</gamma>  <!-- input value weighing factor for -->
+                          <!-- unfiltered derivative error -->
+      <Ti>10.0</Ti>       <!-- integrator time -->
+      <Td>0.00001</Td>    <!-- derivator time -->
+      <u_min>-1.0</u_min> <!-- minimum output clamp -->
+      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+    </config>
+  </pid-controller>
+  
+  <pid-controller>
+    <debug>false</debug>
+    <enable>
+      <prop>/aircraft/afcs/logic/ver-hold</prop>
+    </enable>
+    <input>
+      <prop>/velocities/vertical-speed-fps</prop>
+    </input>
+    <reference>
+      <value>0.0</value>
     </reference>
      <output>
       <prop>/controls/flight/elevator-trim</prop>

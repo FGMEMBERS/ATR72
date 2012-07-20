@@ -4,11 +4,62 @@
 
 <!--=================== Automatic Flight Control System =====================-->
 
+	<!-- For some reason, a fake animation is required here to enable pilots animation -->
+	
+	<animation>
+		<type>select</type>
+		<object-name>fake</object-name>
+		<condition>
+			<property>/aircraft/anim</property>
+		</condition>
+	</animation>
+	
+	<!-- Show Pilots Only in Exterior View -->
+	
+	<animation>
+		<type>select</type>
+		<object-name>pilots</object-name>
+		<condition>
+			<not>
+				<property>sim/current-view/internal</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<!-- Standby-AI -->
+	
+	<animation>
+        <type>textranslate</type>
+        <object-name>stby-ai-horizon</object-name>
+        <property>orientation/pitch-deg</property>
+        <subtype>textranslate</subtype>
+        <factor>0.0037</factor>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+        </axis>
+    </animation>
+    
+    <animation>
+		<type>rotate</type>
+		<object-name>stby-ai-horizon</object-name>
+		<property>/orientation/roll-deg</property>
+		<factor>-1</factor>
+		<axis>
+			<x1-m>-11.292</x1-m>
+			<y1-m>-0.2268</y1-m>
+			<z1-m>0.6441</z1-m>
+			<x2-m>-11.3379</x2-m>
+			<y2-m>-0.2268</y2-m>
+			<z2-m>0.6360</z2-m>
+		</axis>
+	</animation>
+
 <!-- Knobs Pick and Rotate -->
 
 	<animation>
 		<type>pick</type>
-		<object-name>hdgknob</object-name>
+		<object-name>crs2</object-name>
 		<action>
 			<button>0</button>
 			<button>3</button>
@@ -17,7 +68,7 @@
 				<command>nasal</command>
 				<script>
 				
-					var hdg_prop = "/aircraft/afcs/hdg-setting";
+					var hdg_prop = "/aircraft/afcs/crs2";
 				
 					if (359 > getprop(hdg_prop))
 						setprop(hdg_prop, getprop(hdg_prop) + 1);
@@ -35,7 +86,7 @@
 				<command>nasal</command>
 				<script>
 					
-					var hdg_prop = "/aircraft/afcs/hdg-setting";
+					var hdg_prop = "/aircraft/afcs/crs2";
 				
 					if (getprop(hdg_prop) > 0)
 						setprop(hdg_prop, getprop(hdg_prop) - 1);
@@ -90,7 +141,7 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>crs2</object-name>
+		<object-name>afcs_hdg</object-name>
 		<action>
 			<button>0</button>
 			<button>3</button>
@@ -99,7 +150,7 @@
 				<command>nasal</command>
 				<script>
 				
-					var hdg_prop = "/aircraft/afcs/crs2";
+					var hdg_prop = "/aircraft/afcs/hdg-setting";
 				
 					if (359 > getprop(hdg_prop))
 						setprop(hdg_prop, getprop(hdg_prop) + 1);
@@ -117,7 +168,7 @@
 				<command>nasal</command>
 				<script>
 					
-					var hdg_prop = "/aircraft/afcs/crs2";
+					var hdg_prop = "/aircraft/afcs/hdg-setting";
 				
 					if (getprop(hdg_prop) > 0)
 						setprop(hdg_prop, getprop(hdg_prop) - 1);
@@ -223,7 +274,7 @@
 	
 	<animation>
 		<type>rotate</type>
-		<object-name>hdgknob</object-name>
+		<object-name>afcs_hdg</object-name>
 		<property>/aircraft/afcs/hdg-setting</property>
 		<factor>11.25</factor>
 		<axis>

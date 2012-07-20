@@ -36,6 +36,23 @@
 	</model>
 	
 	<model>
+		<name>EADI (FO)</name>
+		<path>Aircraft/ATR72/Models/Instruments/EADI/eadi.xml</path>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+		<offsets>
+			<x-m>-11.2991</x-m>
+			<y-m>0.6043</y-m>
+			<z-m>0.6668</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
 		<name>ADU</name>
 		<path>Aircraft/ATR72/Models/Instruments/ADU/adu.xml</path>
 		<condition>
@@ -73,20 +90,5 @@
 			<pitch-deg>-10</pitch-deg>
 		</offsets>
 	</model>
-	
-	<!-- Show Pilots Only in Exterior View -->
-	
-	<animation>
-		<type>select</type>
-		<object-name>pilots</object-name>
-		<condition>
-			<or>
-				<not>
-					<property>sim/current-view/internal</property>
-				</not>
-				<property>/aircraft/show-pilots-inside</property>
-			</or>
-		</condition>
-	</animation>
 	
 </PropertyList>

@@ -48,6 +48,9 @@ var autostart = func() {
 		if (getprop("/engines/engine[1]/n1") > 40) {
 			setprop("/controls/electric/engine[1]/generator", 0);
 			setprop("/controls/engines/engine[1]/starter", 0);
+			
+			print("Both Aircraft Engines (PW127F) have been started up, have a nice flight!");
+			
 			removelistener(engine2start);
 		}
 	}, 0, 0);
@@ -57,7 +60,5 @@ var autostart = func() {
 	
 	setprop("/controls/elec_panel/gen1", 1);
 	setprop("/controls/elec_panel/gen2", 1);
-	
-	print("Both Aircraft Engines (PW127F) have been started up, have a nice flight!");
 
 };
