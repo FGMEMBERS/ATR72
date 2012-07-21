@@ -339,13 +339,10 @@
 		<debug>false</debug>
 		<feedback-if-disabled>true</feedback-if-disabled>
 		<enable>
-			<or>
-				<property>/aircraft/afcs/logic/ver-alt</property>
-				<!--<property>/autopilot/internal/altitude-hold</property>
-				<property>/autopilot/internal/vertical-speed-hold</property>
-				<property>/autopilot/internal/speed-hold</property>
-				<property>/autopilot/internal/pitch-hold</property>-->
-			</or>
+			<prop>/aircraft/afcs/logic/ver-alt</prop>
+			<!-- REPLACE WITH 
+			<prop>/aircraft/afcs/ap-master</prop>
+			for control in all vertical axis AP modes -->
 		</enable>
 		<input>/autopilot/internal/elevator-cmd</input>
 		<output>/controls/flight/elevator-trim</output>
