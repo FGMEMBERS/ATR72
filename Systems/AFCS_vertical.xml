@@ -21,7 +21,6 @@
 	<logic>
 		<input>
 			<and>
-				<property>/aircraft/afcs/ap-master</property>
 				<equals>
 					<property>/aircraft/afcs/ver-mode</property>
 					<value>ias</value>
@@ -43,7 +42,7 @@
       <prop>/aircraft/afcs/logic/ver-ias</prop>
     </enable>
     <input>
-      <prop>/autopilot/internal/lookahead-5-sec-airspeed-kt</prop>
+      <prop>/autopilot/internal/lookahead-10-sec-airspeed-kt</prop>
     </input>
     <reference>
       <prop>/aircraft/afcs/ias-setting</prop>
@@ -57,7 +56,7 @@
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>1.0</Ti>        <!-- integrator time -->
+      <Ti>0.1</Ti>        <!-- integrator time -->
       <Td>0.00001</Td>    <!-- derivator time -->
       <u_min>-10.0</u_min><!-- minimum output clamp -->
       <u_max>10.0</u_max> <!-- maximum output clamp -->
@@ -76,15 +75,16 @@
       <prop>/autopilot/internal/target-pitch-deg-ias</prop>
     </reference>
     <output>
-      <prop>/controls/flight/elevator-trim</prop>
+      <!--<prop>/controls/flight/elevator-trim</prop>-->
+      <prop>/autopilot/internal/elevator-cmd</prop>
     </output>
     <config>
-      <Kp>-0.05</Kp>      <!-- proportional gain -->
+      <Kp>-0.00005</Kp>      <!-- proportional gain -->
       <beta>1.0</beta>    <!-- input value weighing factor -->
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>1.0</Ti>        <!-- integrator time -->
+      <Ti>10</Ti>        <!-- integrator time -->
       <Td>0.00001</Td>    <!-- derivator time -->
       <u_min>-1.0</u_min> <!-- minimum output clamp -->
       <u_max>1.0</u_max>  <!-- maximum output clamp -->
@@ -106,7 +106,6 @@
 	<logic>
 		<input>
 			<and>
-				<property>/aircraft/afcs/ap-master</property>
 				<equals>
 					<property>/aircraft/afcs/ver-mode</property>
 					<value>vs</value>
@@ -165,7 +164,6 @@
 	<logic>
 		<input>
 			<and>
-				<property>/aircraft/afcs/ap-master</property>
 				<equals>
 					<property>/aircraft/afcs/ver-mode</property>
 					<value>alt</value>
@@ -339,10 +337,7 @@
 		<debug>false</debug>
 		<feedback-if-disabled>true</feedback-if-disabled>
 		<enable>
-			<prop>/aircraft/afcs/logic/ver-alt</prop>
-			<!-- REPLACE WITH 
 			<prop>/aircraft/afcs/ap-master</prop>
-			for control in all vertical axis AP modes -->
 		</enable>
 		<input>/autopilot/internal/elevator-cmd</input>
 		<output>/controls/flight/elevator-trim</output>
