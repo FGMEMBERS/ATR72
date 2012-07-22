@@ -43,11 +43,28 @@
 		<internal type="bool">true</internal>
 		<cockpit type="bool">true</cockpit>
 		<config>
-			<x-offset-m type="double">-0.59</x-offset-m>
-			<y-offset-m type="double">1.08</y-offset-m>
+			<x-offset-m type="double">-0.54</x-offset-m>
+			<y-offset-m type="double">1.0833</y-offset-m>
 			<z-offset-m type="double">-10.2479</z-offset-m>
 			<pitch-offset-deg>-3</pitch-offset-deg>
 			<default-field-of-view-deg type="double">60.0</default-field-of-view-deg>
+		</config>
+	</view>
+	
+	<view n="101">
+		<name>Copilot View</name>
+		<type>lookfrom</type>
+		<internal archive="y">true</internal>
+		<cockpit type="bool">true</cockpit>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+			<x-offset-m type="double">0.54</x-offset-m>
+			<y-offset-m type="double">1.0833</y-offset-m>
+			<z-offset-m type="double">-10.2479</z-offset-m>
+			<pitch-offset-deg>-4</pitch-offset-deg>
+			<default-field-of-view-deg type="double">65</default-field-of-view-deg>
 		</config>
 	</view>
 
@@ -99,7 +116,56 @@
 			<name>Autopilot Internal Helpers</name>
 			<path>Aircraft/Generic/generic-autopilot-helper.xml</path>
 		</autopilot>
+		
 	</systems>
+	
+	<flight-recorder>
+			<replay-config type="int">0</replay-config>
+			<config n="0" include="/Aircraft/Generic/flightrecorder/generic-jet.xml">
+				<name type="string">ATR 72-500 Flight Recorder</name>
+				<!-- Custom properties -->
+				<signal>
+					<type>float</type>
+					<property type="string">/aircraft/wingflex</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/gear/gear[0]/compression-ft</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/gear/gear[1]/compression-ft</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/gear/gear[2]/compression-ft</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/engines/engine[0]/thruster/prop_rpm</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/engines/engine[0]/thruster/prop_pitch</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/engines/engine[1]/thruster/prop_rpm</property>
+					<interpolation>linear</interpolation>
+				</signal>
+				<signal>
+					<type>float</type>
+					<property type="string">/engines/engine[1]/thruster/prop_pitch</property>
+					<interpolation>linear</interpolation>
+				</signal>
+			</config>
+		</flight-recorder>
 
 	</sim>
 	
