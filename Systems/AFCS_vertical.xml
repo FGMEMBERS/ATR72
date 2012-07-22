@@ -300,6 +300,8 @@
                           <!-- unfiltered derivative error -->
       <Ti>10</Ti>       <!-- integrator time -->
       <Td>0.00002</Td>    <!-- derivator time -->
+	  <!-- need to clamp this so that there is no possibility of the aircraft
+			climbing to find the glideslope -->
       <u_min>-1.0</u_min> <!-- minimum output clamp -->
       <u_max>1.0</u_max>  <!-- maximum output clamp -->
     </config>
