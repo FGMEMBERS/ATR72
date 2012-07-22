@@ -4,7 +4,7 @@ var hyd_green = {
 	
 		if (rbus >= 100) {
 		
-			var out_basic = rbus * 7.5;
+			var out_basic = rbus * 15;
 		
 			if (out_basic > 3000)
 				hydraulics.green_psi = 3000; # Filter

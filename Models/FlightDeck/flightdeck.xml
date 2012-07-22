@@ -36,6 +36,23 @@
 	</model>
 	
 	<model>
+		<name>EHSI</name>
+		<path>Aircraft/ATR72/Models/Instruments/EHSI/ehsi.xml</path>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+		<offsets>
+			<x-m>-11.2708</x-m>
+			<y-m>-0.5738</y-m>
+			<z-m>0.5041</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
 		<name>EADI (FO)</name>
 		<path>Aircraft/ATR72/Models/Instruments/EADI/eadi.xml</path>
 		<condition>
@@ -48,6 +65,23 @@
 			<x-m>-11.2991</x-m>
 			<y-m>0.6043</y-m>
 			<z-m>0.6668</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>EHSI (FO)</name>
+		<path>Aircraft/ATR72/Models/Instruments/EHSI/ehsi1.xml</path>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+		<offsets>
+			<x-m>-11.2708</x-m>
+			<y-m>0.6042</y-m>
+			<z-m>0.5041</z-m>
 			<pitch-deg>-10</pitch-deg>
 		</offsets>
 	</model>
@@ -131,6 +165,28 @@
 			<x-m>-11.2985</x-m>
 			<y-m>0.7501</y-m>
 			<z-m>0.6566</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>Vertical Speed Indicator</name>
+		<path>Aircraft/ATR72/Models/Instruments/VSI/vertical-speed-indicator.xml</path>
+		<offsets>
+			<x-m>-11.2797</x-m>
+			<y-m>-0.4279</y-m>
+			<z-m>0.5500</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+	</model>
+	
+	<model>
+		<name>Vertical Speed Indicator (FO) </name>
+		<path>Aircraft/ATR72/Models/Instruments/VSI/vertical-speed-indicator.xml</path>
+		<offsets>
+			<x-m>-11.2797</x-m>
+			<y-m>0.7496</y-m>
+			<z-m>0.5500</z-m>
 			<pitch-deg>-10</pitch-deg>
 		</offsets>
 	</model>

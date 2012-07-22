@@ -93,6 +93,15 @@
 							</script>
                         </binding>
                     </item>
+                    <item>
+						<label>Select Livery</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							 aircraft.livery.dialog.open();
+							</script>
+						</binding>
+					</item>
                 </menu>
 			</default>
 		</menubar>
@@ -182,6 +191,7 @@
 			<alt-setting type="int">10000</alt-setting>
 			<vs-setting type="int">0</vs-setting>
 			<ias-setting type="int">180</ias-setting>
+			<bank-limit type="int">27</bank-limit>
 		</afcs>
 	</aircraft>
 	
@@ -324,7 +334,7 @@
 		</walk>
 		<atr>
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
-			<file>Aircraft/ATR72/Engines/propeller.nas</file>
+			<file>Aircraft/ATR72/Engines/propellerC.nas</file>
 			<file>Aircraft/ATR72/Nasal/general_loop.nas</file>
 			<file>Aircraft/ATR72/Nasal/electrical.nas</file>
 			<file>Aircraft/ATR72/Nasal/ccas.nas</file>

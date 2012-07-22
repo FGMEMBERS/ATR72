@@ -1,3 +1,5 @@
+aircraft.livery.init("Aircraft/ATR72/Models/Liveries/" ~ getprop("sim/aero"));
+
 var get_percent = func(val, max) {
 
 	return (val / max) * 100;

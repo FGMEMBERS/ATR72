@@ -126,18 +126,41 @@
         <type>select</type>
         <object-name>spdpointer</object-name>
         <condition>
-            <equals>
-            	<property>aircraft/afcs/spdpointer-show</property>
-            	<value>1</value>
-            </equals>
+            <and>
+            	<greater-than>
+		        	<property>/velocities/airspeed-kt</property>
+					<expression>
+						<difference>
+							<property>/aircraft/afcs/ias-setting</property>
+							<value>30</value>
+						</difference>
+					</expression>
+		        </greater-than>
+		        <less-than-equals>
+					<property>/velocities/airspeed-kt</property>
+					<expression>
+						<sum>
+							<property>/aircraft/afcs/ias-setting</property>
+							<value>30</value>
+						</sum>
+					</expression>
+		        </less-than-equals>
+            </and>
         </condition>
     </animation>
 
     <animation>
         <type>translate</type>
         <object-name>spdpointer</object-name>
-        <property>aircraft/afcs/spdpointer-norm</property>
-        <factor>0.0326</factor>
+        <expression>
+			<product>
+				<difference>
+					<property>/velocities/airspeed-kt</property>
+					<property>/aircraft/afcs/ias-setting</property>
+				</difference>
+				<value>0.00108</value>
+			</product>
+        </expression>
         <axis>
             <x>0</x>
             <y>0</y>

@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>ehsi.ac</path>
+	
+	<animation>
+		<type>material</type>
+		<object-name>text</object-name>
+		<emission>
+			<red>0.172</red>
+			<green>0.423</green>
+			<blue>0.753</blue>
+			<factor>0.8</factor>
+		</emission>
+		<diffuse>
+			<red>0.172</red>
+			<green>0.423</green>
+			<blue>0.753</blue>
+		</diffuse>
+		<ambient>
+			<red>0.172</red>
+			<green>0.423</green>
+			<blue>0.753</blue>
+		</ambient>
+	</animation>
+	
+	<animation>
+    	<type>rotate</type>
+    	<object-name>hsi-rotate</object-name>
+    	<property>/orientation/heading-deg</property>
+    	<factor>-1</factor>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>hdgbug</object-name>
+    	<property>/aircraft/afcs/hdg-setting</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>crsbug</object-name>
+    	<object-name>loc-point</object-name>
+    	<property>/aircraft/afcs/crs1</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>vor1-pointer</object-name>
+    	<property>/instrumentation/nav[0]/heading-deg</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>vor2-pointer</object-name>
+    	<property>/instrumentation/nav[1]/heading-deg</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>translate</type>type>
+    	<object-name>loc-point</object-name>
+    	<property>/instrumentation/nav/heading-needle-deflection-norm</property>
+    	<factor>0.0144</factor>
+    	<axis>
+    		<x>0</x>
+    		<y>1</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <!-- OSG Text -->
+    
+    <text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>-0.0671</y-m>
+			<z-m>0.046</z-m>
+		</offsets>
+		<alignment>left-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f</format>
+		<property>/aircraft/afcs/crs1</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">Helvetica.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.01</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>-0.0671</y-m>
+			<z-m>-0.0572</z-m>
+		</offsets>
+		<alignment>left-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f</format>
+		<property>/aircraft/afcs/hdg-setting</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">Helvetica.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.01</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+
+	    <text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.071</y-m>
+			<z-m>0.046</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f NM</format>
+		<property>/instrumentation/dme/indicated-distance-nm</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">Helvetica.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.01</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.071</y-m>
+			<z-m>-0.0572</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f</format>
+		<property>/aircraft/afcs/hdg-setting</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">Helvetica.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.01</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+</PropertyList>

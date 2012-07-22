@@ -8,6 +8,32 @@
 		<path>FlightDeck/flightdeck.xml</path>
 	</model>
 	
+	<!-- LIVERY SELECT -->
+	<!-- Animation -->
+	<animation>
+		<type>material</type>
+		<!-- Fuselage -->
+		<object-name>fuselage</object-name>
+		<!-- Vstab/Rudder -->
+		<object-name>vstab</object-name>
+		<object-name>rudder</object-name>
+		<!-- Engines -->
+		<object-name>engine0</object-name>
+		<object-name>engine1</object-name>
+		<property-base>sim/model/livery</property-base>
+		<texture-prop>texture</texture-prop>
+	</animation>
+
+	<!-- Nasal code -->
+	<nasal>
+		<load>
+		 var livery_update = aircraft.livery_update.new("Aircraft/ATR72/Models/Liveries/ATR72-500C");
+		</load>
+		<unload>
+		 livery_update.stop();
+		</unload>
+	</nasal>
+	
 	<!-- Animations -->
 	
 	<!-- Wing Flex -->
@@ -963,8 +989,6 @@
         <object-name>lprop2</object-name>
         <object-name>lprop3</object-name>
         <object-name>lprop4</object-name>
-        <object-name>lprop5</object-name>
-        <object-name>lprop6</object-name>
         <object-name>lpropblur</object-name>
         <object-name>nosecone0</object-name>
         <property>/engines/engine[0]/thruster/prop_rpm</property>
@@ -987,8 +1011,6 @@
         <object-name>rprop2</object-name>
         <object-name>rprop3</object-name>
         <object-name>rprop4</object-name>
-        <object-name>rprop5</object-name>
-        <object-name>rprop6</object-name>
         <object-name>rpropblur</object-name>
         <object-name>nosecone1</object-name>
         <property>/engines/engine[1]/thruster/prop_rpm</property>
@@ -1008,195 +1030,147 @@
     <!-- Propeller Pitch Animations -->
     
     <animation>
-		<type>rotate</type>
-		<object-name>rprop1</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>lprop1</object-name>
+	  <property>/engines/engine[0]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>4.0916</y1-m>
-			<z1-m>1.7030</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>4.0916</y2-m>
-			<z2-m>1.6414</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>-4.045</y-m>
+	   <z-m>0</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>0</y>
+	   <z>1</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>rprop2</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>lprop4</object-name>
+	  <property>/engines/engine[0]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>3.8645</y1-m>
-			<z1-m>1.6090</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>3.9179</y2-m>
-			<z2-m>1.5782</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>-4.045</y-m>
+	   <z-m>0</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>0</y>
+	   <z>-1</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>rprop3</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>lprop2</object-name>
+	  <property>/engines/engine[0]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>3.8323</y1-m>
-			<z1-m>1.3653</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>3.8857</y2-m>
-			<z2-m>1.3961</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>0</y-m>
+	   <z-m>1.4594</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>1</y>
+	   <z>0</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>rprop4</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>lprop3</object-name>
+	  <property>/engines/engine[0]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>4.0272</y1-m>
-			<z1-m>1.2156</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>4.0272</y2-m>
-			<z2-m>1.2773</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>0</y-m>
+	   <z-m>1.4594</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>-1</y>
+	   <z>0</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>rprop5</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>rprop1</object-name>
+	  <property>/engines/engine[1]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>4.2543</y1-m>
-			<z1-m>1.3096</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>4.2009</y2-m>
-			<z2-m>1.3404</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>4.057</y-m>
+	   <z-m>0</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>0</y>
+	   <z>1</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>rprop6</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>rprop4</object-name>
+	  <property>/engines/engine[1]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>4.2865</y1-m>
-			<z1-m>1.5532</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>4.2331</y2-m>
-			<z2-m>1.5224</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>4.057</y-m>
+	   <z-m>0</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>0</y>
+	   <z>-1</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>lprop1</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>rprop2</object-name>
+	  <property>/engines/engine[1]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-3.9301</y1-m>
-			<z1-m>1.6772</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-3.9511</y2-m>
-			<z2-m>1.6193</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>0</y-m>
+	   <z-m>1.4594</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>1</y>
+	   <z>0</z>
+	  </axis>
 	</animation>
 	
 	<animation>
-		<type>rotate</type>
-		<object-name>lprop2</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
+	  <type>rotate</type>
+	  <object-name>rprop3</object-name>
+	  <property>/engines/engine[1]/thruster/prop_pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-4.1756</y1-m>
-			<z1-m>1.6667</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-4.1360</y2-m>
-			<z2-m>1.6194</z2-m>
-		</axis>
-	</animation>
-	
-	<animation>
-		<type>rotate</type>
-		<object-name>lprop3</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
-		<offset-deg>35</offset-deg>
-		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-4.2892</y1-m>
-			<z1-m>1.4487</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-4.2285</y2-m>
-			<z2-m>1.4594</z2-m>
-		</axis>
-	</animation>
-	
-	<animation>
-		<type>rotate</type>
-		<object-name>lprop4</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
-		<offset-deg>35</offset-deg>
-		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-4.1573</y1-m>
-			<z1-m>1.2414</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-4.1362</y2-m>
-			<z2-m>1.2993</z2-m>
-		</axis>
-	</animation>
-	
-	<animation>
-		<type>rotate</type>
-		<object-name>lprop5</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
-		<offset-deg>35</offset-deg>
-		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-3.9118</y1-m>
-			<z1-m>1.2520</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-3.9514</y2-m>
-			<z2-m>1.2992</z2-m>
-		</axis>
-	</animation>
-	
-	<animation>
-		<type>rotate</type>
-		<object-name>lprop6</object-name>
-		<property>/engines/engine/thruster/prop_pitch</property>
-		<offset-deg>35</offset-deg>
-		<factor>-1</factor>
-		<axis>
-			<x1-m>-3.9254</x1-m>
-			<y1-m>-3.7982</y1-m>
-			<z1-m>1.4698</z1-m>
-			<x2-m>-3.9254</x2-m>
-			<y2-m>-3.8589</y2-m>
-			<z2-m>1.4592</z2-m>
-		</axis>
+	  <center>
+	   <x-m>-3.9639</x-m>
+	   <y-m>0</y-m>
+	   <z-m>1.4594</z-m>
+	  </center>
+	  <axis>
+	   <x>0</x>
+	   <y>-1</y>
+	   <z>0</z>
+	  </axis>
 	</animation>
 	
 	<!-- Blur Animation Select -->
@@ -1229,8 +1203,6 @@
         <object-name>lprop2</object-name>
         <object-name>lprop3</object-name>
         <object-name>lprop4</object-name>
-        <object-name>lprop5</object-name>
-        <object-name>lprop6</object-name>
 		<condition>
 			<less-than-equals>
 				<property>engines/engine[0]/thruster/prop_rpm</property>
@@ -1245,8 +1217,6 @@
         <object-name>rprop2</object-name>
         <object-name>rprop3</object-name>
         <object-name>rprop4</object-name>
-        <object-name>rprop5</object-name>
-        <object-name>rprop6</object-name>
 		<condition>
 			<less-than-equals>
 				<property>engines/engine[1]/thruster/prop_rpm</property>

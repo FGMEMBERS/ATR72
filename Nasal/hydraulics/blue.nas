@@ -4,7 +4,7 @@ var hyd_blue = {
 	
 		if (lbus >= 100) {
 		
-			var out_basic = lbus * 7.5;
+			var out_basic = lbus * 15;
 		
 			if (out_basic > 3000)
 				hydraulics.blue_psi = 3000; # Filter

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>vertical-speed-indicator.ac</path>
+	
+	<animation>
+    	<type>rotate</type>
+    	<object-name>vsi-needle</object-name>
+    	<property>/velocities/vertical-speed-fps</property>
+    	<interpolation>
+			<entry>
+				<ind>-100</ind>
+				<dep>-180</dep>
+			</entry>
+			<entry>
+				<ind>-33.33</ind>
+				<dep>-108</dep>
+			</entry>
+			<entry>
+				<ind>-16.67</ind>
+				<dep>-72</dep>
+			</entry>
+			<entry>
+				<ind>0</ind>
+				<dep></dep>
+			</entry>
+			<entry>
+				<ind>16.67</ind>
+				<dep>72</dep>
+			</entry>
+			<entry>
+				<ind>33.33</ind>
+				<dep>108</dep>
+			</entry>
+			<entry>
+				<ind>100</ind>
+				<dep>180</dep>
+			</entry>
+    	</interpolation>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+	
+</PropertyList>
