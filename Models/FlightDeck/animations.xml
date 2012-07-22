@@ -54,6 +54,43 @@
 			<z2-m>0.6360</z2-m>
 		</axis>
 	</animation>
+	
+<!-- Instrument Settings -->
+
+<animation>
+		<type>pick</type>
+		<object-name>altimeter-setting</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					var alt_setting = getprop("/instrumentation/altimeter/setting-inhg");
+					
+					setprop("/instrumentation/altimeter/setting-inhg", alt_setting + 0.01);
+					
+				</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					
+					var alt_setting = getprop("/instrumentation/altimeter/setting-inhg");
+					
+					setprop("/instrumentation/altimeter/setting-inhg", alt_setting - 0.01);
+					
+				</script>
+			</binding>
+		</action>
+	</animation>
 
 <!-- Knobs Pick and Rotate -->
 
@@ -1318,5 +1355,190 @@
 	</animation>
 
 <!--=============================== END OF ADU ==============================-->
+
+<!-- Move Speed Bugs -->
+    
+    <animation>
+		<type>pick</type>
+		<object-name>V1</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/V1</property>
+				<step>1</step>
+				<max>
+					<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/VR</property>
+							<value>-4</value>
+						</sum>
+					</expression>
+				</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/V1</property>
+				<step>-1</step>
+				<min>0</min>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>Vr</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/VR</property>
+				<step>1</step>
+				<max>
+					<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/V2</property>
+							<value>-4</value>
+						</sum>
+					</expression>
+				</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/VR</property>
+				<step>-1</step>
+				<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/V1</property>
+							<value>4</value>
+						</sum>
+					</expression>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>V2</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/V2</property>
+				<step>1</step>
+				<max>
+					<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/Vs</property>
+							<value>-4</value>
+						</sum>
+					</expression>
+				</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/V2</property>
+				<step>-1</step>
+				<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/VR</property>
+							<value>4</value>
+						</sum>
+					</expression>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>Vs</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/Vs</property>
+				<step>1</step>
+				<max>
+					<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/Vne</property>
+							<value>-20</value>
+						</sum>
+					</expression>
+				</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/Vs</property>
+				<step>-1</step>
+				<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/V2</property>
+							<value>4</value>
+						</sum>
+					</expression>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>Vne</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/Vne</property>
+				<step>1</step>
+				<max>400</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/fmc/vspeeds/Vne</property>
+				<step>-1</step>
+				<expression>
+						<sum>
+							<property>/instrumentation/fmc/vspeeds/Vs</property>
+							<value>20</value>
+						</sum>
+					</expression>
+			</binding>
+		</action>
+	</animation>
 			
 </PropertyList>

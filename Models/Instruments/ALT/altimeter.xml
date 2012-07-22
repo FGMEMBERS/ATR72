@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>altimeter.ac</path>
+	
+	<animation>
+		<type>material</type>
+		<object-name>text</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<factor>0.8</factor>
+		</emission>
+	</animation>
+	
+	<animation>
+    	<type>rotate</type>
+    	<object-name>asi-needle</object-name>
+    	<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+    	<factor>0.36</factor>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.0172</y-m>
+			<z-m>0.0145</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%5.0f</format>
+		<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>-0.0102</y-m>
+			<z-m>-0.0148</z-m>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%4.0f</format>
+		<property>/instrumentation/altimeter/setting-hpa</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.0102</y-m>
+			<z-m>-0.0148</z-m>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%2.2f</format>
+		<property>/instrumentation/altimeter/setting-inhg</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+</PropertyList>

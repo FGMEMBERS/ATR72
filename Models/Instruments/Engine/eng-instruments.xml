@@ -185,6 +185,186 @@
     	</axis>
     </animation>
     
+    <animation>
+    	<type>rotate</type>
+    	<object-name>ff0</object-name>
+    	<property>engines/engine[0]/fuelflow-kgph</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>600</ind>
+    			<dep>75</dep>
+    		</entry>
+    		<entry>
+    			<ind>1000</ind>
+    			<dep>220</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>-0.0376</y-m>
+    		<z-m>-0.1557</z-m>
+    	</center>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>ff1</object-name>
+    	<property>engines/engine[1]/fuelflow-kgph</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>600</ind>
+    			<dep>75</dep>
+    		</entry>
+    		<entry>
+    			<ind>1000</ind>
+    			<dep>220</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>0.0378</y-m>
+    		<z-m>-0.1557</z-m>
+    	</center>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>oilpress0</object-name>
+    	<property>engines/engine[0]/oil-pressure-psi</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>40</ind>
+    			<dep>15</dep>
+    		</entry>
+    		<entry>
+    			<ind>80</ind>
+    			<dep>85</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>-0.1138</y-m>
+    		<z-m>-0.1547</z-m>
+    	</center>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>oiltemp0</object-name>
+    	<property>engines/engine[0]/oil-temperature-degc</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>20</ind>
+    			<dep>14</dep>
+    		</entry>
+    		<entry>
+    			<ind>100</ind>
+    			<dep>82</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>-0.1138</y-m>
+    		<z-m>-0.1547</z-m>
+    	</center>
+    	<axis>
+    		<x>1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>oilpress1</object-name>
+    	<property>engines/engine[1]/oil-pressure-psi</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>40</ind>
+    			<dep>15</dep>
+    		</entry>
+    		<entry>
+    			<ind>80</ind>
+    			<dep>85</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>0.1133</y-m>
+    		<z-m>-0.1547</z-m>
+    	</center>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>oiltemp1</object-name>
+    	<property>engines/engine[1]/oil-temperature-degc</property>
+    	<interpolation>
+    		<entry>
+    			<ind>0</ind>
+    			<dep>0</dep>
+    		</entry>
+    		<entry>
+    			<ind>20</ind>
+    			<dep>14</dep>
+    		</entry>
+    		<entry>
+    			<ind>100</ind>
+    			<dep>82</dep>
+    		</entry>
+    	</interpolation>
+    	<center>
+    		<x-m>0</x-m>
+    		<y-m>0.1133</y-m>
+    		<z-m>-0.1547</z-m>
+    	</center>
+    	<axis>
+    		<x>1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
     <text>
 		<name>text</name>
 		<offsets>
@@ -366,6 +546,54 @@
 		<type type="string">number-value</type>
 		<format type="string">%3.1f</format>
 		<property>/engines/engine[1]/n1</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>-0.0376</y-m>
+			<z-m>-0.1704</z-m>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%4.1f</format>
+		<property>/engines/engine[0]/fuelflow-kgph</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.0379</y-m>
+			<z-m>-0.1697</z-m>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%4.1f</format>
+		<property>/engines/engine[1]/fuelflow-kgph</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>

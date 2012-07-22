@@ -10,9 +10,11 @@ var get_degC = func(degF) {
 
 };
 
-setprop("/instrumentation/fmc/vspeeds/V1", 0);
-setprop("/instrumentation/fmc/vspeeds/VR", 0);
-setprop("/instrumentation/fmc/vspeeds/V2", 0);
+setprop("/instrumentation/fmc/vspeeds/V1", 98);
+setprop("/instrumentation/fmc/vspeeds/VR", 112);
+setprop("/instrumentation/fmc/vspeeds/V2", 126);
+setprop("/instrumentation/fmc/vspeeds/Vs", 145);
+setprop("/instrumentation/fmc/vspeeds/Vne", 320);
 
 var nose_wow_sav = 0;
 var left_wow_sav = 0;
@@ -92,6 +94,14 @@ var general_loop_1 = {
     	
     	setprop("/engines/engine[0]/itt_degc", get_degC(itt0_degF));
     	setprop("/engines/engine[1]/itt_degc", get_degC(itt1_degF));
+    	
+    	# Convert Oil Temperature degF to degC
+    	
+    	var oiltemp0 = getprop("/engines/engine[0]/oil-temperature-degf");
+    	var oiltemp1 = getprop("/engines/engine[1]/oil-temperature-degf");
+    	
+    	setprop("/engines/engine[0]/oil-temperature-degc", get_degC(oiltemp0));
+    	setprop("/engines/engine[1]/oil-temperature-degc", get_degC(oiltemp1));
     	
     	# Convert Torque and RPM to Percentage
     	
