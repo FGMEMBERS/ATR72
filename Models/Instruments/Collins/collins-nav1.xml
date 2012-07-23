@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>nav1.ac</path>
+	
+	<animation>
+		<type>material</type>
+		<object-name>text</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>text</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+	
+	<!-- Knob Rotate -->
+	
+	<animation>
+    	<type>rotate</type>
+    	<object-name>nav1-modesel</object-name>
+    	<property>/aircraft/collins/nav1-mode</property>
+    	<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>45</dep>
+			</entry>
+			<entry>
+				<ind>2</ind>
+				<dep>93</dep>
+			</entry>
+    	</interpolation>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    	<center>
+			<x-m>0</x-m>
+			<y-m>-0.02175</y-m>
+			<z-m>-0.0271</z-m>
+    	</center>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>nav1-editmode</object-name>
+    	<property>/aircraft/collins/nav1-editmode-int</property>
+    	<factor>40</factor>
+    	<axis>
+    		<x>0</x>
+    		<y>-1</y>
+    		<z>0</z>
+    	</axis>
+    	<center>
+			<x-m>0.0041</x-m>
+			<y-m>0</y-m>
+			<z-m>0.0071</z-m>
+    	</center>
+    </animation>
+	
+	<!-- Pick Animations -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>nav1-changeint</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					var mode = getprop("/aircraft/collins/nav1-editmode");
+				
+					var freq = getprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz");
+					
+					setprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz", freq + 1);
+					
+				</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					
+					var mode = getprop("/aircraft/collins/nav1-editmode");
+				
+					var freq = getprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz");
+					
+					setprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz", freq - 1);
+					
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>nav1-changedec</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					var mode = getprop("/aircraft/collins/nav1-editmode");
+				
+					var freq = getprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz");
+					
+					setprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz", freq + 0.01);
+					
+				</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+					
+					var mode = getprop("/aircraft/collins/nav1-editmode");
+				
+					var freq = getprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz");
+					
+					setprop("/instrumentation/nav[1]/frequencies/" ~ mode ~ "-mhz", freq - 0.01);
+					
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>nav1-editmode</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/aircraft/collins/nav1-editmode</property>
+				<value>selected</value>
+				<value>standby</value>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					if (getprop("/aircraft/collins/nav1-editmode") == "selected") {
+					
+						setprop("/aircraft/collins/nav1-editmode-int", 1);
+					
+					} else {
+					
+						setprop("/aircraft/collins/nav1-editmode-int", 0);
+					
+					}
+				
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>nav1-modesel</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					if (getprop("/aircraft/collins/nav1-mode") == 0) {
+					
+						setprop("/aircraft/collins/nav1-mode", 1);
+					
+					} elsif (getprop("/aircraft/collins/nav1-mode") == 1) {
+					
+						setprop("/aircraft/collins/nav1-mode", 2);
+						
+						var active = getprop("/instrumentation/nav[1]/frequencies/selected-mhz");
+						
+						var standby = getprop("/instrumentation/nav[1]/frequencies/standby-mhz");
+						
+						setprop("/instrumentation/nav[1]/frequencies/selected-mhz", standby);
+						
+						setprop("/instrumentation/nav[1]/frequencies/standby-mhz", active);
+						
+						var reset_mode = func {
+							setprop("/aircraft/collins/nav1-mode", 1);
+						}
+						
+						settimer(reset_mode, 0.1);
+					
+					}
+				
+				</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>
+				
+					setprop("/aircraft/collins/nav1-mode", 0);
+				
+				</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<!-- OSG Text -->
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.01</x-m>
+			<y-m>0.019</y-m>
+			<z-m>0.0250</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.2f</format>
+		<property>/instrumentation/nav[1]/frequencies/selected-mhz</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.012</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.01</x-m>
+			<y-m>0.019</y-m>
+			<z-m>0.011</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.2f</format>
+		<property>/instrumentation/nav[1]/frequencies/standby-mhz</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.012</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+</PropertyList>

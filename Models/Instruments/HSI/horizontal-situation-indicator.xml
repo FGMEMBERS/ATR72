@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>horizontal-situation-indicator.ac</path>
+
+	<animation>
+    	<type>rotate</type>
+    	<object-name>hsi-compass</object-name>
+    	<object-name>hsi-hdgbug</object-name>
+    	<object-name>hsi-vor1</object-name>
+    	<object-name>hsi-vor2</object-name>
+    	<property>/orientation/heading-deg</property>
+    	<factor>-1</factor>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>hsi-hdgbug</object-name>
+    	<property>/aircraft/afcs/hdg-setting</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>hsi-vor1</object-name>
+    	<property>/instrumentation/nav[0]/heading-deg</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>hsi-vor2</object-name>
+    	<property>/instrumentation/nav[1]/heading-deg</property>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+
+</PropertyList>

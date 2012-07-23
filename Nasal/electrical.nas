@@ -262,26 +262,42 @@ var electrical = {
     	
     	# Communication and Navigation Systems
     	
-    	if (getprop("/systems/electric/outputs/comm") == 1) {
+    	if ((getprop("/systems/electric/outputs/comm") == 1) and (getprop("/aircraft/collins/com0-mode") == 1)) {
     	
     		setprop("/instrumentation/comm/serviceable", 1);
-    		setprop("/instrumentation/comm[1]/serviceable", 1);
     	
     	} else {
     	
     		setprop("/instrumentation/comm/serviceable", 0);
+    	
+    	}
+    	
+    	if ((getprop("/systems/electric/outputs/comm") == 1) and (getprop("/aircraft/collins/com1-mode") == 1)) {
+    	
+    		setprop("/instrumentation/comm[1]/serviceable", 1);
+    	
+    	} else {
+    	
     		setprop("/instrumentation/comm[1]/serviceable", 0);
     	
     	}
     	
-    	if (getprop("/systems/electric/outputs/nav") == 1) {
+    	if ((getprop("/systems/electric/outputs/nav") == 1) and (getprop("/aircraft/collins/nav0-mode") == 1)) {
     	
     		setprop("/instrumentation/nav/serviceable", 1);
-    		setprop("/instrumentation/nav[1]/serviceable", 1);
     	
     	} else {
     	
     		setprop("/instrumentation/nav/serviceable", 0);
+    	
+    	}
+    	
+    	if ((getprop("/systems/electric/outputs/nav") == 1) and (getprop("/aircraft/collins/nav1-mode") == 1)) {
+    	
+    		setprop("/instrumentation/nav[1]/serviceable", 1);
+    	
+    	} else {
+    	
     		setprop("/instrumentation/nav[1]/serviceable", 0);
     	
     	}

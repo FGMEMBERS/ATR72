@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>clock.ac</path>
+	
+	<!-- UTC: /sim/time/utc/day-seconds -->
+	<!-- Local Offset: /sum/time/local-offset -->
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>clock-sec</object-name>
+    	<expression>
+			<product>
+				<sum>
+					<property>/sim/time/utc/day-seconds</property>
+					<property>/sim/time/local-offset</property>
+				</sum>
+				<value>6</value>
+			</product>
+    	</expression>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>clock-min</object-name>
+    	<expression>
+			<product>
+				<sum>
+					<property>/sim/time/utc/day-seconds</property>
+					<property>/sim/time/local-offset</property>
+				</sum>
+				<value>0.1</value>
+			</product>
+    	</expression>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+    
+    <animation>
+    	<type>rotate</type>
+    	<object-name>clock-hr</object-name>
+    	<expression>
+			<product>
+				<sum>
+					<property>/sim/time/utc/day-seconds</property>
+					<property>/sim/time/local-offset</property>
+				</sum>
+				<value>0.0083333</value>
+			</product>
+    	</expression>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+
+</PropertyList>
