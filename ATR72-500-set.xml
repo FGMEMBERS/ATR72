@@ -93,6 +93,15 @@
 							</script>
                         </binding>
                     </item>
+                    <item>
+						<label>Select Livery</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							 aircraft.livery.dialog.open();
+							</script>
+						</binding>
+					</item>
                 </menu>
 			</default>
 		</menubar>
@@ -182,6 +191,7 @@
 			<alt-setting type="int">10000</alt-setting>
 			<vs-setting type="int">0</vs-setting>
 			<ias-setting type="int">180</ias-setting>
+			<bank-limit type="int">27</bank-limit>
 		</afcs>
 	</aircraft>
 	
