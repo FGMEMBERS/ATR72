@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>nav0.ac</path>
+	
+	<animation>
+		<type>material</type>
+		<object-name>text</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.8</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
+	</animation>
+	
+	<!--
+	
+	<!-- OSG Text -->
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.0182</y-m>
+			<z-m>0.0238</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.2f</format>
+		<property>/instrumentation/nav[0]/selected-mhz</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>text</name>
+		<offsets>
+			<x-m>0.001</x-m>
+			<y-m>0.0182</y-m>
+			<z-m>0.0142</z-m>
+		</offsets>
+		<alignment>right-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.2f</format>
+		<property>/instrumentation/nav[0]/standby-mhz</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.005</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+</PropertyList>

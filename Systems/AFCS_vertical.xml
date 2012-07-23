@@ -37,9 +37,7 @@
 	</logic>
 	
 	<pid-controller>
-    <debug>false</debug>
-    <enable>
-      <prop>/aircraft/afcs/logic/ver-ias</prop>
+    <debug>/afcs/logic/ver-ias</prop>
     </enable>
     <input>
       <prop>/autopilot/internal/lookahead-10-sec-airspeed-kt</prop>

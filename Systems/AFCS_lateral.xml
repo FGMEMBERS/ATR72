@@ -193,14 +193,24 @@
     <output>
       <prop>/controls/flight/aileron</prop>
     </output>
+    <!-- config>
+      <Kp>0.1</Kp>
+      <beta>1.0</beta>
+      <alpha>0.1</alpha>
+      <gamma>0.0</gamma>
+      <Ti>10.0</Ti>
+      <Td>0.00001</Td>
+      <u_min>-1.0</u_min>
+      <u_max>1.0</u_max>
+    </config -->
     <config>
-      <Kp>0.1</Kp>        <!-- proportional gain -->
+      <Kp>0.01</Kp>        <!-- proportional gain -->
       <beta>1.0</beta>    <!-- input value weighing factor -->
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>10.0</Ti>       <!-- integrator time -->
-      <Td>0.00001</Td>    <!-- derivator time -->
+      <Ti>10</Ti>       <!-- integrator time -->
+      <Td>0.000005</Td>    <!-- derivator time -->
       <u_min>-1.0</u_min> <!-- minimum output clamp -->
       <u_max>1.0</u_max>  <!-- maximum output clamp -->
     </config>
@@ -283,14 +293,24 @@
     <output>
       <prop>/controls/flight/aileron</prop>
     </output>
+    <!-- config>
+      <Kp>0.1</Kp>
+      <beta>1.0</beta>
+      <alpha>0.1</alpha> 
+      <gamma>0.0</gamma>
+      <Ti>10.0</Ti>
+      <Td>0.00001</Td>
+      <u_min>-1.0</u_min>
+      <u_max>1.0</u_max
+    </config -->
     <config>
-      <Kp>0.1</Kp>        <!-- proportional gain -->
+      <Kp>0.02</Kp>        <!-- proportional gain -->
       <beta>1.0</beta>    <!-- input value weighing factor -->
       <alpha>0.1</alpha>  <!-- low pass filter weighing factor -->
       <gamma>0.0</gamma>  <!-- input value weighing factor for -->
                           <!-- unfiltered derivative error -->
-      <Ti>10.0</Ti>       <!-- integrator time -->
-      <Td>0.00001</Td>    <!-- derivator time -->
+      <Ti>10</Ti>       <!-- integrator time -->
+      <Td>0.000005</Td>    <!-- derivator time -->
       <u_min>-1.0</u_min> <!-- minimum output clamp -->
       <u_max>1.0</u_max>  <!-- maximum output clamp -->
     </config>
@@ -300,12 +320,24 @@
 	
 <!-- Leave this empty for now, I'm still thinking on how we can achieve this -->
 
+	<!-- Servo Driver Logic -->
+	
+	<logic>
+		<input>
+			<and>
+				<property>/aircraft/afcs/ap-master</property>
+				<property>/aircraft/afcs/logic/lat-hdg</property>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-servo</output>
+	</logic>
+
   	<filter>
 		<name>SERVO-DRIVER:aileron</name>
 		<debug>false</debug>
 		<feedback-if-disabled>true</feedback-if-disabled>
 		<enable>
-			<prop>/aircraft/afcs/ap-master</prop>
+			<prop>/aircraft/afcs/logic/lat-servo</prop>
 		</enable>
 		<input>/autopilot/internal/aileron-cmd</input>
 		<output>/controls/flight/aileron</output>
