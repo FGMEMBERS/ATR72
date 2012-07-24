@@ -118,6 +118,27 @@ var general_loop_1 = {
     	
     	setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1400));
     	setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1400));
+    	
+    	# Fuel X-Feed
+    	
+    	if ((getprop("/controls/engines/x-feed")) and (getprop("/systems/electric/outputs/x-feed"))) {
+    	
+			var ltank = getprop("/consumables/fuel/tank[0]/level-kg");
+			var rtank = getprop("/consumables/fuel/tank[1]/level-kg");
+			
+			if (ltank > rtank) {
+			
+				setprop("/consumables/fuel/tank[0]/level-kg", ltank - 0.25);
+				setprop("/consumables/fuel/tank[1]/level-kg", rtank + 0.25);
+			
+			} else {
+			
+				setprop("/consumables/fuel/tank[0]/level-kg", ltank + 0.25);
+				setprop("/consumables/fuel/tank[1]/level-kg", rtank - 0.25);
+			
+			}
+    	
+    	}
 
 	},
 
