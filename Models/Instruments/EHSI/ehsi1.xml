@@ -26,6 +26,31 @@
 	</animation>
 	
 	<animation>
+		<type>select</type>
+		<object-name>crs1bug</object-name>
+		<object-name>loc-point1</object-name>
+		<condition>
+			<property>/instrumentation/nav[1]/serviceable</property>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>vor1-pointer</object-name>
+		<condition>
+			<property>/instrumentation/nav[0]/in-range</property>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>vor2-pointer</object-name>
+		<condition>
+			<property>/instrumentation/nav[1]/in-range</property>
+		</condition>
+	</animation>
+	
+	<animation>
     	<type>rotate</type>
     	<object-name>hsi-rotate</object-name>
     	<property>/orientation/heading-deg</property>
@@ -85,7 +110,7 @@
     <animation>
     	<type>translate</type>type>
     	<object-name>loc-point1</object-name>
-    	<property>/instrumentation/nav/heading-needle-deflection-norm</property>
+    	<property>/instrumentation/nav[1]/heading-needle-deflection-norm</property>
     	<factor>0.0144</factor>
     	<axis>
     		<x>0</x>
@@ -155,7 +180,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%3.0f NM</format>
-		<property>/instrumentation/dme/indicated-distance-nm</property>
+		<property>/instrumentation/dme[1]/indicated-distance-nm</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">Helvetica.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -191,5 +216,27 @@
 			<height type="int">32</height>
 		</font-resolution>
 	</text>
+	
+	<!-- Navigation Display and TCAS -->
+	
+	<panel>
+        <name>panel-area</name>
+        <path>Aircraft/ATR72/Models/Instruments/EHSI/nd.xml</path>
+        <bottom-left>
+            <x-m>0.002</x-m>
+            <y-m>-0.055</y-m>
+            <z-m>-0.055</z-m>
+        </bottom-left>
+        <bottom-right>
+            <x-m>0.002</x-m>
+            <y-m>0.055</y-m>
+            <z-m>-0.055</z-m>
+        </bottom-right>
+        <top-left>
+            <x-m>0.002</x-m>
+            <y-m>-0.055</y-m>
+            <z-m>0.055</z-m>
+        </top-left>
+    </panel>
 	
 </PropertyList>

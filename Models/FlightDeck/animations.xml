@@ -1540,5 +1540,31 @@
 			</binding>
 		</action>
 	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>gearlever</object-name>
+		<property>/controls/gear/gear-down</property>
+		<interpolation>
+			<entry>
+				<dep>0</dep>
+				<ind>0</ind>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>40</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-11.3150</x-m>
+			<y-m>0</y-m>
+			<z-m>0.6097</z-m>
+		</center>
+	</animation>
 			
 </PropertyList>

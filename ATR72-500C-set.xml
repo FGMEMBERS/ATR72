@@ -102,6 +102,37 @@
 							</script>
 						</binding>
 					</item>
+					 <item>
+						<label>Toggle Tail Support</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							
+								if (getprop("/fdm/jsbsim/contact/unit[5]/z-position") == -5.516) {
+								
+									setprop("/fdm/jsbsim/contact/unit[5]/z-position", -65);
+								
+								} else {
+								
+									setprop("/fdm/jsbsim/contact/unit[5]/z-position", -5.516);
+									
+								
+								}
+							
+							</script>
+						</binding>
+					</item>
+					<item>
+						<name>lights</name>
+						<label>NavDisplay Settings</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							 var nav_display_settings = gui.Dialog.new("sim/gui/dialogs/nav-display-settings/dialog", "Aircraft/ATR72/Systems/nd-settings-dlg.xml");
+							 nav_display_settings.open();
+							</script>
+						</binding>
+					</item>
                 </menu>
 			</default>
 		</menubar>
@@ -256,6 +287,83 @@
 		<adu>
 			<brt type="float">0.6</brt>
 		</adu>
+		<tcas>
+            <serviceable type="bool">true</serviceable>
+            <inputs>
+                <mode type="int">3</mode>       <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
+            </inputs>
+            <!--voice>
+                <file-prefix type="string">Sounds/tcas/</file-prefix>
+            </voice-->
+            <speaker>                           <!-- Speaker Configuration -->
+                <max-dist type="double">6</max-dist>        <!-- Max. distance where speaker is heard -->
+                <reference-dist type="double"> 2 </reference-dist> <!-- Distance to pilot -->
+                <volume type="double"> 1 </volume>          <!-- Volume at reference distance -->
+            </speaker>
+            <range type="int">20</range>
+        </tcas>
+        <nd>
+            <radar-texture-path type="string">Aircraft/ATR72/Models/Instruments/EHSI/radar.png</radar-texture-path>
+            <symbol-texture-path type="string">Aircraft/ATR72/Models/Instruments/EHSI/symbols.png</symbol-texture-path>
+            <font>
+                <color>
+                    <red type="float">0.7</red>
+                    <green type="float">0.7</green>
+                    <blue type="float">0.7</blue>
+                    <alpha type="float">1</alpha>
+                </color>
+                <name type="string">helvetica_bold.txf</name>
+                <size type="float">14</size>
+                <line-spacing type="float">0.01</line-spacing>
+            </font>
+            <serviceable type="bool">true</serviceable>
+            <range type="int" archive="y">20</range>
+            <aircraft-heading-up type="bool">true</aircraft-heading-up>
+            <heading-up-deg type="float">0.01</heading-up-deg>
+            <x-center type="float">0.5</x-center>
+            <y-center type="float">0.5</y-center>
+            <display>
+                <arpt type="bool">0</arpt>
+                <vor type="bool">0</vor>
+                <fix type="bool">0</fix>
+            </display>
+            <line-width type="double">3</line-width>
+        </nd>
+        <tcas-display>
+            <radar-texture-path type="string">Aircraft/ATR72/Models/Instruments/EHSI/tcas-display.png</radar-texture-path>
+            <symbol-texture-path type="string">Aircraft/ATR72/Models/Instruments/EHSI/symbols.png</symbol-texture-path>
+            <font>
+                <color>
+                    <red type="float">0.7</red>
+                    <green type="float">0.7</green>
+                    <blue type="float">0.7</blue>
+                    <alpha type="float">1</alpha>
+                </color>
+                <name type="string">helvetica_bold.txf</name>
+                <size type="float">14</size>
+                <line-spacing type="float">0.01</line-spacing>
+            </font>
+            <serviceable type="bool">true</serviceable>
+            <range type="int" archive="y">20</range>
+            <aircraft-heading-up type="bool">true</aircraft-heading-up>
+            <heading-up-deg type="float">0.01</heading-up-deg>
+            <x-center type="float">0.5</x-center>
+            <y-center type="float">0.5</y-center>
+            <display>
+                <tcas type="bool">1</tcas>
+            </display>
+            <line-width type="double">3</line-width>
+        </tcas-display>
+        <nd-settings>
+            <map type="bool">1</map>
+            <tcas type="bool">1</tcas>
+            <wx type="bool">1</wx>
+            <dat type="bool">1</dat>
+            <apt type="bool">1</apt>
+            <apt-id type="bool">1</apt-id>
+            <vor type="bool">1</vor>
+            <vor-id type="bool">1</vor-id>
+        </nd-settings>
 	</instrumentation>
 
 	<consumables>

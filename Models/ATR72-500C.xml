@@ -1502,5 +1502,16 @@
 			<z-m>-0.855</z-m>
 		</offsets>
 	</model>
+	
+	<animation>
+		<type>select</type>
+		<object-name>tailsupport</object-name>
+		<condition>
+			<equals>
+				<property>/fdm/jsbsim/contact/unit[5]/z-position</property>
+				<value>-65</value>
+			</equals>
+		</condition>
+	</animation>
 
 </PropertyList>

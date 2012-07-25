@@ -46,12 +46,11 @@ file, these values will be used (they are hardcoded).
 		<suction>/systems/vacuum/suction-inhg</suction>
 	</heading-indicator>
 
-<!-- Bicyus Testing  
 	<heading-indicator-dg>
 		<name>heading-indicator-dg</name>
 		<number>0</number>
 	</heading-indicator-dg>
--->
+	
 	<magnetic-compass>
 		<name>magnetic-compass</name>
 		<number>0</number>
@@ -171,18 +170,23 @@ file, these values will be used (they are hardcoded).
 		<!--range-source>instrumentation/radar/range</range-source-->
 	</groundradar>
 
-    <!--navigation-display>
-        <name>nd</name>
-        <number>0</number>        
-        <symbols include="nav-display-c.xml"/>
-    </navigation-display-->
-    
+	<tcas>
+        <name>tcas</name>
+        <number>0</number>
+    </tcas>
 
-<!-- Does an airliner have TACAN?	<tacan>
-		<name>tacan</name>
-		<number>0</number>
-	</tacan>
--->
+    <navigation-display>
+        <name>nd</name>
+        <number>0</number>
+        <symbols include="nav-display.xml"/>
+    </navigation-display>
+
+    <navigation-display>
+        <name>tcas-display</name>
+        <number>0</number>
+        <symbols include="tcas-display.xml"/>
+    </navigation-display>
+
 	<mk-viii>
 		<name>mk-viii</name>
 		<number>0</number>

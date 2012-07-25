@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ATR72-500(C) Navigation Display Settings -->
+
+<PropertyList>
+
+	<name>nav-display-settings</name>
+	<layout>vbox</layout>
+
+	<text>
+		<label>Navigation Display Settings</label>
+	</text>
+
+	<hrule />
+	
+	<checkbox>
+		<label>Show ARPT Icons</label>
+		<property>/instrumentation/nd-settings/apt</property>
+		<live type="bool">true</live>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+
+	<checkbox>
+		<label>Show ARPT ICAOs</label>
+		<property>/instrumentation/nd-settings/apt-id</property>
+		<live type="bool">true</live>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+	
+	<checkbox>
+		<label>Show VOR Icons</label>
+		<property>/instrumentation/nd-settings/vor</property>
+		<live type="bool">true</live>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+
+	<checkbox>
+		<label>Show VOR IDs</label>
+		<property>/instrumentation/nd-settings/vor-id</property>
+		<live type="bool">true</live>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+	
+	<checkbox>
+		<label>Enable TCAS</label>
+		<property>/instrumentation/nd-settings/tcas</property>
+		<live type="bool">true</live>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+	</checkbox>
+	
+	<hrule />
+	
+	<text>
+		<label>Adjust ND/TCAS Range</label>
+	</text>
+	
+	<dial>
+		<name>nd_range_dial</name>
+		<width>32</width>
+		<property>/instrumentation/nd/range</property>
+		<live>true</live>
+		<min>4</min>
+		<max>80</max>
+		<binding>
+			<command>dialog-apply</command>
+			<object-name>nd_range_dial</object-name>
+		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>
+				setprop("/instrumentation/tcas-display/range", getprop("/instrumentation/nd/range"));
+			</script>
+		</binding>
+	</dial>
+	
+	<hrule />
+	
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+		
+</PropertyList>

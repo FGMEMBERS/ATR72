@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>stby-asi.ac</path>
+	
+	<animation>
+    	<type>rotate</type>
+    	<object-name>stby-asi-needle</object-name>
+    	<property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+    	<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>40</ind>
+				<dep>7.5</dep>
+			</entry>
+			<entry>
+				<ind>180</ind>
+				<dep>217.4</dep>
+			</entry>
+			<entry>
+				<ind>200</ind>
+				<dep>232.4</dep>
+			</entry>
+			<entry>
+				<ind>300</ind>
+				<dep>322.5</dep>
+			</entry>
+			<entry>
+				<ind>400</ind>
+				<dep>341.5</dep>
+			</entry>
+    	</interpolation>
+    	<axis>
+    		<x>-1</x>
+    		<y>0</y>
+    		<z>0</z>
+    	</axis>
+    </animation>
+	
+</PropertyList>
