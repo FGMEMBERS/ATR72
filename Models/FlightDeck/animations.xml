@@ -1566,5 +1566,120 @@
 			<z-m>0.6097</z-m>
 		</center>
 	</animation>
+	
+	<!-- Yokes Animations -->
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>yokepitch</object-name>
+		<object-name>yokeroll0</object-name>
+		<object-name>yokeroll1</object-name>
+		<property>/controls/flight/elevator</property>
+		<factor>20</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.92</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.215</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>yokeroll0</object-name>
+		<property>/controls/flight/aileron</property>
+		<factor>45</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.5856</y-m>
+			<z-m>0.4821</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>yokeroll1</object-name>
+		<property>/controls/flight/aileron</property>
+		<factor>45</factor>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0.6033</y-m>
+			<z-m>0.4821</z-m>
+		</center>
+	</animation>
+	
+	<!-- Rudder Pedals Animation -->
+	
+	<animation>
+		<type>translate</type>
+		<object-name>pedal0</object-name>
+		<property>/controls/flight/rudder</property>
+		<factor>0.06</factor>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>translate</type>
+		<object-name>pedal1</object-name>
+		<property>/controls/flight/rudder</property>
+		<factor>-0.06</factor>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>pedal0</object-name>
+		<property>/controls/gear/brake-left</property>
+		<factor>15</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-11.433</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.173</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>pedal1</object-name>
+		<property>/controls/gear/brake-right</property>
+		<factor>15</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-11.433</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.173</z-m>
+		</center>
+	</animation>
 			
 </PropertyList>

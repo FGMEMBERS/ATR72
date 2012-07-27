@@ -139,6 +139,70 @@ var general_loop_1 = {
 			}
     	
     	}
+    	
+    	# Autopilot ALT Mode VS Setting
+    	
+    	if ((getprop("/sim/aero") == "ATR72-500") and getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/ver-mode") == "alt")) {
+    	
+			if (getprop("/position/altitude-ft") > 16000) {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 10);
+				setprop("/aircraft/afcs/alt-vs-dn", -8.33);
+			
+			} elsif (getprop("/position/altitude-ft") > 10000) {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 20);
+				setprop("/aircraft/afcs/alt-vs-dn", -18);
+			
+			} else {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 30);
+				setprop("/aircraft/afcs/alt-vs-dn", -25);
+			
+			}
+    	
+    	} elsif ((getprop("/sim/aero") == "ATR72-500C") and getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/ver-mode") == "alt")) {
+    	
+			if (getprop("/position/altitude-ft") > 16000) {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 8);
+				setprop("/aircraft/afcs/alt-vs-dn", -6);
+			
+			} elsif (getprop("/position/altitude-ft") > 10000) {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 16);
+				setprop("/aircraft/afcs/alt-vs-dn", -12);
+			
+			} else {
+			
+				setprop("/aircraft/afcs/alt-vs-up", 25);
+				setprop("/aircraft/afcs/alt-vs-dn", -20);
+			
+			}
+    	
+    	}
+    	
+    	# Glide-slope filter (input: /instrumentation/nav[0]/gs-rate-of-climb)
+    	
+    	if (getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/lat-mode") == "app") and (getprop("/instrumentation/nav/gs-in-range"))) {
+    	
+			var input_vs = getprop("/instrumentation/nav[0]/gs-rate-of-climb");
+			
+			if (input_vs > 23) {
+			
+				setprop("/aircraft/afcs/app-gs-fps", 23);
+			
+			} elsif (input_vs < -22) {
+			
+				setprop("/aircraft/afcs/app-gs-fps", -22);
+			
+			} else {
+			
+				setprop("/aircraft/afcs/app-gs-fps", input_vs);
+			
+			}
+    	
+    	}
 
 	},
 

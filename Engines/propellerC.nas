@@ -117,7 +117,7 @@ var prop = {
 		
 		var pitch = getprop(pitch_prop);
 	
-		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos(pitch * DEG2RAD);
+		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos(pitch * DEG2RAD * 1.1);
 	
 		setprop(thrust_prop, thrust);
 	
@@ -172,7 +172,7 @@ var propeller = {
             me.UPDATE_INTERVAL = 0.01;
             me.loopid = 0;
             
-			me.props = [prop.new(0, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -10, 0.48, 2700), prop.new(1, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -10, 0.48, 2700)];
+			me.props = [prop.new(0, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -10, 0.6, 2700), prop.new(1, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -10, 0.6, 2700)];
             
             setprop("/engines/engine/thruster/prop_pitch", 10);
             setprop("/engines/engine[1]/thruster/prop_pitch", 10);

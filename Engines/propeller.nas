@@ -117,7 +117,7 @@ var prop = {
 		
 		var pitch = getprop(pitch_prop);
 	
-		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos(pitch * DEG2RAD);
+		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos(pitch * DEG2RAD * 1.1);
 	
 		setprop(thrust_prop, thrust);
 	
