@@ -188,9 +188,9 @@ var general_loop_1 = {
     	
 			var input_vs = getprop("/instrumentation/nav[0]/gs-rate-of-climb");
 			
-			if (input_vs > 23) {
+			if (input_vs > 18) {
 			
-				setprop("/aircraft/afcs/app-gs-fps", 23);
+				setprop("/aircraft/afcs/app-gs-fps", 18);
 			
 			} elsif (input_vs < -22) {
 			
