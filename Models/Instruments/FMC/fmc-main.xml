@@ -1,0 +1,717 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>fmc-main.ac</path>
+	
+	<effect>
+		<inherits-from>Effects/lightmap</inherits-from>
+		<parameters>
+			<texture n="1">
+				<image>Aircraft/ATR72/Models/Instruments/FMC/exterior-lt.png</image>
+			</texture>
+		</parameters>
+		<object-name>atr.fmc</object-name>
+	</effect>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.1</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "1");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.2</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "2");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.3</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "3");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.4</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "4");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.5</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "5");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.6</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "6");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.7</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "7");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.8</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "8");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.9</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "9");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.dot</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ ".");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.0</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "0");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<!-- +/- -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.+/-</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					var inp_size = size(getprop(input));
+					
+					if (inp_size == 0)
+						setprop(input, "+");
+					
+					if (inp_size != 0) {
+										
+						if ((substr(getprop(input), (inp_size - 1), 1) != "+") and (substr(getprop(input), (inp_size - 1), 1) != "-"))
+							setprop(input, getprop(input) ~ "+");
+							
+						elsif (substr(getprop(input), (inp_size - 1), 1) == "+")
+							setprop(input, substr(getprop(input), 0, (inp_size - 1)) ~ "-");
+							
+						elsif (substr(getprop(input), (inp_size - 1), 1) == "-")
+							setprop(input, substr(getprop(input), 0, (inp_size - 1)) ~ "+");
+							
+					}
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<!-- Alphabets -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.a</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "A");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.b</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "B");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.c</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "C");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.d</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "D");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.e</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "E");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.f</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "F");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.g</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "G");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.h</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "H");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.i</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "I");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.j</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "J");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.k</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "K");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.l</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "L");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.m</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "M");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.n</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "N");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.o</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "O");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.p</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "P");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.q</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "Q");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.r</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "R");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.s</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "S");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.t</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "T");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.u</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "U");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.v</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "V");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.w</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "W");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.x</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "X");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.y</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "Y");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.z</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ "Z");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.sp</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					setprop(input, getprop(input) ~ " ");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.brtdim</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>property-cycle</command>
+				<property>/instrumentation/fmc/brt-norm</property>
+				<value>0.00</value>
+				<value>0.25</value>
+				<value>0.50</value>
+				<value>0.75</value>
+				<value>1.00</value>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.clr</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/fmc/input";
+					
+					var inp_size = size(getprop(input));
+					
+					setprop(input, substr(getprop(input), 0, inp_size - 1))
+					
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc./</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					var input = "/instrumentation/mcdu/input";
+					setprop(input, getprop(input) ~ "/");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	
+
+</PropertyList>
