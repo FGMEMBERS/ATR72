@@ -270,7 +270,7 @@
 		
 		<!-- Default Company DB and NavData (To be removed once DBs are added)-->
 		
-		<fmc>
+		<!-- fmc>
 			<company>
 				<db-id type="string">MIA_Data v3.1</db-id>
 				<db-date type="string">25JUN24AUG/12</db-date>
@@ -278,6 +278,17 @@
 			<navdata>
 				<db-id type="string">FGDAT+OMEGAAWY</db-id>
 				<db-date type="string">25JUN24DEC/12</db-date>
+			</navdata>
+		</fmc -->
+		
+		<fmc>
+			<company>
+				<db-id type="string">N/A</db-id>
+				<db-date type="string">----------/--</db-date>
+			</company>
+			<navdata>
+				<db-id type="string">N/A</db-id>
+				<db-date type="string">----------/--</db-date>
 			</navdata>
 		</fmc>
 		
@@ -481,6 +492,8 @@
 		</loader>
 		<fmc>
 			<file>Aircraft/ATR72/Nasal/FMC/fmc-screen.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/fmc-main.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/ident.nas</file>
 		</fmc>
 		<atr>
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>

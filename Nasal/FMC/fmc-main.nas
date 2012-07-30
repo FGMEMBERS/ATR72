@@ -1,5 +1,4 @@
 var fmc = "/instrumentation/fmc/";
-var fmcPages = [];
 
 # Clear Input Funciton
 
@@ -17,4 +16,16 @@ var setInput = func(inp) {
 
 };
 
+# Initialize Empty Hashes (pages and Active Page)
 
+var fmcPages = {};
+var ActivePage = {};
+
+var GoToPage = func(page) {
+
+	setprop(fmc~ "page", page);
+	clearScreen();
+	fmcPages[page].initDisplay();
+	ActivePage = fmcPages[page];
+
+};

@@ -88,3 +88,25 @@ for (var n=12; n<18; n+=1) {
 			.setText("VALUE R"~(n-11));
 
 }
+
+var clearScreen = func() {
+
+	title.setText("");
+	
+	foreach(var label; labels) {
+		label.setText("");
+	}
+	
+	foreach(var value; values) {
+		value.setText("");
+	}
+
+
+};
+
+# FMC Text Colors
+
+var green = [0,0.35, 0.06, 0.7];
+var white = [1,1,1,1];
+var blue = [0,0.4,0.86,0.7];
+var magenta = [0.83,0,0.83,0.7];
