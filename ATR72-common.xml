@@ -39,6 +39,40 @@
 	</view>
 	
 	<view n="101">
+		<name>FMC View</name>
+		<type>lookfrom</type>
+		<internal archive="y">true</internal>
+		<cockpit type="bool">true</cockpit>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+			<x-offset-m type="double">0</x-offset-m>
+			<y-offset-m type="double">1.083</y-offset-m>
+			<z-offset-m type="double">-10.75</z-offset-m>
+			<pitch-offset-deg>-66</pitch-offset-deg>
+			<default-field-of-view-deg type="double">22</default-field-of-view-deg>
+		</config>
+	</view>
+	
+	<view n="102">
+		<name>AFCS View</name>
+		<type>lookfrom</type>
+		<internal archive="y">true</internal>
+		<cockpit type="bool">true</cockpit>
+		<config>
+			<from-model type="bool">true</from-model>
+			<from-model-idx type="int">0</from-model-idx>
+			<ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+			<x-offset-m type="double">0</x-offset-m>
+			<y-offset-m type="double">1.08</y-offset-m>
+			<z-offset-m type="double">-10.2479</z-offset-m>
+			<pitch-offset-deg>-12</pitch-offset-deg>
+			<default-field-of-view-deg type="double">30</default-field-of-view-deg>
+		</config>
+	</view>
+	
+	<view n="103">
 		<name>Copilot View</name>
 		<type>lookfrom</type>
 		<internal archive="y">true</internal>
@@ -233,6 +267,20 @@
 			<tcas-editmode type="string">standby</tcas-editmode>
 			<tcas-editmode-int type="int">0</tcas-editmode-int>
 		</collins>
+		
+		<!-- Default Company DB and NavData (To be removed once DBs are added)-->
+		
+		<fmc>
+			<company>
+				<db-id type="string">MIA_Data v3.1</db-id>
+				<db-date type="string">25JUN24AUG/12</db-date>
+			</company>
+			<navdata>
+				<db-id type="string">FGDAT+OMEGAAWY</db-id>
+				<db-date type="string">25JUN24DEC/12</db-date>
+			</navdata>
+		</fmc>
+		
 	</aircraft>
 	
 	<controls>
@@ -350,6 +398,10 @@
             <vor type="bool">1</vor>
             <vor-id type="bool">1</vor-id>
         </nd-settings>
+        <fmc>
+			<input type="string"></input>
+			<brt-norm type="float">0</brt-norm>
+        </fmc>
 	</instrumentation>
 
 	<consumables>
@@ -424,9 +476,12 @@
 		<walk>
 			<file>Aircraft/ATR72/Nasal/walk.nas</file>
 		</walk>
-		<canvas>
-			<file>Aircraft/ATR72/Nasal/canvas/api.nas</file>
-		</canvas>
+		<loader>
+			<file>Aircraft/ATR72/Nasal/canvas/loader.nas</file>
+		</loader>
+		<fmc>
+			<file>Aircraft/ATR72/Nasal/FMC/fmc-screen.nas</file>
+		</fmc>
 		<atr>
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
 			<file>Aircraft/ATR72/Engines/propeller.nas</file>

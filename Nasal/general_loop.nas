@@ -203,6 +203,10 @@ var general_loop_1 = {
 			}
     	
     	}
+    	
+    	# Position String
+    	
+    	setprop("/instrumentation/fmc/pos-string", getprop("/position/latitude-string") ~ "/" ~ getprop("/position/longitude-string"));
 
 	},
 

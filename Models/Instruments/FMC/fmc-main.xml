@@ -4,6 +4,36 @@
 
 	<path>fmc-main.ac</path>
 	
+	<animation>
+		<type>material</type>
+		<object-name>fmcScreen</object-name>
+		<object-name>input</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<factor-prop>/instrumentation/fmc/brt-norm</factor-prop>
+		</emission>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>fmcScreen</object-name>
+		<object-name>input</object-name>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<greater-than>
+					<property>/instrumentation/fmc/brt-norm</property>
+					<value>0</value>
+				</greater-than>
+			</and>
+		</condition>
+	</animation>
+	
 	<effect>
 		<inherits-from>Effects/lightmap</inherits-from>
 		<parameters>
@@ -705,13 +735,37 @@
             <binding>
 				<command>nasal</command>
 		 		<script>
-					var input = "/instrumentation/mcdu/input";
+					var input = "/instrumentation/fmc/input";
 					setprop(input, getprop(input) ~ "/");
 				</script>
             </binding>
         </action>
 	</animation>
 	
+	<!-- Input OSGText -->
 	
+	<text>
+		<name>input</name>
+		<offsets>
+			<x-m>-0.0004</x-m>
+			<y-m>-0.0712</y-m>
+			<z-m>-0.016</z-m>
+		</offsets>
+		<alignment>left-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">text-value</type>
+		<format type="string">%s</format>
+		<property>/instrumentation/fmc/input</property>
+  <truncate type="bool">false</truncate>
+  <font type="string">helvetica_medium.txf</font>
+  <draw-text type="bool">true</draw-text>
+  <draw-alignment type="bool">false</draw-alignment>
+  <draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
 
 </PropertyList>
