@@ -29,3 +29,5 @@ var GoToPage = func(page) {
 	ActivePage = fmcPages[page];
 
 };
+
+print("Flight Management Computer . Initialized");

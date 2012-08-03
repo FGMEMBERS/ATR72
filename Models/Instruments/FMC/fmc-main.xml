@@ -715,11 +715,8 @@
             <binding>
 				<command>nasal</command>
 		 		<script>
-					var input = "/instrumentation/fmc/input";
 					
-					var inp_size = size(getprop(input));
-					
-					setprop(input, substr(getprop(input), 0, inp_size - 1))
+					fmc.clearInput();
 					
 				</script>
             </binding>
@@ -767,5 +764,379 @@
 			<height type="int">32</height>
 		</font-resolution>
 	</text>
+	
+	<!-- LSKs and EXEC -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL1</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l1();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL2</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l2();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL3</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l3();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL4</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l4();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL5</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l5();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskL6</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.l6();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR1</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r1();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR2</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r2();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR3</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r3();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR4</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r4();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR5</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r5();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.lskR6</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.r6();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.exec</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.exec();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<!-- Page Buttons -->
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.rte</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("rte1init");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.legs</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("rte1legs");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.deparr</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("deparrindex");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.hold</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("hold");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.prog</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("prog");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.vnav</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("perfinit");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.atc</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("atc");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.prev</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.prev();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.next</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.ActivePage.next();
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.menu</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("menu");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>fmc.data</object-name>
+		<action>
+            <button>0</button>
+	   		<repeatable type="bool">false</repeatable>
+            <binding>
+				<command>nasal</command>
+		 		<script>
+					fmc.GoToPage("data");
+				</script>
+            </binding>
+        </action>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>exec-lt</object-name>
+		<property>/instrumentation/fmc/exec-lt</property>
+		<factor>0.048</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
 
 </PropertyList>
