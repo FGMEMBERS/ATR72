@@ -6,7 +6,7 @@ var fmcScreen = canvas.new({
   "mipmapping": 0       # Enable mipmapping (optional)
 });
 
-fmcScreen.addPlacement({"node": "fmcScreen"});
+fmcScreen.addPlacement({"node": "fmcScreen"});;
 
 var group = fmcScreen.createGroup();
 

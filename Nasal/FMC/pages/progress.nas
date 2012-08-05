@@ -113,57 +113,61 @@ fmcPages["progress"] = {
 
 		var num = getprop("/aircraft/fmc/active-rte/num");
 
-		var last_wp = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/id");
-		var last_alt = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/alt");
-		var last_info = getProg(last_wp);
+		if(num > 2) {
 
-		var cur_wp = getprop("/aircraft/fmc/active-rte/current-wp");
+			var last_wp = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/id");
+			var last_alt = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/alt");
+			var last_info = getProg(last_wp);
 
-		var to = getprop("/aircraft/fmc/active-rte/wp["~cur_wp~"]/id");
-		var to_info = getProg(to);
+			var cur_wp = getprop("/aircraft/fmc/active-rte/current-wp");
 
-		var next = getprop("/aircraft/fmc/active-rte/wp["~(cur_wp+1)~"]/id");
-		var next_info = getProg(next);
+			var to = getprop("/aircraft/fmc/active-rte/wp["~cur_wp~"]/id");
+			var to_info = getProg(to);
 
-		var dest = getprop("/aircraft/fmc/rte1/dest-arpt");
-		var dest_info = getArpt(dest);
+			var next = getprop("/aircraft/fmc/active-rte/wp["~(cur_wp+1)~"]/id");
+			var next_info = getProg(next);
 
-		# LAST
-		if ((last_wp != nil) and (last_wp != "-----")) {
-		values[0].setText(last_wp).setColor(white).setFontSize(40, 1.2);
-		values[6].setText(getFL(last_alt)~"   "~last_info.eta).setColor(white).setFontSize(40, 1.2);
-		} else {
-			values[0].setText("----").setColor(white);
-			values[6].setText("").setColor(white);
+			var dest = getprop("/aircraft/fmc/rte1/dest-arpt");
+			var dest_info = getArpt(dest);
+
+			# LAST
+			if ((last_wp != nil) and (last_wp != "-----")) {
+			values[0].setText(last_wp).setColor(white).setFontSize(40, 1.2);
+			values[6].setText(getFL(last_alt)~"   "~last_info.eta).setColor(white).setFontSize(40, 1.2);
+			} else {
+				values[0].setText("----").setColor(white);
+				values[6].setText("").setColor(white);
+			}
+			
+			# TO
+			if ((to != nil) and (to != "-----")) {
+			values[1].setText(to).setColor(magenta);
+			values[13].setText(to_info.dtg~"  "~to_info.eta~"               ").setColor(magenta);
+			} else {
+				values[1].setText("----").setColor(magenta);
+				values[13].setText("").setColor(white);
+			}
+
+			# NEXT
+			if ((next != nil) and (next != "-----")) {
+			values[2].setText(next).setColor(white);
+			values[14].setText(next_info.dtg~"  "~next_info.eta~"               ").setColor(white);
+			} else {
+				values[2].setText("----").setColor(white);
+				values[14].setText("").setColor(white);
+			}
+			
+			# DEST
+			if ((dest != nil) and (dest != "----")) {
+				values[3].setText(dest).setColor(white);
+				values[15].setText(dest_info.dtg~"  "~dest_info.eta~"               ").setColor(white);
+			} else {
+				values[3].setText("----").setColor(white);
+				values[15].setText("").setColor(white);
+			}
+
 		}
 		
-		# TO
-		if ((to != nil) and (to != "-----")) {
-		values[1].setText(to).setColor(magenta);
-		values[13].setText(to_info.dtg~"  "~to_info.eta~"               ").setColor(magenta);
-		} else {
-			values[1].setText("----").setColor(magenta);
-			values[13].setText("").setColor(white);
-		}
-
-		# NEXT
-		if ((next != nil) and (next != "-----")) {
-		values[2].setText(next).setColor(white);
-		values[14].setText(next_info.dtg~"  "~next_info.eta~"               ").setColor(white);
-		} else {
-			values[2].setText("----").setColor(white);
-			values[14].setText("").setColor(white);
-		}
-		
-		# DEST
-		if ((dest != nil) and (dest != "----")) {
-			values[3].setText(dest).setColor(white);
-			values[15].setText(dest_info.dtg~"  "~dest_info.eta~"               ").setColor(white);
-		} else {
-			values[3].setText("----").setColor(white);
-			values[15].setText("").setColor(white);
-		}
-
 	},
 	
 	r6: func() {

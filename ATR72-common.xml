@@ -13,6 +13,10 @@
 		<startup>
 			<splash-texture>Aircraft/ATR72/splash.png</splash-texture>
 		</startup>
+
+		<panel>
+			<path></path>
+		</panel>
 	
 		<chase-distance-m>-60</chase-distance-m>
 
@@ -189,6 +193,16 @@
 							</script>
 						</binding>
 					</item>
+					<!-- item>
+						<name>fmc</name>
+						<label>Flight Management Computer</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							 atr.fmc_gui.open();
+							</script>
+						</binding>
+					</item -->
                 </menu>
 			</default>
 		</menubar>
@@ -590,6 +604,9 @@
 		<loader>
 			<file>Aircraft/ATR72/Nasal/canvas/loader.nas</file>
 		</loader>
+		<!-- gui>
+			<file>Aircraft/ATR72/Nasal/FMC/fmc.nas</file>
+		</gui -->
 		<devel>
 			<file>Aircraft/ATR72/Devel/parse_dat.nas</file>
 		</devel>

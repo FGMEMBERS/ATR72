@@ -1,3 +1,5 @@
+# var fmc_gui = gui.Dialog.new("sim/gui/dialogs/fmc/dialog", "Aircraft/ATR72/Systems/fmc-canvas-dlg.xml");
+
 aircraft.livery.init("Aircraft/ATR72/Models/Liveries/" ~ getprop("sim/aero"));
 
 # Start at FMC Page IDENT

@@ -535,19 +535,19 @@ var Path = {
   VG_SCUBIC_TO:     16,
   VG_SCUBIC_TO_ABS: 16,
   VG_SCUBIC_TO_REL: 17,
-  VG_SCCWARC_TO:    18,
-  VG_SCCWARC_TO_ABS:18,
-  VG_SCCWARC_TO_REL:19,
-  VG_SCWARC_TO:     20,
-  VG_SCWARC_TO_ABS: 20,
-  VG_SCWARC_TO_REL: 21,
-  VG_LCCWARC_TO:    22,
-  VG_LCCWARC_TO_ABS:22,
-  VG_LCCWARC_TO_REL:23,
-  VG_LCWARC_TO:     24,
-  VG_LCWARC_TO_ABS: 24,
-  VG_LCWARC_TO_REL: 25,
-  
+  VG_SCCWARC_TO:    20, # Note that CC and CCW commands are swapped. This is
+  VG_SCCWARC_TO_ABS:20, # needed  due to the different coordinate systems used.
+  VG_SCCWARC_TO_REL:21, # In OpenVG values along the y-axis increase from bottom
+  VG_SCWARC_TO:     18, # to top, whereas in the Canvas system it is flipped.
+  VG_SCWARC_TO_ABS: 18,
+  VG_SCWARC_TO_REL: 19,
+  VG_LCCWARC_TO:    24,
+  VG_LCCWARC_TO_ABS:24,
+  VG_LCCWARC_TO_REL:25,
+  VG_LCWARC_TO:     22,
+  VG_LCWARC_TO_ABS: 22,
+  VG_LCWARC_TO_REL: 23,
+
   # Number of coordinates per command
   num_coords: [
     0, 0, # VG_CLOSE_PATH
@@ -607,6 +607,7 @@ var Path = {
   # Add a path segment
   addSegment: func(cmd, coords...)
   {
+    var coords = _arg2valarray(coords);
     var num_coords = me.num_coords[cmd];
     if( size(coords) != num_coords )
       debug.warn
@@ -622,24 +623,62 @@ var Path = {
     
     return me;
   },
-  # Append move command
-  moveTo: func(x, y) me.addSegment(me.VG_MOVE_TO_ABS, x, y),
-  move: func(x, y) me.addSegment(me.VG_MOVE_TO_REL, x, y),
-  lineTo: func(x, y) me.addSegment(me.VG_LINE_TO_ABS, x, y),
-  line: func(x, y) me.addSegment(me.VG_LINE_TO_REL, x, y),
-  horizTo: func(x) me.addSegment(me.VG_HLINE_TO_ABS, x),
-  horiz: func(x) me.addSegment(me.VG_HLINE_TO_REL, x),
-  vertTo: func(y) me.addSegment(me.VG_VLINE_TO_ABS, y),
-  vert: func(y) me.addSegment(me.VG_VLINE_TO_REL, y),
+  # Move path cursor
+  moveTo: func me.addSegment(me.VG_MOVE_TO_ABS, arg),
+  move:   func me.addSegment(me.VG_MOVE_TO_REL, arg),
+  # Add a line
+  lineTo: func me.addSegment(me.VG_LINE_TO_ABS, arg),
+  line:   func me.addSegment(me.VG_LINE_TO_REL, arg),
+  # Add a horizontal line
+  horizTo: func me.addSegment(me.VG_HLINE_TO_ABS, arg),
+  horiz:   func me.addSegment(me.VG_HLINE_TO_REL, arg),
+  # Add a vertical line
+  vertTo: func me.addSegment(me.VG_VLINE_TO_ABS, arg),
+  vert:   func me.addSegment(me.VG_VLINE_TO_REL, arg),
+  # Add a quadratic Bézier curve
+  quadTo: func me.addSegment(me.VG_QUAD_TO_ABS, arg),
+  quad:   func me.addSegment(me.VG_QUAD_TO_REL, arg),
+  # Add a cubic Bézier curve
+  cubicTo: func me.addSegment(me.VG_CUBIC_TO_ABS, arg),
+  cubic:   func me.addSegment(me.VG_CUBIC_TO_REL, arg),
+  # Add a smooth quadratic Bézier curve
+  quadTo: func me.addSegment(me.VG_SQUAD_TO_ABS, arg),
+  quad:   func me.addSegment(me.VG_SQUAD_TO_REL, arg),
+  # Add a smooth cubic Bézier curve
+  cubicTo: func me.addSegment(me.VG_SCUBIC_TO_ABS, arg),
+  cubic:   func me.addSegment(me.VG_SCUBIC_TO_REL, arg),
+  # Draw an elliptical arc (shorter counter-clockwise arc)
+  arcSmallCCWTo: func me.addSegment(me.VG_SCCWARC_TO_ABS, arg),
+  arcSmallCCW:   func me.addSegment(me.VG_SCCWARC_TO_REL, arg),
+  # Draw an elliptical arc (shorter clockwise arc)
+  arcSmallCWTo: func me.addSegment(me.VG_SCWARC_TO_ABS, arg),
+  arcSmallCW:   func me.addSegment(me.VG_SCWARC_TO_REL, arg),
+  # Draw an elliptical arc (longer counter-clockwise arc)
+  arcLargeCCWTo: func me.addSegment(me.VG_LCCWARC_TO_ABS, arg),
+  arcLargeCCW:   func me.addSegment(me.VG_LCCWARC_TO_REL, arg),
+  # Draw an elliptical arc (shorter clockwise arc)
+  arcLargeCWTo: func me.addSegment(me.VG_LCWARC_TO_ABS, arg),
+  arcLargeCW:   func me.addSegment(me.VG_LCWARC_TO_REL, arg),
+  # Close the path (implicit lineTo to first point of path)
   close: func me.addSegment(me.VG_CLOSE_PATH),
+
   setStrokeLineWidth: func(width)
   {
     me.setDouble('stroke-width', width);
   },
+  # Set stroke linecap
+  #
+  # @param linecap String, "butt", "round" or "square"
+  #
+  # See http://www.w3.org/TR/SVG/painting.html#StrokeLinecapProperty for details
   setStrokeLineCap: func(linecap)
   {
     me.set('stroke-linecap', linecap);
   },
+  # Set stroke dasharray
+  #
+  # @param pattern Vector, Vector of alternating dash and gap lengths
+  #  [on1, off1, on2, ...]
   setStrokeDashArray: func(pattern)
   {
     me._node.removeChildren('stroke-dasharray');
@@ -651,9 +690,14 @@ var Path = {
 
     return me;
   },
+  # Set the fill color and enable filling this path
+  #
+  # @param color  Vector of 3 or 4 values in [0, 1]
+  setColorFill: func { _setColorNodes(me.color_fill, arg); me.setFill(1); },
+  # Enable/disable filling this path
   setFill: func(fill)
   {
-    me.set("fill", fill);
+    me.setBool("fill", fill);
   }
 };
 
@@ -698,7 +742,7 @@ var Canvas = {
   # Set the background color
   #
   # @param color  Vector of 3 or 4 values in [0, 1]
-  setColorBackground: func _setColorNodes(me.color, arg)
+  setColorBackground: func { _setColorNodes(me.color, arg); return me; }
 };
 
 # Create a new canvas. Pass parameters as hash, eg:
@@ -759,3 +803,26 @@ var get = func(name)
     color: _createColorNodes(node_canvas, "color-background")
   };
 };
+
+# ------------------------------------------------------------------------------
+# Show warnings if API used with too old version of FlightGear without Canvas
+# support (Wrapped in anonymous function do not polute the canvas namespace)
+
+(func {
+var version_str = getprop("/sim/version/flightgear");
+if( string.scanf(version_str, "%u.%u.%u", var fg_version = []) < 1 )
+  debug.warn("Canvas: Error parsing flightgear version (" ~ version_str ~ ")");
+else
+{
+  if(     fg_version[0] < 2
+      or (fg_version[0] == 2 and fg_version[1] < 8) )
+  {
+    debug.warn("Canvas: FlightGear version too old (" ~ version_str ~ ")");
+    gui.popupTip
+    (
+      "FlightGear v2.8.0 or newer needed for Canvas support!",
+      600,
+      {button: {legend: "Ok", binding: {command: "dialog-close"}}}
+    );
+  }
+} })();
