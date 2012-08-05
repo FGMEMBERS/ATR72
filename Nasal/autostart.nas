@@ -11,10 +11,10 @@ var autostart = func() {
 	setprop("/controls/engines/engine[1]/fuel-pump", 1);
 	
 	# Set Idle Gate Lever to FLIGHT IDLE
-	setprop("/controls/atr72/idle-gate", 1);
+	setprop("/aircraft/idle-gate", 1);
 	
 	# Set Propeller Brake to OFF
-	setprop("/controls/atr72/prop-brake", 0);
+	setprop("/aircraft/prop-brake", 0);
 	
 	#Cranking is not required for autostart, that's just something to make the manual start-up procedure more realistic
 	

@@ -1711,5 +1711,105 @@
 			<z-m>-0.173</z-m>
 		</center>
 	</animation>
+
+	<!-- Throttle Quadrant -->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>flapsLever</object-name>
+		<property>/controls/flight/flaps</property>
+		<interpolation>
+			<entry>
+				<dep>0</dep>
+				<ind>0</ind>
+			</entry>
+			<entry>
+				<dep>0.43</dep>
+				<ind>10</ind>
+			</entry>
+			<entry>
+				<dep>1</dep>
+				<ind>30</ind>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.865</z-m>
+		</center>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>parkbrk</object-name>
+		<property>/controls/gear/brake-parking</property>
+		<factor>32</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.865</z-m>
+		</center>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>throttleL</object-name>
+		<property>/controls/engines/engine[0]/throttle</property>
+		<factor>-57</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.865</z-m>
+		</center>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>throttleR</object-name>
+		<property>/controls/engines/engine[1]/throttle</property>
+		<factor>-57</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.865</z-m>
+		</center>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>idlegate</object-name>
+		<property>/aircraft/idle-gate</property>
+		<factor>-30</factor>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.5752</x-m>
+			<y-m>0</y-m>
+			<z-m>0.1846</z-m>
+		</center>
+	</animation>
 			
 </PropertyList>
