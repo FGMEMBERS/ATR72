@@ -219,7 +219,13 @@ var general_loop_1 = {
 
 		if (getprop("/instrumentation/fmc/page") == "posref") {
 
-			values[1].setText(substr(getprop("/aircraft/fmc/time/utc"), 0, 4)~"z").setColor(white);
+			fmc.values[1].setText(substr(getprop("/aircraft/fmc/time/utc"), 0, 4)~"z").setColor(1,1,1,0.8);
+
+		}
+
+		if (getprop("/instrumentation/fmc/page") == "progress") {
+
+			fmc.fmcPages["progress"].updateDisplay();
 
 		}
 

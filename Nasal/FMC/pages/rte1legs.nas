@@ -109,7 +109,7 @@ fmcPages["rte1legs"] = {
 
 					values[n+12].setText("/ -----").setColor(white);
 
-				}							
+				}
 
 			} elsif (wp_id == me.num) {
 

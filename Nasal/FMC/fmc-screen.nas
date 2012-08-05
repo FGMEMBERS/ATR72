@@ -143,12 +143,14 @@ var clearScreen = func() {
 	setprop("/instrumentation/fmc/exec-lt", 0);
 	
 	foreach(var label; labels) {
-		label.setText("").setFontSize(36, 1.2);
+		label.setText("").setFontSize(40, 1.2);
 	}
 	
 	foreach(var value; values) {
-		value.setText("").setFontSize(60, 1.2);
+		value.setText("").setFontSize(54, 1.2);
 	}
+
+	labels[5].setFontSize(36, 1.2);
 
 
 };

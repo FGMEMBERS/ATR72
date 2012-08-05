@@ -10,6 +10,18 @@ var fplnDisp = {
 
 		me.clear();
 
+		var sids = getprop("/aircraft/fmc/rte1/dep/wpts/num");
+
+		for(var n=0; n<sids; n+=1) {
+
+			if((getprop("/aircraft/fmc/rte1/dep/wpts/wp["~n~"]/lon-deg") > 0) and (getprop("/aircraft/fmc/rte1/dep/wpts/wp["~n~"]/lat-deg") > 0)) {
+
+				setprop("/autopilot/route-manager/input", "@INSERT99:"~getprop("/aircraft/fmc/rte1/dep/wpts/wp["~n~"]/lon-deg")~","~getprop("/aircraft/fmc/rte1/dep/wpts/wp["~n~"]/lat-deg"));
+
+			}
+
+		}
+
 		var num = getprop("/aircraft/fmc/active-rte/num");
 
 		for(var n=0; n<num; n+=1) {
@@ -18,7 +30,19 @@ var fplnDisp = {
 
 		}
 
-	}
+		var stars = getprop("/aircraft/fmc/rte1/arr/wpts/num");
+
+		for(var n=0; n<stars; n+=1) {
+
+			if((getprop("/aircraft/fmc/rte1/arr/wpts/wp["~n~"]/lon-deg") > 0) and (getprop("/aircraft/fmc/rte1/arr/wpts/wp["~n~"]/lat-deg") > 0)) {
+
+				setprop("/autopilot/route-manager/input", "@INSERT99:"~getprop("/aircraft/fmc/rte1/arr/wpts/wp["~n~"]/lon-deg")~","~getprop("/aircraft/fmc/rte1/arr/wpts/wp["~n~"]/lat-deg"));
+
+			}
+
+		}
+
+	},
 
 };
 

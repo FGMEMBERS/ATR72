@@ -346,19 +346,31 @@
 				<flt-no type="string">-------</flt-no>
 				<co-rte type="string">----------</co-rte>
 				<dep>
-					<active type="bool">0</active>
-					<rwy type="string">---</rwy>
-					<sid type="string">-----</sid>
+					<!-- active type="bool">0</active -->
+					<sid type="string"></sid>
+					<current-wp type="int">0</current-wp>
 					<wpts>
-
+						<num type="int">0</num>
+						<wp>
+							<id type="string"></id>
+							<lat-deg type="float">0</lat-deg>
+							<lon-deg type="float">0</lon-deg>
+							<alt-res type="float">0</alt-res>
+						</wp>
 					</wpts>
 				</dep>
 				<arr>
-					<active type="bool">0</active>
-					<rwy type="string">---</rwy>
-					<star type="string">-----</star>
+					<!-- active type="bool">0</active -->
+					<star type="string"></star>
+					<current-wp type="int">0</current-wp>
 					<wpts>
-
+						<num type="int">0</num>
+						<wp>
+							<id type="string"></id>
+							<lat-deg type="float">0</lat-deg>
+							<lon-deg type="float">0</lon-deg>
+							<alt-res type="float">0</alt-res>
+						</wp>
 					</wpts>
 				</arr>
 				<rte>
@@ -581,6 +593,12 @@
 		<devel>
 			<file>Aircraft/ATR72/Devel/parse_dat.nas</file>
 		</devel>
+		<procedures>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsDB.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsWP.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsTP.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsTransition.nas</file>
+		</procedures>
 		<fmc>
 			<file>Aircraft/ATR72/Nasal/FMC/functions/load-navdata.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/fmc-screen.nas</file>
@@ -595,6 +613,10 @@
 			<file>Aircraft/ATR72/Nasal/FMC/pages/rte1.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/pages/rte1legs.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/afcs-nav.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/progress.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/deparrindex.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/departures.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/arrivals.nas</file>
 		</fmc>
 		<atr>
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
@@ -606,12 +628,6 @@
 			<file>Aircraft/ATR72/Nasal/brakesystem.nas</file>
 			<file>Aircraft/ATR72/Nasal/ohpanel.nas</file>
 		</atr>
-		<procedures>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsDB.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsWP.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsTP.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsTransition.nas</file>
-		</procedures>
 		<hydraulics>
 			<file>Aircraft/ATR72/Nasal/hydraulics/common.nas</file>
 			<file>Aircraft/ATR72/Nasal/hydraulics/green.nas</file>
