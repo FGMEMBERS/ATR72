@@ -1,4 +1,9 @@
+# var fmc_gui = gui.Dialog.new("sim/gui/dialogs/fmc/dialog", "Aircraft/ATR72/Systems/fmc-canvas-dlg.xml");
+
 aircraft.livery.init("Aircraft/ATR72/Models/Liveries/" ~ getprop("sim/aero"));
+
+# Start at FMC Page IDENT
+fmc.GoToPage("ident");
 
 var get_percent = func(val, max) {
 
@@ -142,7 +147,7 @@ var general_loop_1 = {
     	
     	# Autopilot ALT Mode VS Setting
     	
-    	if ((getprop("/sim/aero") == "ATR72-500") and getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/ver-mode") == "alt")) {
+    	if (getprop("/sim/aero") == "ATR72-500") {
     	
 			if (getprop("/position/altitude-ft") > 16000) {
 			
@@ -161,7 +166,7 @@ var general_loop_1 = {
 			
 			}
     	
-    	} elsif ((getprop("/sim/aero") == "ATR72-500C") and getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/ver-mode") == "alt")) {
+    	} else {
     	
 			if (getprop("/position/altitude-ft") > 16000) {
 			
@@ -206,7 +211,25 @@ var general_loop_1 = {
     	
     	# Position String
     	
-    	setprop("/instrumentation/fmc/pos-string", getprop("/position/latitude-string") ~ "/" ~ getprop("/position/longitude-string"));
+    	setprop("/instrumentation/fmc/pos-string", getprop("/position/latitude-string") ~ " " ~ getprop("/position/longitude-string"));
+
+    	# FMC Time Management System
+
+    	var elapsed_min = int((getprop("/sim/time/elapsed-sec") - getprop("/aircraft/fmc/time/start-sec")) / 60);
+
+		setprop("/aircraft/fmc/time/utc", getprop("/aircraft/fmc/time/utc-set") + elapsed_min);
+
+		if (getprop("/instrumentation/fmc/page") == "posref") {
+
+			fmc.values[1].setText(substr(getprop("/aircraft/fmc/time/utc"), 0, 4)~"z").setColor(1,1,1,0.8);
+
+		}
+
+		if (getprop("/instrumentation/fmc/page") == "progress") {
+
+			fmc.fmcPages["progress"].updateDisplay();
+
+		}
 
 	},
 

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+	<name>fmc</name>
+	<layout>vbox</layout>
+
+		<group>
+            <layout>hbox</layout>
+            <empty><stretch>1</stretch></empty>
+
+            <text>
+                <label>ATR72-500(C) Flight Management Computer</label>
+            </text>
+
+            <empty><stretch>1</stretch></empty>
+
+            <button>
+                <pref-width>16</pref-width>
+                <pref-height>16</pref-height>
+                <legend></legend>
+                <keynum>27</keynum>
+                <border>2</border>
+                <binding>
+                    <command>dialog-close</command>
+                </binding>
+            </button>
+        </group>
+        
+        <hrule/>
+
+        <group>
+			<layout>hbox</layout>
+
+			<button>
+				<legend>RTE</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("rte1init");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>LEGS</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("rte1legs");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>DEP/ARR</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("deparrindex");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>HOLD</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("hold");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>PROG</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("progress");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>VNAV</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("perfinit");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>ATC</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("atc");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+			
+        </group>
+
+        <group>
+			<layout>hbox</layout>
+
+			<group>
+				<layout>table</layout>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>4</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l1();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>5</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l2();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>6</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l3();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>7</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l4();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>8</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l5();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>></legend>
+					<padding>2</padding>
+					<row>9</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.l6();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+			</group>
+
+		<canvas>
+		  <name>fmcScreen</name>
+		  <valign>fill</valign>
+		  <halign>fill</halign>
+		  <stretch>false</stretch>
+		  <pref-width>400</pref-width>
+		  <pref-height>300</pref-height>
+		  
+		  <nasal>
+			<load>
+			  <![CDATA[
+
+					var my_canvas = canvas.get(cmdarg());
+
+					my_canvas.setColorBackground(0, 0, 0, 0.5);
+
+					var group = my_canvas.createGroup();
+					props.copy(fmc.group._node, group._node);
+
+					group._node.getNode("id", 1).setValue(1);
+
+					var test = "Test Successful!";
+		
+			  ]]>
+			</load>
+		  </nasal>
+		</canvas>
+
+			<group>
+				<layout>table</layout>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>4</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r1();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>5</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r2();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>6</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r3();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>7</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r4();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>8</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r5();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+				<button>
+					<legend>&lt;</legend>
+					<padding>2</padding>
+					<row>9</row>
+					<col>0</col>
+					<binding>
+						<command>nasal</command>
+						<script>
+							fmc.ActivePage.r6();
+						</script>
+					</binding>
+					<binding>
+						<command>dialog-apply</command>
+					</binding>
+				</button>
+
+			</group>
+
+		</group>
+
+		<group>
+			<layout>hbox</layout>
+
+			<button>
+				<legend>BRT</legend>
+				<padding>2</padding>
+				<binding>
+					<command>property-cycle</command>
+					<property>/instrumentation/fmc/brt-norm</property>
+					<value>0.00</value>
+					<value>0.25</value>
+					<value>0.50</value>
+					<value>0.75</value>
+					<value>1.00</value>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>CLR</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/instrumentation/fmc/input", "");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>PREV</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.ActivePage.prev();
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>NEXT</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.ActivePage.next();
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>MENU</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("menu");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>DATA</legend>
+				<padding>2</padding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.GoToPage("data");
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+
+			<button>
+				<legend>EXEC</legend>
+				<padding>2</padding>
+				<visible>
+					<equals>
+						<property>/instrumentation/fmc/exec-lt</property>
+						<value>1</value>
+					</equals>
+				</visible>
+				<binding>
+					<command>nasal</command>
+					<script>
+						fmc.ActivePage.exec();
+					</script>
+				</binding>
+				<binding>
+		    		<command>dialog-apply</command>
+		   		</binding>
+			</button>
+			
+        </group>
+
+        <group>
+			<layout>hbox</layout>
+
+			<input>
+				<name>fmc_input</name>
+				<height>25</height>
+				<stretch>1</stretch>
+				<property>/instrumentation/fmc/input</property>
+				<live>true</live>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>fmc_input</object-name>
+				</binding>
+			</input>
+
+        </group>
+		
+</PropertyList>

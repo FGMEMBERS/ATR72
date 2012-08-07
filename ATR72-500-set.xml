@@ -14,31 +14,30 @@
             <livery>
                <file type="string">blank</file>
             </livery> 
-		</model>
-	<payload>
-
-	<weight n="0">
-		<name>Crew</name>
-		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]">380</weight-lb>
-		<max-lb>480</max-lb>
-		<min-lb>100</min-lb>
-	</weight>
-
-	<weight n="1">
-		<name>Cargo</name>
-		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]">750</weight-lb>
-		<max-lb>960</max-lb>
-		<min-lb>0</min-lb>
-	</weight>
-
-	<weight n="2">
-		<name>Passengers</name>
-		<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]">12000</weight-lb>
-		<max-lb>13320</max-lb>
-		<min-lb>0</min-lb>
-	</weight>
-	</payload>
-	
+		</model>	
 </sim>
+
+<payload>
+		<weight n="0">
+			<name>Crew</name>
+			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]">380</weight-lb>
+			<max-lb>480</max-lb>
+			<min-lb>100</min-lb>
+		</weight>
+
+		<weight n="1">
+			<name>Cargo</name>
+			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[1]">750</weight-lb>
+			<max-lb>960</max-lb>
+			<min-lb>0</min-lb>
+		</weight>
+
+		<weight n="2">
+			<name>Passengers</name>
+			<weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[2]">12000</weight-lb>
+			<max-lb>13320</max-lb>
+			<min-lb>0</min-lb>
+		</weight>
+	</payload>
 
 </PropertyList>

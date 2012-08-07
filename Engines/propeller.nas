@@ -133,6 +133,9 @@ var prop = {
 		
 		if (torque < 25.231)
 			torque = 25.231;
+			
+		if (torque > 4000)
+			torque = 4000;
 		
 		setprop(torque_prop, torque);
 	
@@ -199,10 +202,6 @@ var propeller = {
     		if (getprop("/aircraft/prop-brake") == 1) {
     		
     			approach_trgt(0, eng_tree ~ "thruster/prop_rpm", 1, 5, 1);
-    			
-    			if (getprop(eng_tree ~ "thruster/prop_torque") > 3400)
-    				setprop("/aircraft/prop-brake", 0);
-    				setprop("/aircraft/prop-brake-fail", 1);
     		
     		} else {
     		

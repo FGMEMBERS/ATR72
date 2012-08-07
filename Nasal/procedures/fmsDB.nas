@@ -283,7 +283,7 @@ var fmsDB = {
 
      ############ constructor ####################
       root = getprop("/sim/aircraft-dir");
-      fn = call(func parsexml(root~"/Database/Procedures/"~icao~".xml", start, end, data),nil, var err = []);
+      fn = call(func parsexml(root~"/Database/NavData/Procedures/"~icao~".xml", start, end, data),nil, var err = []);
       if (size(err)) {
          print("[FMS] failed to find SID/STAR database file for: "~icao);
          foreach(var e; err) {

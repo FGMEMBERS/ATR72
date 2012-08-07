@@ -13,6 +13,10 @@
 		<startup>
 			<splash-texture>Aircraft/ATR72/splash.png</splash-texture>
 		</startup>
+
+		<panel>
+			<path></path>
+		</panel>
 	
 		<chase-distance-m>-60</chase-distance-m>
 
@@ -102,6 +106,41 @@
 							</script>
                         </binding>
                     </item>
+                    <item n="1">
+		                <label>Route Manager</label>
+		                <enabled type="bool">true</enabled>
+                        <binding>
+							<command>nasal</command>
+							<script>
+								var rm_info = gui.Dialog.new("sim/gui/dialogs/rm_info/dialog", "Aircraft/ATR72/Systems/rm-info-dlg.xml");
+								rm_info.open();
+							</script>
+                        </binding>
+                    </item>
+                    <item n="2">
+		                <label>Previous Waypoint</label>
+		                <enabled type="bool">true</enabled>
+                        <binding>
+							<command>nasal</command>
+							<script>
+								var current_wp = getprop("/aircraft/fmc/active-rte/current-wp");
+
+								setprop("/aircraft/fmc/active-rte/current-wp", current_wp - 1);
+							</script>
+                        </binding>
+                    </item>
+                    <item n="3">
+		                <label>Next Waypoint</label>
+		                <enabled type="bool">true</enabled>
+                        <binding>
+							<command>nasal</command>
+							<script>
+								var current_wp = getprop("/aircraft/fmc/active-rte/current-wp");
+
+								setprop("/aircraft/fmc/active-rte/current-wp", current_wp + 1);
+							</script>
+                        </binding>
+                    </item>
                 </menu>
                 <menu n="100">
                 	<label>ATR72-500</label>
@@ -154,6 +193,16 @@
 							</script>
 						</binding>
 					</item>
+					<!-- item>
+						<name>fmc</name>
+						<label>Flight Management Computer</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+							 atr.fmc_gui.open();
+							</script>
+						</binding>
+					</item -->
                 </menu>
 			</default>
 		</menubar>
@@ -244,6 +293,7 @@
 			<vs-setting type="int">0</vs-setting>
 			<ias-setting type="int">180</ias-setting>
 			<bank-limit type="int">27</bank-limit>
+			<crz-alt type="string">FL160</crz-alt>
 		</afcs>
 		<collins>
 			<nav0-editmode type="string">standby</nav0-editmode>
@@ -268,20 +318,15 @@
 			<tcas-editmode-int type="int">0</tcas-editmode-int>
 		</collins>
 		
-		<!-- Default Company DB and NavData (To be removed once DBs are added)-->
-		
-		<!-- fmc>
-			<company>
-				<db-id type="string">MIA_Data v3.1</db-id>
-				<db-date type="string">25JUN24AUG/12</db-date>
-			</company>
-			<navdata>
-				<db-id type="string">FGDAT+OMEGAAWY</db-id>
-				<db-date type="string">25JUN24DEC/12</db-date>
-			</navdata>
-		</fmc -->
-		
 		<fmc>
+			<time>
+				<start-sec type="int">0</start-sec>
+				<utc type="string">0000</utc>
+				<utc-set type="string">0000</utc-set>
+			</time>
+			<gps>
+				<accur type="string">LO</accur>
+			</gps>
 			<company>
 				<db-id type="string">N/A</db-id>
 				<db-date type="string">----------/--</db-date>
@@ -290,6 +335,75 @@
 				<db-id type="string">N/A</db-id>
 				<db-date type="string">----------/--</db-date>
 			</navdata>
+			<perf>
+				<trans-alt type="int">14000</trans-alt>
+				<crz-alt type="string">FL160</crz-alt>
+				<climb type="string">170/0.55/5.5</climb>
+				<cruise type="string">210/0.55M</cruise>
+				<descent>240/0.55/3.0</descent>
+				<spd-trans type="string">250/10000</spd-trans>
+			</perf>
+			<active-rte>
+				<num type="int">0</num>
+				<current-wp type="int">0</current-wp>
+				<wp>
+					<id type="string"></id>
+					<alt type="string"></alt>
+				</wp>
+			</active-rte>
+			<rte1>
+				<active type="int">0</active>
+				<origin-arpt type="string">----</origin-arpt>
+				<origin-rwy type="string">---</origin-rwy>
+				<dest-arpt type="string">----</dest-arpt>
+				<dest-rwy type="string">---</dest-rwy>
+				<flt-no type="string">-------</flt-no>
+				<co-rte type="string">----------</co-rte>
+				<dep>
+					<!-- active type="bool">0</active -->
+					<sid type="string"></sid>
+					<current-wp type="int">0</current-wp>
+					<wpts>
+						<num type="int">0</num>
+						<wp>
+							<id type="string"></id>
+							<lat-deg type="float">0</lat-deg>
+							<lon-deg type="float">0</lon-deg>
+							<alt-res type="float">0</alt-res>
+						</wp>
+					</wpts>
+				</dep>
+				<arr>
+					<!-- active type="bool">0</active -->
+					<star type="string"></star>
+					<current-wp type="int">0</current-wp>
+					<wpts>
+						<num type="int">0</num>
+						<wp>
+							<id type="string"></id>
+							<lat-deg type="float">0</lat-deg>
+							<lon-deg type="float">0</lon-deg>
+							<alt-res type="float">0</alt-res>
+						</wp>
+					</wpts>
+				</arr>
+				<rte>
+					<num type="int">0</num>
+					<first type="int">0</first>
+					<entry>
+						<awy type="string">----</awy>
+						<wp type="string">-----</wp>
+					</entry>
+				</rte>
+				<legs>
+					<num type="int">0</num>
+					<first type="int">0</first>
+					<wp>
+						<wp type="string"></wp>
+						<alt type="string"></alt>
+					</wp>
+				</legs>
+			</rte1>
 		</fmc>
 		
 	</aircraft>
@@ -490,10 +604,36 @@
 		<loader>
 			<file>Aircraft/ATR72/Nasal/canvas/loader.nas</file>
 		</loader>
+		<!-- gui>
+			<file>Aircraft/ATR72/Nasal/FMC/fmc.nas</file>
+		</gui -->
+		<devel>
+			<file>Aircraft/ATR72/Devel/parse_dat.nas</file>
+		</devel>
+		<procedures>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsDB.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsWP.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsTP.nas</file>
+			<file>Aircraft/ATR72/Nasal/procedures/fmsTransition.nas</file>
+		</procedures>
 		<fmc>
+			<file>Aircraft/ATR72/Nasal/FMC/functions/load-navdata.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/fmc-screen.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/fmc-main.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/functions/active-rte.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/functions/rte.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/functions/rtelegs.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/functions/awy2legs.nas</file>
 			<file>Aircraft/ATR72/Nasal/FMC/pages/ident.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/posref.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/vnav.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/rte1.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/rte1legs.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/afcs-nav.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/progress.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/deparrindex.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/departures.nas</file>
+			<file>Aircraft/ATR72/Nasal/FMC/pages/arrivals.nas</file>
 		</fmc>
 		<atr>
 			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
@@ -505,12 +645,6 @@
 			<file>Aircraft/ATR72/Nasal/brakesystem.nas</file>
 			<file>Aircraft/ATR72/Nasal/ohpanel.nas</file>
 		</atr>
-		<procedures>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsDB.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsWP.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsTP.nas</file>
-			<file>Aircraft/ATR72/Nasal/procedures/fmsTransition.nas</file>
-		</procedures>
 		<hydraulics>
 			<file>Aircraft/ATR72/Nasal/hydraulics/common.nas</file>
 			<file>Aircraft/ATR72/Nasal/hydraulics/green.nas</file>

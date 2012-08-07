@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<PropertyList>
+
+	<name>Trim Indicator</name>
+	<path>trim-ind.ac</path>
+	
+	<!-- Pick animations -->
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>aileron-needle</object-name>
+		<property>/controls/flight/aileron-trim</property>
+		<factor>45</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.0115</y-m>
+			<z-m>0.0216</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>rudder-needle</object-name>
+		<property>/controls/flight/rudder-trim</property>
+		<factor>45</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>-0.0115</y-m>
+			<z-m>-0.0176</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>nose-trim</object-name>
+		<property>/controls/flight/elevator-trim</property>
+		<factor>0.286</factor>
+		<axis>
+			<y>1</y>
+		</axis>
+	</animation>
+		
+</PropertyList>

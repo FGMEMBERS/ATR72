@@ -8,7 +8,7 @@ fmcPages["ident"] = {
 		labels[1].setText("CO-DATA").setColor(blue);
 		labels[2].setText("NAVDATA").setColor(blue);
 		labels[3].setText("CALLSIGN").setColor(blue);
-		labels[5].setText("-------------------------").setColor(blue);
+		labels[5].setText("-------------------------------------------------------").setColor(blue);
 		labels[12].setText("ENGINES").setColor(blue);
 		labels[13].setText("CO-DATA").setColor(blue);
 		labels[14].setText("NAVDATA").setColor(blue);

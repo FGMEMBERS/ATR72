@@ -4,7 +4,7 @@
 # copy of all canvas modules (api.nas, svg.nas and string.nas)
 var canvas_subfolder = '/Nasal/canvas/';
 # list of modules to be loaded, and destination namespace to be used
-var modules = [ ['api.nas','canvas'], ['svg.nas','canvas'], ['string.nas','std'] ];
+var modules = [ ['api.nas','canvas'], ['svg.nas','canvas'], ['gui.nas', 'canvas'], ['string.nas','std'] ];
  
 # various helpers to check if the canvas namespace is used already
 var has_symbol = func(symbol) contains(globals, symbol);
