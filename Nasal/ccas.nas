@@ -1,137 +1,52 @@
 var ccas = {
+	
+	
 	init : func {
 			me.loopInterval = 0.1;
 			setprop("/aircraft/ccas/sound/warning",0);
+			me.totalCurrentActiveWarnings = 0;
 			setprop("/aircraft/ccas/sound/caution",0);
-			setprop("/aircraft/ccas/master-warning",0);
-			setprop("/aircraft/ccas/master-caution",0);
+			me.totalCurrentActiveCautions = 0;
+			setprop("/aircraft/ccas/master-warning-count",0);
+			me.totalCurrentMasterWarn = 0;
+			setprop("/aircraft/ccas/master-caution-count",0);
+			me.totalCurrentMasterCaution = 0;
 			me.update();
 			},
 	
 	update : func {
-			var totalCurrentMasterWarn = getprop("/aircraft/ccas/master-warning");	
-			var totalCurrentMasterCaution = getprop("/aircraft/ccas/master-caution");	
-			var totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
-			var totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");	
+			me.totalCurrentMasterWarn = getprop("/aircraft/ccas/master-warning-count");	
+			me.totalCurrentMasterCaution = getprop("/aircraft/ccas/master-caution-count");	
+			me.totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
+			me.totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");	
 			
-#-- LDG GEAR NOT DOWN --#
-			var lastGearWarningStatus = getprop("/aircraft/ccas/ldg_gear_not_down");
-			if ((getprop("/surface-positions/flap-pos-norm") == 1) 
-					and (me.all_gear_down() == 0) 
-					and (getprop("/position/altitude-agl-ft") <= 500)) {
-		
-				setprop("/aircraft/ccas/ldg_gear_not_down", 1);
-				if (lastGearWarningStatus != 1) {
-					setprop("/aircraft/ccas/master-warning", totalCurrentMasterWarn + 1);
-					setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings + 1);
-					}
-				}
-			else {
-				setprop("/aircraft/ccas/ldg_gear_not_down", 0);
-				if (lastGearWarningStatus != 0) {
-					if (totalCurrentMasterWarn > 0) {
-						setprop("/aircraft/ccas/master-warning", totalCurrentMasterWarn - 1);
-						}
-					if (totalCurrentActiveWarnings > 0) {
-						setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings - 1);
-						}
-					}
-				}
+			me.ldg_gear_not_down();
+			me.prop_brk();
+			me.fuel();
+			me.idle_gate();
+			me.wheels();
+			me.flaps_unlk();
 
-#-- end LDG GEAR NOT DOWN --#
-#-- PROP BRK --#	
-			var lastPropBrakeStatus = getprop("/aircraft/ccas/prop-brak-fault");
-
-			if ((getprop("/aircraft/prop-brake") < 1 and getprop("/aircraft/prop-brake") > 0)
-					or (getprop("/aircraft/prop-brake-fail") == 1)){
-				
-				setprop("/aircraft/ccas/prop-brake-fault", 1);
-				if (lastPropBrakeStatus != 1) {
-					setprop("/aircraft/ccas/master-warning", totalCurrentMasterWarn + 1);
-					setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings + 1);
-					}
-				}
+			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
+				setprop("/aircraft/ccas/master-warning", 1);
+			}
 			else {
-				setprop("/aircraft/ccas/prop-brake-fault", 0);
-				if (lastPropBrakeStatus != 0) {
-					if (totalCurrentMasterWarn > 0) {
-						setprop("/aircraft/ccas/master-warning", totalCurrentMasterWarn - 1);
-						}
-					if (totalCurrentActiveWarnings > 0) {
-						setprop("/aircraft/ccas/sound/warning", totalCurrentActiveWarnings - 1);
-						}
-					}				
-				}
-
-#-- end PROP BRK --#
-#-- FUEL --#
-			var lastFuelStatus = getprop("/aircraft/ccas/fuel-fault");
-			#also needs to check for fuel flow psi < 4 in line below
-			if (getprop("/consumables/fuel/total-fuel-kg") < 160) {
-				setprop("/aircraft/ccas/fuel-fault", 1);
-				if (lastFuelStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
-				}
-			else {
-				setprop("/aircraft/ccas/fuel-fault", 0);
-				if (lastFuelStatus != 0) {
-					if (totalCurrentMasterCaution > 0) {
-						setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution - 1);
-						}
-					if (totalCurrentActiveCautions > 0) {
-						setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions - 1);
-						}
-					}					
-				}
-#-- end FUEL --#	
-#-- IDLE GATE --#
-			var lastIdleGateStatus = getprop("/aircraft/ccas/idle-gate-fault");
-
-			if (getprop("/controls/atr72/idle-gate") != 1) {
-				setprop("/aircraft/ccas/idle-gate-fault", 1);
-				if (lastIdleGateStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
-				}
-			else {
-				setprop("/aircraft/ccas/idle-gate-fault", 0);
-				if (lastIdleGateStatus != 0) {
-					if (totalCurrentMasterCaution > 0) {
-						setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution - 1);
-						}
-					if (totalCurrentActiveCautions > 0) {
-						setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions - 1);
-						}
-					}					
-				}
-#-- end IDLE GATE --#		
-#-- WHEELS --#
-			var lastWheelsStatus = getprop("/aircraft/ccas/wheels-fault");
+				setprop("/aircraft/ccas/master-warning", 0);
+			}
 			
-			if (getprop("/gear/brake-thermal-energy") >= 1) {
-				setprop("/aircraft/ccas/wheels-fault", 1);
-				if (lastWheelsStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
-				}
+			if (getprop("/aircraft/ccas/master-caution-count") > 0) {
+				setprop("/aircraft/ccas/master-caution", 1);
+			}
 			else {
-				setprop("/aircraft/ccas/wheels-fault", 0);
-				if (lastWheelsStatus != 0) {
-					if (totalCurrentMasterCaution > 0) {
-						setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution - 1);
-						}
-					if (totalCurrentActiveCautions > 0) {
-						setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions - 1);
-						}
-					}					
-				}
-#-- end WHEELS --#	
-#-- FLAPS UNLK --#
-			var lastFlapsUnlockStatus = getprop("/aircraft/ccas/flaps-unlk-fault");
+				setprop("/aircraft/ccas/master-caution", 0);
+			}
+			
+			settimer(func {me.update();}, me.loopInterval);
+			},
+			
+	flaps_unlk : func {
+			var propertyName = "/aircraft/ccas/flaps-unlk-fault";
+			var lastFlapsUnlockStatus = getprop(propertyName);
 			var flapPosNorm = getprop("/surface-positions/flap-pos-norm");
 			var flapFlightPos = getprop("/controls/flight/flaps");
 			if (flapPosNorm == nil) flapPosNorm = 0;
@@ -140,44 +55,135 @@ var ccas = {
 			if ((flapFlightPos == 0.428) and 
 					(flapPosNorm < 0.314 or 
 					 flapPosNorm > 0.542)) {
-				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
-				if (lastFlapsUnlockStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
+				me.add_caution(propertyName, lastFlapsUnlockStatus);
 				}
 			elsif ((flapFlightPos == 0.714) and 
 					(flapPosNorm < 0.600 or 
 					 flapPosNorm > 0.828)) {
-				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
-				if (lastFlapsUnlockStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
+				me.add_caution(propertyName, lastFlapsUnlockStatus);
 				}
 			elsif ((flapFlightPos == 1) and 
 					(flapPosNorm < 0.886 or 
 					 flapPosNorm > 1.114)) {
-				setprop("/aircraft/ccas/flaps-unlk-fault", 1);
-				if (lastFlapsUnlockStatus != 1) {
-					setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution + 1);
-					setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions + 1);
-					}				
+				me.add_caution(propertyName, lastFlapsUnlockStatus);
 				}	
 			else {
-				setprop("/aircraft/ccas/flaps-unlk-fault", 0);
-				if (lastFlapsUnlockStatus != 0) {
-					if (totalCurrentMasterCaution > 0) {
-						setprop("/aircraft/ccas/master-caution", totalCurrentMasterCaution - 1);
-						}
-					if (totalCurrentActiveCautions > 0) {
-						setprop("/aircraft/ccas/sound/caution", totalCurrentActiveCautions - 1);
-						}
-					}					
+				me.remove_caution(propertyName, lastFlapsUnlockStatus);
+				}	
+			},
+			
+	wheels : func {
+			var propertyName = "/aircraft/ccas/wheels-fault";
+			var lastWheelsStatus = getprop(propertyName);
+			
+			if (getprop("/gear/brake-thermal-energy") >= 1) {
+				me.add_caution(propertyName, lastWheelsStatus);
 				}
-#-- end FLAPS UNLK --#	
+			else {
+				me.remove_caution(propertyName, lastWheelsStatus);
+				}
+			},
+			
+	idle_gate : func {
+			var propertyName = "/aircraft/ccas/idle-gate-fault";
+			var lastIdleGateStatus = getprop(propertyName);
+			
+			if (getprop("/aircraft/idle-gate") != 1) {
+				me.add_caution(propertyName, lastIdleGateStatus);
+				}
+			else {
+				me.remove_caution(propertyName, lastIdleGateStatus);					
+				}	
+			},
+			
+	fuel : func {
+			var propertyName = "/aircraft/ccas/fuel-fault";
+			var lastFuelStatus = getprop(propertyName);
+			
+			#also needs to check for fuel flow psi < 4 in line below
+			if (getprop("/consumables/fuel/total-fuel-kg") < 160) {
+				me.add_caution(propertyName, lastFuelStatus);
+				}
+			else {
+				me.remove_caution(propertyName, lastFuelStatus);					
+				}
+			},
+			
+	prop_brk : func {
+			var propertyName = "/aircraft/ccas/prop-brake-fault";
+			var lastPropBrakeStatus = getprop(propertyName);
 
-			settimer(func {me.update();}, me.loopInterval);
+			if ((getprop("/aircraft/prop-brake") == 1) or (getprop("/aircraft/prop-brake-fail") == 1)){
+				me.add_warning(propertyName, lastPropBrakeStatus);
+				}
+			else {
+				me.remove_warning(propertyName, lastPropBrakeStatus);
+				}
+			},
+			
+	ldg_gear_not_down : func {
+			var propertyName = "/aircraft/ccas/ldg_gear_not_down";
+			var lastGearWarningStatus = getprop(propertyName);
+			if ((getprop("/surface-positions/flap-pos-norm") == 1) 
+					and (me.all_gear_down() == 0) 
+					and (getprop("/position/altitude-agl-ft") <= 500)) {
+				me.add_warning(propertyName, lastGearWarningStatus);
+				}
+			else {
+				me.remove_warning(propertyName, lastGearWarningStatus);
+				}
+			},
+			
+	add_caution : func(propertyName = "", propertyLastStatus = 0) {
+			setprop(propertyName, 1);
+			if (propertyLastStatus != 1) {
+				
+				me.totalCurrentMasterCaution = me.totalCurrentMasterCaution + 1;
+				setprop("/aircraft/ccas/master-caution-count", me.totalCurrentMasterCaution);
+				
+				me.totalCurrentActiveCautions = me.totalCurrentActiveCautions + 1;
+				setprop("/aircraft/ccas/sound/caution", me.totalCurrentActiveCautions);			
+				}
+			},
+			
+	remove_caution : func(propertyName = "", propertyLastStatus=0) {
+			setprop(propertyName, 0);
+			if (propertyLastStatus != 0) {
+				if (me.totalCurrentMasterCaution > 0) {
+					me.totalCurrentMasterCaution = me.totalCurrentMasterCaution - 1;
+					setprop("/aircraft/ccas/master-caution-count", me.totalCurrentMasterCaution);
+					}
+				if (me.totalCurrentActiveCautions > 0) {
+					me.totalCurrentActiveCautions = me.totalCurrentActiveCautions - 1;
+					setprop("/aircraft/ccas/sound/caution", me.totalCurrentActiveCautions);
+					}
+				}
+			},
+			
+	add_warning : func (propertyName="", propertyLastStatus=0) {
+			setprop(propertyName, 1);
+			if (propertyLastStatus != 1) {
+				
+				me.totalCurrentMasterWarn = me.totalCurrentMasterWarn + 1;
+				setprop("/aircraft/ccas/master-warning-count", me.totalCurrentMasterWarn);
+				
+				me.totalCurrentActiveWarnings = me.totalCurrentActiveWarnings + 1;
+				setprop("/aircraft/ccas/sound/warning", me.totalCurrentActiveWarnings);			
+				}
+			},
+			
+	remove_warning : func (propertyName="", propertyLastStatus=0) {
+			setprop(propertyName, 0);
+			if (propertyLastStatus != 0) {
+				if (me.totalCurrentMasterWarn > 0) {
+					me.totalCurrentMasterWarn = me.totalCurrentMasterWarn - 1;
+					setprop("/aircraft/ccas/master-warning-count", me.totalCurrentMasterWarn);
+					}
+				if (me.totalCurrentActiveWarnings > 0) {
+					me.totalCurrentActiveWarnings = me.totalCurrentActiveWarnings - 1;
+					setprop("/aircraft/ccas/sound/warning", me.totalCurrentActiveWarnings);
+					}
+				}				
 			},
 			
 	all_gear_down : func {
