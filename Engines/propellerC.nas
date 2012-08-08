@@ -141,6 +141,17 @@ var prop = {
 	
 	},
 	
+	set_oilpressure : func (defaultoilpressure_property, oilpressure_property) {
+		
+		var currentPressure = getprop(defaultoilpressure_property);
+		
+		setprop(oilpressure_property, currentPressure*2);
+	},	
+	
+	set_oiltempCelsius : func (degreesF_property, degreesC_property) {
+		var currentF = getprop(degreesF_property);
+		setprop(degreesC_property, (currentF - 32) * 0.555556);
+	}
 	## Fuel Flow (this is done here as the engine used in a dummy engine)
 	
 	set_fuelflow: func(psfc, n1_prop, fuelflow_prop) {
@@ -189,6 +200,9 @@ var propeller = {
             setprop("/engines/engine/fuelflow_kgph", 0);
             setprop("/engines/engine[1]/fuelflow_kgph", 0);
             
+			setprop("/engines/engine/oil-pressure-psi-adjusted", 0);
+            setprop("/engines/engine[1]/oil-pressure-psi-adjusted", 0);
+			
             setprop("/aircraft/prop-brake-fail", 0);
             
             me.reset();
@@ -217,6 +231,10 @@ var propeller = {
     		
     		propeller.set_fuelflow(0.45, eng_tree ~ "n1", eng_tree ~ "fuelflow-kgph");
     		
+			propeller.set_oilpressure(eng_tree ~ "oil-pressure-psi", eng_tree ~ "oil-pressure-psi-adjusted");
+			
+			propeller.set_oiltempCelsius(eng_tree ~ "oil-temperature-degf", eng_tree ~ "oil-temperature-degc");
+			
     		propeller.fuel_consumption(eng_tree ~ "fuelflow-kgph", "/consumables/fuel/tank[" ~ propeller.propid ~ "]/level-kg");
     	
     	}
