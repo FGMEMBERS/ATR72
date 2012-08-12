@@ -11,10 +11,17 @@ var ccas = {
 			me.totalCurrentMasterWarn = 0;
 			setprop("/aircraft/ccas/master-caution-count",0);
 			me.totalCurrentMasterCaution = 0;
+			
+			me.engine1StartTime = nil;
+			
 			me.update();
 			},
 	
 	update : func {
+	
+			## this needs to exit immediately if power isn't available in the aircraft
+			
+			## when power is available do the following
 			me.totalCurrentMasterWarn = getprop("/aircraft/ccas/master-warning-count");	
 			me.totalCurrentMasterCaution = getprop("/aircraft/ccas/master-caution-count");	
 			me.totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
@@ -26,6 +33,8 @@ var ccas = {
 			me.idle_gate();
 			me.wheels();
 			me.flaps_unlk();
+			me.oil_pressure_eng(0);
+			me.oil_pressure_eng(1);
 
 			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
 				setprop("/aircraft/ccas/master-warning", 1);
@@ -42,6 +51,22 @@ var ccas = {
 			}
 			
 			settimer(func {me.update();}, me.loopInterval);
+			},
+			
+	oil_pressure_eng : func(engineNumber) {
+			##must be suppressed for first 30s after engine start
+			if (me.engine1StartTime == nil) return;
+						
+			if ((systime() - me.engine1StartTime) > 30) {
+				var propertyName = "/aircraft/ccas/oil-pressure-eng" ~ engineNumber;
+				var lastOilPressStatus = getprop(propertyName);
+				if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi-adjusted") < 40) {
+					me.add_warning(propertyName, lastOilPressStatus);
+					}
+				else {
+					me.remove_warning(propertyName, lastOilPressStatus);
+					}
+				}
 			},
 			
 	flaps_unlk : func {
@@ -198,6 +223,17 @@ var ccas = {
 				return 0;
 				}
 			},
+	engine1started : func {
+			var engineRunningProperty = "/engines/engine[0]/running";
+			if (getprop(engineRunningProperty) == 1) {
+				if (me.engine1StartTime == nil) {
+					me.engine1StartTime = systime();
+					}
+				}
+			if (getprop(engineRunningProperty) == 0) {
+				me.engine1StartTime = nil;
+				}
+			},
 };
-
+setlistener("/engines/engine[0]/running", func {ccas.engine1started();});
 setlistener("/sim/signals/fdm-initialized", func{ccas.init();});
