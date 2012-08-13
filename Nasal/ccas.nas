@@ -1,6 +1,4 @@
 var ccas = {
-	
-	
 	init : func {
 			me.loopInterval = 0.1;
 			setprop("/aircraft/ccas/sound/warning",0);
@@ -27,15 +25,19 @@ var ccas = {
 			me.totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
 			me.totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");	
 			
-			me.ldg_gear_not_down();
+			##warnings
+			me.oil_pressure_eng(0);
+			me.oil_pressure_eng(1);			
 			me.prop_brk();
-			me.fuel();
+			me.ldg_gear_not_down();
+			
+			##cautions
+			me.flaps_unlk();
 			me.idle_gate();
 			me.wheels();
-			me.flaps_unlk();
-			me.oil_pressure_eng(0);
-			me.oil_pressure_eng(1);
-
+			me.fuel();
+			
+			
 			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
 				setprop("/aircraft/ccas/master-warning", 1);
 			}
@@ -58,7 +60,7 @@ var ccas = {
 			if (me.engine1StartTime == nil) return;
 						
 			if ((systime() - me.engine1StartTime) > 30) {
-				var propertyName = "/aircraft/ccas/oil-pressure-eng" ~ engineNumber;
+				var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
 				var lastOilPressStatus = getprop(propertyName);
 				if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi-adjusted") < 40) {
 					me.add_warning(propertyName, lastOilPressStatus);
@@ -70,7 +72,7 @@ var ccas = {
 			},
 			
 	flaps_unlk : func {
-			var propertyName = "/aircraft/ccas/flaps-unlk-fault";
+			var propertyName = "/aircraft/ccas/cautions/flaps-unlk-fault";
 			var lastFlapsUnlockStatus = getprop(propertyName);
 			var flapPosNorm = getprop("/surface-positions/flap-pos-norm");
 			var flapFlightPos = getprop("/controls/flight/flaps");
@@ -98,7 +100,7 @@ var ccas = {
 			},
 			
 	wheels : func {
-			var propertyName = "/aircraft/ccas/wheels-fault";
+			var propertyName = "/aircraft/ccas/cautions/wheels-fault";
 			var lastWheelsStatus = getprop(propertyName);
 			
 			if (getprop("/gear/brake-thermal-energy") >= 1) {
@@ -110,7 +112,7 @@ var ccas = {
 			},
 			
 	idle_gate : func {
-			var propertyName = "/aircraft/ccas/idle-gate-fault";
+			var propertyName = "/aircraft/ccas/cautions/idle-gate-fault";
 			var lastIdleGateStatus = getprop(propertyName);
 			
 			if (getprop("/aircraft/idle-gate") != 1) {
@@ -122,7 +124,7 @@ var ccas = {
 			},
 			
 	fuel : func {
-			var propertyName = "/aircraft/ccas/fuel-fault";
+			var propertyName = "/aircraft/ccas/cautions/fuel-fault";
 			var lastFuelStatus = getprop(propertyName);
 			
 			#also needs to check for fuel flow psi < 4 in line below
@@ -135,7 +137,7 @@ var ccas = {
 			},
 			
 	prop_brk : func {
-			var propertyName = "/aircraft/ccas/prop-brake-fault";
+			var propertyName = "/aircraft/ccas/warnings/prop-brake-fault";
 			var lastPropBrakeStatus = getprop(propertyName);
 
 			if ((getprop("/aircraft/prop-brake") == 1) or (getprop("/aircraft/prop-brake-fail") == 1)){
@@ -147,7 +149,7 @@ var ccas = {
 			},
 			
 	ldg_gear_not_down : func {
-			var propertyName = "/aircraft/ccas/ldg_gear_not_down";
+			var propertyName = "/aircraft/ccas/warnings/ldg_gear_not_down";
 			var lastGearWarningStatus = getprop(propertyName);
 			if ((getprop("/surface-positions/flap-pos-norm") == 1) 
 					and (me.all_gear_down() == 0) 
@@ -163,10 +165,10 @@ var ccas = {
 			setprop(propertyName, 1);
 			if (propertyLastStatus != 1) {
 				
-				me.totalCurrentMasterCaution = me.totalCurrentMasterCaution + 1;
+				me.totalCurrentMasterCaution += 1;
 				setprop("/aircraft/ccas/master-caution-count", me.totalCurrentMasterCaution);
 				
-				me.totalCurrentActiveCautions = me.totalCurrentActiveCautions + 1;
+				me.totalCurrentActiveCautions += 1;
 				setprop("/aircraft/ccas/sound/caution", me.totalCurrentActiveCautions);			
 				}
 			},
@@ -175,11 +177,11 @@ var ccas = {
 			setprop(propertyName, 0);
 			if (propertyLastStatus != 0) {
 				if (me.totalCurrentMasterCaution > 0) {
-					me.totalCurrentMasterCaution = me.totalCurrentMasterCaution - 1;
+					me.totalCurrentMasterCaution -= 1;
 					setprop("/aircraft/ccas/master-caution-count", me.totalCurrentMasterCaution);
 					}
 				if (me.totalCurrentActiveCautions > 0) {
-					me.totalCurrentActiveCautions = me.totalCurrentActiveCautions - 1;
+					me.totalCurrentActiveCautions -= 1;
 					setprop("/aircraft/ccas/sound/caution", me.totalCurrentActiveCautions);
 					}
 				}
@@ -189,10 +191,10 @@ var ccas = {
 			setprop(propertyName, 1);
 			if (propertyLastStatus != 1) {
 				
-				me.totalCurrentMasterWarn = me.totalCurrentMasterWarn + 1;
+				me.totalCurrentMasterWarn += 1;
 				setprop("/aircraft/ccas/master-warning-count", me.totalCurrentMasterWarn);
 				
-				me.totalCurrentActiveWarnings = me.totalCurrentActiveWarnings + 1;
+				me.totalCurrentActiveWarnings += 1;
 				setprop("/aircraft/ccas/sound/warning", me.totalCurrentActiveWarnings);			
 				}
 			},
@@ -201,11 +203,11 @@ var ccas = {
 			setprop(propertyName, 0);
 			if (propertyLastStatus != 0) {
 				if (me.totalCurrentMasterWarn > 0) {
-					me.totalCurrentMasterWarn = me.totalCurrentMasterWarn - 1;
+					me.totalCurrentMasterWarn -= 1;
 					setprop("/aircraft/ccas/master-warning-count", me.totalCurrentMasterWarn);
 					}
 				if (me.totalCurrentActiveWarnings > 0) {
-					me.totalCurrentActiveWarnings = me.totalCurrentActiveWarnings - 1;
+					me.totalCurrentActiveWarnings -= 1;
 					setprop("/aircraft/ccas/sound/warning", me.totalCurrentActiveWarnings);
 					}
 				}				
@@ -233,7 +235,7 @@ var ccas = {
 			if (getprop(engineRunningProperty) == 0) {
 				me.engine1StartTime = nil;
 				}
-			},
+			},			
 };
 setlistener("/engines/engine[0]/running", func {ccas.engine1started();});
 setlistener("/sim/signals/fdm-initialized", func{ccas.init();});

@@ -1222,48 +1222,7 @@
 	
 <!--============================= END OF AFCS ===============================-->
 <!--================================ CCAS ===================================-->
-	<animation>
-		<name>LDG GEAR NOT DOWN</name>
-		<type>textranslate</type>
-		<object-name>ccas_ldg_gear_not_down</object-name>
-		<property>aircraft/ccas/ldg_gear_not_down</property>
-		<factor>-0.37</factor>
-		<step>1</step>
-		<offset>0</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
-	<animation>
-		<name>OIL PRESS ENG 1</name>
-		<type>textranslate</type>
-		<object-name>ccas_eng_1_oil</object-name>
-		<property>/aircraft/ccas/oil-pressure-eng0</property>
-		<factor>-0.37</factor>
-		<step>1</step>
-		<offset>0</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
-	<animation>
-		<name>OIL PRESS ENG 2</name>
-		<type>textranslate</type>
-		<object-name>ccas_eng_2_oil</object-name>
-		<property>/aircraft/ccas/oil-pressure-eng1</property>
-		<factor>-0.37</factor>
-		<step>1</step>
-		<offset>0</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>
+
 	<animation>
 		<name>Pilot Master Warning</name>
 		<type>textranslate</type>
@@ -1433,6 +1392,31 @@
 		</condition>
 	</animation>
 	<animation>
+		<name>CLR Illumination</name>
+		<type>material</type>
+		<object-name>ccas_clr</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+	</animation>	
+	<animation>
 		<name>PRKG BRK</name>
 		<type>textranslate</type>
 		<object-name>ccas_prkg_brk</object-name>
@@ -1447,10 +1431,38 @@
 		</axis>
 	</animation>
 	<animation>
-		<name>PROP BRK</name>
+		<name>PRKG BRK Illumination</name>
+		<type>material</type>
+		<object-name>ccas_prkg_brk</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>controls/gear/brake-parking</property>
+		</condition>
+	</animation>
+	<animation>
+		<name>LDG GEAR NOT DOWN</name>
 		<type>textranslate</type>
-		<object-name>ccas_prop_brk</object-name>
-		<property>aircraft/ccas/prop-brake-fault</property>
+		<object-name>ccas_ldg_gear_not_down</object-name>
+		<property>aircraft/ccas/warnings/ldg_gear_not_down</property>
 		<factor>-0.37</factor>
 		<step>1</step>
 		<offset>0</offset>
@@ -1459,40 +1471,166 @@
 			<y>0</y>
 			<z>0</z>
 		</axis>
+	</animation>
+	<animation>
+		<name>LDG GEAR NOT DOWN Illumination</name>
+		<type>material</type>
+		<object-name>ccas_lgd_gear_not_down</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/warnings/ldg_gear_not_down</property>
+		</condition>
+	</animation>	
+	<animation>
+		<name>OIL PRESS ENG 1</name>
+		<type>textranslate</type>
+		<object-name>ccas_eng_1_oil</object-name>
+		<property>/aircraft/ccas/warnings/oil-pressure-eng0</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>OIL PRESS ENG 1 Illumination</name>
+		<type>material</type>
+		<object-name>ccas_eng_1_oil</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>/aircraft/ccas/warnings/oil-pressure-eng0</property>
+		</condition>
+	</animation>
+	<animation>
+		<name>OIL PRESS ENG 2</name>
+		<type>textranslate</type>
+		<object-name>ccas_eng_2_oil</object-name>
+		<property>/aircraft/ccas/warnings/oil-pressure-eng1</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>OIL PRESS ENG 2 Illumination</name>
+		<type>material</type>
+		<object-name>ccas_eng_2_oil</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>/aircraft/ccas/warnings/oil-pressure-eng1</property>
+		</condition>
+	</animation>
+	<animation>
+		<name>PROP BRK</name>
+		<type>textranslate</type>
+		<object-name>ccas_prop_brk</object-name>
+		<property>aircraft/ccas/warnings/prop-brake-fault</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>PROP BRK Illumination</name>
+		<type>material</type>
+		<object-name>ccas_prop_brk</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/warnings/prop-brake-fault</property>
+		</condition>
 	</animation>
 	<animation>
 		<name>FUEL</name>
 		<type>textranslate</type>
 		<object-name>ccas_fuel</object-name>
-		<property>aircraft/ccas/fuel-fault</property>
-		<factor>-0.37</factor>
-		<step>1</step>
-		<offset>0</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>	
-	<animation>
-		<name>IDLE GATE</name>
-		<type>textranslate</type>
-		<object-name>ccas_idle_gate</object-name>
-		<property>aircraft/ccas/idle-gate-fault</property>
-		<factor>-0.37</factor>
-		<step>1</step>
-		<offset>0</offset>
-		<axis>
-			<x>1</x>
-			<y>0</y>
-			<z>0</z>
-		</axis>
-	</animation>	
-	<animation>
-		<name>WHEELS</name>
-		<type>textranslate</type>
-		<object-name>ccas_wheels</object-name>
-		<property>aircraft/ccas/wheels-fault</property>
+		<property>aircraft/ccas/cautions/fuel-fault</property>
 		<factor>-0.37</factor>
 		<step>1</step>
 		<offset>0</offset>
@@ -1503,10 +1641,38 @@
 		</axis>
 	</animation>
 	<animation>
-		<name>FLAPS UNLK</name>
+		<name>FUEL Illumination</name>
+		<type>material</type>
+		<object-name>ccas_fuel</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/cautions/fuel-fault</property>
+		</condition>
+	</animation>	
+	<animation>
+		<name>IDLE GATE</name>
 		<type>textranslate</type>
-		<object-name>ccas_flaps_unlk</object-name>
-		<property>aircraft/ccas/flaps-unlk-fault</property>
+		<object-name>ccas_idle_gate</object-name>
+		<property>aircraft/ccas/cautions/idle-gate-fault</property>
 		<factor>-0.37</factor>
 		<step>1</step>
 		<offset>0</offset>
@@ -1515,6 +1681,135 @@
 			<y>0</y>
 			<z>0</z>
 		</axis>
+	</animation>
+	<animation>
+		<name>IDLE GATE Illumination</name>
+		<type>material</type>
+		<object-name>ccas_idle_gate</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/cautions/idle-gate-fault</property>
+		</condition>
+	</animation>	
+	<animation>
+		<name>WHEELS</name>
+		<type>textranslate</type>
+		<object-name>ccas_wheels</object-name>
+		<property>aircraft/ccas/cautions/wheels-fault</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>WHEELS Illumination</name>
+		<type>material</type>
+		<object-name>ccas_wheels</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/cautions/wheels-fault</property>
+		</condition>
+	</animation>
+	<animation>
+		<name>FLAPS UNLK</name>
+		<type>textranslate</type>
+		<object-name>ccas_flaps_unlk</object-name>
+		<property>aircraft/ccas/cautions/flaps-unlk-fault</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>FLAPS UNLK Illumination</name>
+		<type>material</type>
+		<object-name>ccas_flaps_unlk</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/cautions/flaps-unlk-fault</property>
+		</condition>
+	</animation>	
+	<animation>
+		<type>pick</type>
+		<object-name>ccas_clr</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>				
+					setprop("/aircraft/ccas/cautions/flaps-unlk-fault", 0);
+					setprop("/aircraft/ccas/cautions/wheels-fault", 0);
+					setprop("/aircraft/ccas/cautions/idle-gate-fault", 0);
+					setprop("/aircraft/ccas/cautions/fuel-fault", 0);					
+				</script>
+			</binding>
+		</action>
 	</animation>	
 <!--============================= END OF CCAS ===============================-->
 
