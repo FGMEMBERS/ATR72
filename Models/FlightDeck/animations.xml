@@ -1709,6 +1709,48 @@
 		<condition>
 			<property>aircraft/ccas/cautions/idle-gate-fault</property>
 		</condition>
+	</animation>
+	<animation>
+		<name>HYD</name>
+		<type>textranslate</type>
+		<object-name>ccas_hyd</object-name>
+		<property>aircraft/ccas/cautions/hyd-fault</property>
+		<factor>-0.37</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<name>HYD Illumination</name>
+		<type>material</type>
+		<object-name>ccas_hyd</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<property>aircraft/ccas/cautions/hyd-fault</property>
+		</condition>
 	</animation>	
 	<animation>
 		<name>WHEELS</name>

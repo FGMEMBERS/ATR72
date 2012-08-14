@@ -36,6 +36,7 @@ var ccas = {
 			me.idle_gate();
 			me.wheels();
 			me.fuel();
+			me.hyd();
 			
 			
 			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
@@ -109,6 +110,25 @@ var ccas = {
 			else {
 				me.remove_caution(propertyName, lastWheelsStatus);
 				}
+			},
+			
+	hyd : func {
+			var propertyName = "/aircraft/ccas/cautions/hyd-fault";
+			var lastIdleGateStatus = getprop(propertyName);
+			
+			var bluePressure = getprop("/systems/hydraulic/blue-pressure-psi");
+			if (bluePressure == nil) bluePressure = 0;
+			
+			var greenPressure = getprop("/systems/hydraulic/green-pressure-psi");
+			if (greenPressure == nil) greenPressure = 0;
+			
+			if (getprop("/engines/engine[0]/running") and (bluePressure < 1500
+					or greenPressure < 1500)) {
+				me.add_caution(propertyName, lastIdleGateStatus);
+				}
+			else {
+				me.remove_caution(propertyName, lastIdleGateStatus);					
+				}	
 			},
 			
 	idle_gate : func {
