@@ -47,6 +47,8 @@ var general_loop_1 = {
             
             me.strobe_count = 0;
             me.beacon_count = 0;
+			me.masterCautionCount = 0;
+			me.masterWarningCount = 0;
             
             me.reset();
     },
@@ -94,6 +96,48 @@ var general_loop_1 = {
     		setprop("/controls/lighting/beacon-state", 0);
     	}
     	
+		#master warning lights
+		var masterWarningCount = getprop("/aircraft/ccas/master-warning-count");
+		if(masterWarningCount != nil and masterWarningCount > 0) {
+			var masterWarningState = 0;
+			if (me.masterWarningCount < 25) {
+				masterWarningState = 1;
+			}
+			
+			setprop("/aircraft/ccas/master-warning-flash-state", masterWarningState);
+			
+			if (me.masterWarningCount == 50) {
+				me.masterWarningCount = 0;
+			}
+			else {
+				me.masterWarningCount += 1;
+			}			
+		}
+		else {
+			setprop("/aircraft/ccas/master-warning-flash-state", 0);
+		}
+		
+		#master caution lights
+		var masterCautionCount = getprop("/aircraft/ccas/master-caution-count");
+		if(masterCautionCount != nil and masterCautionCount > 0) {
+			var masterCautionState = 0;
+			if (me.masterCautionCount < 25) {
+				masterCautionState = 1;
+			}
+			
+			setprop("/aircraft/ccas/master-caution-flash-state", masterCautionState);
+			
+			if (me.masterCautionCount == 50) {
+				me.masterCautionCount = 0;
+			}
+			else {
+				me.masterCautionCount += 1;
+			}			
+		}
+		else {
+			setprop("/aircraft/ccas/master-caution-flash-state", 0);
+		}
+		
     	# Convert ITT degF to degC
     	
     	var itt0_degF = getprop("/engines/engine[0]/itt_degf");
