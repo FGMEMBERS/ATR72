@@ -1442,6 +1442,65 @@
 		</emission>
 	</animation>	
 	<animation>
+		<name>TO INHI Illumination</name>
+		<type>material</type>
+		<object-name>ccas_to_inhi</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/aircraft/ccas/to-inhi-enabled</property>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
+		<name>TO INHI enabled Illumination</name>
+		<type>material</type>
+		<object-name>ccas_to_inhi</object-name>
+		<diffuse>
+			<red>0</red>
+			<green>191</green>
+			<blue>255</blue>
+		</diffuse>
+		<ambient>
+			<red>0</red>
+			<green>191</green>
+			<blue>255</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>191</green>
+			<blue>255</blue>
+		</emission>
+		<condition>
+			<property>/aircraft/ccas/to-inhi-enabled</property>
+		</condition>
+	</animation>	
+	<animation>
 		<name>PRKG BRK</name>
 		<type>textranslate</type>
 		<object-name>ccas_prkg_brk</object-name>
@@ -1947,6 +2006,18 @@
 			</binding>
 		</action>
 	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>ccas_to_inhi</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/aircraft/ccas/to-inhi-enabled</property>
+			</binding>
+		</action>
+	</animation>	
 <!--============================= END OF CCAS ===============================-->
 
 <!--===================== ADU (Advisory Display Unit)========================-->

@@ -11,6 +11,8 @@ var ccas = {
 			me.totalCurrentMasterCaution = 0;
 			setprop("/aircraft/ccas/clr-engaged",0);
 			me.clrEngaged = 0;			
+			setprop("/aircraft/ccas/to-inhi-enabled",0);
+			me.toInhib = 0;
 			
 			me.engine1StartTime = nil;
 			
@@ -27,6 +29,7 @@ var ccas = {
 			me.totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
 			me.totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");
 			me.clrEngaged = getprop("/aircraft/ccas/clr-engaged");
+			me.toInhib = getprop("/aircraft/ccas/to-inhi-enabled");
 			
 			##warnings
 			me.oil_pressure_eng(0);
@@ -61,7 +64,7 @@ var ccas = {
 			
 	oil_pressure_eng : func(engineNumber) {
 			##must be suppressed for first 30s after engine start
-			if (me.engine1StartTime == nil) return;
+			if (me.engine1StartTime == nil or me.toInhib) return;
 						
 			if ((systime() - me.engine1StartTime) > 30) {
 				var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
@@ -79,7 +82,7 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/flaps-unlk-fault";
 			var lastFlapsUnlockStatus = getprop(propertyName);
 			
-			if (me.clrEngaged == 1) {
+			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastFlapsUnlockStatus);
 					return;
 				}			
@@ -113,7 +116,7 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/wheels-fault";
 			var lastWheelsStatus = getprop(propertyName);
 			
-			if (me.clrEngaged == 1) {
+			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastWheelsStatus);
 					return;
 				}
@@ -130,7 +133,7 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/hyd-fault";
 			var lastHydStatus = getprop(propertyName);
 			
-			if (me.clrEngaged == 1) {
+			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastHydStatus);
 					return;
 				}
@@ -154,7 +157,7 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/idle-gate-fault";
 			var lastIdleGateStatus = getprop(propertyName);
 			
-			if (me.clrEngaged == 1) {
+			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastIdleGateStatus);
 					return;
 				}			
@@ -171,7 +174,7 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/fuel-fault";
 			var lastFuelStatus = getprop(propertyName);
 			
-			if (me.clrEngaged == 1) {
+			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastFuelStatus);
 					return;
 				}			

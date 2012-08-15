@@ -142,6 +142,15 @@ var general_loop_1 = {
 			setprop("/aircraft/ccas/master-caution-flash-state", 0);
 		}
 		
+		#disable TO INHI when any landing gear is not locked down
+		if (getprop("/aircraft/ccas/to-inhi-enabled") == 1) {
+			if (getprop("/gear/gear[0]/position-norm") != 1 
+					or getprop("/gear/gear[1]/position-norm") != 1 
+					or getprop("/gear/gear[2]/position-norm") != 1) {
+				setprop("/aircraft/ccas/to-inhi-enabled", 0);
+			}
+		}
+		
     	# Convert ITT degF to degC
     	
     	var itt0_degF = getprop("/engines/engine[0]/itt_degf");
