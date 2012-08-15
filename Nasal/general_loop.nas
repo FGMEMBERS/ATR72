@@ -98,7 +98,9 @@ var general_loop_1 = {
     	
 		#master warning lights
 		var masterWarningCount = getprop("/aircraft/ccas/master-warning-count");
-		if(masterWarningCount != nil and masterWarningCount > 0) {
+		var masterWarningSelected = getprop("/aircraft/ccas/master-warning-selected");
+		
+		if((masterWarningSelected == nil or masterWarningSelected == 0) and (masterWarningCount != nil and masterWarningCount > 0)) {
 			var masterWarningState = 0;
 			if (me.masterWarningCount < 25) {
 				masterWarningState = 1;
@@ -119,7 +121,9 @@ var general_loop_1 = {
 		
 		#master caution lights
 		var masterCautionCount = getprop("/aircraft/ccas/master-caution-count");
-		if(masterCautionCount != nil and masterCautionCount > 0) {
+		var masterCautionSelected = getprop("/aircraft/ccas/master-caution-selected");
+		
+		if((masterCautionSelected == nil or masterCautionSelected == 0) and (masterCautionCount != nil and masterCautionCount > 0)) {
 			var masterCautionState = 0;
 			if (me.masterCautionCount < 25) {
 				masterCautionState = 1;

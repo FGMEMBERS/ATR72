@@ -9,6 +9,8 @@ var ccas = {
 			me.totalCurrentMasterWarn = 0;
 			setprop("/aircraft/ccas/master-caution-count",0);
 			me.totalCurrentMasterCaution = 0;
+			setprop("/aircraft/ccas/clr-engaged",0);
+			me.clrEngaged = 0;			
 			
 			me.engine1StartTime = nil;
 			
@@ -23,7 +25,8 @@ var ccas = {
 			me.totalCurrentMasterWarn = getprop("/aircraft/ccas/master-warning-count");	
 			me.totalCurrentMasterCaution = getprop("/aircraft/ccas/master-caution-count");	
 			me.totalCurrentActiveWarnings = getprop("/aircraft/ccas/sound/warning");	
-			me.totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");	
+			me.totalCurrentActiveCautions = getprop("/aircraft/ccas/sound/caution");
+			me.clrEngaged = getprop("/aircraft/ccas/clr-engaged");
 			
 			##warnings
 			me.oil_pressure_eng(0);
@@ -75,6 +78,12 @@ var ccas = {
 	flaps_unlk : func {
 			var propertyName = "/aircraft/ccas/cautions/flaps-unlk-fault";
 			var lastFlapsUnlockStatus = getprop(propertyName);
+			
+			if (me.clrEngaged == 1) {
+					me.remove_caution(propertyName, lastFlapsUnlockStatus);
+					return;
+				}			
+			
 			var flapPosNorm = getprop("/surface-positions/flap-pos-norm");
 			var flapFlightPos = getprop("/controls/flight/flaps");
 			if (flapPosNorm == nil) flapPosNorm = 0;
@@ -104,6 +113,11 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/wheels-fault";
 			var lastWheelsStatus = getprop(propertyName);
 			
+			if (me.clrEngaged == 1) {
+					me.remove_caution(propertyName, lastWheelsStatus);
+					return;
+				}
+			
 			if (getprop("/gear/brake-thermal-energy") >= 1) {
 				me.add_caution(propertyName, lastWheelsStatus);
 				}
@@ -114,26 +128,36 @@ var ccas = {
 			
 	hyd : func {
 			var propertyName = "/aircraft/ccas/cautions/hyd-fault";
-			var lastIdleGateStatus = getprop(propertyName);
+			var lastHydStatus = getprop(propertyName);
+			
+			if (me.clrEngaged == 1) {
+					me.remove_caution(propertyName, lastHydStatus);
+					return;
+				}
 			
 			var bluePressure = getprop("/systems/hydraulic/blue-pressure-psi");
 			if (bluePressure == nil) bluePressure = 0;
 			
 			var greenPressure = getprop("/systems/hydraulic/green-pressure-psi");
-			if (greenPressure == nil) greenPressure = 0;
+			if (greenPressure == nil) greenPressure = 0;		
 			
 			if (getprop("/engines/engine[0]/running") and (bluePressure < 1500
 					or greenPressure < 1500)) {
-				me.add_caution(propertyName, lastIdleGateStatus);
+				me.add_caution(propertyName, lastHydStatus);
 				}
 			else {
-				me.remove_caution(propertyName, lastIdleGateStatus);					
+				me.remove_caution(propertyName, lastHydStatus);					
 				}	
 			},
 			
 	idle_gate : func {
 			var propertyName = "/aircraft/ccas/cautions/idle-gate-fault";
 			var lastIdleGateStatus = getprop(propertyName);
+			
+			if (me.clrEngaged == 1) {
+					me.remove_caution(propertyName, lastIdleGateStatus);
+					return;
+				}			
 			
 			if (getprop("/aircraft/idle-gate") != 1) {
 				me.add_caution(propertyName, lastIdleGateStatus);
@@ -146,6 +170,11 @@ var ccas = {
 	fuel : func {
 			var propertyName = "/aircraft/ccas/cautions/fuel-fault";
 			var lastFuelStatus = getprop(propertyName);
+			
+			if (me.clrEngaged == 1) {
+					me.remove_caution(propertyName, lastFuelStatus);
+					return;
+				}			
 			
 			#also needs to check for fuel flow psi < 4 in line below
 			if (getprop("/consumables/fuel/total-fuel-kg") < 160) {

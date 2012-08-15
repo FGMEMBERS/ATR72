@@ -1415,6 +1415,31 @@
 			<green>1</green>
 			<blue>1</blue>
 		</emission>
+	</animation>
+	<animation>
+		<name>RCL Illumination</name>
+		<type>material</type>
+		<object-name>ccas_rcl</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
 	</animation>	
 	<animation>
 		<name>PRKG BRK</name>
@@ -1844,15 +1869,84 @@
 			<repeatable type="bool">true</repeatable>
 			<binding>
 				<command>nasal</command>
-				<script>				
-					setprop("/aircraft/ccas/cautions/flaps-unlk-fault", 0);
-					setprop("/aircraft/ccas/cautions/wheels-fault", 0);
-					setprop("/aircraft/ccas/cautions/idle-gate-fault", 0);
-					setprop("/aircraft/ccas/cautions/fuel-fault", 0);					
+				<script>	
+					setprop("/aircraft/ccas/clr-engaged", 1);				
+				</script>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>ccas_rcl</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>	
+					setprop("/aircraft/ccas/clr-engaged", 0);				
+					setprop("/aircraft/ccas/master-caution-selected", 0);	
+					setprop("/aircraft/ccas/master-warning-selected", 0);						
+				</script>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>masterCaution_Pilot</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>	
+					setprop("/aircraft/ccas/master-caution-selected", 1);				
+				</script>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>masterCaution_CoPilot</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>	
+					setprop("/aircraft/ccas/master-caution-selected", 1);				
+				</script>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>masterWarning_Pilot</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>	
+					setprop("/aircraft/ccas/master-warning-selected", 1);				
 				</script>
 			</binding>
 		</action>
 	</animation>	
+	<animation>
+		<type>pick</type>
+		<object-name>masterWarning_CoPilot</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>	
+					setprop("/aircraft/ccas/master-warning-selected", 1);	
+				</script>
+			</binding>
+		</action>
+	</animation>
 <!--============================= END OF CCAS ===============================-->
 
 <!--===================== ADU (Advisory Display Unit)========================-->
