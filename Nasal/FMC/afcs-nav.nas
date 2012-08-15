@@ -267,7 +267,7 @@ var afcs_nav = {
 
 				var diff = getprop("/aircraft/afcs/alt-setting") - getprop("/instrumentation/altimeter/indicated-altitude-ft"); # Target - Indicated
 
-				var vs = limit2(diff, getprop("/aircraft/afcs/alt-vs-up"), -25);
+				var vs = limit2(diff /10, getprop("/aircraft/afcs/alt-vs-up"), -25);
 
 				setprop("/autopilot/internal/target-climb-rate-fps", vs);
 
