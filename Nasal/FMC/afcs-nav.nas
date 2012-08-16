@@ -181,7 +181,7 @@ var afcs_nav = {
 
 					var brg = getprop(gps~"scratch/true-bearing-deg");
 
-					var deflection = -1 * defl(brg, 180);
+					var deflection = -1 * defl(brg, 60);
 
 					setprop("aircraft/afcs/nav-error-deg", deflection);
 
