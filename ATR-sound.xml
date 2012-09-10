@@ -3,7 +3,38 @@
 <PropertyList>
 
 	<fx>
-
+		<warning_500>
+			<name>vr</name>
+			<path>Aircraft/ATR72/Sounds/GPWS/500.wav</path>
+			<mode>once</mode>
+			<condition>
+				<and>
+					<equals>
+						<property>/aircraft/cockpitSounds/altitudeDirection</property>
+						<value>descend</value>
+					</equals>
+					<equals>
+						<property>/gear/gear[1]/wow</property>
+						<value>0</value>
+					</equals>
+					<less-than-equals>
+							<property>/position/altitude-agl-ft</property>
+							<value>500</value>
+					</less-than-equals>
+				</and>
+			</condition>
+			<volume>
+				<factor>10</factor>
+			</volume>
+			<position>
+				<x>0.00</x>
+				<y>0.00</y>
+				<z>0.00</z>
+			</position>
+			<reference-dist>10.0</reference-dist>
+			<max-dist>100.0</max-dist>
+		</warning_500>
+	
 		<wind>
 			<name>wind</name>
 			<mode>looped</mode>

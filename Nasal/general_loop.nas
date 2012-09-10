@@ -44,6 +44,8 @@ var general_loop_1 = {
             
             setprop("/gear/tilt/left-tilt-deg", 0);
             setprop("/gear/tilt/right-tilt-deg", 0);
+			
+			setprop("/aircraft/cockpitsounds/warning-500ft", 0);
             
             me.strobe_count = 0;
             me.beacon_count = 0;
@@ -285,9 +287,7 @@ var general_loop_1 = {
 		if (getprop("/instrumentation/fmc/page") == "progress") {
 
 			fmc.fmcPages["progress"].updateDisplay();
-
 		}
-
 	},
 
         reset : func {
@@ -361,9 +361,43 @@ var tyresmoke = {
 
 };
 
+var cockpitSounds = {
+       init : func {
+            me.UPDATE_INTERVAL = 0.1;
+            me.loopid = 0;
+			me.lastAltitude = 0;
+			
+			me.reset();
+    },
+    	update : func {
+			var currentAltitude = getprop("/position/altitude-agl-ft");
+			var altDirectionProp = "/aircraft/cockpitSounds/altitudeDirection";
+
+			if (me.lastAltitude > currentAltitude) {
+				setprop(altDirectionProp, "descend");
+			}
+			elsif(me.lastAltitude <= currentAltitude) {
+				setprop(altDirectionProp, "climb");
+			}
+			me.lastAltitude = currentAltitude; 
+	},
+
+        reset : func {
+            me.loopid += 1;
+            me._loop_(me.loopid);
+    },
+        _loop_ : func(id) {
+            id == me.loopid or return;
+            me.update();
+            settimer(func { me._loop_(id); }, me.UPDATE_INTERVAL);
+    }
+
+};
+
 setlistener("sim/signals/fdm-initialized", func
  {
  general_loop_1.init();
  print("ATR72 General System ....... Initialized");
  tyresmoke.init();
+ cockpitSounds.init();
  });
