@@ -45,8 +45,6 @@ var general_loop_1 = {
             setprop("/gear/tilt/left-tilt-deg", 0);
             setprop("/gear/tilt/right-tilt-deg", 0);
 			
-			setprop("/aircraft/cockpitsounds/warning-500ft", 0);
-            
             me.strobe_count = 0;
             me.beacon_count = 0;
 			me.masterCautionCount = 0;
@@ -380,6 +378,16 @@ var cockpitSounds = {
 				setprop(altDirectionProp, "climb");
 			}
 			me.lastAltitude = currentAltitude; 
+			
+			var currentBank = getprop("/orientation/roll-deg");
+			var maxBank = getprop("/aircraft/afcs/bank-limit");
+			var bankAngleWarning = "/aircraft/cockpitSounds/bank-angle-warning";
+			if (currentBank >= maxBank) {
+				setprop(bankAngleWarning, 1);
+			}
+			else {
+				setprop(bankAngleWarning, 0);
+			}
 	},
 
         reset : func {

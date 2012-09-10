@@ -4,7 +4,7 @@
 
 	<fx>
 		<warning_500>
-			<name>vr</name>
+			<name>warning_500</name>
 			<path>Aircraft/ATR72/Sounds/GPWS/500.wav</path>
 			<mode>once</mode>
 			<condition>
@@ -34,6 +34,34 @@
 			<reference-dist>10.0</reference-dist>
 			<max-dist>100.0</max-dist>
 		</warning_500>
+	
+		<warning_bankangle>
+			<name>warning_bankangle</name>
+			<path>Aircraft/ATR72/Sounds/GPWS/bank-angle.wav</path>
+			<mode>loop</mode>
+			<condition>
+				<and>
+					<equals>
+						<property>/gear/gear[1]/wow</property>
+						<value>0</value>
+					</equals>
+					<greater-than-equals>
+						<property>/aircraft/cockpitSounds/bank-angle-warning</property>
+						<value>1</value>
+					</greater-than-equals>
+				</and>
+			</condition>
+			<volume>
+				<factor>10</factor>
+			</volume>
+			<position>
+				<x>0.00</x>
+				<y>0.00</y>
+				<z>0.00</z>
+			</position>
+			<reference-dist>10.0</reference-dist>
+			<max-dist>100.0</max-dist>
+		</warning_bankangle>
 	
 		<wind>
 			<name>wind</name>
