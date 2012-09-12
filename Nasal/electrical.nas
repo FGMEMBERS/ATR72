@@ -142,6 +142,7 @@ var output = {
 	min_volt: "",
 	run_amps: 0,
 	bus: [],
+	serviceableVolts: 0,
 	serviceable: func() {
 	
 		var serviceable = 0;
@@ -155,7 +156,11 @@ var output = {
 					if ((bus.get_volts() >= me.min_volt) and (bus.get_amps() >= me.run_amps)) {
 				
 						serviceable = 1;
-				
+						
+						if (me.serviceableVolts < bus.get_volts())
+						{
+							me.serviceableVolts = bus.get_volts();
+						}
 					}
 			
 				}
@@ -173,11 +178,12 @@ var output = {
 		if (serviceable == 1) {
 		
 			setprop("/systems/electric/outputs/" ~ me.name, 1);
+			setprop("/systems/electrical/outputs/" ~ me.name, me.serviceableVolts);
 		
 		} else {
 		
 			setprop("/systems/electric/outputs/" ~ me.name, 0);
-		
+			setprop("/systems/electrical/outputs/" ~ me.name, me.serviceableVolts);		
 		}
 	
 	},
@@ -217,7 +223,21 @@ var electrical = {
 			
 			atr_buses = [bus.new("dc-bus1", "DC", ["eng1-DCgen"]), bus.new("ac-bus1", "AC", ["eng1-gen"]), bus.new("dc-bus2", "DC", ["eng2-DCgen"]), bus.new("ac-bus2", "AC", ["eng2-gen"]), bus.new("hot-main-bat-bus", "DC", ["batt-main"]), bus.new("hot-emer-bat-bus", "DC", ["batt-emer"])]; # 2 AC Generators also exist but are not being used currently, I'll probably put them in later.
 			
-			atr_outputs = [output.new("avionics", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus", "util-bus"]), output.new("comm", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"]), output.new("fuel-pump1", 28, 20, ["dc-bus1", "util-bus"]), output.new("fuel-pump2", 28, 20, ["dc-bus2", "util-bus"]), output.new("anti-icing", 24, 2, ["dc-bus1", "dc-bus2", "hot-main-bat-bus"]), output.new("lights", 24, 12, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "util-bus"]), output.new("nav", 16, 2, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"]), output.new("pneu", 24, 12, ["dc-bus1", "hot-main-bat-bus", "hot-emer-bat-bus"]), output.new("hydraulic-blue", 24, 12, ["ac-bus1"]), output.new("hydraulic-aux", 24, 8, ["dc-bus1", "util-bus"]), output.new("hydraulic-green", 24, 12, ["ac-bus2", "hot-main-bat-bus", "hot-main-emer-bus"]), output.new("x-feed", 8, 2, ["dc-bus1", "dc-bus2", "util-bus", "hot-emer-bat-bus", "hot-main-bat-bus"])];
+			atr_outputs = [
+				output.new("avionics", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus", "util-bus"]), 
+				output.new("comm", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"]), 
+				output.new("fuel-pump1", 28, 20, ["dc-bus1", "util-bus"]), 
+				output.new("fuel-pump2", 28, 20, ["dc-bus2", "util-bus"]), 
+				output.new("anti-icing", 24, 2, ["dc-bus1", "dc-bus2", "hot-main-bat-bus"]), 
+				output.new("lights", 24, 12, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "util-bus"]), 
+				output.new("nav", 16, 2, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"]), 
+				output.new("pneu", 24, 12, ["dc-bus1", "hot-main-bat-bus", "hot-emer-bat-bus"]), 
+				output.new("hydraulic-blue", 24, 12, ["ac-bus1"]), 
+				output.new("hydraulic-aux", 24, 8, ["dc-bus1", "util-bus"]), 
+				output.new("hydraulic-green", 24, 12, ["ac-bus2", "hot-main-bat-bus", "hot-main-emer-bus"]),
+				output.new("x-feed", 8, 2, ["dc-bus1", "dc-bus2", "util-bus", "hot-emer-bat-bus", "hot-main-bat-bus"]),
+				output.new("mk-viii", 28, 1, ["dc-bus1", "dc-bus2", "hot-emer-bat-bus", "hot-main-bat-bus"])
+				];
             
             setprop("/systems/electric/util-volts", 0);
             
