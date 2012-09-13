@@ -25,6 +25,140 @@
 			</not>
 		</condition>
 	</animation>
+	
+	<!-- TAT-SAT OSGText -->
+	
+	<animation>
+		<type>material</type>
+		<object-name>PanelText</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
+	</animation>
+	
+	<text>
+		<name>PanelText</name>
+		<offsets>
+			<x-m>-11.2612</x-m>
+			<y-m>-0.4484</y-m>
+			<z-m>0.4764</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%2.1f</format>
+		<property>/environment/temperature-total-degc</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>PanelText</name>
+		<offsets>
+			<x-m>-11.2612</x-m>
+			<y-m>0.7298</y-m>
+			<z-m>0.4764</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%2.1f</format>
+		<property>/environment/temperature-total-degc</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>PanelText</name>
+		<offsets>
+			<x-m>-11.2612</x-m>
+			<y-m>-0.4116</y-m>
+			<z-m>0.4764</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f</format>
+		<property>velocities/airspeed-kt</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<text>
+		<name>PanelText</name>
+		<offsets>
+			<x-m>-11.2612</x-m>
+			<y-m>0.7658</y-m>
+			<z-m>0.4764</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%3.0f</format>
+		<property>velocities/airspeed-kt</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<animation>
+		<type>select</type>
+		<object-name>PanelText</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
 
 	<animation>
 		<type>textranslate</type>

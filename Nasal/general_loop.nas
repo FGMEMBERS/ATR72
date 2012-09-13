@@ -53,6 +53,13 @@ var general_loop_1 = {
             me.reset();
     },
     	update : func {
+    	
+    	# Total Air Temperature
+    	
+    	var staticTemp = props.globals.getNode("environment/temperature-degc", 1);
+		var machNumber = props.globals.getNode("velocities/mach", 0);
+		
+		setprop("environment/temperature-total-degc", (1 + ((1.4-1)/2*machNumber.getValue()))*staticTemp.getValue());
 
     	cpy_props();
     	
