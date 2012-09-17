@@ -54,6 +54,28 @@ var general_loop_1 = {
     },
     	update : func {
     	
+		# Copilot announcements
+		# V1
+		var currentVelocity = getprop("/instrumentation/airspeed-indicator/true-speed-kt");
+		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V1")) {
+			setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 1);
+		}
+		else {
+			setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 0);
+		}
+		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/VR")) {
+			setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 1);
+		}
+		else {
+			setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 0);
+		}
+		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V2")) {
+			setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 1);
+		}
+		else {
+			setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 0);
+		}
+		
     	# Total Air Temperature
     	
     	var staticTemp = props.globals.getNode("environment/temperature-degc", 1);
@@ -75,7 +97,6 @@ var general_loop_1 = {
 		if (airspeed > 68) {
 			tasKt = airspeed;
 		}
-	
 		setprop("/aircraft/tas-kt", tasKt);
 	
     	# Strobe Lights
