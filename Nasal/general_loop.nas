@@ -13,7 +13,7 @@ var get_percent = func(val, max) {
 
 var get_degC = func(degF) {
 
-	return (degF - 32) * (5/9);
+	return (degF - 32) * (5/9);	
 
 };
 
@@ -27,14 +27,11 @@ var nose_wow_sav = 0;
 var left_wow_sav = 0;
 var right_wow_sav = 0;
 
-var cpy_props = func() {
+var updateWingFlex = func() {
 
 	if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
-	
-		setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/aero/force/Lift_alpha"));
-		
+		setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/aero/force/Lift_alpha"));		
 	}
-
 };
 
 var general_loop_1 = {
@@ -51,285 +48,279 @@ var general_loop_1 = {
 			me.masterWarningCount = 0;
             
             me.reset();
-    },
+		},
+			
     	update : func {
-    	
-		# Copilot announcements
-		# V1
-		var currentVelocity = getprop("/instrumentation/airspeed-indicator/true-speed-kt");
-		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V1")) {
-			setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 1);
-		}
-		else {
-			setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 0);
-		}
-		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/VR")) {
-			setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 1);
-		}
-		else {
-			setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 0);
-		}
-		if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V2")) {
-			setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 1);
-		}
-		else {
-			setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 0);
-		}
-		
-    	# Total Air Temperature
-    	
-    	var staticTemp = props.globals.getNode("environment/temperature-degc", 1);
-		var machNumber = props.globals.getNode("velocities/mach", 0);
-		
-		setprop("environment/temperature-total-degc", (1 + ((1.4-1)/2*machNumber.getValue()))*staticTemp.getValue());
-
-    	cpy_props();
-    	
-		var apOff = 0;
-		
-		if (getprop("/aircraft/afcs/ap-master") == 0) {
-			apOff = 1;
-		}
-		setprop("/aircraft/afcs/indicators/ap-off", apOff);
+			copilotCallouts();
+			setTotalAirTemperature();
+			updateWingFlex();
+			setTotalAirspeed();
+			setAutopilotOffIndicator();
+			setStrobesAndBeacons();
+			setMasterWarningLights();
+			setMasterCautionLights();
+			disableTakeoffInhibit();
+			convertIttDegreesToCelsius();
+			convertOilTemperaturetoCelsius();
+			convertTorqueAndRpmToPercentage();
+			fuelCrossFeed();
+			setAutoPilotAltModeVerticalSpeeds();
+			setGlideslopeFilter();
+			updateFmcSettings();
+		},
 	
-		var tasKt = 0;
-		var airspeed = getprop("/velocities/airspeed-kt");
-		if (airspeed > 68) {
-			tasKt = airspeed;
-		}
-		setprop("/aircraft/tas-kt", tasKt);
-	
-    	# Strobe Lights
-    	
-    	if (getprop("/controls/lighting/strobe")) {
-    		
-    		if ((me.strobe_count == 30) or (me.strobe_count == 31) or (me.strobe_count == 37) or (me.strobe_count == 36)) {
-    			setprop("/controls/lighting/strobe-state", 1);
-    		} else {
-    			setprop("/controls/lighting/strobe-state", 0);
-    		}
-    		
-    		if (me.strobe_count == 40) {
-    			me.strobe_count = 0;
-    		} else {
-    			me.strobe_count += 1;
-    		}
-    		
-    	} else {
-    		setprop("/controls/lighting/strobe-state", 0);
-    	}
-    	
-    	# Beacon Lights
-    	
-    	if (getprop("/controls/lighting/beacon")) {
-    		
-    		if ((me.beacon_count == 15) or (me.beacon_count == 16) or (me.beacon_count == 17)) {
-    			setprop("/controls/lighting/beacon-state", 1);
-    		} else {
-    			setprop("/controls/lighting/beacon-state", 0);
-    		}
-    		
-    		if (me.beacon_count == 40) {
-    			me.beacon_count = 0;
-    		} else {
-    			me.beacon_count += 1;
-    		}
-    		
-    	} else {
-    		setprop("/controls/lighting/beacon-state", 0);
-    	}
-    	
-		#master warning lights
-		var masterWarningCount = getprop("/aircraft/ccas/master-warning-count");
-		var masterWarningSelected = getprop("/aircraft/ccas/master-warning-selected");
-		
-		if((masterWarningSelected == nil or masterWarningSelected == 0) and (masterWarningCount != nil and masterWarningCount > 0)) {
-			var masterWarningState = 0;
-			if (me.masterWarningCount < 25) {
-				masterWarningState = 1;
-			}
-			
-			setprop("/aircraft/ccas/master-warning-flash-state", masterWarningState);
-			
-			if (me.masterWarningCount == 50) {
-				me.masterWarningCount = 0;
+		copilotCallouts : func {
+			# V1
+			var currentVelocity = getprop("/instrumentation/airspeed-indicator/true-speed-kt");
+			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V1")) {
+				setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 1);
 			}
 			else {
-				me.masterWarningCount += 1;
-			}			
-		}
-		else {
-			setprop("/aircraft/ccas/master-warning-flash-state", 0);
-		}
-		
-		#master caution lights
-		var masterCautionCount = getprop("/aircraft/ccas/master-caution-count");
-		var masterCautionSelected = getprop("/aircraft/ccas/master-caution-selected");
-		
-		if((masterCautionSelected == nil or masterCautionSelected == 0) and (masterCautionCount != nil and masterCautionCount > 0)) {
-			var masterCautionState = 0;
-			if (me.masterCautionCount < 25) {
-				masterCautionState = 1;
+				setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 0);
 			}
-			
-			setprop("/aircraft/ccas/master-caution-flash-state", masterCautionState);
-			
-			if (me.masterCautionCount == 50) {
-				me.masterCautionCount = 0;
+			# VR
+			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/VR")) {
+				setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 1);
 			}
 			else {
-				me.masterCautionCount += 1;
-			}			
-		}
-		else {
-			setprop("/aircraft/ccas/master-caution-flash-state", 0);
-		}
+				setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 0);
+			}
+			#V2
+			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V2")) {
+				setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 1);
+			}
+			else {
+				setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 0);
+			}
+		},
+	
+		setAutopilotOffIndicator : func {
+			var apOff = 0;
 		
-		#disable TO INHI when any landing gear is not locked down
-		if (getprop("/aircraft/ccas/to-inhi-enabled") == 1) {
-			if (getprop("/gear/gear[0]/position-norm") != 1 
-					or getprop("/gear/gear[1]/position-norm") != 1 
-					or getprop("/gear/gear[2]/position-norm") != 1) {
-				setprop("/aircraft/ccas/to-inhi-enabled", 0);
+			if (getprop("/aircraft/afcs/ap-master") == 0) {
+				apOff = 1;
 			}
-		}
+			setprop("/aircraft/afcs/indicators/ap-off", apOff);		
+		},
+	
+		setStrobesAndBeacons : func {
+			# Strobe Lights
+			
+			if (getprop("/controls/lighting/strobe")) {
+				
+				if ((me.strobe_count == 30) or (me.strobe_count == 31) or (me.strobe_count == 37) or (me.strobe_count == 36)) {
+					setprop("/controls/lighting/strobe-state", 1);
+				} else {
+					setprop("/controls/lighting/strobe-state", 0);
+				}
+				
+				if (me.strobe_count == 40) {
+					me.strobe_count = 0;
+				} else {
+					me.strobe_count += 1;
+				}
+				
+			} else {
+				setprop("/controls/lighting/strobe-state", 0);
+			}
+			
+			# Beacon Lights
+			if (getprop("/controls/lighting/beacon")) {
+				
+				if ((me.beacon_count == 15) or (me.beacon_count == 16) or (me.beacon_count == 17)) {
+					setprop("/controls/lighting/beacon-state", 1);
+				} else {
+					setprop("/controls/lighting/beacon-state", 0);
+				}
+				
+				if (me.beacon_count == 40) {
+					me.beacon_count = 0;
+				} else {
+					me.beacon_count += 1;
+				}
+				
+			} else {
+				setprop("/controls/lighting/beacon-state", 0);
+			}
+		},
+	
+		setMasterWarningLights : func {
+			#master warning lights
+			var masterWarningCount = getprop("/aircraft/ccas/master-warning-count");
+			var masterWarningSelected = getprop("/aircraft/ccas/master-warning-selected");
+			
+			if((masterWarningSelected == nil or masterWarningSelected == 0) and (masterWarningCount != nil and masterWarningCount > 0)) {
+				var masterWarningState = 0;
+				if (me.masterWarningCount < 25) {
+					masterWarningState = 1;
+				}
+				
+				setprop("/aircraft/ccas/master-warning-flash-state", masterWarningState);
+				
+				if (me.masterWarningCount == 50) {
+					me.masterWarningCount = 0;
+				}
+				else {
+					me.masterWarningCount += 1;
+				}			
+			}
+			else {
+				setprop("/aircraft/ccas/master-warning-flash-state", 0);
+			}
+		},
 		
-    	# Convert ITT degF to degC
-    	
-    	var itt0_degF = getprop("/engines/engine[0]/itt_degf");
-    	var itt1_degF = getprop("/engines/engine[1]/itt_degf");
-    	
-    	setprop("/engines/engine[0]/itt_degc", get_degC(itt0_degF));
-    	setprop("/engines/engine[1]/itt_degc", get_degC(itt1_degF));
-    	
-    	# Convert Oil Temperature degF to degC
-    	
-    	var oiltemp0 = getprop("/engines/engine[0]/oil-temperature-degf");
-    	var oiltemp1 = getprop("/engines/engine[1]/oil-temperature-degf");
-    	
-    	setprop("/engines/engine[0]/oil-temperature-degc", get_degC(oiltemp0));
-    	setprop("/engines/engine[1]/oil-temperature-degc", get_degC(oiltemp1));
-    	
-    	# Convert Torque and RPM to Percentage
-    	
-    	var torque0 = getprop("/engines/engine[0]/thruster/prop_torque");
-    	var torque1 = getprop("/engines/engine[1]/thruster/prop_torque");
-    	
-    	var rpm0 = getprop("/engines/engine[0]/thruster/prop_rpm");
-    	var rpm1 = getprop("/engines/engine[1]/thruster/prop_rpm");
-    	
-    	setprop("/engines/engine[0]/thruster/prop_torque-percent", get_percent(torque0, 3800));
-    	setprop("/engines/engine[1]/thruster/prop_torque-percent", get_percent(torque1, 3800));
-    	
-    	setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1400));
-    	setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1400));
-    	
-    	# Fuel X-Feed
-    	
-    	if ((getprop("/controls/engines/x-feed")) and (getprop("/systems/electric/outputs/x-feed"))) {
-    	
-			var ltank = getprop("/consumables/fuel/tank[0]/level-kg");
-			var rtank = getprop("/consumables/fuel/tank[1]/level-kg");
+		setMasterCautionLights : func {
+			#master caution lights
+			var masterCautionCount = getprop("/aircraft/ccas/master-caution-count");
+			var masterCautionSelected = getprop("/aircraft/ccas/master-caution-selected");
 			
-			if (ltank > rtank) {
-			
-				setprop("/consumables/fuel/tank[0]/level-kg", ltank - 0.25);
-				setprop("/consumables/fuel/tank[1]/level-kg", rtank + 0.25);
-			
-			} else {
-			
-				setprop("/consumables/fuel/tank[0]/level-kg", ltank + 0.25);
-				setprop("/consumables/fuel/tank[1]/level-kg", rtank - 0.25);
-			
+			if((masterCautionSelected == nil or masterCautionSelected == 0) and (masterCautionCount != nil and masterCautionCount > 0)) {
+				var masterCautionState = 0;
+				if (me.masterCautionCount < 25) {
+					masterCautionState = 1;
+				}
+				
+				setprop("/aircraft/ccas/master-caution-flash-state", masterCautionState);
+				
+				if (me.masterCautionCount == 50) {
+					me.masterCautionCount = 0;
+				}
+				else {
+					me.masterCautionCount += 1;
+				}			
 			}
-    	
-    	}
-    	
-    	# Autopilot ALT Mode VS Setting
-    	
-    	if (getprop("/sim/aero") == "ATR72-500") {
-    	
-			if (getprop("/position/altitude-ft") > 16000) {
-			
-				setprop("/aircraft/afcs/alt-vs-up", 10);
-				setprop("/aircraft/afcs/alt-vs-dn", -8.33);
-			
-			} elsif (getprop("/position/altitude-ft") > 10000) {
-			
-				setprop("/aircraft/afcs/alt-vs-up", 20);
-				setprop("/aircraft/afcs/alt-vs-dn", -18);
-			
-			} else {
-			
-				setprop("/aircraft/afcs/alt-vs-up", 30);
-				setprop("/aircraft/afcs/alt-vs-dn", -25);
-			
+			else {
+				setprop("/aircraft/ccas/master-caution-flash-state", 0);
 			}
-    	
-    	} else {
-    	
-			if (getprop("/position/altitude-ft") > 16000) {
+		},
+	
+		setTotalAirTemperature : func {
+			var staticTemp = props.globals.getNode("environment/temperature-degc", 1);
+			var machNumber = props.globals.getNode("velocities/mach", 0);
 			
-				setprop("/aircraft/afcs/alt-vs-up", 8);
-				setprop("/aircraft/afcs/alt-vs-dn", -6);
-			
-			} elsif (getprop("/position/altitude-ft") > 10000) {
-			
-				setprop("/aircraft/afcs/alt-vs-up", 16);
-				setprop("/aircraft/afcs/alt-vs-dn", -12);
-			
-			} else {
-			
-				setprop("/aircraft/afcs/alt-vs-up", 25);
-				setprop("/aircraft/afcs/alt-vs-dn", -20);
-			
+			setprop("environment/temperature-total-degc", (1 + ((1.4-1)/2*machNumber.getValue()))*staticTemp.getValue());
+		},
+		
+		disableTakeoffInhibit : func {		
+			#disable TO INHI when any landing gear is not locked down
+			if (getprop("/aircraft/ccas/to-inhi-enabled") == 1) {
+				if (getprop("/gear/gear[0]/position-norm") != 1 
+						or getprop("/gear/gear[1]/position-norm") != 1 
+						or getprop("/gear/gear[2]/position-norm") != 1) {
+					setprop("/aircraft/ccas/to-inhi-enabled", 0);
+				}
 			}
-    	
-    	}
-    	
-    	# Glide-slope filter (input: /instrumentation/nav[0]/gs-rate-of-climb)
-    	
-    	if (getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/lat-mode") == "app") and (getprop("/instrumentation/nav/gs-in-range"))) {
-    	
-			var input_vs = getprop("/instrumentation/nav[0]/gs-rate-of-climb");
+		},
+		
+		convertIttDegreesToCelsius : func {
+			var itt0_degF = getprop("/engines/engine[0]/itt_degf");
+			var itt1_degF = getprop("/engines/engine[1]/itt_degf");
 			
-			if (input_vs > 18) {
+			setprop("/engines/engine[0]/itt_degc", get_degC(itt0_degF));
+			setprop("/engines/engine[1]/itt_degc", get_degC(itt1_degF));
+		},
+	
+		convertOilTemperatureToCelsius : func {	
+			var oiltemp0 = getprop("/engines/engine[0]/oil-temperature-degf");
+			var oiltemp1 = getprop("/engines/engine[1]/oil-temperature-degf");
 			
-				setprop("/aircraft/afcs/app-gs-fps", 18);
+			setprop("/engines/engine[0]/oil-temperature-degc", get_degC(oiltemp0));
+			setprop("/engines/engine[1]/oil-temperature-degc", get_degC(oiltemp1));
+		},
+	
+		convertTorqueAndRpmToPercentage : func {		
+			var torque0 = getprop("/engines/engine[0]/thruster/prop_torque");
+			var torque1 = getprop("/engines/engine[1]/thruster/prop_torque");
 			
-			} elsif (input_vs < -22) {
+			var rpm0 = getprop("/engines/engine[0]/thruster/prop_rpm");
+			var rpm1 = getprop("/engines/engine[1]/thruster/prop_rpm");
 			
-				setprop("/aircraft/afcs/app-gs-fps", -22);
+			setprop("/engines/engine[0]/thruster/prop_torque-percent", get_percent(torque0, 3800));
+			setprop("/engines/engine[1]/thruster/prop_torque-percent", get_percent(torque1, 3800));
 			
-			} else {
-			
-				setprop("/aircraft/afcs/app-gs-fps", input_vs);
-			
+			setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1400));
+			setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1400));
+		},
+		
+		fuelCrossFeed : func {		
+			if ((getprop("/controls/engines/x-feed")) and (getprop("/systems/electric/outputs/x-feed"))) {
+				var ltank = getprop("/consumables/fuel/tank[0]/level-kg");
+				var rtank = getprop("/consumables/fuel/tank[1]/level-kg");
+				
+				if (ltank > rtank) {
+					setprop("/consumables/fuel/tank[0]/level-kg", ltank - 0.25);
+					setprop("/consumables/fuel/tank[1]/level-kg", rtank + 0.25);
+				} else {
+					setprop("/consumables/fuel/tank[0]/level-kg", ltank + 0.25);
+					setprop("/consumables/fuel/tank[1]/level-kg", rtank - 0.25);
+				}
 			}
-    	
-    	}
-    	
-    	# Position String
-    	
-    	setprop("/instrumentation/fmc/pos-string", getprop("/position/latitude-string") ~ " " ~ getprop("/position/longitude-string"));
+		},
+		
+		setAutoPilotAltModeVerticalSpeeds : func {		
+			if (getprop("/sim/aero") == "ATR72-500") {
+				if (getprop("/position/altitude-ft") > 16000) {
+					setprop("/aircraft/afcs/alt-vs-up", 10);
+					setprop("/aircraft/afcs/alt-vs-dn", -8.33);
+				} elsif (getprop("/position/altitude-ft") > 10000) {
+					setprop("/aircraft/afcs/alt-vs-up", 20);
+					setprop("/aircraft/afcs/alt-vs-dn", -18);
+				} else {
+					setprop("/aircraft/afcs/alt-vs-up", 30);
+					setprop("/aircraft/afcs/alt-vs-dn", -25);
+				}
+			} else {
+				if (getprop("/position/altitude-ft") > 16000) {
+					setprop("/aircraft/afcs/alt-vs-up", 8);
+					setprop("/aircraft/afcs/alt-vs-dn", -6);
+				} elsif (getprop("/position/altitude-ft") > 10000) {
+					setprop("/aircraft/afcs/alt-vs-up", 16);
+					setprop("/aircraft/afcs/alt-vs-dn", -12);
+				} else {
+					setprop("/aircraft/afcs/alt-vs-up", 25);
+					setprop("/aircraft/afcs/alt-vs-dn", -20);
+				}
+			}
+		},
+		
+		setGlideslopeFilter : func {
+			if (getprop("/aircraft/afcs/ap-master") and (getprop("/aircraft/afcs/lat-mode") == "app") and (getprop("/instrumentation/nav/gs-in-range"))) {			
+				var input_vs = getprop("/instrumentation/nav[0]/gs-rate-of-climb");
+				if (input_vs > 18) {
+					setprop("/aircraft/afcs/app-gs-fps", 18);
+				} elsif (input_vs < -22) {
+					setprop("/aircraft/afcs/app-gs-fps", -22);
+				} else {
+					setprop("/aircraft/afcs/app-gs-fps", input_vs);
+				}
+			}
+		},
+		
+		updateFmcSettings : func {
+			# Position String
+			setprop("/instrumentation/fmc/pos-string", getprop("/position/latitude-string") ~ " " ~ getprop("/position/longitude-string"));
 
-    	# FMC Time Management System
+			# FMC Time Management System
+			var elapsed_min = int((getprop("/sim/time/elapsed-sec") - getprop("/aircraft/fmc/time/start-sec")) / 60);
+			setprop("/aircraft/fmc/time/utc", getprop("/aircraft/fmc/time/utc-set") + elapsed_min);
 
-    	var elapsed_min = int((getprop("/sim/time/elapsed-sec") - getprop("/aircraft/fmc/time/start-sec")) / 60);
+			if (getprop("/instrumentation/fmc/page") == "posref") {
+				fmc.values[1].setText(substr(getprop("/aircraft/fmc/time/utc"), 0, 4)~"z").setColor(1,1,1,0.8);
+			}
 
-		setprop("/aircraft/fmc/time/utc", getprop("/aircraft/fmc/time/utc-set") + elapsed_min);
-
-		if (getprop("/instrumentation/fmc/page") == "posref") {
-
-			fmc.values[1].setText(substr(getprop("/aircraft/fmc/time/utc"), 0, 4)~"z").setColor(1,1,1,0.8);
-
-		}
-
-		if (getprop("/instrumentation/fmc/page") == "progress") {
-
-			fmc.fmcPages["progress"].updateDisplay();
-		}
-	},
+			if (getprop("/instrumentation/fmc/page") == "progress") {
+				fmc.fmcPages["progress"].updateDisplay();
+			}
+		},
+		
+		setTotalAirspeed : func {
+			var tasKt = 0;
+			var airspeed = getprop("/velocities/airspeed-kt");
+			if (airspeed > 68) {
+				tasKt = airspeed;
+			}
+			setprop("/aircraft/tas-kt", tasKt);		
+		},
 
         reset : func {
             me.loopid += 1;
