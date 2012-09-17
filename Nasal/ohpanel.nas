@@ -18,7 +18,7 @@ var ohpanel = {
     	else { setprop(ohp~ "ldggearn", 1); }
     	
     	if (getprop("/gear/gear[1]/position-norm") == 0) {
-    		setprop(ohp~ "ldggealn", 0); }
+    		setprop(ohp~ "ldggearl", 0); }
     	elsif (getprop("/gear/gear[1]/position-norm") == 1) {
     		setprop(ohp~ "ldggearl", 2); }
     	else { setprop(ohp~ "ldggearl", 1); }

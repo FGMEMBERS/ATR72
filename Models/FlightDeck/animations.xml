@@ -98,9 +98,9 @@
 			<height type="int">32</height>
 		</font-resolution>
 	</text>
-	
+		
 	<text>
-		<name>PanelText</name>
+		<name>TAS_PanelText</name>
 		<offsets>
 			<x-m>-11.2612</x-m>
 			<y-m>-0.4116</y-m>
@@ -111,7 +111,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%3.0f</format>
-		<property>velocities/airspeed-kt</property>
+		<property>/aircraft/tas-kt</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>

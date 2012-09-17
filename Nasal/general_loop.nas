@@ -69,7 +69,15 @@ var general_loop_1 = {
 			apOff = 1;
 		}
 		setprop("/aircraft/afcs/indicators/ap-off", apOff);
-		
+	
+		var tasKt = 0;
+		var airspeed = getprop("/velocities/airspeed-kt");
+		if (airspeed > 68) {
+			tasKt = airspeed;
+		}
+	
+		setprop("/aircraft/tas-kt", tasKt);
+	
     	# Strobe Lights
     	
     	if (getprop("/controls/lighting/strobe")) {
