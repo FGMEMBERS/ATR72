@@ -1267,6 +1267,136 @@
 			</not>
 		</condition>
 	</animation>
+
+	<animation>
+		<name>Pilot AP Off</name>
+		<type>textranslate</type>
+		<object-name>pilot_apoff</object-name>
+		<property>/aircraft/afcs/indicators/ap-off</property>
+		<factor>0.125</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>pilot_apoff</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+				<property>/aircraft/afcs/indicators/ap-off</property>
+		</condition>
+	</animation>
+	
+	<animation>
+		<name>CoPilot AP Off</name>
+		<type>textranslate</type>
+		<object-name>copilot_apoff</object-name>
+		<property>/aircraft/afcs/indicators/ap-off</property>
+		<factor>0.125</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>copilot_apoff</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+				<property>/aircraft/afcs/indicators/ap-off</property>
+		</condition>
+	</animation>
+
+	<animation>
+		<name>CoPilot AP Off</name>
+		<type>textranslate</type>
+		<object-name>brake_temp</object-name>
+		<property>/gear/brakes-hot</property>
+		<factor>0.125</factor>
+		<step>1</step>
+		<offset>0</offset>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>brake_temp</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+				<property>/gear/brakes-hot</property>
+		</condition>
+	</animation>
+
 	
 	<animation>
 		<type>material</type>

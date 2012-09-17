@@ -58,6 +58,7 @@ var BrakeSystem =
         setprop("/gear/brake-thermal-energy",0.0);
         setprop("/gear/brake-smoke",0);
         setprop("sim/animation/fire-services",0);
+		setprop("/gear/brakes-hot", 0);
         me.LastSimTime = 0.0;
     },
 
@@ -131,6 +132,7 @@ var BrakeSystem =
             }
             setprop("/gear/brake-smoke",SmokeValue);
             settimer(func { BrakeSys.smoke(); },SmokeDelay);
+			setprop("/gear/brakes-hot", 1);
         }
         else
         {
@@ -138,6 +140,7 @@ var BrakeSystem =
             setprop("/gear/brake-smoke",0);
             setprop("sim/animation/fire-services",0);
             me.SmokeActive = 0;
+			setprop("/gear/brakes-hot", 0);
         }
     },
 };

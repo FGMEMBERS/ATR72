@@ -63,6 +63,13 @@ var general_loop_1 = {
 
     	cpy_props();
     	
+		var apOff = 0;
+		
+		if (getprop("/aircraft/afcs/ap-master") == 0) {
+			apOff = 1;
+		}
+		setprop("/aircraft/afcs/indicators/ap-off", apOff);
+		
     	# Strobe Lights
     	
     	if (getprop("/controls/lighting/strobe")) {
