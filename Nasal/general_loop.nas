@@ -17,22 +17,9 @@ var get_degC = func(degF) {
 
 };
 
-setprop("/instrumentation/fmc/vspeeds/V1", 98);
-setprop("/instrumentation/fmc/vspeeds/VR", 112);
-setprop("/instrumentation/fmc/vspeeds/V2", 126);
-setprop("/instrumentation/fmc/vspeeds/Vs", 145);
-setprop("/instrumentation/fmc/vspeeds/Vne", 320);
-
 var nose_wow_sav = 0;
 var left_wow_sav = 0;
 var right_wow_sav = 0;
-
-var updateWingFlex = func() {
-
-	if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
-		setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/aero/force/Lift_alpha"));		
-	}
-};
 
 var general_loop_1 = {
        init : func {
@@ -41,6 +28,12 @@ var general_loop_1 = {
             
             setprop("/gear/tilt/left-tilt-deg", 0);
             setprop("/gear/tilt/right-tilt-deg", 0);
+			
+			setprop("/instrumentation/fmc/vspeeds/V1", 98);
+			setprop("/instrumentation/fmc/vspeeds/VR", 112);
+			setprop("/instrumentation/fmc/vspeeds/V2", 126);
+			setprop("/instrumentation/fmc/vspeeds/Vs", 145);
+			setprop("/instrumentation/fmc/vspeeds/Vne", 320);
 			
             me.strobe_count = 0;
             me.beacon_count = 0;
@@ -51,49 +44,55 @@ var general_loop_1 = {
 		},
 			
     	update : func {
-			copilotCallouts();
-			setTotalAirTemperature();
-			updateWingFlex();
-			setTotalAirspeed();
-			setAutopilotOffIndicator();
-			setStrobesAndBeacons();
-			setMasterWarningLights();
-			setMasterCautionLights();
-			disableTakeoffInhibit();
-			convertIttDegreesToCelsius();
-			convertOilTemperaturetoCelsius();
-			convertTorqueAndRpmToPercentage();
-			fuelCrossFeed();
-			setAutoPilotAltModeVerticalSpeeds();
-			setGlideslopeFilter();
-			updateFmcSettings();
+			me.copilotCallouts();
+			me.setTotalAirTemperature();
+			me.updateWingFlex();
+			me.setTotalAirspeed();
+			me.setAutopilotOffIndicator();
+			me.setStrobesAndBeacons();
+			me.setMasterWarningLights();
+			me.setMasterCautionLights();
+			me.disableTakeoffInhibit();
+			me.convertIttDegreesToCelsius();
+			me.convertOilTemperatureToCelsius();
+			me.convertTorqueAndRpmToPercentage();
+			me.fuelCrossFeed();
+			me.setAutoPilotAltModeVerticalSpeeds();
+			me.setGlideslopeFilter();
+			me.updateFmcSettings();
 		},
 	
 		copilotCallouts : func {
 			# V1
 			var currentVelocity = getprop("/instrumentation/airspeed-indicator/true-speed-kt");
+			
+			var v1 = 0;
 			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V1")) {
-				setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 1);
+				v1 = 1;
 			}
-			else {
-				setprop("/aircraft/cockpitSounds/copilot-v1-announcement", 0);
-			}
+			setprop("/aircraft/cockpitSounds/copilot-v1-announcement", v1);
+			
 			# VR
+			var vR = 0;
 			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/VR")) {
-				setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 1);
+				vR = 1;
 			}
-			else {
-				setprop("/aircraft/cockpitSounds/copilot-vr-announcement", 0);
-			}
+			setprop("/aircraft/cockpitSounds/copilot-vr-announcement", vR);
+			
 			#V2
+			var v2 = 0;
 			if (currentVelocity >= getprop("/instrumentation/fmc/vspeeds/V2")) {
-				setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 1);
+				v2 = 1;
 			}
-			else {
-				setprop("/aircraft/cockpitSounds/copilot-v2-announcement", 0);
+			setprop("/aircraft/cockpitSounds/copilot-v2-announcement", v2);
+		},
+		
+		updateWingFlex : func {
+			if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
+				setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/aero/force/Lift_alpha"));		
 			}
 		},
-	
+		
 		setAutopilotOffIndicator : func {
 			var apOff = 0;
 		
@@ -322,6 +321,14 @@ var general_loop_1 = {
 			setprop("/aircraft/tas-kt", tasKt);		
 		},
 
+		get_percent : func(val, max) {
+			return (val / max) * 100;
+		},
+
+		get_degC : func(degF) {
+			return (degF - 32) * (5/9);	
+		},
+		
         reset : func {
             me.loopid += 1;
             me._loop_(me.loopid);
