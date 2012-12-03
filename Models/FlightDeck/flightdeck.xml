@@ -293,7 +293,7 @@
 	<!-- Radios left to right-->
 	<model>
 		<name>COM1</name>
-		<path>Aircraft/Instruments-3d/VHF-22/ctl22-com1.xml</path>
+		<path>Aircraft/ATR72/Models/Instruments/VHF-22/ctl22-com1.xml</path>
 		<offsets>
 			<x-m>-10.475</x-m>
 			<y-m>-0.175</y-m>
@@ -301,7 +301,16 @@
 			<pitch-deg>-90</pitch-deg>		
 		</offsets>
 	</model>
-	
+	<model>
+		<name>COM2</name>
+		<path>Aircraft/ATR72/Models/Instruments/VHF-22/ctl22-com2.xml</path>
+		<offsets>
+			<x-m>-10.475</x-m>
+			<y-m>-0.1</y-m>
+			<z-m>0.1375</z-m>
+			<pitch-deg>-90</pitch-deg>		
+		</offsets>
+	</model>
 	<model>
 		<name>ADF</name>
 		<path>Aircraft/Instruments-3d/ADF-462/ctl62-adf.xml</path>
@@ -312,7 +321,26 @@
 			<pitch-deg>-90</pitch-deg>		
 		</offsets>
 	</model>
-	
+	<model>
+		<name>COM1 CP</name>
+		<path>Aircraft/ATR72/Models/Instruments/VHF-22/ctl22-com1.xml</path>
+		<offsets>
+			<x-m>-10.475</x-m>
+			<y-m>0.1</y-m>
+			<z-m>0.1375</z-m>
+			<pitch-deg>-90</pitch-deg>		
+		</offsets>
+	</model>
+	<model>
+		<name>COM2 CP</name>
+		<path>Aircraft/ATR72/Models/Instruments/VHF-22/ctl22-com2.xml</path>
+		<offsets>
+			<x-m>-10.475</x-m>
+			<y-m>0.175</y-m>
+			<z-m>0.1375</z-m>
+			<pitch-deg>-90</pitch-deg>		
+		</offsets>
+	</model>
 	<!-- Flight Management Computer -->
 	
 	<model>
