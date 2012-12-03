@@ -236,7 +236,8 @@ var electrical = {
 				output.new("hydraulic-aux", 24, 8, ["dc-bus1", "util-bus"]), 
 				output.new("hydraulic-green", 24, 12, ["ac-bus2", "hot-main-bat-bus", "hot-main-emer-bus"]),
 				output.new("x-feed", 8, 2, ["dc-bus1", "dc-bus2", "util-bus", "hot-emer-bat-bus", "hot-main-bat-bus"]),
-				output.new("mk-viii", 28, 1, ["dc-bus1", "dc-bus2", "hot-emer-bat-bus", "hot-main-bat-bus"])
+				output.new("mk-viii", 28, 1, ["dc-bus1", "dc-bus2", "hot-emer-bat-bus", "hot-main-bat-bus"]),
+				output.new("adf", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"])
 				];
             
             setprop("/systems/electric/util-volts", 0);
