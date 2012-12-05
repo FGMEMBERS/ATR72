@@ -1558,6 +1558,50 @@
 			<z-m>-0.855</z-m>
 		</offsets>
 	</model>
+
+	<model>
+		<path>Lighting/landing-nose.xml</path>
+		<name>NoseGearLandinglightLeft</name>     
+		<condition>
+			<and>
+				<equals>
+					<property>gear/gear[0]/position-norm</property>
+					<value type="bool">true</value>
+				</equals>
+				<property>/systems/electric/outputs/lights</property>
+				<property>/controls/lighting/taxi</property>
+			</and>
+		</condition>
+
+		<offsets>
+			<x-m>-11.5</x-m>
+			<y-m>-0.1</y-m> 
+			<z-m>-0.9</z-m> 
+			<pitch-deg>-7.5</pitch-deg>			
+		</offsets>
+	</model>
+
+	<model>
+		<path>Lighting/landing-nose.xml</path>
+		<name>NoseGearLandinglightRight</name>     
+		<condition>
+			<and>
+				<equals>
+					<property>gear/gear[0]/position-norm</property>
+					<value type="bool">true</value>
+				</equals>
+				<property>/systems/electric/outputs/lights</property>
+				<property>/controls/lighting/taxi</property>
+			</and>
+		</condition>
+
+		<offsets>
+			<x-m>-11.5</x-m>
+			<y-m>0.1</y-m> 
+			<z-m>-0.9</z-m> 	
+			<pitch-deg>-7.5</pitch-deg>	
+		</offsets>
+	</model>
 	
 	<animation>
 		<type>select</type>
