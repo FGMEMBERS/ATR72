@@ -168,6 +168,18 @@
 		<axis>
 			<y>1</y>
 		</axis>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>/controls/ohpanel/ldggearl</property>
+					<value>2</value>
+				</equals>
+			</and>
+		</condition>
 	</animation>
 	
 	<animation>
@@ -178,6 +190,18 @@
 		<axis>
 			<y>1</y>
 		</axis>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>/controls/ohpanel/ldggearn</property>
+					<value>2</value>
+				</equals>
+			</and>
+		</condition>
 	</animation>
 	
 	<animation>
@@ -188,6 +212,18 @@
 		<axis>
 			<y>1</y>
 		</axis>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>/controls/ohpanel/ldggearr</property>
+					<value>2</value>
+				</equals>
+			</and>
+		</condition>		
 	</animation>
 	
 	<!-- Standby-AI -->
