@@ -1675,6 +1675,9 @@
 			<green>0</green>
 			<blue>0</blue>
 		</emission>
+		<condition>
+			<property>/systems/electric/outputs/avionics</property>
+		</condition>
 	</animation>
 	<animation>
 		<name>RCL Illumination</name>
@@ -1700,6 +1703,9 @@
 			<green>0</green>
 			<blue>0</blue>
 		</emission>
+		<condition>
+			<property>/systems/electric/outputs/avionics</property>
+		</condition>
 	</animation>	
 	<animation>
 		<name>TO INHI Illumination</name>
@@ -1726,9 +1732,12 @@
 			<blue>0</blue>
 		</emission>
 		<condition>
-			<not>
-				<property>/aircraft/ccas/to-inhi-enabled</property>
-			</not>
+			<and>
+				<not>
+					<property>/aircraft/ccas/to-inhi-enabled</property>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	<animation>
@@ -1757,6 +1766,7 @@
 		</emission>
 		<condition>
 			<property>/aircraft/ccas/to-inhi-enabled</property>
+			<property>/systems/electric/outputs/avionics</property>
 		</condition>
 	</animation>	
 	<animation>
