@@ -21,7 +21,7 @@ var ccas = {
 	
 	update : func {
 	
-			## this needs to exit immediately if power isn't available in the aircraft
+			## this needs to exit immediately if power isn't available in the aircraft		
 			
 			## when power is available do the following
 			me.totalCurrentMasterWarn = getprop("/aircraft/ccas/master-warning-count");	
@@ -44,6 +44,7 @@ var ccas = {
 			me.fuel();
 			me.hyd();
 			
+			me.clear_master();
 			
 			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
 				setprop("/aircraft/ccas/master-warning", 1);
@@ -61,13 +62,31 @@ var ccas = {
 			
 			settimer(func {me.update();}, me.loopInterval);
 			},
+		
+	clear_master : func {
+		if (getprop("/systems/electric/outputs/avionics") == 0) {
+			setprop("/aircraft/ccas/master-warning-count", 0);
+			setprop("/aircraft/ccas/master-caution-count", 0);
+		}
+	},
+			
+	turn_light_off : func(propertyName) {
+		if (getprop("/systems/electric/outputs/avionics") == 0){		
+			setprop(propertyName,0);
+			return 1;
+		}		
+		return 0;
+	},
 			
 	oil_pressure_eng : func(engineNumber) {
 			##must be suppressed for first 30s after engine start
+			var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
+						
+			if (me.turn_light_off(propertyName)) return;
+			
 			if (me.engine1StartTime == nil or me.toInhib) return;
 						
-			if ((systime() - me.engine1StartTime) > 30) {
-				var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
+			if ((systime() - me.engine1StartTime) > 30) {	
 				var lastOilPressStatus = getprop(propertyName);
 				if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi-adjusted") < 40) {
 					me.add_warning(propertyName, lastOilPressStatus);
@@ -81,6 +100,8 @@ var ccas = {
 	flaps_unlk : func {
 			var propertyName = "/aircraft/ccas/cautions/flaps-unlk-fault";
 			var lastFlapsUnlockStatus = getprop(propertyName);
+			
+			if (me.turn_light_off(propertyName)) return;
 			
 			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastFlapsUnlockStatus);
@@ -116,6 +137,8 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/wheels-fault";
 			var lastWheelsStatus = getprop(propertyName);
 			
+			if (me.turn_light_off(propertyName)) return;
+			
 			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastWheelsStatus);
 					return;
@@ -132,6 +155,8 @@ var ccas = {
 	hyd : func {
 			var propertyName = "/aircraft/ccas/cautions/hyd-fault";
 			var lastHydStatus = getprop(propertyName);
+			
+			if (me.turn_light_off(propertyName)) return;
 			
 			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastHydStatus);
@@ -157,6 +182,8 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/cautions/idle-gate-fault";
 			var lastIdleGateStatus = getprop(propertyName);
 			
+			if (me.turn_light_off(propertyName)) return;
+			
 			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastIdleGateStatus);
 					return;
@@ -173,6 +200,8 @@ var ccas = {
 	fuel : func {
 			var propertyName = "/aircraft/ccas/cautions/fuel-fault";
 			var lastFuelStatus = getprop(propertyName);
+			
+			if (me.turn_light_off(propertyName)) return;
 			
 			if (me.clrEngaged == 1 or me.toInhib) {
 					me.remove_caution(propertyName, lastFuelStatus);
@@ -192,6 +221,8 @@ var ccas = {
 			var propertyName = "/aircraft/ccas/warnings/prop-brake-fault";
 			var lastPropBrakeStatus = getprop(propertyName);
 
+			if (me.turn_light_off(propertyName)) return;
+			
 			if ((getprop("/aircraft/prop-brake") == 1) or (getprop("/aircraft/prop-brake-fail") == 1)){
 				me.add_warning(propertyName, lastPropBrakeStatus);
 				}
@@ -203,6 +234,9 @@ var ccas = {
 	ldg_gear_not_down : func {
 			var propertyName = "/aircraft/ccas/warnings/ldg_gear_not_down";
 			var lastGearWarningStatus = getprop(propertyName);
+			
+			if (me.turn_light_off(propertyName)) return;
+			
 			if ((getprop("/surface-positions/flap-pos-norm") == 1) 
 					and (me.all_gear_down() == 0) 
 					and (getprop("/position/altitude-agl-ft") <= 500)) {

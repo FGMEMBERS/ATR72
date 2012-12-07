@@ -96,7 +96,7 @@ var general_loop_1 = {
 		setAutopilotOffIndicator : func {
 			var apOff = 0;
 		
-			if (getprop("/aircraft/afcs/ap-master") == 0) {
+			if (getprop("/aircraft/afcs/ap-master") == 0 and getprop("/systems/electric/outputs/avionics") != 0) {
 				apOff = 1;
 			}
 			setprop("/aircraft/afcs/indicators/ap-off", apOff);		

@@ -1228,7 +1228,7 @@
 		<emission>
 			<red>1</red>
 			<green>1</green>
-			<blue>1</blue>
+		<blue>1</blue>
 		</emission>
 		<condition>
 			<equals>
@@ -1306,16 +1306,14 @@
 			<green>1</green>
 			<blue>1</blue>
 		</emission>
-		<condition>
-				<property>/aircraft/afcs/indicators/ap-off</property>
-		</condition>
+		<property>/aircraft/afcs/indicators/ap-off</property>
 	</animation>
 	
 	<animation>
 		<name>CoPilot AP Off</name>
 		<type>textranslate</type>
 		<object-name>copilot_apoff</object-name>
-		<property>/aircraft/afcs/indicators/ap-off</property>
+		<property>/aircraft/afcs/indicators/ap-off</property>			
 		<factor>0.125</factor>
 		<step>1</step>
 		<offset>0</offset>
@@ -1349,13 +1347,11 @@
 			<green>1</green>
 			<blue>1</blue>
 		</emission>
-		<condition>
-				<property>/aircraft/afcs/indicators/ap-off</property>
-		</condition>
+		<property>/aircraft/afcs/indicators/ap-off</property>
 	</animation>
 
 	<animation>
-		<name>CoPilot AP Off</name>
+		<name>BrakeTemp</name>
 		<type>textranslate</type>
 		<object-name>brake_temp</object-name>
 		<property>/gear/brakes-hot</property>
@@ -1822,7 +1818,7 @@
 	<animation>
 		<name>LDG GEAR NOT DOWN Illumination</name>
 		<type>material</type>
-		<object-name>ccas_lgd_gear_not_down</object-name>
+		<object-name>ccas_ldg_gear_not_down</object-name>
 		<diffuse>
 			<red>1</red>
 			<green>1</green>
@@ -2228,7 +2224,7 @@
 	<animation>
 		<name>FWD SWK</name>
 		<type>textranslate</type>
-		<object-name>ccas_fwd_swk</object-name>
+		<object-name>ccas_fwd_smk</object-name>
 		<property>aircraft/ccas/warnings/fwd-swk-fault</property>
 		<factor>-0.37</factor>
 		<step>1</step>
@@ -2242,7 +2238,7 @@
 	<animation>
 		<name>FWD SWK Illumination</name>
 		<type>material</type>
-		<object-name>ccas_fwd_swk</object-name>
+		<object-name>ccas_fwd_smk</object-name>
 		<diffuse>
 			<red>1</red>
 			<green>1</green>
