@@ -44,6 +44,9 @@ var ccas = {
 			me.fuel();
 			me.hyd();
 			
+			##other
+			me.parking_brake();
+			
 			me.clear_master();
 			
 			if (getprop("/aircraft/ccas/master-warning-count") > 0) {
@@ -77,7 +80,15 @@ var ccas = {
 		}		
 		return 0;
 	},
-			
+	
+	parking_brake : func {
+		var propertyName = "/aircraft/ccas/parking-brake";
+		
+		if (me.turn_light_off(propertyName)) return;
+		
+		setprop(propertyName, getprop("/controls/gear/brake-parking"));
+	},
+	
 	oil_pressure_eng : func(engineNumber) {
 			##must be suppressed for first 30s after engine start
 			var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
