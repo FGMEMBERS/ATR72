@@ -762,12 +762,15 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<equals>
-					<property>/aircraft/afcs/lat-mode</property>
-					<value>hdg</value>
-				</equals>
-			</not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/lat-mode</property>
+						<value>hdg</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -795,10 +798,13 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/lat-mode</property>
-				<value>hdg</value>
-			</equals>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>hdg</value>
+				</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -826,43 +832,49 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/lat-mode</property>
+						<value>nav</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>nav</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<and>
 				<equals>
 					<property>/aircraft/afcs/lat-mode</property>
 					<value>nav</value>
 				</equals>
-			</not>
-		</condition>
-	</animation>
-	
-	<animation>
-		<type>material</type>
-		<object-name>nav</object-name>
-		<diffuse>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</diffuse>
-		<ambient>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</ambient>
-		<specular>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-		</specular>
-		<emission>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</emission>
-		<condition>
-			<equals>
-				<property>/aircraft/afcs/lat-mode</property>
-				<value>nav</value>
-			</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -890,43 +902,49 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/lat-mode</property>
+						<value>app</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>app</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<and>
 				<equals>
 					<property>/aircraft/afcs/lat-mode</property>
 					<value>app</value>
 				</equals>
-			</not>
-		</condition>
-	</animation>
-	
-	<animation>
-		<type>material</type>
-		<object-name>app</object-name>
-		<diffuse>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</diffuse>
-		<ambient>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</ambient>
-		<specular>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-		</specular>
-		<emission>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</emission>
-		<condition>
-			<equals>
-				<property>/aircraft/afcs/lat-mode</property>
-				<value>app</value>
-			</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -954,43 +972,49 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/lat-mode</property>
+						<value>bc</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>bc</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</emission>
+		<condition>
+			<and>
 				<equals>
 					<property>/aircraft/afcs/lat-mode</property>
 					<value>bc</value>
 				</equals>
-			</not>
-		</condition>
-	</animation>
-	
-	<animation>
-		<type>material</type>
-		<object-name>bc</object-name>
-		<diffuse>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</diffuse>
-		<ambient>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</ambient>
-		<specular>
-			<red>0</red>
-			<green>0</green>
-			<blue>0</blue>
-		</specular>
-		<emission>
-			<red>1</red>
-			<green>1</green>
-			<blue>1</blue>
-		</emission>
-		<condition>
-			<equals>
-				<property>/aircraft/afcs/lat-mode</property>
-				<value>bc</value>
-			</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1018,10 +1042,13 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/bank-limit</property>
-				<value>27</value>
-			</equals>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/bank-limit</property>
+					<value>27</value>
+				</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1049,10 +1076,13 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/bank-limit</property>
-				<value>15</value>
-			</equals>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/bank-limit</property>
+					<value>15</value>
+				</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1080,6 +1110,9 @@
 			<green>0.2</green>
 			<blue>0.2</blue>
 		</emission>
+		<condition>
+			<property>/systems/electric/outputs/avionics</property>
+		</condition>
 	</animation>
 
 	<animation>
@@ -1106,12 +1139,15 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<equals>
-					<property>/aircraft/afcs/ver-mode</property>
-					<value>ias</value>
-				</equals>
-			</not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/ver-mode</property>
+						<value>ias</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1139,10 +1175,13 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/ver-mode</property>
-				<value>ias</value>
-			</equals>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/ver-mode</property>
+					<value>ias</value>
+				</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1170,12 +1209,15 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<equals>
-					<property>/aircraft/afcs/ver-mode</property>
-					<value>vs</value>
-				</equals>
-			</not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/ver-mode</property>
+						<value>vs</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1203,10 +1245,13 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/ver-mode</property>
-				<value>vs</value>
-			</equals>
+			<and>
+				<property>/systems/electric/outputs/avionics</property>
+				<equals>
+					<property>/aircraft/afcs/ver-mode</property>
+					<value>vs</value>
+				</equals>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1234,12 +1279,15 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<equals>
-					<property>/aircraft/afcs/ver-mode</property>
-					<value>alt</value>
-				</equals>
-			</not>
+			<and>
+				<not>
+					<equals>
+						<property>/aircraft/afcs/ver-mode</property>
+						<value>alt</value>
+					</equals>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1267,10 +1315,13 @@
 		<blue>1</blue>
 		</emission>
 		<condition>
-			<equals>
-				<property>/aircraft/afcs/ver-mode</property>
-				<value>alt</value>
-			</equals>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/ver-mode</property>
+					<value>alt</value>
+				</equals>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1298,9 +1349,12 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<property>/aircraft/afcs/ap-master</property>
-			</not>
+			<and>
+				<not>
+					<property>/aircraft/afcs/ap-master</property>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 
@@ -1454,7 +1508,10 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
+			<and>
 				<property>/aircraft/afcs/ap-master</property>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1482,9 +1539,12 @@
 			<blue>0.2</blue>
 		</emission>
 		<condition>
-			<not>
-				<property>/aircraft/afcs/yd</property>
-			</not>
+			<and>
+				<not>
+					<property>/aircraft/afcs/yd</property>
+				</not>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
@@ -1512,7 +1572,10 @@
 			<blue>1</blue>
 		</emission>
 		<condition>
+			<and>
 				<property>/aircraft/afcs/yd</property>
+				<property>/systems/electric/outputs/avionics</property>
+			</and>
 		</condition>
 	</animation>
 	
