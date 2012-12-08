@@ -28,7 +28,7 @@
     </animation>
     
 	<text>
-		<name>text</name>
+		<name>alt_text</name>
 		<offsets>
 			<x-m>0.001</x-m>
 			<y-m>0.0172</y-m>
@@ -48,11 +48,22 @@
 		<font-resolution>
 			<width type="int">32</width>
 			<height type="int">32</height>
-		</font-resolution>
+		</font-resolution>		
 	</text>
 	
+	<animation>
+		<type>select</type>
+		<object-name>alt_text</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+	
 	<text>
-		<name>text</name>
+		<name>hpa_text</name>
 		<offsets>
 			<x-m>0.001</x-m>
 			<y-m>-0.0102</y-m>
@@ -72,11 +83,22 @@
 		<font-resolution>
 			<width type="int">32</width>
 			<height type="int">32</height>
-		</font-resolution>
+		</font-resolution>		
 	</text>
+
+	<animation>
+		<type>select</type>
+		<object-name>hpa_text</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
 	
 	<text>
-		<name>text</name>
+		<name>inhg_text</name>
 		<offsets>
 			<x-m>0.001</x-m>
 			<y-m>0.0102</y-m>
@@ -96,7 +118,79 @@
 		<font-resolution>
 			<width type="int">32</width>
 			<height type="int">32</height>
-		</font-resolution>
+		</font-resolution>		
 	</text>
+
+	<animation>
+		<type>select</type>
+		<object-name>inhg_text</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>asi-needle</object-name>
+		<object-name>faceplate</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/systems/electric/outputs/avionics</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>asi-needle</object-name>
+		<object-name>faceplate</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0.5</red>
+			<green>0.5</green>
+			<blue>0.5</blue>
+		</emission>
+		<condition>
+			<property>/systems/electric/outputs/avionics</property>
+		</condition>
+	</animation>	
+
 	
 </PropertyList>
