@@ -230,6 +230,75 @@
     	</axis>
     </animation>
     
+	<animation>
+		<type>material</type>
+		<object-name>Vs</object-name>
+		<object-name>V2</object-name>
+		<object-name>V1</object-name>
+		<object-name>faceplate</object-name>
+		<object-name>airspeed-needle</object-name>
+		<object-name>Vne</object-name>
+		<object-name>Vr</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/systems/electric/outputs/avionics</property>
+			</not>
+		</condition>
+	</animation>
+	
+	<animation>
+		<type>material</type>
+		<object-name>Vs</object-name>
+		<object-name>V2</object-name>
+		<object-name>V1</object-name>
+		<object-name>faceplate</object-name>
+		<object-name>airspeed-needle</object-name>
+		<object-name>Vne</object-name>
+		<object-name>Vr</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0.5</red>
+			<green>0.5</green>
+			<blue>0.5</blue>
+		</emission>
+		<condition>
+			<property>/systems/electric/outputs/avionics</property>
+		</condition>
+	</animation>	
     <!-- Move Speed Bugs
     
     <animation>
