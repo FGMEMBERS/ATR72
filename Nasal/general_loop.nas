@@ -354,7 +354,7 @@ var tyresmoke = {
     	
 			var nose_wow_cur = getprop("/gear/gear/wow");
 			var left_wow_cur = getprop("/gear/gear[1]/wow");
-			var right_wow_cur = getprop("/gear/gear[1]/wow");
+			var right_wow_cur = getprop("/gear/gear[2]/wow");
 		
 			if (!nose_wow_cur or nose_wow_sav) {
 				setprop("/gear/gear[0]/tyresmoke", 0);
