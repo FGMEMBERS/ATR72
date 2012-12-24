@@ -47,6 +47,26 @@
 			<green>0.067</green>
 			<blue>0</blue>
 		</ambient>
+	</animation>	
+	<animation>
+		<type>material</type>
+		<object-name>TAS_PanelText</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
 	</animation>
 	
 	<text>
@@ -152,6 +172,16 @@
 	<animation>
 		<type>select</type>
 		<object-name>PanelText</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>	
+	<animation>
+		<type>select</type>
+		<object-name>TAS_PanelText</object-name>
 		<condition>
 			<equals>
 				<property>/systems/electric/outputs/avionics</property>
