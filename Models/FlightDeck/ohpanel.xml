@@ -1102,5 +1102,42 @@
 			<y>-1</y>
 		</axis>
 	</animation>
-		
+	<animation>
+		<type>material</type>
+		<object-name>ohp</object-name>
+		<object-name>fuelxfeed</object-name>
+		<object-name>eng1fuelLP</object-name>
+		<object-name>eng2fuelLP</object-name>
+		<object-name>eng1fuelpump</object-name>
+		<object-name>eng2fuelpump</object-name>
+		<object-name>fuelguage</object-name>
+		<object-name>fuelpresspointer</object-name>
+		<object-name>rfuelind</object-name>
+		<object-name>lfuelind</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/systems/electric/outputs/avionics</property>
+			</not>
+		</condition>
+	</animation>	
 </PropertyList>
