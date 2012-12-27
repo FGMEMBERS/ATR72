@@ -4875,5 +4875,34 @@
 			<z-m>0.1846</z-m>
 		</center>
 	</animation>
-			
+	<animation>
+		<type>material</type>
+		<object-name>fuel1</object-name>
+		<object-name>fuel2</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/systems/electric/outputs/avionics</property>
+			</not>
+		</condition>
+	</animation>			
 </PropertyList>
