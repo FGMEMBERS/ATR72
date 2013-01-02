@@ -206,6 +206,16 @@
 						</binding>
 					</item>
 					<item>
+					<label>Tiller Steering</label>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var tiller = gui.Dialog.new("/sim/gui/dialogs/tiller/dialog","Aircraft/ATR72/Systems/tiller-dlg.xml");
+							tiller.open();
+						</script>
+					</binding>
+				</item>
+					<item>
 						<name>lights</name>
 						<label>NavDisplay Settings</label>
 						<binding>
@@ -432,6 +442,10 @@
 	</aircraft>
 	
 	<controls>
+		<gear>
+			<tiller-cmd-norm type="double">0</tiller-cmd-norm>
+			<tiller-enabled type="bool">false</tiller-enabled>
+		</gear>
 		<lighting>
 			<nav-lights type="bool">false</nav-lights>
 			<beacon type="bool">false</beacon>
