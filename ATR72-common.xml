@@ -206,15 +206,15 @@
 						</binding>
 					</item>
 					<item>
-					<label>Tiller Steering</label>
-					<binding>
-						<command>nasal</command>
-						<script>
-							var tiller = gui.Dialog.new("/sim/gui/dialogs/tiller/dialog","Aircraft/ATR72/Systems/tiller-dlg.xml");
-							tiller.open();
-						</script>
-					</binding>
-				</item>
+						<label>Tiller Steering</label>
+						<binding>
+							<command>nasal</command>
+							<script>
+								var tiller = gui.Dialog.new("/sim/gui/dialogs/tiller/dialog","Aircraft/ATR72/Systems/tiller-dlg.xml");
+								tiller.open();
+							</script>
+						</binding>
+					</item>
 					<item>
 						<name>lights</name>
 						<label>NavDisplay Settings</label>
@@ -309,7 +309,26 @@
 				</signal>
 			</config>
 		</flight-recorder>
-
+		
+		<help>
+			<title>Aircraft Specific Keys</title>
+			  <key>
+				<name>r</name>
+				<desc>Toggle Reverse Pitch</desc>
+			  </key>
+			  <key>
+				<name>j</name>
+				<desc>Steer Tiller Left</desc>
+			  </key>
+			  <key>
+				<name>k</name>
+				<desc>Center Tiller</desc>
+			  </key>
+			  <key>
+				<name>l</name>
+				<desc>Steer Tiller Right</desc>
+			  </key>
+		</help>
 	</sim>
 	
 	<aircraft>
@@ -676,6 +695,43 @@
 					<property>/controls/reverse-pitch</property>
 				</binding>
 			</key>
+			
+			<key n="106">
+				<name>j</name>
+				<repeatable type="bool">true</repeatable>
+				<desc>Steer Left (Tiller)</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/controls/gear/tiller-cmd-norm", getprop("/controls/gear/tiller-cmd-norm") - (1/70));
+					</script>
+				</binding>
+			</key>
+			
+			<key n="107">
+				<name>k</name>
+				<repeatable type="bool">true</repeatable>
+				<desc>Center Tiller</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/controls/gear/tiller-cmd-norm", 0);
+					</script>
+				</binding>
+			</key>
+			
+			<key n="108">
+				<name>l</name>
+				<repeatable type="bool">true</repeatable>
+				<desc>Steer Right (Tiller)</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						setprop("/controls/gear/tiller-cmd-norm", getprop("/controls/gear/tiller-cmd-norm") + (1/70));
+					</script>
+				</binding>
+			</key>
+			
 		</keyboard>
 	</input>
 
