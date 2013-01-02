@@ -4829,7 +4829,32 @@
 		<type>rotate</type>
 		<object-name>throttleL</object-name>
 		<property>/controls/engines/engine[0]/throttle</property>
+		<condition>
+			<not>
+				<property>/controls/reverse-pitch</property>
+			</not>
+		</condition>
 		<factor>-57</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.0865</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>throttleL</object-name>
+		<property>/controls/engines/engine[0]/throttle</property>
+		<condition>
+			<property>/controls/reverse-pitch</property>
+		</condition>
+		<factor>15</factor>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -4846,6 +4871,11 @@
 		<type>rotate</type>
 		<object-name>throttleR</object-name>
 		<property>/controls/engines/engine[1]/throttle</property>
+		<condition>
+			<not>
+				<property>/controls/reverse-pitch</property>
+			</not>
+		</condition>
 		<factor>-57</factor>
 		<axis>
 			<x>0</x>
@@ -4856,6 +4886,44 @@
 			<x-m>-10.7944</x-m>
 			<y-m>0</y-m>
 			<z-m>0.0865</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>throttleR</object-name>
+		<property>/controls/engines/engine[1]/throttle</property>
+		<condition>
+			<property>/controls/reverse-pitch</property>
+		</condition>
+		<factor>15</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.0865</z-m>
+		</center>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>reverse1</object-name>
+		<object-name>reverse2</object-name>
+		<property>/controls/reverse-pitch</property>
+		<factor>60</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.6226</x-m>
+			<y-m>0</y-m>
+			<z-m>0.3396</z-m>
 		</center>
 	</animation>
 

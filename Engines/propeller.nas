@@ -1,3 +1,6 @@
+var rev_prop = "/controls/reverse-pitch";
+setprop(rev_prop, 0);
+
 # Propellers Class
 
 var DEG2RAD = 0.0174532925;
@@ -80,30 +83,30 @@ var prop = {
 		
 	set_pitch: func(rpm_prop, out_prop) {
 	
-		var rpm = getprop(rpm_prop);
+		if(getprop(rev_prop)) {
 		
-		if (rpm < 400) {
-			setprop(out_prop, (((400 - rpm)/400) * (me.maxpitch - me.minpitch)) + me.minpitch);
+			approach_trgt(me.revpitch, out_prop, 0.25, 0.25, 0.5);
+		
 		} else {
-		
-			var pitch = (((rpm - me.minrpm)/(me.maxrpm - me.minrpm)) * me.maxpitch);
+	
+			var rpm = getprop(rpm_prop);
 			
-			if (pitch < me.minpitch)
-				setprop(out_prop, me.minpitch);
-			elsif (pitch > me.maxpitch)
-				setprop(out_prop, me.maxpitch);
-			else
-				setprop(out_prop, pitch);
-		
+			if (rpm < 400) {
+				setprop(out_prop, (((400 - rpm)/400) * (me.maxpitch - me.minpitch)) + me.minpitch);
+			} else {
+			
+				var pitch = (((rpm - me.minrpm)/(me.maxrpm - me.minrpm)) * me.maxpitch);
+				
+				if (pitch < me.minpitch)
+					approach_trgt(me.minpitch, out_prop, 0.25, 0.25, 0.5);
+				elsif (pitch > me.maxpitch)
+					approach_trgt(me.maxpitch, out_prop, 0.25, 0.25, 0.5);
+				else
+					approach_trgt(pitch, out_prop, 0.25, 0.25, 0.5);
+			
+			}
+			
 		}
-	
-	},
-	
-	## Reverse Pitch
-	
-	rev_pitch: func(out_prop) {
-	
-		setprop(out_prop, me.revpitch);
 	
 	},
 	
@@ -187,7 +190,7 @@ var propeller = {
             me.UPDATE_INTERVAL = 0.01;
             me.loopid = 0;
             
-			me.props = [prop.new(0, "HS 568F 6 Blade Propeller", 6, 850, 1400, 10, 45, -10, 0.48, 2700), prop.new(1, "HS 568F 6 Blade Propeller", 6, 850, 1400, 10, 45, -10, 0.48, 2700)];
+			me.props = [prop.new(0, "HS 568F 6 Blade Propeller", 6, 850, 1400, 10, 45, -12, 0.48, 2700), prop.new(1, "HS 568F 6 Blade Propeller", 6, 850, 1400, 10, 45, -10, 0.48, 2700)];
             
             setprop("/engines/engine/thruster/prop_pitch", 10);
             setprop("/engines/engine[1]/thruster/prop_pitch", 10);

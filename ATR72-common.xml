@@ -197,6 +197,14 @@
 							</script>
 						</binding>
 					</item>
+					
+					<item>
+						<label>Toggle Reverse-Pitch (r)</label>
+						<binding>
+							<command>property-toggle</command>
+							<property>/controls/reverse-pitch</property>
+						</binding>
+					</item>
 					<item>
 						<name>lights</name>
 						<label>NavDisplay Settings</label>
@@ -643,6 +651,16 @@
 					</script>
 				   </binding>
 				  </mod-alt>
+			</key>
+			
+			<key n="114">
+				<name>r</name>
+				<repeatable type="bool">false</repeatable>
+				<desc>Toggle Reverse Pitch</desc>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/reverse-pitch</property>
+				</binding>
 			</key>
 		</keyboard>
 	</input>
