@@ -32,8 +32,8 @@ var ccas = {
 			me.toInhib = getprop("/aircraft/ccas/to-inhi-enabled");
 			
 			##warnings
-			me.oil_pressure_eng(0);
-			me.oil_pressure_eng(1);			
+			me.oil_pressure_eng(0, me.engine1StartTime);
+			me.oil_pressure_eng(1, me.engine2StartTime);			
 			me.prop_brk();
 			me.ldg_gear_not_down();
 			
@@ -89,16 +89,21 @@ var ccas = {
 		setprop(propertyName, getprop("/controls/gear/brake-parking"));
 	},
 	
-	oil_pressure_eng : func(engineNumber) {
+	oil_pressure_eng : func(engineNumber, engineStartTime) {
 			##must be suppressed for first 30s after engine start
 			var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
-						
+			var lastOilPressStatus = getprop(propertyName);
+			
 			if (me.turn_light_off(propertyName)) return;
 			
-			if (me.engine1StartTime == nil or me.toInhib) return;
+			if (engineStartTime == nil) {
+				me.remove_warning(propertyName, lastOilPressStatus);
+				return;
+				}
+			
+			if (me.toInhib) return;
 						
-			if ((systime() - me.engine1StartTime) > 30) {	
-				var lastOilPressStatus = getprop(propertyName);
+			if ((systime() - engineStartTime) > 30) {		
 				if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi-adjusted") < 40) {
 					me.add_warning(propertyName, lastOilPressStatus);
 					}
@@ -322,7 +327,7 @@ var ccas = {
 				return 0;
 				}
 			},
-	engine1started : func {
+	engine1changed : func {
 			var engineRunningProperty = "/engines/engine[0]/running";
 			if (getprop(engineRunningProperty) == 1) {
 				if (me.engine1StartTime == nil) {
@@ -333,6 +338,18 @@ var ccas = {
 				me.engine1StartTime = nil;
 				}
 			},			
+	engine2changed : func {
+			var engineRunningProperty = "/engines/engine[1]/running";
+			if (getprop(engineRunningProperty) == 1) {
+				if (me.engine2StartTime == nil) {
+					me.engine2StartTime = systime();
+					}
+				}
+			if (getprop(engineRunningProperty) == 0) {
+				me.engine2StartTime = nil;
+				}
+			},			
 };
-setlistener("/engines/engine[0]/running", func {ccas.engine1started();});
+setlistener("/engines/engine[0]/running", func {ccas.engine1changed();});
+setlistener("/engines/engine[1]/running", func {ccas.engine2changed();});
 setlistener("/sim/signals/fdm-initialized", func{ccas.init();});
