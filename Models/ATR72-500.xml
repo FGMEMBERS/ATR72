@@ -8,6 +8,20 @@
 		<path>FlightDeck/flightdeck.xml</path>
 	</model>
 	
+	<!-- Rembrandt Stuff -->
+	
+	<model>
+		<path>Lighting/rembrandt.xml</path>
+	</model>
+	
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>lpropblur</object-name>
+		<object-name>rpropblur</object-name>
+		<object-name>windshield</object-name>
+		<object-name>Light</object-name>
+	</effect>
+	
 	<!-- LIVERY SELECT -->
 	<!-- Animation -->
 	<animation>
@@ -329,6 +343,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>ngear</object-name>
+		<object-name>taxi-cone</object-name>
 		<property>/fdm/jsbsim/fcs/nose-wheel-steering-0</property>
 		<factor>1</factor>
 		<axis>
