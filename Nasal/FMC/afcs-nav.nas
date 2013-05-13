@@ -34,9 +34,10 @@ var limit2 = func (value, limitup, limitdn) {
 }
 
 var defl = func(bug = 0, limit = 0) {
-      var heading = getprop("orientation/heading-magnetic-deg");
+      ##var heading = getprop("orientation/heading-magnetic-deg");
+      var heading = getprop("orientation/heading-deg");
       var bugDeg = 0;
-
+	  
       while (bug < 0)
        {
        bug += 360;
