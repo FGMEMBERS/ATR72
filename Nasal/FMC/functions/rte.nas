@@ -73,6 +73,9 @@ fmcPages["srcWP"] = {
         },
 
         updateDisplay: func() {
+        
+        		setprop("/instrumentation/fmc/exec-lt", 0);
+				modcmd.hide();
 
                 title.setText("SELECT DESIRED WPT").setColor(blue);
 

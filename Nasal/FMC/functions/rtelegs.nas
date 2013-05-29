@@ -9,7 +9,7 @@ fmcPages["srcWP-legs1"] = {
 		clearScreen();
 		ActivePage = fmcPages["srcWP-legs1"];
 	
-		var results = gpsSearch(ident);
+		var results = gpsSearchAll(ident);
 		me.results = results;
 
 		if (size(results) > 1) {

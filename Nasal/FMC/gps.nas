@@ -37,8 +37,8 @@ var gpsSearch = func(name, type) {
 			dist: 0
 		};
 		
-		returnResult.brg = getBearing(result.lat, result.lon);
-		returnResult.dist = getDistance(result.lat, result.lon);
+		returnResult.brg = int(getBearing(result.lat, result.lon));
+		returnResult.dist = int(getDistance(result.lat, result.lon));
 		
 		append(returnResults, returnResult);
 	}
@@ -64,8 +64,8 @@ var gpsSearchAll = func(name) {
 				dist: 0
 			};
 		
-			returnResult.brg = getBearing(result.lat, result.lon);
-			returnResult.dist = getDistance(result.lat, result.lon);
+			returnResult.brg = int(getBearing(result.lat, result.lon));
+			returnResult.dist = int(getDistance(result.lat, result.lon));
 		
 			append(returnResults, returnResult);
 		}

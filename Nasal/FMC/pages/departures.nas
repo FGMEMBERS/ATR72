@@ -1,5 +1,3 @@
-var gps = "/instrumentation/gps/";
-
 var depView = {
 
 	first: 0,
@@ -14,18 +12,16 @@ var depView = {
 
 		# Get a list of all available runways on the departure airport
 		
-		setprop(gps~ "scratch/query", icao);
-		setprop(gps~ "scratch/type", "airport");
-		setprop(gps~ "command", "search");
+		var arpt = airportinfo(icao);
 
 		var rwy_match = 0;
 
-		for(var rwy_index = 0; getprop(gps~ "scratch/runways[" ~ rwy_index ~ "]/id") != nil; rwy_index += 1) {
-
-			append(me.dispRWYs, getprop(gps~ "scratch/runways[" ~ rwy_index ~ "]/id"));
-
-			if (me.dispRWYs[rwy_index] == getprop("/aircraft/fmc/rte1/origin-rwy")) rwy_match = 1;
-
+		foreach(var i; keys(arpt.runways)) {
+		
+			append(me.dispRWYs, arpt.runways[i].id);
+			
+			if (arpt.runways[i].id == getprop("/aircraft/fmc/rte1/dest-rwy")) rwy_match = 1;
+		
 		}
 
 		# If departure runway isn't already selected, select the first option

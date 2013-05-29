@@ -186,7 +186,12 @@ fmcPages["rte1"] = {
 
 	initDisplay: func() {
 	
-		setprop("/aircraft/fmc/rte1/rte-mod", 0);
+		if(getprop("/instrumentation/fmc/mod-mem")==1) {
+			setprop("/aircraft/fmc/rte1/rte-mod", 1);
+			setprop("/instrumentation/fmc/exec-lt", 1);
+		} else {
+			setprop("/aircraft/fmc/rte1/rte-mod", 0);
+		}
 	
 		me.rte_num = getprop("/aircraft/fmc/rte1/rte/num");
 		me.rte_first = getprop("/aircraft/fmc/rte1/rte/first");
@@ -282,6 +287,11 @@ fmcPages["rte1"] = {
 		me.updateDisplay();
 		
 		setprop("/aircraft/fmc/rte1/rte-mod", 1);
+		if (getprop("/aircraft/fmc/rte1/active") == 1) {
+
+			setprop("/instrumentation/fmc/mod-mem", 1);
+			
+		}
 	
 	},
 	
@@ -302,6 +312,11 @@ fmcPages["rte1"] = {
 		me.updateDisplay();
 		
 		setprop("/aircraft/fmc/rte1/rte-mod", 1);
+		if (getprop("/aircraft/fmc/rte1/active") == 1) {
+
+			setprop("/instrumentation/fmc/mod-mem", 1);
+			
+		}
 	
 	},
 	
@@ -322,6 +337,11 @@ fmcPages["rte1"] = {
 		me.updateDisplay();
 		
 		setprop("/aircraft/fmc/rte1/rte-mod", 1);
+		if (getprop("/aircraft/fmc/rte1/active") == 1) {
+
+			setprop("/instrumentation/fmc/mod-mem", 1);
+			
+		}
 	
 	},
 	
@@ -342,6 +362,11 @@ fmcPages["rte1"] = {
 		me.updateDisplay();
 		
 		setprop("/aircraft/fmc/rte1/rte-mod", 1);
+		if (getprop("/aircraft/fmc/rte1/active") == 1) {
+
+			setprop("/instrumentation/fmc/mod-mem", 1);
+			
+		}
 	
 	},
 	
@@ -362,6 +387,11 @@ fmcPages["rte1"] = {
 		me.updateDisplay();
 		
 		setprop("/aircraft/fmc/rte1/rte-mod", 1);
+		if (getprop("/aircraft/fmc/rte1/active") == 1) {
+
+			setprop("/instrumentation/fmc/mod-mem", 1);
+			
+		}
 	
 	},
 	
@@ -382,6 +412,7 @@ fmcPages["rte1"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			
 		}
 		
@@ -406,6 +437,7 @@ fmcPages["rte1"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			
 		}
 
@@ -430,6 +462,7 @@ fmcPages["rte1"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			
 		}
 		
@@ -454,6 +487,7 @@ fmcPages["rte1"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			
 		}
 		
@@ -478,6 +512,7 @@ fmcPages["rte1"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			
 		}
 		
@@ -523,6 +558,7 @@ fmcPages["rte1"] = {
 		} else { # Route is not activated
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			values[17].setText("PERF INIT>").setColor(green);
 
 		}
@@ -536,6 +572,7 @@ fmcPages["rte1"] = {
 			activate_rte("rte", 1);
 			values[17].setText("PERF INIT>").setColor(green);
 			setprop("/instrumentation/fmc/exec-lt", 0);
+			setprop("/instrumentation/fmc/mod-mem", 0);
 
 		}
 

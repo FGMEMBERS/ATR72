@@ -36,7 +36,7 @@ round = func(val, dec) {
 
 getProg = func(wp) {
 
-	var data = gpsSearch(wp);
+	var data = gpsSearchAll(wp);
 
 	var dist = round(data[0].dist, 1);
 
@@ -63,12 +63,10 @@ getProg = func(wp) {
 
 getArpt = func(icao) {
 
-	setprop("/instrumentation/gps/scratch/query", icao);
-	setprop("/instrumentation/gps/scratch/type", "airport");
-	setprop("/instrumentation/gps/command", "search");
+	var arpt = airportinfo(icao);
 
-	var dist = round(getprop("/instrumentation/gps/scratch/distance-nm"), 1);
-
+	var dist = round(getDistance(arpt.lat, arpt.lon), 1);
+	
 	var fl = substr(getprop("/aircraft/afcs/crz-alt"), 2,3);
 
 	var crz = split("/", getprop("/aircraft/fmc/perf/cruise"));
@@ -99,7 +97,7 @@ fmcPages["progress"] = {
 		labels[2].setText("NEXT").setColor(blue);
 		labels[3].setText("DEST").setColor(blue);
 		labels[5].setText("-------------------------------------------------------").setColor(blue);
-		labels[6].setText("ENGINES").setColor(blue);
+		labels[6].setText("ETA").setColor(blue);
 		labels[7].setText("ALT    ATA").setColor(blue);
 		labels[8].setText("DTG    ETA").setColor(blue);
 		labels[12].setText("FUEL").setColor(blue);

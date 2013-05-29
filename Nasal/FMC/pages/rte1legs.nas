@@ -41,6 +41,14 @@ fmcPages["rte1legs"] = {
 	},
 
 	updateDisplay: func() {
+	
+		if (getprop("/instrumentation/fmc/mod-mem") == 1) {
+			setprop("/instrumentation/fmc/exec-lt", 1);
+			modcmd.show();
+		} else {
+			setprop("/instrumentation/fmc/exec-lt", 0);
+			modcmd.hide();
+		}
 
 		me.num = getprop("/aircraft/fmc/rte1/legs/num");
 		me.first = getprop("/aircraft/fmc/rte1/legs/first");
@@ -65,14 +73,14 @@ fmcPages["rte1legs"] = {
 
 				if (wp_id == 0) { # This is for the first waypoint
 
-					var gpsresult = gpsSearch(getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/wp"));
+					var gpsresult = gpsSearchAll(getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/wp"));
 
 					labels[n].setText(gpsresult[0].brg~"* / "~gpsresult[0].dist~"NM").setColor(white);
 
 				} else { # NOT the first waypoint
 
-					var gpsresult1 = gpsSearch(getprop("/aircraft/fmc/rte1/legs/wp["~(wp_id-1)~"]/wp"));
-					var gpsresult2 = gpsSearch(getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/wp"));
+					var gpsresult1 = gpsSearchAll(getprop("/aircraft/fmc/rte1/legs/wp["~(wp_id-1)~"]/wp"));
+					var gpsresult2 = gpsSearchAll(getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/wp"));
 
 					var last_wp = geo.Coord.new();
 					var this_wp = geo.Coord.new();
@@ -151,6 +159,7 @@ fmcPages["rte1legs"] = {
 			if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -176,6 +185,7 @@ fmcPages["rte1legs"] = {
 			if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -201,6 +211,7 @@ fmcPages["rte1legs"] = {
 			if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -226,6 +237,7 @@ fmcPages["rte1legs"] = {
 			if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -251,6 +263,7 @@ fmcPages["rte1legs"] = {
 			if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -275,6 +288,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -293,6 +307,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -311,6 +326,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -329,6 +345,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -347,6 +364,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/aircraft/fmc/rte1/active") == 1) {
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			modcmd.show();
 			values[17].setText("ERASE>").setColor(green);
 			
@@ -388,6 +406,7 @@ fmcPages["rte1legs"] = {
 
 				revert_mods(1);
 				setprop("/instrumentation/fmc/exec-lt", 0);
+				setprop("/instrumentation/fmc/mod-mem", 0);
 				values[17].setText("PERF INIT>").setColor(green);
 				me.updateDisplay();
 
@@ -400,6 +419,7 @@ fmcPages["rte1legs"] = {
 		} else { # Route is not activated
 
 			setprop("/instrumentation/fmc/exec-lt", 1);
+			setprop("/instrumentation/fmc/mod-mem", 1);
 			values[17].setText("PERF INIT>").setColor(green);
 
 		}
@@ -411,6 +431,7 @@ fmcPages["rte1legs"] = {
 		if (getprop("/instrumentation/fmc/exec-lt") == 1) {
 
 			activate_rte("legs", 1);
+			setprop("/instrumentation/fmc/mod-mem", 0);
 			modcmd.hide();
 			title.setText("ACT RTE 1 LEGS").setColor(blue);
 			values[17].setText("PERF INIT>").setColor(green);
