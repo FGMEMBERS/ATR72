@@ -28,51 +28,6 @@ var pos_string = func(lat, lon) {
 
 };
 
-var gps = "/instrumentation/gps/";
-var query_types = ["vor", "ndb", "fix"];
-
-var gpsSearch = func(query) {
-        
-        var results = [];
-        
-        foreach(var type; query_types) {
-
-                setprop(gps~"scratch/query", query);
-                setprop(gps~"scratch/type", type);
-                setprop(gps~"command", "search");
-                
-                var num = getprop(gps~"scratch/result-count");
-                
-                for(var n=0; n<num; n+=1) {
-                
-                        var result = {
-                        
-                                ident: getprop(gps~"scratch/ident"),
-                                name: getprop(gps~"scratch/name"),
-                                brg: int(getprop(gps~"scratch/true-bearing-deg")),
-                                dist: int(getprop(gps~"scratch/distance-nm")),
-                                lat: getprop(gps~"scratch/latitude-deg"),
-                                lon: getprop(gps~"scratch/longitude-deg"),
-                                type: type
-                        
-                        };
-
-                        if (result.dist != nil) {
-                                if (result.dist > 0) {
-                                        append(results, result);
-                                }
-                        }
-                        
-                        setprop(gps~"command", "next");
-                
-                }
-                
-        }
-        
-        return results;
-
-};
-
 fmcPages["srcWP"] = {
 
         init: func(mode, rte, n, ident) {
@@ -85,7 +40,7 @@ fmcPages["srcWP"] = {
                 clearScreen();
                 ActivePage = fmcPages["srcWP"];
         
-                var results = gpsSearch(ident);
+                var results = gpsSearchAll(ident);
                 me.results = results;
 
                 if (size(results) > 1) {
