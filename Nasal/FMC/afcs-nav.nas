@@ -162,27 +162,11 @@ var afcs_nav = {
 
 					var curr_wp_id = getprop("/aircraft/fmc/active-rte/wp["~curr_wp~"]/id");
 
-					# Check if GPS Data is already loaded
+					# Get Waypoint Data
+					
+					var wpt = gpsSearchAll(curr_wp_id)[0];
 
-					var gps = "/instrumentation/gps[1]/";
-
-					if (getprop(gps~"scratch/ident") != curr_wp_id) {
-
-						foreach(var type; query_types) {
-
-							setprop(gps~"scratch/query", curr_wp_id);
-							setprop(gps~"scratch/type", type);
-							setprop(gps~"command", "search");
-
-							if (getprop(gps~"scratch/ident") == curr_wp_id) break;
-
-						}
-
-					}
-
-					var brg = getprop(gps~"scratch/true-bearing-deg");
-
-					var deflection = -1 * defl(brg, 60);
+					var deflection = -1 * defl(wpt.brg, 60);
 
 					setprop("aircraft/afcs/nav-error-deg", deflection);
 
@@ -194,9 +178,9 @@ var afcs_nav = {
 
 					if (accur_str == "HI") accur = 0.005;
 
-					if ((getprop(gps~"scratch/latitude-deg") != nil) and (getprop(gps~"scratch/longitude-deg") != nil)) {
+					if ((wpt.lat != nil) and (wpt.lon != nil)) {
 
-						if (transit(getprop(gps~"scratch/latitude-deg"), getprop(gps~"scratch/longitude-deg"), accur)) {
+						if (transit(wpt.lat, wpt.lon, accur)) {
 
 							setprop("/aircraft/fmc/active-rte/current-wp", getprop("/aircraft/fmc/active-rte/current-wp") + 1);
 
