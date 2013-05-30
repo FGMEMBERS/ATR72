@@ -225,12 +225,25 @@ var ccas = {
 				}			
 			
 			#also needs to check for fuel flow psi < 4 in line below
-			if (getprop("/consumables/fuel/total-fuel-kg") < 160) {
+			if (getprop("/consumables/fuel/tank/level-kg") <= 160 
+						or getprop("/consumables/fuel/tank[1]/level-kg") <= 160) {
 				me.add_caution(propertyName, lastFuelStatus);
 				}
 			else {
 				me.remove_caution(propertyName, lastFuelStatus);					
 				}
+			if (getprop("/consumables/fuel/tank/level-kg") <= 160) {
+				setprop("/aircraft/ccas/cautions/fuel-low-left", 1);
+				}
+			else {
+				setprop("/aircraft/ccas/cautions/fuel-low-left", 0);
+				}			
+			if (getprop("/consumables/fuel/tank[0]/level-kg") <= 160) {
+				setprop("/aircraft/ccas/cautions/fuel-low-right", 1);
+				}
+			else {
+				setprop("/aircraft/ccas/cautions/fuel-low-right", 0);
+				}			
 			},
 			
 	prop_brk : func {

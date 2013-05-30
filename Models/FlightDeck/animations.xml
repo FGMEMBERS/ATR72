@@ -26,6 +26,158 @@
 		</condition>
 	</animation>
 	
+	<!-- fuel indicator -->
+	<animation>
+		<type>material</type>
+		<object-name>FuelLvlRight</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
+	</animation>
+	<animation>
+		<type>material</type>
+		<object-name>FuelLvlLeft</object-name>
+		<emission>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0.725</red>
+			<green>0.067</green>
+			<blue>0</blue>
+		</ambient>
+	</animation>
+	<text>
+		<name>FuelLvlRight</name>
+		<offsets>
+			<x-m>-11.2412</x-m>
+			<y-m>-0.2084</y-m>
+			<z-m>0.3554</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%4.0f</format>
+		<property>/consumables/fuel/tank[1]/level-kg</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	<text>
+		<name>FuelLvlLeft</name>
+		<offsets>
+			<x-m>-11.2412</x-m>
+			<y-m>-0.2484</y-m>
+			<z-m>0.3554</z-m>
+			<pitch-deg>-10</pitch-deg>
+		</offsets>
+		<alignment>center-center</alignment>
+		<axis-alignment>yz-plane</axis-alignment>
+		<type type="string">number-value</type>
+		<format type="string">%4.0f</format>
+		<property>/consumables/fuel/tank/level-kg</property>
+		<truncate type="bool">false</truncate>
+		<font type="string">led.txf</font>
+		<draw-text type="bool">true</draw-text>
+		<draw-alignment type="bool">false</draw-alignment>
+		<draw-boundingbox type="bool">false</draw-boundingbox>
+		<character-size>0.007</character-size>
+		<font-resolution>
+			<width type="int">32</width>
+			<height type="int">32</height>
+		</font-resolution>
+	</text>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>low_level_l</object-name>
+		<property>/aircraft/ccas/cautions/fuel-low-left</property>
+		<factor>-0.125</factor>
+		<axis>
+			<x>1</x>
+		</axis>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>/aircraft/ccas/cautions/fuel-low-left</property>
+					<value>1</value>
+				</equals>
+			</and>
+		</condition>
+	</animation>
+	<animation>
+		<type>textranslate</type>
+		<object-name>low_level_r</object-name>
+		<property>/aircraft/ccas/cautions/fuel-low-right</property>
+		<factor>-0.125</factor>
+		<axis>
+			<x>1</x>
+		</axis>
+		<condition>
+			<and>
+				<equals>
+					<property>/systems/electric/outputs/avionics</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>/aircraft/ccas/cautions/fuel-low-right</property>
+					<value>1</value>
+				</equals>
+			</and>
+		</condition>
+	</animation>	
+	<animation>
+		<type>select</type>
+		<object-name>FuelLvlRight</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>	
+	<animation>
+		<type>select</type>
+		<object-name>FuelLvlLeft</object-name>
+		<condition>
+			<equals>
+				<property>/systems/electric/outputs/avionics</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
 	<!-- TAT-SAT OSGText -->
 	
 	<animation>
