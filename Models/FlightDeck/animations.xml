@@ -114,11 +114,10 @@
 			<width type="int">32</width>
 			<height type="int">32</height>
 		</font-resolution>
-	</text>
-	
+	</text>	
 	<animation>
 		<type>textranslate</type>
-		<object-name>low_level_l</object-name>
+		<object-name>low_lvl_l</object-name>
 		<property>/aircraft/ccas/cautions/fuel-low-left</property>
 		<factor>-0.125</factor>
 		<axis>
@@ -130,6 +129,30 @@
 					<property>/systems/electric/outputs/avionics</property>
 					<value>1</value>
 				</equals>
+			</and>
+		</condition>
+	</animation>
+	<animation>
+		<type>material</type>
+		<object-name>low_lvl_l</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+		</ambient>
+		<condition>
+			<and>
 				<equals>
 					<property>/aircraft/ccas/cautions/fuel-low-left</property>
 					<value>1</value>
@@ -139,7 +162,7 @@
 	</animation>
 	<animation>
 		<type>textranslate</type>
-		<object-name>low_level_r</object-name>
+		<object-name>low_lvl_r</object-name>
 		<property>/aircraft/ccas/cautions/fuel-low-right</property>
 		<factor>-0.125</factor>
 		<axis>
@@ -151,12 +174,36 @@
 					<property>/systems/electric/outputs/avionics</property>
 					<value>1</value>
 				</equals>
+			</and>
+		</condition>
+	</animation>
+	<animation>
+		<type>material</type>
+		<object-name>low_lvl_r</object-name>
+		<emission>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+			<factor>0.6</factor>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>0.749</green>
+			<blue>0</blue>
+		</ambient>
+		<condition>
+			<and>
 				<equals>
 					<property>/aircraft/ccas/cautions/fuel-low-right</property>
 					<value>1</value>
 				</equals>
 			</and>
-		</condition>
+		</condition>		
 	</animation>	
 	<animation>
 		<type>select</type>

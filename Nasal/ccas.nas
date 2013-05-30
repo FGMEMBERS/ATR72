@@ -238,7 +238,7 @@ var ccas = {
 			else {
 				setprop("/aircraft/ccas/cautions/fuel-low-left", 0);
 				}			
-			if (getprop("/consumables/fuel/tank[0]/level-kg") <= 160) {
+			if (getprop("/consumables/fuel/tank[1]/level-kg") <= 160) {
 				setprop("/aircraft/ccas/cautions/fuel-low-right", 1);
 				}
 			else {
