@@ -26,6 +26,59 @@
 		</condition>
 	</animation>
 	
+	<!-- flight directors -->
+	<animation>
+		<type>pick</type>
+		<object-name>fd-bars-capt</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/aircraft/afcs/fd-bars-capt</property>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>fd-bars-capt</object-name>
+		<property>/aircraft/afcs/fd-bars-capt</property>
+		<factor>40</factor>
+		<center>
+			<x-m>-11.1602</x-m>
+			<y-m>0</y-m>
+			<z-m>0.8475</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>fd-bars-fo</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/aircraft/afcs/fd-bars-fo</property>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>fd-bars-fo</object-name>
+		<property>/aircraft/afcs/fd-bars-fo</property>
+		<factor>40</factor>
+		<center>
+			<x-m>-11.1602</x-m>
+			<y-m>0</y-m>
+			<z-m>0.8475</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>	
 	<!-- fuel indicator -->
 	<animation>
 		<type>material</type>
