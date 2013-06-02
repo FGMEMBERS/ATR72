@@ -158,7 +158,7 @@ var afcs_nav = {
 
 				# Fly Active Route
 
-				elsif (curr_wp < getprop("/aircraft/fmc/active-rte/num")) {
+				elsif (curr_wp <= getprop("/aircraft/fmc/active-rte/num")) {
 
 					var curr_wp_id = getprop("/aircraft/fmc/active-rte/wp["~curr_wp~"]/id");
 

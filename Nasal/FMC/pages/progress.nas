@@ -108,10 +108,9 @@ fmcPages["progress"] = {
 	},
 
 	updateDisplay: func() {
-
 		var num = getprop("/aircraft/fmc/active-rte/num");
 
-		if(num > 2) {
+		if(num > 1) {
 
 			var last_wp = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/id");
 			var last_alt = getprop("/aircraft/fmc/active-rte/wp["~(num-1)~"]/alt");
@@ -122,8 +121,13 @@ fmcPages["progress"] = {
 			var to = getprop("/aircraft/fmc/active-rte/wp["~cur_wp~"]/id");
 			var to_info = getProg(to);
 
+			var next_info = nil;
+			
 			var next = getprop("/aircraft/fmc/active-rte/wp["~(cur_wp+1)~"]/id");
-			var next_info = getProg(next);
+			if (next != nil) {
+				next_info = getProg(next);
+			}
+			
 
 			var dest = getprop("/aircraft/fmc/rte1/dest-arpt");
 			var dest_info = getArpt(dest);

@@ -1,3 +1,15 @@
+round = func(val, dec) {
+
+	var integer = int(val);
+
+	var decimal = val - integer;
+
+	var decimal_rounded = int(decimal*(math.pow(10, dec)));
+
+	return integer~"."~decimal_rounded;
+
+};
+
 fmcPages["perfinit"] = {
 
 	initDisplay: func() {
@@ -18,16 +30,22 @@ fmcPages["perfinit"] = {
 		labels[15].setText("DESCENT").setColor(blue);
 		labels[16].setText("SPD TRANS").setColor(blue);
 		
-		if (getprop("/aircraft/fmc/perf/grwt") != nil)
-			values[0].setText(getprop("/aircraft/fmc/perf/grwt")).setColor(white);
-		else
+		var grwt = getprop("/aircraft/fmc/perf/grwt");
+		if (grwt != nil) {
+			values[0].setText(round(grwt, 1)).setColor(white);
+		}
+		else {
 			values[0].setText("--.-").setColor(white);
-			
-		if (getprop("/aircraft/fmc/perf/fuel") != nil)
-			values[1].setText(getprop("/aircraft/fmc/perf/fuel")).setColor(white);
-		else
+		}
+	
+		var fuel = getprop("/aircraft/fmc/perf/fuel");
+		if (fuel != nil) {
+			values[1].setText(round(fuel, 1)).setColor(white);
+		}
+		else {
 			values[1].setText("--.- CALC").setColor(white);
-			
+		}
+		
 		values[2].setText("28.5").setColor(white);
 		
 		if (getprop("/aircraft/fmc/perf/rsv") != nil)
@@ -48,14 +66,14 @@ fmcPages["perfinit"] = {
 	l1: func() {
 	
 		setprop("/aircraft/fmc/perf/grwt", (int(getprop("/fdm/jsbsim/inertia/weight-lbs")/10)/100));
-		values[0].setText(getprop("/aircraft/fmc/perf/grwt")).setColor(white);
+		values[0].setText(round(getprop("/aircraft/fmc/perf/grwt"), 1)).setColor(white);
 	
 	},
 	
 	l2: func() {
 	
 		setprop("/aircraft/fmc/perf/fuel", (int(getprop("/consumables/fuel/total-fuel-lbs")/10)/100));
-		values[1].setText(getprop("/aircraft/fmc/perf/fuel")).setColor(white);
+		values[1].setText(round(getprop("/aircraft/fmc/perf/fuel"),1)).setColor(white);
 	
 	},
 	
