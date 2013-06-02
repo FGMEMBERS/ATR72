@@ -584,7 +584,6 @@
 			<brt-norm type="float">0</brt-norm>
         </fmc>
 		<mk-viii>                           <!-- http://wiki.flightgear.org/index.php/GPWS -->
-
 			<serviceable>true</serviceable>   <!-- EGPWS_ENABLE -->
 
 			<configuration-module>
@@ -618,6 +617,18 @@
 				<file-prefix type="string">Sounds/mk-viii/</file-prefix>
 			</voice>
 	    </mk-viii>
+        <dme n="0">
+            <serviceable>true</serviceable>
+            <frequencies>
+                <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
+            </frequencies>
+        </dme>
+        <dme n="1">
+            <serviceable>true</serviceable>
+            <frequencies>
+                <source>/instrumentation/nav[1]/frequencies/selected-mhz</source>
+            </frequencies>
+        </dme>		
 	</instrumentation>
 
 	<consumables>

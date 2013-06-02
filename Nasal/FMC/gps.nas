@@ -58,23 +58,24 @@ var Search210 = func(name, types) {
 			var num = getprop(gps~"scratch/result-count");
 			
 			for(var n=0; n<num; n+=1) {
-			
-					var result = {
-					
-							ident: getprop(gps~"scratch/ident"),
-							name: getprop(gps~"scratch/name"),
-							brg: int(getprop(gps~"scratch/true-bearing-deg")),
-							dist: int(getprop(gps~"scratch/distance-nm")),
-							lat: getprop(gps~"scratch/latitude-deg"),
-							lon: getprop(gps~"scratch/longitude-deg"),
-							type: type
-					
-					};
+					if (getprop(gps~"/scratch/valid")) {
+						var result = {
+						
+								ident: getprop(gps~"scratch/ident"),
+								name: getprop(gps~"scratch/name"),
+								brg: int(getprop(gps~"scratch/true-bearing-deg")),
+								dist: int(getprop(gps~"scratch/distance-nm")),
+								lat: getprop(gps~"scratch/latitude-deg"),
+								lon: getprop(gps~"scratch/longitude-deg"),
+								type: type
+						
+						};
 
-					if (result.dist != nil) {
-							if (result.dist > 0) {
-									append(results, result);
-							}
+						if (result.dist != nil) {
+								#if (result.dist > 0) {
+										append(results, result);
+								#}
+						}
 					}
 					setprop(gps~"command", "next");
 			}
