@@ -102,7 +102,7 @@ fmcPages["progress"] = {
 		labels[8].setText("DTG    ETA").setColor(blue);
 		labels[12].setText("FUEL").setColor(blue);
 
-		values[12].setText(getprop("/aircraft/fmc/perf/fuel")).setColor(white);
+		values[12].setText(round(getprop("/aircraft/fmc/perf/fuel"),1)).setColor(white);
 		values[17].setText("POS REF>").setColor(green);
 	
 	},
