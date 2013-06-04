@@ -43,19 +43,19 @@ var supplier = {
 		return amps;
 	
 	},
-	new: func(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
+	new: func(name, type, volts, amps, dep, dep_prop, dep_max, dep_req, sw_prop) {
 	
 		var t = {parents:[supplier]};
 		
-		t.name = arg1;
-		t.type = arg2;
-		t.volts = arg3;
-		t.amps = arg4;
-		t.dep = arg5;
-		t.dep_prop = arg6;
-		t.dep_max = arg7;
-		t.dep_req = arg8;
-		t.sw_prop = arg9;
+		t.name = name;
+		t.type = type;
+		t.volts = volts;
+		t.amps = amps;
+		t.dep = dep;
+		t.dep_prop = dep_prop;
+		t.dep_max = dep_max;
+		t.dep_req = dep_req;
+		t.sw_prop = sw_prop;
 		
 		return t;
 	
@@ -120,13 +120,13 @@ var bus = {
 		return amps;
 	
 	},
-	new: func(arg1, arg2, arg3) {
+	new: func(name, type, suppliers) {
 	
 		var t = {parents:[bus]};
 		
-		t.name = arg1;
-		t.type = arg2;
-		t.suppliers = arg3;
+		t.name = name;
+		t.type = type;
+		t.suppliers = suppliers;
 		
 		return t;
 	
@@ -187,14 +187,14 @@ var output = {
 		}
 	
 	},
-	new: func(arg1, arg2, arg3, arg4) {
+	new: func(name, min_volt, run_amps, bus) {
 	
 		var t = {parents:[output]};
 		
-		t.name = arg1;
-		t.min_volt = arg2;
-		t.run_amps = arg3;
-		t.bus = arg4;
+		t.name = name;
+		t.min_volt = min_volt;
+		t.run_amps = run_amps;
+		t.bus = bus;
 		
 		return t;
 	
@@ -237,7 +237,8 @@ var electrical = {
 				output.new("hydraulic-green", 24, 12, ["ac-bus2", "hot-main-bat-bus", "hot-main-emer-bus"]),
 				output.new("x-feed", 8, 2, ["dc-bus1", "dc-bus2", "util-bus", "hot-emer-bat-bus", "hot-main-bat-bus"]),
 				output.new("mk-viii", 28, 1, ["dc-bus1", "dc-bus2", "hot-emer-bat-bus", "hot-main-bat-bus"]),
-				output.new("adf", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"])
+				output.new("adf", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"]),
+				output.new("dme", 12, 1, ["dc-bus1", "dc-bus2", "hot-main-bat-bus", "hot-emer-bat-bus"])
 				];
             
             setprop("/systems/electric/util-volts", 0);
