@@ -588,11 +588,14 @@
 				<script>
 				
 					var hdg_prop = "/aircraft/afcs/crs2";
-				
+					var nav_prop = "/instrumentation/nav[1]/radials/selected-deg";
+					
 					if (359 > getprop(hdg_prop))
 						setprop(hdg_prop, getprop(hdg_prop) + 1);
 					else
 						setprop(hdg_prop, 0);
+					
+					setprop(nav_prop, getprop(hdg_prop));
 					
 				</script>
 			</binding>
@@ -606,11 +609,14 @@
 				<script>
 					
 					var hdg_prop = "/aircraft/afcs/crs2";
+					var nav_prop = "/instrumentation/nav[1]/radials/selected-deg";
 				
 					if (getprop(hdg_prop) > 0)
 						setprop(hdg_prop, getprop(hdg_prop) - 1);
 					else
 						setprop(hdg_prop, 359);
+					
+					setprop(nav_prop, getprop(hdg_prop));
 					
 				</script>
 			</binding>
@@ -629,11 +635,14 @@
 				<script>
 				
 					var hdg_prop = "/aircraft/afcs/crs1";
+					var nav_prop = "/instrumentation/nav/radials/selected-deg";
 				
 					if (359 > getprop(hdg_prop))
 						setprop(hdg_prop, getprop(hdg_prop) + 1);
 					else
 						setprop(hdg_prop, 0);
+					
+					setprop(nav_prop, getprop(hdg_prop));
 					
 				</script>
 			</binding>
@@ -647,11 +656,14 @@
 				<script>
 					
 					var hdg_prop = "/aircraft/afcs/crs1";
+					var nav_prop = "/instrumentation/nav/radials/selected-deg";
 				
 					if (getprop(hdg_prop) > 0)
 						setprop(hdg_prop, getprop(hdg_prop) - 1);
 					else
 						setprop(hdg_prop, 359);
+					
+					setprop(nav_prop, getprop(hdg_prop));
 					
 				</script>
 			</binding>

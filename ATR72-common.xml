@@ -157,6 +157,20 @@
                         </binding>
                     </item>
                 </menu>
+				
+				<menu n="5">
+					<item n="3">
+						<label>Radio Settings</label>
+						<enabled type="bool">false</enabled>
+                        <binding>
+							<command>nasal</command>
+							<script>
+							<!-- Disabled -->
+							</script>
+                        </binding>
+					</item>
+				</menu>
+				
                 <menu n="100">
                 	<label>ATR72-500</label>
                     <item n="0">
@@ -503,7 +517,17 @@
 		<adu>
 			<brt type="float">0.6</brt>
 		</adu>
-		 <tcas>
+		<nav>
+			<radials>
+				<selected-deg type="int">0</selected-deg>
+			</radials>
+		</nav>
+		<nav n="1">
+			<radials>
+				<selected-deg type="int">0</selected-deg>
+			</radials>
+		</nav>
+		<tcas>
             <serviceable type="bool">true</serviceable>
             <inputs>
                 <mode type="int">3</mode>       <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
@@ -740,6 +764,26 @@
 					<script>
 						setprop("/controls/gear/tiller-cmd-norm", getprop("/controls/gear/tiller-cmd-norm") + (1/70));
 					</script>
+				</binding>
+			</key>
+			
+			<!-- Disable Autopilot Dialog from F11 key -->
+			<key n="267">
+				<name>F11</name>
+				<desc>Pop up autopilot dialog</desc>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name></dialog-name>
+				</binding>
+			</key>
+			
+			<!-- Disable Radio Settings Dialog from F12 key -->
+			<key n="268">
+				<name>F12</name>
+				<desc>Pop up radio settings dialog</desc>
+				<binding>
+					<command>dialog-show</command>
+					<dialog-name></dialog-name>
 				</binding>
 			</key>
 			
