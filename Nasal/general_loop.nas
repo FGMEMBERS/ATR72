@@ -246,10 +246,10 @@ var general_loop_1 = {
 				var ltank = getprop("/consumables/fuel/tank[0]/level-kg");
 				var rtank = getprop("/consumables/fuel/tank[1]/level-kg");
 				
-				if (ltank > rtank) {
+				if (ltank > rtank and ltank > 5) {
 					setprop("/consumables/fuel/tank[0]/level-kg", ltank - 0.25);
 					setprop("/consumables/fuel/tank[1]/level-kg", rtank + 0.25);
-				} else {
+				} elsif (rtank > ltank and rtank > 5) {
 					setprop("/consumables/fuel/tank[0]/level-kg", ltank + 0.25);
 					setprop("/consumables/fuel/tank[1]/level-kg", rtank - 0.25);
 				}
