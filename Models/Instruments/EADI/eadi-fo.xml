@@ -3,7 +3,7 @@
 <PropertyList>
 
 	<name>EADI</name>
-	<path>eadi.ac</path>
+	<path>eadi-fo.ac</path>
 	
 	<effect>
 		<inherits-from>Effects/model-transparent</inherits-from>
@@ -12,13 +12,13 @@
 		<object-name>mask</object-name>
 		<object-name>locpointer</object-name>
 	</effect>
-	
+
 	<animation>
         <type>select</type>
-        <object-name>fd-roll</object-name>
+        <object-name>fd-roll-fo</object-name>
         <condition>
 			<and>
-				<property>/aircraft/afcs/fd-bars-capt</property>
+				<property>/aircraft/afcs/fd-bars-fo</property>
 				<or>
 					<equals>
 						<property>/aircraft/afcs/lat-mode</property>
@@ -34,15 +34,14 @@
 					</equals>				
 				</or>			
 			</and>
-
         </condition>
     </animation>	
 	<animation>
         <type>select</type>
-        <object-name>fd-pitch</object-name>
+        <object-name>fd-pitch-fo</object-name>
         <condition>
         	<and>
-				<property>/aircraft/afcs/fd-bars-capt</property>
+				<property>/aircraft/afcs/fd-bars-fo</property>
 				<or>
 					<equals>
 						<property>/aircraft/afcs/ver-mode</property>
