@@ -26,17 +26,25 @@
 	
 	<logic>
 		<input>
+			<equals>
+				<property>/aircraft/afcs/lat-mode</property>
+				<value>hdg</value>
+			</equals>
+		</input>
+		<output>/aircraft/afcs/logic/lat-hdg</output>
+	</logic>
+	<logic>
+		<input>
 			<and>
-				<property>/aircraft/afcs/ap-master</property>
 				<equals>
 					<property>/aircraft/afcs/lat-mode</property>
 					<value>hdg</value>
 				</equals>
+				<property>/aircraft/afcs/ap-master</property>
 			</and>
 		</input>
-		<output>/aircraft/afcs/logic/lat-hdg</output>
+		<output>/aircraft/afcs/logic/lat-hdg-final-stage</output>
 	</logic>
-	
 	<filter>
 		<type>gain</type>
 		<debug type="bool">false</debug>
@@ -131,17 +139,26 @@
 
 	<logic>
 		<input>
-			<and>
-				<property>/aircraft/afcs/ap-master</property>
-				<equals>
-					<property>/aircraft/afcs/lat-mode</property>
-					<value>nav</value>
-				</equals>
-			</and>
+			<equals>
+				<property>/aircraft/afcs/lat-mode</property>
+				<value>nav</value>
+			</equals>
 		</input>
 		<output>/aircraft/afcs/logic/lat-nav</output>
 	</logic>
 	
+	<logic>
+		<input>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>nav</value>
+				</equals>
+				<property>/aircraft/afcs/ap-master</property>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-nav-final-stage</output>
+	</logic>	
 	<!-- True Heading hold.  2 stage cascade controller. -->
 
   <!-- Stage #1 sets target roll based on diff between current heading -->
@@ -182,7 +199,7 @@
   <pid-controller>
     <debug>false</debug>
     <enable>
-      <prop>/aircraft/afcs/logic/lat-nav</prop>
+		<prop>/aircraft/afcs/logic/lat-nav-final-stage</prop>
     </enable>
     <input>
       <prop>/orientation/roll-deg</prop>
@@ -230,17 +247,26 @@
 
 	<logic>
 		<input>
-			<and>
-				<property>/aircraft/afcs/ap-master</property>
-				<equals>
-					<property>/aircraft/afcs/lat-mode</property>
-					<value>app</value>
-				</equals>
-			</and>
+			<equals>
+				<property>/aircraft/afcs/lat-mode</property>
+				<value>app</value>
+			</equals>
 		</input>
 		<output>/aircraft/afcs/logic/lat-app</output>
 	</logic>
 	
+	<logic>
+		<input>
+			<and>
+				<equals>
+					<property>/aircraft/afcs/lat-mode</property>
+					<value>app</value>
+				</equals>
+				<property>/aircraft/afcs/ap-master</property>
+			</and>
+		</input>
+		<output>/aircraft/afcs/logic/lat-app-final-stage</output>
+	</logic>		
 	<!-- Nav1 hold.  2 stage cascade controller. -->
 
   <!-- Stage #1 sets target roll based on diff between current heading -->
@@ -282,7 +308,7 @@
     <name>Nav1 Hold Stage 2</name>
     <debug>false</debug>
     <enable>
-      <prop>/aircraft/afcs/logic/lat-app</prop>
+		<prop>/aircraft/afcs/logic/lat-app-final-stage</prop>
     </enable>
     <input>
       <prop>/orientation/roll-deg</prop>
@@ -321,23 +347,12 @@
 <!-- Leave this empty for now, I'm still thinking on how we can achieve this -->
 
 	<!-- Servo Driver Logic -->
-	
-	<logic>
-		<input>
-			<and>
-				<property>/aircraft/afcs/ap-master</property>
-				<property>/aircraft/afcs/logic/lat-hdg</property>
-			</and>
-		</input>
-		<output>/aircraft/afcs/logic/lat-servo</output>
-	</logic>
-
   	<filter>
 		<name>SERVO-DRIVER:aileron</name>
 		<debug>false</debug>
 		<feedback-if-disabled>true</feedback-if-disabled>
 		<enable>
-			<prop>/aircraft/afcs/logic/lat-servo</prop>
+			<prop>/aircraft/afcs/logic/lat-hdg-final-stage</prop>
 		</enable>
 		<input>/autopilot/internal/aileron-cmd</input>
 		<output>/controls/flight/aileron</output>

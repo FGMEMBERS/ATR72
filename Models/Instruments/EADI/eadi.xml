@@ -191,6 +191,18 @@
         </condition>		
     </animation>	
 	
+    <animation>
+        <type>translate</type>
+        <object-name>fd-roll</object-name>
+		<property>/autopilot/internal/target-roll-deg</property>
+		<factor>0.0005</factor>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>		
+    </animation>	
+	
 	<animation>
         <type>texmultiple</type>
         <object-name>horizon</object-name>
