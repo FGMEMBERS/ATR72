@@ -114,6 +114,33 @@
 			</equals>
         </condition>		
     </animation>	
+    <animation>
+        <type>translate</type>
+        <object-name>fd-pitch</object-name>
+		<expression>
+			<product>
+				<difference>
+					<product>
+						<property>/aircraft/afcs/vs-setting</property>
+						<value>0.01667</value>
+					</product>		  
+					<property>/velocities/vertical-speed-fps</property>
+				</difference>
+				<value>0.0005</value>
+			</product>
+        </expression>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+        <condition>
+			<equals>
+				<property>/aircraft/afcs/ver-mode</property>
+				<value>vs</value>
+			</equals>
+        </condition>		
+    </animation>	
 	
 	<animation>
         <type>texmultiple</type>
