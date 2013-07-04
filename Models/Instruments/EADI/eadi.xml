@@ -64,6 +64,31 @@
 			</and>
         </condition>
     </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>fd-pitch</object-name>
+		<expression>
+			<product>
+				<difference>
+					<property>/autopilot/internal/target-pitch-deg-ias</property>
+					<property>/orientation/pitch-deg</property>
+				</difference>
+				<value>0.001</value>
+			</product>
+        </expression>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+        <condition>
+			<equals>
+				<property>/aircraft/afcs/ver-mode</property>
+				<value>ias</value>
+			</equals>
+        </condition>		
+    </animation>
 	
 	<animation>
         <type>texmultiple</type>
