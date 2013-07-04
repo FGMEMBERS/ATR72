@@ -37,7 +37,29 @@
 		<property-base>sim/model/livery</property-base>
 		<texture-prop>texture</texture-prop>
 	</animation>
-
+	
+	<!-- LIVERY SELECT (wings and elevators)-->
+	<!-- Animation -->
+	<animation>
+		<type>material</type>
+		<!-- Wings -->
+		<object-name>wing.outer0</object-name>
+		<object-name>wing.outer1</object-name>
+		<object-name>wing.middle0</object-name>
+		<object-name>wing.middle1</object-name>
+		<object-name>flap.inner0</object-name>
+		<object-name>flap.inner1</object-name>
+		<object-name>flapb.inner0</object-name>
+		<object-name>flapb.inner1</object-name>
+		<object-name>wing</object-name>
+		<!-- Elevators -->
+		<object-name>elevator0</object-name>
+		<object-name>elevator1</object-name>
+		<object-name>hstab</object-name>
+		<property-base>sim/model/livery</property-base>
+		<texture-prop>texture-wings</texture-prop>
+	</animation>
+	
 	<!-- Nasal code -->
 	<nasal>
 		<load>
