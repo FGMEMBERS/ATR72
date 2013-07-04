@@ -4,11 +4,49 @@ OBJECT world
 kids 1
 OBJECT group
 name "poweron"
-loc 0.000960464 0.0288194 -0.00349044
-kids 25
+loc 0.000934674 0.0267333 -0.00323051
+kids 27
+OBJECT poly
+name "fd-roll"
+loc -0.000322376 -0.0264228 0.00324943
+texture "eadi.png"
+crease 45.000000
+numvert 4
+0 0.0270182 0.00034184
+0 -0.0270182 0.000341848
+0 -0.0270182 -0.000341848
+0 0.0270182 -0.000341855
+numsurf 1
+SURF 0x30
+mat 0
+refs 4
+0 0.49748 0.716923
+1 0.0673149 0.716923
+2 0.0673149 0.716923
+3 0.49748 0.716923
+kids 0
+OBJECT poly
+name "fd-pitch"
+loc -0.000322376 -0.0257287 0.00324949
+texture "eadi.png"
+crease 45.000000
+numvert 4
+0 -0.000341851 -0.0270182
+0 -0.000341851 0.0270182
+0 0.000341846 0.0270182
+0 0.000341846 -0.0270182
+numsurf 1
+SURF 0x30
+mat 0
+refs 4
+3 0.49748 0.716923
+2 0.0673149 0.716923
+1 0.0673149 0.716923
+0 0.49748 0.716923
+kids 0
 OBJECT poly
 name "horizon"
-loc -0.00104678 -0.0270719 0.00438769
+loc -0.00102099 -0.0249858 0.00412776
 texture "horizon.png"
 crease 45.000000
 numvert 4
@@ -27,7 +65,7 @@ refs 4
 kids 0
 OBJECT poly
 name "loc"
-loc -0.000389541 0.0233779 0.0483751
+loc -0.000363751 0.025464 0.0481152
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -46,7 +84,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.loc"
-loc 4.66161e-05 0.0233779 0.0299027
+loc 7.24063e-05 0.025464 0.0296428
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -65,7 +103,7 @@ refs 4
 kids 0
 OBJECT poly
 name "nav"
-loc -0.000389541 0.0233779 0.0484543
+loc -0.000363751 0.025464 0.0481944
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -84,7 +122,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.nav"
-loc 4.66161e-05 0.0233779 0.0298235
+loc 7.24063e-05 0.025464 0.0295636
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -103,7 +141,7 @@ refs 4
 kids 0
 OBJECT poly
 name "hdg"
-loc -0.000389541 0.0233779 0.0484543
+loc -0.000363751 0.025464 0.0481944
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -122,7 +160,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.hdg"
-loc 4.66161e-05 0.0233779 0.0298235
+loc 7.24063e-05 0.025464 0.0295636
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -141,7 +179,7 @@ refs 4
 kids 0
 OBJECT poly
 name "gs"
-loc -8.63319e-05 0.0230663 -0.0242038
+loc -6.05417e-05 0.0251524 -0.0244637
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -160,7 +198,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.gs"
-loc 0.000349826 0.0230663 -0.0426763
+loc 0.000375616 0.0251524 -0.0429362
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -179,7 +217,7 @@ refs 4
 kids 0
 OBJECT poly
 name "alt"
-loc -0.000389541 0.0230663 -0.0242335
+loc -0.000363751 0.0251524 -0.0244934
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -198,7 +236,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.alt"
-loc 4.66161e-05 0.0230663 -0.0427654
+loc 7.24063e-05 0.0251524 -0.0430253
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -217,7 +255,7 @@ refs 4
 kids 0
 OBJECT poly
 name "vs"
-loc -0.000389541 0.0230663 -0.0241741
+loc -0.000363751 0.0251524 -0.024434
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -236,7 +274,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.vs"
-loc 4.66161e-05 0.0230663 -0.0427654
+loc 7.24063e-05 0.0251524 -0.0430253
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -255,7 +293,7 @@ refs 4
 kids 0
 OBJECT poly
 name "ias"
-loc -0.000389541 0.0230663 -0.0241741
+loc -0.000363751 0.0251524 -0.024434
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -274,7 +312,7 @@ refs 4
 kids 0
 OBJECT poly
 name "active.ias"
-loc 4.66161e-05 0.0230663 -0.0427654
+loc 7.24063e-05 0.0251524 -0.0430253
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -293,7 +331,7 @@ refs 4
 kids 0
 OBJECT poly
 name "locscale"
-loc -0.000594836 -0.0821589 0.00351068
+loc -0.000569046 -0.0800728 0.00325075
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -312,7 +350,7 @@ refs 4
 kids 0
 OBJECT poly
 name "locpointer"
-loc 0.000389906 -0.081758 0.00340204
+loc 0.000415696 -0.0796719 0.00314211
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -331,7 +369,7 @@ refs 4
 kids 0
 OBJECT poly
 name "spdpointer"
-loc 0.000712466 -0.0269768 0.0651416
+loc 0.000738256 -0.0248907 0.0648817
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -350,7 +388,7 @@ refs 4
 kids 0
 OBJECT poly
 name "gspointer"
-loc 0.000712466 -0.0276742 -0.0562233
+loc 0.000738256 -0.0255881 -0.0564832
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -369,7 +407,7 @@ refs 4
 kids 0
 OBJECT poly
 name "spdscale"
-loc 0.000712466 -0.0275483 0.0537936
+loc 0.000738256 -0.0254622 0.0535337
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -388,7 +426,7 @@ refs 4
 kids 0
 OBJECT poly
 name "gsscale"
-loc 0.000712466 -0.028434 -0.0449116
+loc 0.000738256 -0.0263479 -0.0451715
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -407,7 +445,7 @@ refs 4
 kids 0
 OBJECT poly
 name "bank"
-loc 0.000834126 0.0110976 0.00278474
+loc 0.000859916 0.0131837 0.00252481
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -426,7 +464,7 @@ refs 4
 kids 0
 OBJECT poly
 name "center"
-loc -0.000348166 -0.0297235 0.00324916
+loc -0.000322376 -0.0276374 0.00298923
 texture "eadi.png"
 crease 45.000000
 numvert 4
@@ -445,7 +483,7 @@ refs 4
 kids 0
 OBJECT poly
 name "mask"
-loc 0.000238256 -0.0278227 0.00382648
+loc 0.000264046 -0.0257366 0.00356655
 texture "mask.png"
 crease 45.000000
 numvert 4
@@ -464,7 +502,7 @@ refs 4
 kids 0
 OBJECT poly
 name "ap"
-loc -0.000528319 0.0232722 -0.00603715
+loc -0.000502529 0.0253583 -0.00629708
 texture "eadi.png"
 crease 45.000000
 numvert 8
