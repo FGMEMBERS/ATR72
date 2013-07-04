@@ -90,6 +90,31 @@
         </condition>		
     </animation>
 	
+    <animation>
+        <type>translate</type>
+        <object-name>fd-pitch</object-name>
+		<expression>
+			<product>
+				<difference>
+					<property>/autopilot/internal/target-climb-rate-fps</property>
+					<property>/velocities/vertical-speed-fps</property>
+				</difference>
+				<value>0.0005</value>
+			</product>
+        </expression>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+        <condition>
+			<equals>
+				<property>/aircraft/afcs/ver-mode</property>
+				<value>alt</value>
+			</equals>
+        </condition>		
+    </animation>	
+	
 	<animation>
         <type>texmultiple</type>
         <object-name>horizon</object-name>
