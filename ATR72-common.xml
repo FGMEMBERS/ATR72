@@ -123,14 +123,7 @@
                     </item>
                     <item n="1">
 		                <label>Route Manager</label>
-		                <enabled type="bool">true</enabled>
-                        <binding>
-							<command>nasal</command>
-							<script>
-								var rm_info = gui.Dialog.new("sim/gui/dialogs/rm_info/dialog", "Aircraft/ATR72/Systems/rm-info-dlg.xml");
-								rm_info.open();
-							</script>
-                        </binding>
+		                <enabled type="bool">false</enabled>
                     </item>
                     <item n="2">
 		                <label>Previous Waypoint</label>
