@@ -47,7 +47,7 @@
 		<!-- Left to Right Cross-feed -->
 		
 		<switch>
-			<defualt value="0" />
+			<default value="0" />
 			<test logic="AND" value="18">
 				/controls/engines/x-feed EQ 1
 				propulsion/tank[0]/contents-lbs GT 0
@@ -60,7 +60,7 @@
 		<!-- Right to Left Cross-feed -->
 		
 		<switch>
-			<defualt value="0" />
+			<default value="0" />
 			<test logic="AND" value="18">
 				/controls/engines/x-feed EQ 1
 				propulsion/tank[1]/contents-lbs GT 0
