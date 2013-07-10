@@ -56,7 +56,7 @@ var general_loop_1 = {
 			me.convertIttDegreesToCelsius();
 			me.convertOilTemperatureToCelsius();
 			me.convertTorqueAndRpmToPercentage();
-			me.fuelCrossFeed();
+			# me.fuelCrossFeed(); Now managed with xml
 			me.setAutoPilotAltModeVerticalSpeeds();
 			me.setGlideslopeFilter();
 			me.updateFmcSettings();

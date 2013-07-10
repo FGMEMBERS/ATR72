@@ -176,7 +176,7 @@
       <roll>   0.00 </roll>
       <yaw>   0.00 </yaw>
     </orient>
-    <feed>0</feed>
+    <feed>2</feed>
     <thruster file="prop_hs568f">
 		<sense>1</sense>
 		<p_factor>50</p_factor>
@@ -205,7 +205,7 @@
       <roll>   0.00 </roll>
       <yaw>   0.00 </yaw>
     </orient>
-    <feed>1</feed>
+    <feed>3</feed>
      <thruster file="prop_hs568f">
      	<sense>1</sense>
 		<p_factor>50</p_factor>
@@ -243,8 +243,32 @@
      <contents unit="LBS"> 3000 </contents>
 	 <temperature>59</temperature>
   </tank>
+  
+  <tank type="FUEL"> <!-- Left Pipes -->
+     <location unit="IN">
+       <x> -24.034 </x>
+       <y>-165.732 </y>
+       <z>   75.25 </z>
+     </location>
+     <capacity unit="LBS"> 355 </capacity>
+     <contents unit="LBS"> 0 </contents>
+	 <temperature>65</temperature>
+  </tank>
+  
+  <tank type="FUEL"> <!-- Right Pipes -->
+     <location unit="IN">
+       <x> -24.034 </x>
+       <y>165.732 </y>
+       <z>   75.25 </z>
+     </location>
+     <capacity unit="LBS"> 355 </capacity>
+     <contents unit="LBS"> 0 </contents>
+	 <temperature>65</temperature>
+  </tank>
 
  </propulsion>
+ 
+ <system file="fuel"/>
 
  <flight_control name="FCS: ATR72-500">
 

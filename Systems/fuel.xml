@@ -1,0 +1,107 @@
+<?xml version="1.0"?>  
+ 
+<system name="fuel"> 
+
+	<!-- Fuel Tanks
+	
+		0 - Left Tank
+		1 - Right Tank
+		2 - Left Feeder
+		3 - Right Feeder 
+		
+		Fuel Pumps
+		
+		Left - /controls/engines/engine/fuel-pump
+		Right - /controls/engines/engine[1]/fuel-pump 
+		
+		Feeder compartments are 200L each (max fuel capacity = 355 lbs each)-->
+		
+	<channel name="Fuel Pumps">
+		
+		<!-- Left Tank to Left Pipes -->
+		
+		<switch>
+			<default value="32" /> <!-- 32 lbs/s -->
+			<test logic="OR" value="0">
+				/controls/engines/engine/fuel-pump EQ 0
+				propulsion/tank[0]/contents-lbs LE 0
+				propulsion/tank[2]/contents-lbs GE 354
+				accelerations/Nz LE -0.5
+			</test>
+			<output>propulsion/tank[0]/external-flow-rate/feeder</output>
+		</switch>
+		
+		<!-- Right Tank to Right Pipes -->
+		
+		<switch>
+			<default value="32" /> <!-- 32 lbs/s -->
+			<test logic="OR" value="0">
+				/controls/engines/engine[1]/fuel-pump EQ 0
+				propulsion/tank[1]/contents-lbs LE 0
+				propulsion/tank[3]/contents-lbs GE 354
+				accelerations/Nz LE -0.5
+			</test>
+			<output>propulsion/tank[1]/external-flow-rate/feeder</output>
+		</switch>
+		
+		<!-- Left to Right Cross-feed -->
+		
+		<switch>
+			<defualt value="0" />
+			<test logic="AND" value="18">
+				/controls/engines/x-feed EQ 1
+				propulsion/tank[0]/contents-lbs GT 0
+				propulsion/tank[1]/contents-lbs LT 5512
+				propulsion/tank[0]/contents-lbs GT propulsion/tank[1]/contents-lbs
+			</test>
+			<output>propulsion/tank[0]/external-flow-rate/x-feed</output>
+		</switch>
+		
+		<!-- Right to Left Cross-feed -->
+		
+		<switch>
+			<defualt value="0" />
+			<test logic="AND" value="18">
+				/controls/engines/x-feed EQ 1
+				propulsion/tank[1]/contents-lbs GT 0
+				propulsion/tank[0]/contents-lbs LT 5512
+				propulsion/tank[0]/contents-lbs LT propulsion/tank[1]/contents-lbs
+			</test>
+			<output>propulsion/tank[1]/external-flow-rate/x-feed</output>
+		</switch>
+		
+		<!-- Left Engine Feeder Pipes -->
+			
+		<summer>
+			<input>propulsion/tank[0]/external-flow-rate/feeder</input>
+			<output>propulsion/tank[2]/external-flow-rate-pps</output>
+		</summer>
+		
+		<!-- Right Engine Feeder Pipes -->
+		
+		<summer>
+			<input>propulsion/tank[1]/external-flow-rate/feeder</input>
+			<output>propulsion/tank[3]/external-flow-rate-pps</output>
+		</summer>
+		
+		<!-- Left Wing Fuel Tank -->
+		
+		<summer>
+			<input>-propulsion/tank[0]/external-flow-rate/feeder</input>
+			<input>-propulsion/tank[0]/external-flow-rate/x-feed</input>
+			<input>propulsion/tank[1]/external-flow-rate/x-feed</input>
+			<output>propulsion/tank[0]/external-flow-rate-pps</output>
+		</summer>
+		
+		<!-- Right Wing Fuel Tank -->
+		
+		<summer>
+			<input>-propulsion/tank[1]/external-flow-rate/feeder</input>
+			<input>-propulsion/tank[1]/external-flow-rate/x-feed</input>
+			<input>propulsion/tank[0]/external-flow-rate/x-feed</input>
+			<output>propulsion/tank[1]/external-flow-rate-pps</output>
+		</summer>
+	
+	</channel>
+
+</system>
