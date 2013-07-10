@@ -120,8 +120,8 @@
                           <!-- unfiltered derivative error -->
 	  <Ti>10</Ti>       <!-- integrator time -->
       <Td>0.000005</Td>    <!-- derivator time -->
-      <u_min>-1.0</u_min> <!-- minimum output clamp -->
-      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+      <u_min>-0.4</u_min> <!-- minimum output clamp -->
+      <u_max>0.4</u_max>  <!-- maximum output clamp -->
     </config>
   </pid-controller>
 	
@@ -228,8 +228,8 @@
                           <!-- unfiltered derivative error -->
       <Ti>10</Ti>       <!-- integrator time -->
       <Td>0.000005</Td>    <!-- derivator time -->
-      <u_min>-1.0</u_min> <!-- minimum output clamp -->
-      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+      <u_min>-0.5</u_min> <!-- minimum output clamp -->
+      <u_max>0.5</u_max>  <!-- maximum output clamp -->
     </config>
   </pid-controller>
 
@@ -337,8 +337,8 @@
                           <!-- unfiltered derivative error -->
       <Ti>10</Ti>       <!-- integrator time -->
       <Td>0.000005</Td>    <!-- derivator time -->
-      <u_min>-1.0</u_min> <!-- minimum output clamp -->
-      <u_max>1.0</u_max>  <!-- maximum output clamp -->
+      <u_min>-0.5</u_min> <!-- minimum output clamp -->
+      <u_max>0.5</u_max>  <!-- maximum output clamp -->
     </config>
   </pid-controller>
 
@@ -357,7 +357,7 @@
 		<input>/autopilot/internal/aileron-cmd</input>
 		<output>/controls/flight/aileron</output>
 		<type>noise-spike</type>
-		<max-rate-of-change>0.333</max-rate-of-change>
+		<max-rate-of-change>0.5</max-rate-of-change>
 	</filter>
 
 </PropertyList>
