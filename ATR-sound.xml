@@ -3,6 +3,62 @@
 <PropertyList>
 
 	<fx>
+		<caution>
+			<name>Caution</name>
+			<path>Aircraft/ATR72/Sounds/caution.wav</path>
+			<mode>once</mode>
+			<condition>
+				<and>
+					<equals>
+						<property>/aircraft/ccas/master-caution</property>
+						<value>1</value>
+					</equals>
+					<equals>
+						<property>/systems/electric/outputs/avionics</property>
+						<value>1</value>
+					</equals>
+				</and>
+			</condition>
+			<volume>
+				<property>sim/sound/effects/volume</property>
+				<factor>0.5</factor>
+			</volume>
+			<position>
+				<x>0.00</x>
+				<y>0.00</y>
+				<z>0.00</z>
+			</position>
+			<reference-dist>10.0</reference-dist>
+			<max-dist>100.0</max-dist>
+		</caution>
+		
+		<ap_off>
+			<name>AP off</name>
+			<path>Aircraft/ATR72/Sounds/ap_off.wav</path>
+			<mode>once</mode>
+			<condition>
+				<and>
+					<equals>
+						<property>/aircraft/afcs/ap-master</property>
+						<value>0</value>
+					</equals>
+					<equals>
+						<property>/systems/electric/outputs/avionics</property>
+						<value>1</value>
+					</equals>
+				</and>
+			</condition>
+			<volume>
+				<factor>5</factor>
+			</volume>
+			<position>
+				<x>0.00</x>
+				<y>0.00</y>
+				<z>0.00</z>
+			</position>
+			<reference-dist>10.0</reference-dist>
+			<max-dist>100.0</max-dist>
+		</ap_off>
 		
 		<warning_500>
 			<name>warning_500</name>
