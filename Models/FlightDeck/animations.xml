@@ -25,6 +25,69 @@
 			</not>
 		</condition>
 	</animation>
+
+	<!--fuel temperatures-->
+
+	<animation>
+		<type>material</type>
+		<object-name>fuel-temp.l</object-name>
+		<object-name>fuel-temp.r</object-name>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<property>/systems/electric/outputs/avionics</property>
+			</not>
+		</condition>
+	</animation>	
+	<animation>
+		<type>rotate</type>
+		<object-name>fuel-temp.l</object-name>
+		<property>/consumables/fuel/tank[0]/temperature_degC</property>
+		<center>
+    		<x-m>0</x-m>
+			<y-m>-0.124659</y-m>
+			<z-m>0.409354</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>fuel-temp.r</object-name>
+		<property>/consumables/fuel/tank[1]/temperature_degC</property>
+		<center>
+    		<x-m>0</x-m>
+			<y-m>0.08</y-m>
+			<z-m>0.407872</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
 	
 	<!-- flight directors -->
 	<animation>
