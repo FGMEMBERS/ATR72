@@ -89,7 +89,7 @@ var general_loop_1 = {
 		
 		updateWingFlex : func {
 			if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
-				setprop("/aircraft/wingflex", (getprop("/fdm/jsbsim/forces/fwz-aero-lbs") - 9000)*1.25);		
+				setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);		
 			}
 		},
 		
