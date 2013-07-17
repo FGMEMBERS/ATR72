@@ -92,8 +92,13 @@ var general_loop_1 = {
 				var liftTotal = getprop("/fdm/jsbsim/aero/force/Lift_alpha") + getprop("/fdm/jsbsim/aero/force/Lift_elevator") + getprop("/fdm/jsbsim/aero/force/Lift_flap") + getprop("/fdm/jsbsim/aero/force/Lift_speedbrake");
 				setprop("/aircraft/wingflex", liftTotal*1.25);
 				
+<<<<<<< HEAD
 				# For version > 2.10
 				# setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
+=======
+				// For version > 2.10
+				// setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
+>>>>>>> 4eefb8d1ef319093509d30773bb406937269f193
 			}
 		},
 		
