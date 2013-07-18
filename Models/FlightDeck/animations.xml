@@ -26,7 +26,7 @@
 		</condition>
 	</animation>
 
-	<!--fuel temperatures
+	<!--fuel temperatures -->
 
 	<animation>
 		<type>material</type>
@@ -62,34 +62,81 @@
 		<type>rotate</type>
 		<object-name>fuel-temp.l</object-name>
 		<property>/consumables/fuel/tank[0]/temperature_degC</property>
-		<offset-deg>-90</offset-deg>
-		<center>
-    		<x-m>0</x-m>
-			<y-m>-0.124659</y-m>
-			<z-m>0.409354</z-m>
-		</center>
+		<interpolation>
+			<entry>
+				<ind>-70</ind>
+				<dep>120</dep>
+			</entry>
+			<entry>
+				<ind>-54</ind>
+				<dep>110</dep>
+			</entry>
+			<entry>
+				<ind>0</ind>
+				<dep>90</dep>
+			</entry>
+			<entry>
+				<ind>50</ind>
+				<dep>-90</dep>
+			</entry>
+			<entry>
+				<ind>57</ind>
+				<dep>-110</dep>
+			</entry>
+			<entry>
+				<ind>70</ind>
+				<dep>-120</dep>
+			</entry>
+		</interpolation>
 		<axis>
-			<x1-m>0</x1-m>
-			<y1-m>-1.124659</y1-m>
-			<z1-m>0.409354</z1-m>			
+			<x1-m>-11.2516</x1-m>
+			<y1-m>-0.1247</y1-m>
+			<z1-m>0.4092</z1-m>
+			<x2-m>-11.2493</x2-m>
+			<y2-m>-0.1247</y2-m>
+			<z2-m>0.4096</z2-m>
 		</axis>
 	</animation>
 	<animation>
 		<type>rotate</type>
 		<object-name>fuel-temp.r</object-name>
 		<property>/consumables/fuel/tank[1]/temperature_degC</property>
-		<center>
-    		<x-m>0</x-m>
-			<y-m>0.08</y-m>
-			<z-m>0.407872</z-m>
-		</center>
+		<interpolation>
+			<entry>
+				<ind>-70</ind>
+				<dep>120</dep>
+			</entry>
+			<entry>
+				<ind>-54</ind>
+				<dep>110</dep>
+			</entry>
+			<entry>
+				<ind>0</ind>
+				<dep>90</dep>
+			</entry>
+			<entry>
+				<ind>50</ind>
+				<dep>-90</dep>
+			</entry>
+			<entry>
+				<ind>57</ind>
+				<dep>-110</dep>
+			</entry>
+			<entry>
+				<ind>70</ind>
+				<dep>-120</dep>
+			</entry>
+		</interpolation>
 		<axis>
-			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
+			<x1-m>-11.2516</x1-m>
+			<y1-m>0.0818</y1-m>
+			<z1-m>0.4092</z1-m>
+			<x2-m>-11.2493</x2-m>
+			<y2-m>0.0818</y2-m>
+			<z2-m>0.4096</z2-m>
 		</axis>
 	</animation>
-	-->
+	
 	<!-- flight directors -->
 	<animation>
 		<type>pick</type>
