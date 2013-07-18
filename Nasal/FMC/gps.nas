@@ -38,15 +38,15 @@ var gpsSearchAll = func(name) {
 }
 
 var internalSearch = func(name, types) {
-	if (getprop("/sim/version/flightgear") == "2.10.0") {
-		return Search210(name, types);
+	if ((getprop("/sim/version/flightgear") == "2.10.0") or  (getprop("/sim/version/flightgear") == "2.9.0") or (getprop("/sim/version/flightgear") == "2.8.0")) {
+		return SearchLegacy(name, types);
 	}
 	else {
-		return Search211(name, types);
+		return SearchNew(name, types);
 	}
 }
 
-var Search210 = func(name, types) {
+var SearchLegacy = func(name, types) {
 	var gps = "/instrumentation/gps/";
 	var results = [];
 	
@@ -83,7 +83,7 @@ var Search210 = func(name, types) {
 	return results;
 }
 
-var Search211 = func(name, types) {
+var SearchNew = func(name, types) {
 	var returnResults = [];
 	foreach(var type; types) {
 		var results = positioned.sortByRange(positioned.findByIdent(name, type));
