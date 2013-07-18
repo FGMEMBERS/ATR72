@@ -2,7 +2,26 @@ AC3Db
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.2 0.2 0.2  shi 128  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0.4 0.407843 0.4  spec 0 0 0  shi 32  trans 0
 OBJECT world
-kids 10
+kids 11
+OBJECT poly
+name "light-up"
+loc 0.00212764 0.0381618 0.0330523
+texture "hsi.png"
+crease 45.000000
+numvert 4
+0 0.00222538 -0.0273773
+0 0.00222538 -0.0389493
+0 -0.00222538 -0.0389493
+0 -0.00222538 -0.0273773
+numsurf 1
+SURF 0x30
+mat 0
+refs 4
+3 0.421905 0.820506
+2 0.599827 0.820506
+1 0.599827 0.703435
+0 0.421905 0.703435
+kids 0
 OBJECT poly
 name "needle2-selector"
 loc 0.00611554 -0.0368447 0.0359676
