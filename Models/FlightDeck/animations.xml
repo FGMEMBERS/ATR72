@@ -26,7 +26,7 @@
 		</condition>
 	</animation>
 
-	<!--fuel temperatures-->
+	<!--fuel temperatures
 
 	<animation>
 		<type>material</type>
@@ -62,15 +62,16 @@
 		<type>rotate</type>
 		<object-name>fuel-temp.l</object-name>
 		<property>/consumables/fuel/tank[0]/temperature_degC</property>
+		<offset-deg>-90</offset-deg>
 		<center>
     		<x-m>0</x-m>
 			<y-m>-0.124659</y-m>
 			<z-m>0.409354</z-m>
 		</center>
 		<axis>
-			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
+			<x1-m>0</x1-m>
+			<y1-m>-1.124659</y1-m>
+			<z1-m>0.409354</z1-m>			
 		</axis>
 	</animation>
 	<animation>
@@ -88,7 +89,7 @@
 			<z>0</z>
 		</axis>
 	</animation>
-	
+	-->
 	<!-- flight directors -->
 	<animation>
 		<type>pick</type>
