@@ -90,11 +90,11 @@ var general_loop_1 = {
 		updateWingFlex : func {
 			if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
 				# For version <= 2.10
-				var liftTotal = getprop("/fdm/jsbsim/aero/force/Lift_alpha") + getprop("/fdm/jsbsim/aero/force/Lift_flap");
-				setprop("/aircraft/wingflex", liftTotal*1.25);
+				# var liftTotal = getprop("/fdm/jsbsim/aero/force/Lift_alpha") + getprop("/fdm/jsbsim/aero/force/Lift_flap");
+				# setprop("/aircraft/wingflex", liftTotal*1.25);
 				
 				# For version > 2.10
-				# setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
+				setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
 			}
 		},
 		
