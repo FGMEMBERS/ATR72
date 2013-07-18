@@ -38,11 +38,11 @@ var gpsSearchAll = func(name) {
 }
 
 var internalSearch = func(name, types) {
-	if ((getprop("/sim/version/flightgear") == "2.10.0") or  (getprop("/sim/version/flightgear") == "2.9.0") or (getprop("/sim/version/flightgear") == "2.8.0")) {
-		return SearchLegacy(name, types);
+	if (fgfs.versionCheck()) {
+		return SearchNew(name, types);
 	}
 	else {
-		return SearchNew(name, types);
+		return SearchLegacy(name, types);
 	}
 }
 

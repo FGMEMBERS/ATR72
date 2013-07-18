@@ -89,13 +89,11 @@ var general_loop_1 = {
 		
 		updateWingFlex : func {
 			if ((getprop("/sim/replay/time") == 0) or (getprop("/sim/replay/time") == nil)) {
-				# For version <= 2.10 (Legacy)
-				if ((getprop("/sim/version/flightgear") == "2.10.0") or  (getprop("/sim/version/flightgear") == "2.9.0") or (getprop("/sim/version/flightgear") == "2.8.0")) {
+				if (fgfs.versionCheck()) { # New/Upcoming Version
+					setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
+				} else { # Legacy Version
 					var liftTotal = getprop("/fdm/jsbsim/aero/force/Lift_alpha") + getprop("/fdm/jsbsim/aero/force/Lift_flap");
 					setprop("/aircraft/wingflex", liftTotal*1.25);
-				} else {
-				# For version > 2.10 (New)
-					setprop("/aircraft/wingflex", getprop("/fdm/jsbsim/forces/fwz-aero-lbs")*1.25);
 				}
 			}
 		},
