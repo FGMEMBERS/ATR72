@@ -1,7 +1,5 @@
 var rev_prop = "/controls/reverse-pitch";
-var pwr_setting = "/controls/power-setting";
 setprop(rev_prop, 0);
-setprop(pwr_setting, 1.00);
 
 # Propellers Class
 
@@ -71,15 +69,11 @@ var prop = {
 		
 			var rpm_trgt = 0 + (getprop("/velocities/airspeed-kt")/2);
 		
-			approach_trgt(rpm_trgt, out_prop, 4, 1, 4);
+			approach_trgt(rpm_trgt, out_prop, 4, 1, 10);
 			
 		} else {
 		
-			var C_pwr = getprop(pwr_setting);
-		
-			var rpm_trgt = C_pwr * me.maxrpm;
-		
-			# var rpm_trgt = (me.maxrpm * (getprop(in_prop) - start_val)/(100 - start_val)) + (getprop("/velocities/airspeed-kt")/2);
+			var rpm_trgt = (me.maxrpm * (getprop(in_prop) - start_val)/(100 - start_val)) + (getprop("/velocities/airspeed-kt")/2);
 			
 			approach_trgt(rpm_trgt, out_prop, 4, 1, 10);
 			
@@ -89,7 +83,7 @@ var prop = {
 	
 	## Automatic Pitch
 		
-	set_pitch: func(n1_prop, out_prop, rpm_prop) {
+	set_pitch: func(rpm_prop, out_prop) {
 	
 		if(getprop(rev_prop)) {
 		
@@ -103,20 +97,26 @@ var prop = {
 				setprop(out_prop, (((400 - rpm)/400) * (me.maxpitch - me.minpitch)) + me.minpitch);
 			} else {
 			
-			#	var pitch = (((rpm - me.minrpm)/(me.maxrpm - me.minrpm)) * me.maxpitch);
-			
-			var pitch = ((getprop(n1_prop) - 50)/50)*me.maxpitch;
+				var pitch = (((rpm - me.minrpm)/(me.maxrpm - me.minrpm)) * me.maxpitch);
 				
-			if (pitch < me.minpitch)
-				approach_trgt(me.minpitch, out_prop, 0.25, 0.25, 0.5);
-			elsif (pitch > me.maxpitch)
-				approach_trgt(me.maxpitch, out_prop, 0.25, 0.25, 0.5);
-			else
-				approach_trgt(pitch, out_prop, 0.25, 0.25, 0.5);
+				if (pitch < me.minpitch)
+					approach_trgt(me.minpitch, out_prop, 0.25, 0.25, 0.5);
+				elsif (pitch > me.maxpitch)
+					approach_trgt(me.maxpitch, out_prop, 0.25, 0.25, 0.5);
+				else
+					approach_trgt(pitch, out_prop, 0.25, 0.25, 0.5);
 			
 			}
 			
 		}
+	
+	},
+	
+	## Reverse Pitch
+	
+	rev_pitch: func(out_prop) {
+	
+		setprop(out_prop, me.revpitch);
 	
 	},
 	
@@ -130,7 +130,7 @@ var prop = {
 		
 		var pitch = getprop(pitch_prop);
 	
-		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos((pitch-6) * DEG2RAD * 1.1);
+		var thrust = me.numblades * me.C_thrust * density * rpm * rpm  * pitch * DEG2RAD * math.cos(pitch * DEG2RAD * 1.1);
 	
 		setprop(thrust_prop, thrust);
 	
@@ -159,18 +159,17 @@ var prop = {
 		var currentPressure = getprop(defaultoilpressure_property);
 		
 		setprop(oilpressure_property, currentPressure*2);
-	},
+	},	
 	
 	set_oiltempCelsius : func (degreesF_property, degreesC_property) {
 		var currentF = getprop(degreesF_property);
 		setprop(degreesC_property, (currentF - 32) * 0.555556);
-	},
-	
+	}
 	## Fuel Flow (this is done here as the engine used in a dummy engine)
 	
-	set_fuelflow: func(psfc, rpm_prop, fuelflow_prop) {
-
-		var pwr_hp = (me.hp * getprop(rpm_prop))/me.maxrpm;
+	set_fuelflow: func(psfc, n1_prop, fuelflow_prop) {
+	
+		var pwr_hp = (me.hp * (getprop(n1_prop) - 20))/80;
 		
 		var fuelflow = 0;
 		
@@ -200,7 +199,7 @@ var propeller = {
             me.UPDATE_INTERVAL = 0.01;
             me.loopid = 0;
             
-			me.props = [prop.new(0, "HS 568F 6 Blade Propeller", 6, 850, 1200, 10, 45, -12, 0.58, 2700, 2), prop.new(1, "HS 568F 6 Blade Propeller", 6, 850, 1200, 10, 45, -10, 0.58, 2700, 3)];
+			me.props = [prop.new(0, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -20, 0.64, 2700), prop.new(1, "HS 568 4 Blade Propeller", 4, 850, 1400, 10, 55, -10, 0.64, 2700)];
             
             setprop("/engines/engine/thruster/prop_pitch", 10);
             setprop("/engines/engine[1]/thruster/prop_pitch", 10);
@@ -212,11 +211,11 @@ var propeller = {
             setprop("/engines/engine[1]/thruster/prop_torque", 25);
             
             setprop("/engines/engine/fuelflow_kgph", 0);
-            setprop("/engines/engine[1]/fuelflow_kgph", 0);            
+            setprop("/engines/engine[1]/fuelflow_kgph", 0);
             
 			setprop("/engines/engine/oil-pressure-psi-adjusted", 0);
             setprop("/engines/engine[1]/oil-pressure-psi-adjusted", 0);
-            
+			
             setprop("/aircraft/prop-brake-fail", 0);
             
             me.reset();
@@ -233,20 +232,20 @@ var propeller = {
     		
     		} else {
     		
-    			propeller.set_rpm(eng_tree ~ "n1", eng_tree ~ "thruster/prop_rpm", 50);
+    			propeller.set_rpm(eng_tree ~ "n1", eng_tree ~ "thruster/prop_rpm", 20);
     		
     		}
     		
-    		propeller.set_pitch(eng_tree ~ "n1", eng_tree ~ "thruster/prop_pitch", eng_tree ~ "thruster/prop_rpm");
+    		propeller.set_pitch(eng_tree ~ "thruster/prop_rpm", eng_tree ~ "thruster/prop_pitch");
     		
     		propeller.set_thrust("environment/density-slugft3", eng_tree ~ "thruster/prop_rpm", eng_tree~ "thruster/prop_pitch", "/fdm/jsbsim/external_reactions/hs568f_prop" ~ propeller.propid ~ "/magnitude");
     		
     		propeller.set_torque(eng_tree ~ "n1", eng_tree ~ "thruster/prop_rpm", eng_tree ~ "thruster/prop_torque");
     		
-    		propeller.set_fuelflow(0.45, eng_tree ~ "thruster/prop_rpm", eng_tree ~ "fuelflow-kgph");
+    		propeller.set_fuelflow(0.45, eng_tree ~ "n1", eng_tree ~ "fuelflow-kgph");
     		
 			propeller.set_oilpressure(eng_tree ~ "oil-pressure-psi", eng_tree ~ "oil-pressure-psi-adjusted");
-    		
+			
 			propeller.set_oiltempCelsius(eng_tree ~ "oil-temperature-degf", eng_tree ~ "oil-temperature-degc");
 			
     		propeller.fuel_consumption(eng_tree ~ "fuelflow-kgph", "/consumables/fuel/tank[" ~ propeller.feedtank ~ "]/level-kg");

@@ -242,8 +242,8 @@ var general_loop_1 = {
 			setprop("/engines/engine[0]/thruster/prop_torque-percent", get_percent(torque0, 3800));
 			setprop("/engines/engine[1]/thruster/prop_torque-percent", get_percent(torque1, 3800));
 			
-			setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1400));
-			setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1400));
+			setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1200));
+			setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1200));
 		},
 		
 		fuelCrossFeed : func {		
