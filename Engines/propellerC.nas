@@ -200,7 +200,7 @@ var propeller = {
             me.UPDATE_INTERVAL = 0.01;
             me.loopid = 0;
             
-			me.props = [prop.new(0, "HS 568F 4 Blade Propeller", 4, 850, 1200, 10, 45, -12, 0.64, 2700, 2), prop.new(1, "HS 568F 4 Blade Propeller", 4, 850, 1200, 10, 45, -10, 0.64, 2700, 3)];
+			me.props = [prop.new(0, "HS 568F 4 Blade Propeller", 4, 850, 1400, 4, 45, -12, 0.64, 2760, 2), prop.new(1, "HS 568F 4 Blade Propeller", 4, 850, 1400, 4, 45, -10, 0.64, 2760, 3)];
             
             setprop("/engines/engine/thruster/prop_pitch", 10);
             setprop("/engines/engine[1]/thruster/prop_pitch", 10);

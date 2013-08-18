@@ -25,6 +25,55 @@
 			</not>
 		</condition>
 	</animation>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>pwr.setting</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/power-setting</property>
+				<value>1</value>
+				<value>0.96</value>
+				<value>0.88</value>
+				<value>0.82</value>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>pwr.setting</object-name>
+		<property>/controls/power-setting</property>
+		<interpolation>
+			<entry>
+				<ind>1</ind>
+				<dep>80</dep>
+			</entry>
+			<entry>
+				<ind>0.96</ind>
+				<dep>40</dep>
+			</entry>
+			<entry>
+				<ind>0.88</ind>
+				<dep>-40</dep>
+			</entry>
+			<entry>
+				<ind>0.82</ind>
+				<dep>-80</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>-11.2795</x1-m>
+			<y1-m>-0.1363</y1-m>
+			<z1-m>0.5367</z1-m>
+			<x2-m>-11.2544</x2-m>
+			<y2-m>-0.1363</y2-m>
+			<z2-m>0.5430</z2-m>
+		</axis>
+	</animation>
 
 	<!--fuel temperatures -->
 
