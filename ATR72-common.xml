@@ -27,7 +27,7 @@
 		<instrumentation>
 			<path>Aircraft/ATR72/Systems/instrumentation.xml</path>
 		</instrumentation>
-        
+
 	<view n="0">
 		<name>Pilot View</name>
 		<type>lookfrom</type>
@@ -247,7 +247,11 @@
 			</default>
 		</menubar>
 		
-		<systems>
+	<systems>
+		<autopilot>
+			<name>Cabin Pressurization</name>
+			<path>Aircraft/ATR72/Systems/pressurization.xml</path>
+		</autopilot>
 		<!-- Disable Generic FlightGear Electrical System for my nasal system to work -->
 		<electrical>
 			<path></path>
@@ -468,6 +472,11 @@
 	</aircraft>
 	
 	<controls>
+		<pressurization>
+			<cabin-pressure-cruise-psi type="double">11.3</cabin-pressure-cruise-psi>
+			<cabin-pressure-cruise-alt-ft type="double">7000</cabin-pressure-cruise-alt-ft>
+			<auto-descent-rate>-400</auto-descent-rate>
+		</pressurization>	
 		<gear>
 			<tiller-cmd-norm type="double">0</tiller-cmd-norm>
 			<tiller-enabled type="bool">false</tiller-enabled>
@@ -646,7 +655,10 @@
             <frequencies>
                 <source>/instrumentation/nav[1]/frequencies/selected-mhz</source>
             </frequencies>
-        </dme>		
+        </dme>	
+		<pressurization>
+			<cabin-altitude-ft>0</cabin-altitude-ft>
+		</pressurization>
 	</instrumentation>
 
 	<consumables>

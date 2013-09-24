@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+ 
+<!-- General cabin pressurization controller -->
+
+<!--    Modification History
+     Jan 2011	S.Hamilton	Initial cut
+     -->
+
+
+<PropertyList>
+
+ <filter>
+	<type>gain</type>
+	<name>create pressure in psi</name>
+	<gain>1.0</gain>
+	<input>
+		<expression>
+			<product>
+				<property>systems/static/pressure-inhg</property>
+				<value>0.49115420057252546</value>
+			</product>
+		</expression>
+	</input>
+	<output>
+		<property>controls/pressurization/external-pressure-psi</property>
+	</output>
+ </filter>
+
+ <logic>
+   <name>pressurization required</name>
+   <input>
+    <and>
+	  <not><property>gear/gear[0]/wow</property></not>
+	  <not><property>gear/gear[1]/wow</property></not>
+	  <not><property>gear/gear[2]/wow</property></not>
+	  <not><property>controls/pressurization/ditch</property></not>
+	  <less-than>
+	    <property>instrumentation/pressurization/cabin-altitude-ft</property>
+	    <value>8000</value>
+	  </less-than>
+    </and>
+  </input>
+  <output>
+    <property>controls/pressurization/engaged</property>
+  </output>
+ </logic>
+
+<!--
+ <logic>
+	<name>descent logic</name>
+	<input>
+		<and>
+			<property>/controls/pressurization/engaged</property>
+			<less-than>
+				<property>instrumentation/gps/indicated-vertical-speed</property>
+				<value>-300</value>
+			</less-than>
+		</and>
+	</input>
+	<output>
+		<property>/controls/pressurization/descent-engaged</property>
+	</output>
+ </logic>
+-->
+	<logic>
+		<name>ascent logic</name>
+		<input>
+			<and>
+				<not>
+					<property>/controls/pressurization/manual</property>
+				</not>
+				<property>/controls/pressurization/engaged</property>
+				<greater-than>
+					<property>instrumentation/gps/indicated-vertical-speed</property>
+					<value>300</value>
+				</greater-than>
+			</and>
+		</input>
+		<output>
+			<property>/controls/pressurization/ascent-engaged</property>
+		</output>
+	</logic>
+
+	<filter>
+		<name>determine proper rate of change</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<condition>
+			<or>
+				<property>/controls/pressurization/ascent-engaged</property>
+				<property>/controls/pressurization/descent-engaged</property>
+			</or>
+		</condition>
+		<input>
+			<property>/velocities/vertical-speed-fps</property>
+		</input>
+		<output>
+			<property>/controls/pressurization/auto-rate-of-change-fpm</property>
+			<min>
+				<property>/controls/pressurization/auto-descent-rate</property>
+			</min>
+			<max>2500</max>
+		</output>
+	</filter>
+	
+	<filter>
+		<name>convert rate of change to psi</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<input>
+			<!-- p = 14.7*e^(-0.21a) -->
+			<product>
+				<value>14.7</value>
+				<pow>
+					<value>2.718281828459045</value>
+					<product>
+						<value>-0.21</value>
+						<property>/controls/pressurization/auto-rate-of-change-fpm</property>
+					</product>
+				</pow>
+			</product>
+		</input>
+		<output>
+			<property>/controls/pressurization/rate-of-change-psipm</property>
+		</output>
+	</filter>
+	
+	<!-- 
+		filter to adjust target on descent in auto mode
+		needs to adjust to landing elevation
+	-->
+	
+	<filter>
+		<name>adjust cabin to target in auto mode ascent</name>
+		<type>noise-spike</type>
+		<debug>false</debug>
+		<feedback-if-disabled>false</feedback-if-disabled>
+		<enable>
+			<condition>
+				<and>
+					<property>/controls/pressurization/engaged</property>
+					<property>/controls/pressurization/ascent-engaged</property>					
+				</and>
+			</condition>
+		</enable>
+		<input>/controls/pressurization/cabin-pressure-cruise-psi</input>
+		<output>
+			<property>/controls/pressurization/cabin-pressure-psi</property>
+			<min>
+				<value>11.1</value>
+			</min>
+			<max>
+				<value>15.0</value>
+			</max>
+		</output>
+		<max-rate-of-change>
+			<expression>
+				<div>
+					<property>/controls/pressurization/rate-of-change-psipm</property>
+					<value>60</value>
+				</div>
+			</expression>
+		</max-rate-of-change>
+    </filter>
+	
+	<!--
+		filter to move auto-rate-of-change-fpm from /controls/ to /instrumentation/
+	-->
+	
+	<filter>
+		<type>gain</type>
+		<name>set cabin pressure on ground</name>
+		<gain>1.0</gain>	
+		<condition>
+			<or>
+				<property>/gear/gear[0]/wow</property>
+				<property>/gear/gear[1]/wow</property>
+				<property>/gear/gear[2]/wow</property>
+			</or>
+		</condition>
+		<input>
+			<property>controls/pressurization/external-pressure-psi</property>
+		</input>
+		<output>
+			<property>controls/pressurization/cabin-pressure-psi</property>
+		</output>
+	</filter>
+	<filter>
+		<type>gain</type>
+		<name>pressure difference</name>
+		<gain>1.0</gain>
+		<input>
+			<expression>
+				<abs>
+					<diff>
+						<property>controls/pressurization/external-pressure-psi</property>
+						<property>controls/pressurization/cabin-pressure-psi</property>
+					</diff>
+				</abs>
+			</expression>
+		</input>
+		<output>
+			<property>instrumentation/pressurization/pressure-difference-psi</property>
+		</output>
+	</filter>
+	<filter>
+		<type>gain</type>
+		<name>set cabin pressure in ft</name>
+		<gain>1.0</gain>
+		<input>
+			<expression>
+				<prod>
+					<value>3.28</value>
+					<prod>
+						<value>100</value>
+						<div>
+							<log>
+								<div>
+									<property>controls/pressurization/cabin-pressure-psi</property>
+									<value>14.7</value>
+								</div>
+							</log>
+							<value>-0.012</value>
+						</div>
+					</prod>
+				</prod>
+			</expression>
+		</input>
+		<output>
+			<property>instrumentation/pressurization/cabin-altitude-ft</property>
+		</output>
+	</filter>
+</PropertyList>
