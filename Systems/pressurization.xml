@@ -197,11 +197,45 @@
 		
 	</filter>
 	
-	<!-- change rate from feet/min to psi/min -->
 	<filter>
-		<name>convert rate of change to psi</name>
+		<name>convert manual rate of change to psi</name>
 		<type>gain</type>
 		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<property>/controls/pressurization/mode</property>
+				<value>manual</value>
+			</condition>
+		</enable>
+		<input>
+			<!-- p = 14.7*e^(-0.21a) -->
+			<product>
+				<value>14.7</value>
+				<pow>
+					<value>2.718281828459045</value>
+					<product>
+						<value>-0.21</value>
+						<property>/controls/pressurization/manual-rate-of-change-fpm</property>
+					</product>
+				</pow>
+			</product>
+		</input>
+		<output>
+			<property>/controls/pressurization/rate-of-change-psipm</property>
+		</output>
+	</filter>
+	
+	<!-- change auto rate from feet/min to psi/min -->
+	<filter>
+		<name>convert auto rate of change to psi</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<property>/controls/pressurization/mode</property>
+				<value>auto</value>
+			</condition>
+		</enable>
 		<input>
 			<!-- p = 14.7*e^(-0.21a) -->
 			<product>
@@ -220,7 +254,7 @@
 		</output>
 	</filter>
 	
-	<!-- adjust the cabin pressure -->
+	<!-- adjust the cabin pressure auto mode -->
 	<filter>
 		<name>adjust cabin to target in auto mode ascent</name>
 		<type>noise-spike</type>
@@ -228,13 +262,7 @@
 		<feedback-if-disabled>false</feedback-if-disabled>
 		<enable>
 			<condition>
-				<and>
-					<property>/controls/pressurization/engaged</property>
-					<equals>
-						<property>/controls/pressurization/direction</property>					
-						<value>ascent</value>
-					</equals>
-				</and>
+				<property>/controls/pressurization/enabled</property>
 			</condition>
 		</enable>
 		<input>
@@ -280,10 +308,13 @@
 		<gain>1.0</gain>
 		<enable>
 			<condition>
-				<equals>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
-				</equals>
+				<and>
+					<property>/controls/pressurization/enabled</property>
+					<equals>
+						<property>/controls/pressurization/operation-mode</property>
+						<value>auto</value>
+					</equals>
+				</and>
 			</condition>
 		</enable>
 		<input>
@@ -302,9 +333,36 @@
 			<property>/controls/pressurization/auto-landing-elevation-psi</property>
 		</output>
 	</filter>
+
+	<!-- clamp the cabin pressure in manual mode -->	
+	<filter>
+		<name>clamp output of the cabin pressure when in manual mode</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<and>
+					<property>controls/pressurization/engaged</property>
+					<equals>
+						<property>controls/pressurization/operation-mode</property>
+						<value>manual</value>
+					</equals>
+				</and>
+			</condition>
+		</enable>
+		<input>
+			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
+			<min>
+				<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
+			</min>
+			<max>15</max>		
+		</input>
+		<output>
+			<property>/controls/pressurization/cabin-pressure-psi</property>
+		</output>
+	</filter>
 	
-	<!-- clamp the cabin pressure in auto mode -->
-	
+	<!-- clamp the cabin pressure in auto mode -->	
 	<filter>
 		<name>clamp output of the cabin pressure when in auto mode</name>
 		<type>gain</type>
