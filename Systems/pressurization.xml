@@ -2,13 +2,8 @@
  
 <!-- General cabin pressurization controller -->
 
-<!--    Modification History
-     Jan 2011	S.Hamilton	Initial cut
-     -->
-
-
 <PropertyList>
-
+ <!-- create pressurization in psi -->
  <filter>
 	<type>gain</type>
 	<name>create pressure in psi</name>
@@ -26,6 +21,7 @@
 	</output>
  </filter>
 
+ <!-- enable pressurization when airborne -->
  <logic>
    <name>pressurization required</name>
    <input>
@@ -62,6 +58,7 @@
 	</output>
  </logic>
 -->
+	<!-- automated ascent pressurization engage -->
 	<logic>
 		<name>ascent logic</name>
 		<input>
@@ -81,6 +78,7 @@
 		</output>
 	</logic>
 
+	<!-- calculate rate of pressurization change -->
 	<filter>
 		<name>determine proper rate of change</name>
 		<type>gain</type>
@@ -92,14 +90,17 @@
 			</or>
 		</condition>
 		<input>
-			<property>/velocities/vertical-speed-fps</property>
+			<product>
+				<value>60</value>
+				<property>/velocities/vertical-speed-fps</property>
+			</product>
 		</input>
 		<output>
 			<property>/controls/pressurization/auto-rate-of-change-fpm</property>
-			<min>
+			<!--<min>
 				<property>/controls/pressurization/auto-descent-rate</property>
 			</min>
-			<max>2500</max>
+			<max>2500</max>-->
 		</output>
 	</filter>
 	
@@ -130,6 +131,7 @@
 		needs to adjust to landing elevation
 	-->
 	
+	<!-- adjust the cabin pressure -->
 	<filter>
 		<name>adjust cabin to target in auto mode ascent</name>
 		<type>noise-spike</type>
@@ -143,16 +145,13 @@
 				</and>
 			</condition>
 		</enable>
-		<input>/controls/pressurization/cabin-pressure-cruise-psi</input>
+		<input>
+			<property>/controls/pressurization/cabin-pressure-cruise-psi</property>			
+		</input>
 		<output>
-			<property>/controls/pressurization/cabin-pressure-psi</property>
-			<min>
-				<value>11.1</value>
-			</min>
-			<max>
-				<value>15.0</value>
-			</max>
+			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
 		</output>
+
 		<max-rate-of-change>
 			<expression>
 				<div>
@@ -163,10 +162,7 @@
 		</max-rate-of-change>
     </filter>
 	
-	<!--
-		filter to move auto-rate-of-change-fpm from /controls/ to /instrumentation/
-	-->
-	
+	<!-- set the cabin pressure equal to external pressure when the plane is on the ground -->
 	<filter>
 		<type>gain</type>
 		<name>set cabin pressure on ground</name>
@@ -182,9 +178,31 @@
 			<property>controls/pressurization/external-pressure-psi</property>
 		</input>
 		<output>
-			<property>controls/pressurization/cabin-pressure-psi</property>
+			<property>controls/pressurization/temp-cabin-pressure-psi</property>
 		</output>
 	</filter>
+
+	<!-- clamp the cabin pressure -->
+	<filter>
+		<name>clamp output of the cabin pressure</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<property>/controls/pressurization/engaged</property>
+		</enable>
+		<input>
+			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
+			<min>
+				<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
+			</min>
+			<max>15.0</max>		
+		</input>
+		<output>
+			<property>/controls/pressurization/cabin-pressure-psi</property>
+		</output>
+	</filter>
+	
+	<!-- set the pressure difference between the cabin and exterior -->
 	<filter>
 		<type>gain</type>
 		<name>pressure difference</name>
@@ -192,17 +210,19 @@
 		<input>
 			<expression>
 				<abs>
-					<diff>
+					<difference>
 						<property>controls/pressurization/external-pressure-psi</property>
 						<property>controls/pressurization/cabin-pressure-psi</property>
-					</diff>
+					</difference>
 				</abs>
 			</expression>
 		</input>
 		<output>
-			<property>instrumentation/pressurization/pressure-difference-psi</property>
+			<property>controls/pressurization/pressure-difference-psi</property>
 		</output>
 	</filter>
+	
+	<!-- set the cabin altitude in ft -->
 	<filter>
 		<type>gain</type>
 		<name>set cabin pressure in ft</name>
@@ -227,7 +247,7 @@
 			</expression>
 		</input>
 		<output>
-			<property>instrumentation/pressurization/cabin-altitude-ft</property>
+			<property>controls/pressurization/cabin-altitude-ft</property>
 		</output>
 	</filter>
 </PropertyList>
