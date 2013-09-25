@@ -475,7 +475,11 @@
 		<pressurization>
 			<cabin-pressure-cruise-psi type="double">11.3</cabin-pressure-cruise-psi>
 			<cabin-pressure-cruise-alt-ft type="double">7000</cabin-pressure-cruise-alt-ft>
-			<auto-descent-rate>-400</auto-descent-rate>
+			<auto-descent-max-fpm type="double">-400</auto-descent-max-fpm>
+			<operation-mode type="string">auto</operation-mode>
+			<direction type="string">level</direction>
+			<ditch type="bool">false</ditch>
+			<engaged type="bool">false</engaged>
 		</pressurization>	
 		<gear>
 			<tiller-cmd-norm type="double">0</tiller-cmd-norm>

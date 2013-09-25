@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- ATR72-500(C) Navigation Display Settings -->
+
+<PropertyList>
+
+	<name>rm_info</name>
+	<layout>vbox</layout>
+
+	<text>
+		<label>Important Message!</label>
+	</text>
+
+	<hrule />
+
+	<text>
+		<label>This Aircraft (ATR72-500(C)) does not use FlightGear's generic Route Manager system.</label>
+	</text>
+
+	<text>
+		<label>To realistically plan out our Flight Plan, please use the Flight Management Computer in the cockpit.</label>
+	</text>
+
+	<hrule />
+	
+	<button>
+		<legend>OK</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+		
+</PropertyList>
