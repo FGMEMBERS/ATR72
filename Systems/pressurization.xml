@@ -2,8 +2,15 @@
  
 <!-- General cabin pressurization controller -->
 
+<!-- TODO -->
+<!-- set descent rate based on button selection -->
+<!-- set current functionality to work only when auto mode -->
+<!-- add manual mode -->
+<!-- add pressure dump mode -->
+<!-- add ditch mode -->
+
 <PropertyList>
-	<!-- create external pressure in psi -->
+	<!-- create static pressure in psi -->
 	<filter>
 		<type>gain</type>
 		<name>create pressure in psi</name>
@@ -17,7 +24,7 @@
 			</expression>
 		</input>
 		<output>
-			<property>controls/pressurization/external-pressure-psi</property>
+			<property>systems/static/pressure-psi</property>
 		</output>
 	</filter>
 
@@ -35,360 +42,305 @@
 			<property>controls/pressurization/engaged</property>
 		</output>
 	</logic>
-	
-	<!-- disable pressurization-->
-	<logic>
-		<name>pressurization required</name>
-		<inverted>true</inverted>
+
+	<!-- set the auto landing elevation minimum pressure -->
+	<filter>
+		<name>set auto mode landing elevation pressure</name>
+		<type>gain</type>
+		<gain>1.0</gain>
 		<input>
-			<or>
-				<property>gear/gear[0]/wow</property>
-				<property>gear/gear[1]/wow</property>
-				<property>gear/gear[2]/wow</property>
-			</or>
+			<expression>
+				<prod>
+					<value>14.7</value>
+					<pow>
+						<value>2.71828</value>
+						<prod>
+							<value>-0.21</value>
+							<prod>
+								<property>/controls/pressurization/auto-landing-elevation-ft</property>
+								<value>0.000189394</value>
+							</prod>
+						</prod>
+					</pow>					
+				</prod>
+			</expression>
 		</input>
 		<output>
-			<property>controls/pressurization/engaged</property>
+			<property>/controls/pressurization/auto-landing-elevation-psi</property>
 		</output>
-	</logic>
-
-	<!-- automated descent pressurization engage -->
+	</filter>
+	
+	<!-- identify if aircraft is descending -->
 	<logic>
 		<name>descent logic</name>
 		<input>
 			<and>
 				<equals>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
+					<property>/controls/pressurization/engaged</property>
+					<value>1</value>
 				</equals>
-				<property>/controls/pressurization/engaged</property>
 				<less-than>
 					<property>instrumentation/gps/indicated-vertical-speed</property>
-					<value>-1</value>
+					<value>0</value>
 				</less-than>
-			</and>
+			</and>		
 		</input>
 		<output>
-			<property>/controls/pressurization/direction</property>
-			<value>descent</value>
+			<property>/controls/pressurization/descent-engaged</property>
 		</output>
 	</logic>
-
-	<!-- automated ascent pressurization engage -->
+	
+	<!-- identify if aircraft is ascending -->
 	<logic>
-		<name>ascent logic</name>
+		<name>descent logic</name>
 		<input>
 			<and>
 				<equals>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
+					<property>/controls/pressurization/engaged</property>
+					<value>1</value>
 				</equals>
-				<property>/controls/pressurization/engaged</property>
 				<greater-than>
 					<property>instrumentation/gps/indicated-vertical-speed</property>
-					<value>1</value>
+					<value>0</value>
 				</greater-than>
-			</and>
+			</and>		
 		</input>
 		<output>
-			<property>/controls/pressurization/direction</property>
-			<value>ascent</value>
+			<property>/controls/pressurization/ascent-engaged</property>
 		</output>
 	</logic>
 	
-	<!--set that the plane is neither ascending nor descending-->
-	<logic>
-		<name>neither ascent nor descent</name>
+	<!-- set ascent ratio -->
+	<filter>
+		<type>gain</type>
+		<name>ascent ratio</name>
+		<gain>-0.8</gain>
 		<input>
-			<and>
-				<equals>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
-				</equals>
+			<condition>
 				<property>/controls/pressurization/engaged</property>
-				<less-than>
-					<property>instrumentation/gps/indicated-vertical-speed</property>
-					<value>1</value>
-				</less-than>
-				<greater-than>
-					<property>instrumentation/gps/indicated-vertical-speed</property>
-					<value>-1</value>
-				</greater-than>
-			</and>
+			</condition>
+			<expression>
+				<div>
+					<dif>
+						<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
+						<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+					</dif>
+					<dif>
+						<property>/controls/pressurization/outside-pressure-cruise-psi</property>
+						<property>/systems/static/pressure-psi</property>
+					</dif>
+				</div>
+			</expression>
+		</input>
+		<input>
+			<condition>
+				<not><property>/controls/pressurization/engaged</property></not>
+			</condition>
+			<value>0</value>
 		</input>
 		<output>
-			<property>/controls/pressurization/direction</property>
-			<value>level</value>
+			<property>/controls/pressurization/ascent-ratio</property>
 		</output>
-	</logic>
+		<min>-0.3</min>
+		<max>0</max>
+	</filter>
+	
+	<!-- set descent ratio -->
+	<filter>
+		<type>gain</type>
+		<name>descent ratio</name>
+		<gain>0.8</gain>
+		<input>
+			<condition>
+				<property>/controls/pressurization/engaged</property>
+			</condition>
+			<expression>
+				<div>
+					<dif>
+						<property>/controls/pressurization/auto-landing-elevation-psi</property>
+						<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+					</dif>
+					<dif>
+						<property>/controls/pressurization/auto-landing-elevation-psi</property>
+						<property>/systems/static/pressure-psi</property>
+					</dif>
+				</div>
+			</expression>
+		</input>
+		<input>
+			<condition>
+				<not><property>/controls/pressurization/engaged</property></not>
+			</condition>
+			<value>0</value>
+		</input>
+		<output>
+			<property>/controls/pressurization/descent-ratio</property>
+		</output>
+		<min>0</min>
+		<max>0.3</max>		
+	</filter>
 
-	<!-- calculate rate of pressurization change -->
+	<!-- calculate descent target -->
 	<filter>
-		<name>determine proper rate of change</name>
 		<type>gain</type>
 		<gain>1.0</gain>
-		<condition>
-			<equal>
-				<property>/controls/pressurization/operation-mode</property>
-				<value>auto</value>
-			</equal>
-		</condition>
-		<input>
-			<product>
-				<value>60</value>
-				<property>/velocities/vertical-speed-fps</property>
-			</product>
-		</input>
-		<output>
-			<property>/controls/pressurization/temp-auto-rate-of-change-fpm</property>
-		</output>
-	</filter>
-	
-	<!-- clamp the auto descent rate based on max descent rate button -->
-	<filter>
-		<name>clamp rate of descent</name>
-		<type>gain</type>
-		<gain>1.0</gain>
-		<condition>
-			<and>
-				<equal>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
-				</equal>				
-				<equal>
-					<property>/controls/pressurization/direction</property>
-					<value>descent</value>
-				</equal>
-			</and>
-		</condition>
-		<input>
-			<property>/controls/pressurization/temp-auto-rate-of-change-fpm</property>
-			<min>/controls/pressurization/auto-descent-max-fpm</min>
-			<max>0</max>
-		</input>
-		<output>
-			<property>/controls/pressurization/auto-rate-of-change-fpm</property>
-		</output>
-	</filter>
-	
-	<!-- pass through the auto ascent rate without clamping -->
-	<filter>
-		<name>pass through auto ascent rate</name>
-		<type>gain</type>
-		<gain>1.0</gain>
-		<condition>
-			<and>
-				<equal>
-					<property>/controls/pressurization/operation-mode</property>
-					<value>auto</value>
-				</equal>				
-				<equal>
-					<property>/controls/pressurization/direction</property>
-					<value>ascent</value>
-				</equal>
-			</and>
-		</condition>
-		<input>
-			<property>/controls/pressurization/temp-auto-rate-of-change-fpm</property>
-		</input>
-		<output>
-			<property>/controls/pressurization/auto-rate-of-change-fpm</property>
-		</output>
-		
-	</filter>
-	
-	<filter>
-		<name>convert manual rate of change to psi</name>
-		<type>gain</type>
-		<gain>1.0</gain>
+		<name>descent target calc</name>
 		<enable>
 			<condition>
-				<property>/controls/pressurization/mode</property>
-				<value>manual</value>
+				<and>
+					<property>/controls/pressurization/descent-engaged</property>
+					<property>/controls/pressurization/engaged</property>
+				</and>
 			</condition>
 		</enable>
 		<input>
-			<!-- p = 14.7*e^(-0.21a) -->
-			<product>
-				<value>14.7</value>
-				<pow>
-					<value>2.718281828459045</value>
-					<product>
-						<value>-0.21</value>
-						<property>/controls/pressurization/manual-rate-of-change-fpm</property>
-					</product>
-				</pow>
-			</product>
+			<expression>
+				<sum>
+					<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+					<property>/controls/pressurization/descent-ratio</property>
+				</sum>
+			</expression>
 		</input>
 		<output>
-			<property>/controls/pressurization/rate-of-change-psipm</property>
+			<property>instrumentation/pressurization/temp-target-cabin-pressure-psi</property>
+			<min>
+				<property>controls/pressurization/cabin-pressure-cruise-psi</property>
+			</min>
+			<max>
+				<property>controls/pressurization/auto-landing-elevation-psi</property>
+			</max>
 		</output>
 	</filter>
 	
-	<!-- change auto rate from feet/min to psi/min -->
+	<!-- calculate ascent target -->
 	<filter>
-		<name>convert auto rate of change to psi</name>
 		<type>gain</type>
 		<gain>1.0</gain>
+		<name>ascent target calc</name>
 		<enable>
 			<condition>
-				<property>/controls/pressurization/mode</property>
-				<value>auto</value>
+				<and>
+					<property>/controls/pressurization/ascent-engaged</property>
+					<property>/controls/pressurization/engaged</property>
+				</and>
 			</condition>
 		</enable>
 		<input>
-			<!-- p = 14.7*e^(-0.21a) -->
-			<product>
-				<value>14.7</value>
-				<pow>
-					<value>2.718281828459045</value>
-					<product>
-						<value>-0.21</value>
-						<property>/controls/pressurization/auto-rate-of-change-fpm</property>
-					</product>
-				</pow>
-			</product>
+			<expression>
+				<sum>
+					<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+					<property>/controls/pressurization/ascent-ratio</property>
+				</sum>
+			</expression>
 		</input>
 		<output>
-			<property>/controls/pressurization/rate-of-change-psipm</property>
+			<property>instrumentation/pressurization/temp-target-cabin-pressure-psi</property>
+			<min>
+				<property>controls/pressurization/cabin-pressure-cruise-psi</property>
+			</min>
+			<max>
+				<property>controls/pressurization/auto-landing-elevation-psi</property>
+			</max>
 		</output>
-	</filter>
-	
-	<!-- adjust the cabin pressure auto mode -->
+	</filter>	
+
+	<!-- adjust temp target to target -->
 	<filter>
-		<name>adjust cabin to target in auto mode ascent</name>
+		<name>adjust temp target to target</name>
 		<type>noise-spike</type>
 		<debug>false</debug>
 		<feedback-if-disabled>false</feedback-if-disabled>
 		<enable>
 			<condition>
-				<property>/controls/pressurization/enabled</property>
+				<and>
+					<property>/controls/pressurization/engaged</property>
+					<or>
+						<property>/controls/pressurization/ascent-engaged</property>
+						<property>/controls/pressurization/descent-engaged</property>
+					</or>
+				</and>
 			</condition>
 		</enable>
-		<input>
-			<property>/controls/pressurization/cabin-pressure-cruise-psi</property>			
-		</input>
+		<input>/instrumentation/pressurization/temp-target-cabin-pressure-psi</input>
 		<output>
-			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
+			<property>/instrumentation/pressurization/target-cabin-pressure-psi</property>
 		</output>
-
-		<max-rate-of-change>
+		<max-rate-of-change>0.025</max-rate-of-change>
+	</filter>
+	
+	<!-- adjust cabin pressure towards target pressure -->
+	<filter>
+		<name>adjust cabin to target</name>
+		<type>noise-spike</type>
+		<debug>false</debug>
+		<feedback-if-disabled>false</feedback-if-disabled>
+		<enable>
+			<condition>
+				<and>
+					<property>/controls/pressurization/engaged</property>
+					<or>
+						<property>/controls/pressurization/ascent-engaged</property>
+						<property>/controls/pressurization/descent-engaged</property>
+					</or>
+				</and>
+			</condition>
+		</enable>
+		<input>/instrumentation/pressurization/target-cabin-pressure-psi</input>
+		<output>
+			<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+			<min>
+				<value>11.1</value>
+			</min>
+			<max>
+				<value>15.0</value>
+			</max>
+		</output>
+		<max-rate-of-change>0.0028</max-rate-of-change>
+	</filter>
+	
+	<!-- calculate rate of change -->
+	<filter>
+		<name>cabin pressure rate computer</name>
+		<debug>false</debug>
+		<type>derivative</type>
+		<input>/instrumentation/pressurization/cabin-altitude-ft</input>
+		<output>/instrumentation/pressurization/cabin-altitude-ft-sec</output>
+		<filter-time>1.0</filter-time>
+	</filter>
+	
+	<!-- convert rate of change to ft per minute -->
+	<filter>
+		<name>convert rate of change to ft per minute</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<input>
 			<expression>
-				<div>
-					<property>/controls/pressurization/rate-of-change-psipm</property>
+				<prod>
+					<property>/instrumentation/pressurization/cabin-altitude-ft-sec</property>
 					<value>60</value>
-				</div>
+				</prod>
 			</expression>
-		</max-rate-of-change>
-    </filter>
+		</input>
+		<output>/instrumentation/pressurization/cabin-altitude-ft-min</output>
+	</filter>
 	
 	<!-- set the cabin pressure equal to external pressure when the plane is on the ground -->
 	<filter>
 		<type>gain</type>
 		<name>set cabin pressure on ground</name>
 		<gain>1.0</gain>	
-		<condition>
-			<not>
-				<property>/controls/pressurization/engaged</property>
-			</not>
-		</condition>
-		<input>
-			<property>/controls/pressurization/external-pressure-psi</property>
-		</input>
-		<output>
-			<property>controls/pressurization/cabin-pressure-psi</property>
-			<property>controls/pressurization/temp-cabin-pressure-psi</property>
-		</output>
-	</filter>	
-	
-	<!-- set the auto landing elevation minimum pressure -->
-	<filter>
-		<name>set auto mode landing elevation pressure</name>
-		<type>gain</type>
-		<gain>1.0</gain>
 		<enable>
 			<condition>
-				<and>
-					<property>/controls/pressurization/enabled</property>
-					<equals>
-						<property>/controls/pressurization/operation-mode</property>
-						<value>auto</value>
-					</equals>
-				</and>
+				<not>
+					<property>/controls/pressurization/engaged</property>
+				</not>
 			</condition>
 		</enable>
 		<input>
-			<product>
-				<value>14.7</value>
-				<pow>
-					<value>2.718281828459045</value>
-					<product>
-						<value>-0.21</value>
-						<property>/controls/pressurization/auto-landing-elevation-ft</property>
-					</product>
-				</pow>
-			</product>			
+			<property>/systems/static/pressure-psi</property>
 		</input>
 		<output>
-			<property>/controls/pressurization/auto-landing-elevation-psi</property>
-		</output>
-	</filter>
-
-	<!-- clamp the cabin pressure in manual mode -->	
-	<filter>
-		<name>clamp output of the cabin pressure when in manual mode</name>
-		<type>gain</type>
-		<gain>1.0</gain>
-		<enable>
-			<condition>
-				<and>
-					<property>controls/pressurization/engaged</property>
-					<equals>
-						<property>controls/pressurization/operation-mode</property>
-						<value>manual</value>
-					</equals>
-				</and>
-			</condition>
-		</enable>
-		<input>
-			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
-			<min>
-				<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
-			</min>
-			<max>15</max>		
-		</input>
-		<output>
-			<property>/controls/pressurization/cabin-pressure-psi</property>
-		</output>
-	</filter>
-	
-	<!-- clamp the cabin pressure in auto mode -->	
-	<filter>
-		<name>clamp output of the cabin pressure when in auto mode</name>
-		<type>gain</type>
-		<gain>1.0</gain>
-		<enable>
-			<condition>
-				<and>
-					<property>controls/pressurization/engaged</property>
-					<equals>
-						<property>controls/pressurization/operation-mode</property>
-						<value>auto</value>
-					</equals>
-				</and>
-			</condition>
-		</enable>
-		<input>
-			<property>/controls/pressurization/temp-cabin-pressure-psi</property>
-			<min>
-				<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
-			</min>
-			<max>
-				<property>/controls/pressurization/auto-landing-elevation-psi</property>
-			</max>		
-		</input>
-		<output>
-			<property>/controls/pressurization/cabin-pressure-psi</property>
+			<property>instrumentation/pressurization/cabin-pressure-psi</property>
 		</output>
 	</filter>
 	
@@ -401,14 +353,15 @@
 			<expression>
 				<abs>
 					<difference>
-						<property>controls/pressurization/external-pressure-psi</property>
-						<property>controls/pressurization/cabin-pressure-psi</property>
+						<property>/systems/static/pressure-psi</property>
+						<property>/instrumentation/pressurization/cabin-pressure-psi</property>
 					</difference>
 				</abs>
 			</expression>
 		</input>
 		<output>
-			<property>controls/pressurization/pressure-difference-psi</property>
+			<property>/instrumentation/pressurization/pressure-difference-psi</property>
+			<property>/instrumentation/pressurization/pressure-difference-psi</property>
 		</output>
 	</filter>
 	
@@ -426,7 +379,7 @@
 						<div>
 							<log>
 								<div>
-									<property>controls/pressurization/cabin-pressure-psi</property>
+									<property>/instrumentation/pressurization/cabin-pressure-psi</property>
 									<value>14.7</value>
 								</div>
 							</log>
@@ -437,7 +390,8 @@
 			</expression>
 		</input>
 		<output>
-			<property>controls/pressurization/cabin-altitude-ft</property>
+			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
 		</output>
 	</filter>
+
 </PropertyList>
