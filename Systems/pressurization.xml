@@ -122,12 +122,16 @@
 			<expression>
 				<div>
 					<dif>
-						<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
-						<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+						<!--<property>/controls/pressurization/cabin-pressure-cruise-psi</property>
+						<property>/instrumentation/pressurization/cabin-pressure-psi</property>-->
+						<property>/controls/pressurization/cabin-pressure-cruise-alt-ft</property>
+						<property>/instrumentation/pressurization/cabin-altitude-ft</property>
 					</dif>
 					<dif>
-						<property>/controls/pressurization/outside-pressure-cruise-psi</property>
-						<property>/systems/static/pressure-psi</property>
+						<!--<property>/controls/pressurization/outside-pressure-cruise-psi</property>
+						<property>/systems/static/pressure-psi</property>-->
+						<property>/controls/pressurization/cruise-alt-ft</property>
+						<property>/instrumentation/altimeter/indicated-altitude-ft</property>
 					</dif>
 				</div>
 			</expression>
@@ -157,12 +161,16 @@
 			<expression>
 				<div>
 					<dif>
-						<property>/controls/pressurization/auto-landing-elevation-psi</property>
-						<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+						<!--<property>/controls/pressurization/auto-landing-elevation-psi</property>
+						<property>/instrumentation/pressurization/cabin-pressure-psi</property>-->
+						<property>/controls/pressurization/auto-landing-elevation-ft</property>
+						<property>/instrumentation/pressurization/cabin-altitude-ft</property>
 					</dif>
 					<dif>
-						<property>/controls/pressurization/auto-landing-elevation-psi</property>
-						<property>/systems/static/pressure-psi</property>
+						<!--<property>/controls/pressurization/auto-landing-elevation-psi</property>
+						<property>/systems/static/pressure-psi</property>-->
+						<property>/controls/pressurization/auto-landing-elevation-ft</property>
+						<property>/instrumentation/altimeter/indicated-altitude-ft</property><!--current altitude-->
 					</dif>
 				</div>
 			</expression>
@@ -228,18 +236,25 @@
 		<input>
 			<expression>
 				<sum>
-					<property>/instrumentation/pressurization/cabin-pressure-psi</property>
-					<property>/controls/pressurization/ascent-ratio</property>
+					<!--<property>/instrumentation/pressurization/cabin-pressure-psi</property>-->
+					<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+					<prod>
+						<property>/controls/pressurization/ascent-ratio</property>
+						<value>-100</value>
+					</prod>
 				</sum>
 			</expression>
 		</input>
 		<output>
-			<property>instrumentation/pressurization/temp-target-cabin-pressure-psi</property>
+			<!--<property>instrumentation/pressurization/temp-target-cabin-pressure-psi</property>-->
+			<property>instrumentation/pressurization/temp-target-cabin-altitude-ft</property>
 			<min>
-				<property>controls/pressurization/cabin-pressure-cruise-psi</property>
+				<!--<property>controls/pressurization/cabin-pressure-cruise-psi</property>-->
+				<property>controls/pressurization/auto-landing-elevation-ft</property>
 			</min>
 			<max>
-				<property>controls/pressurization/auto-landing-elevation-psi</property>
+				<!--<property>controls/pressurization/auto-landing-elevation-psi</property>-->
+				<property>instrumentation/pressurization/cabin-pressure-cruise-alt-ft</property>
 			</max>
 		</output>
 	</filter>	
@@ -261,14 +276,18 @@
 				</and>
 			</condition>
 		</enable>
-		<input>/instrumentation/pressurization/temp-target-cabin-pressure-psi</input>
+		<!--<input>/instrumentation/pressurization/temp-target-cabin-pressure-psi</input>-->
+		<input>/instrumentation/pressurization/temp-target-cabin-altitude-ft</input>
 		<output>
-			<property>/instrumentation/pressurization/target-cabin-pressure-psi</property>
+			<!--<property>/instrumentation/pressurization/target-cabin-pressure-psi</property>-->
+			<property>/instrumentation/pressurization/target-cabin-altitude-ft</property>
 		</output>
-		<max-rate-of-change>0.025</max-rate-of-change>
+		<!--<max-rate-of-change>0.025</max-rate-of-change>-->
+		<max-rate-of-change>300</max-rate-of-change>
 	</filter>
 	
 	<!-- adjust cabin pressure towards target pressure -->
+	<!-- this actually is the feet per second -->
 	<filter>
 		<name>adjust cabin to target</name>
 		<type>noise-spike</type>
@@ -285,20 +304,51 @@
 				</and>
 			</condition>
 		</enable>
-		<input>/instrumentation/pressurization/target-cabin-pressure-psi</input>
+		<!--<input>/instrumentation/pressurization/target-cabin-pressure-psi</input>-->
+		<input>/instrumentation/pressurization/target-cabin-altitude-ft</input>
 		<output>
-			<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+			<!--<property>/instrumentation/pressurization/cabin-pressure-psi</property>-->
+			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
 			<min>
-				<value>11.1</value>
+				<!--<value>11.1</value>-->
+				<value>0</value>
 			</min>
 			<max>
-				<value>15.0</value>
+				<!--<value>15.0</value>-->
+				<value>7000</value>
 			</max>
 		</output>
-		<!--<max-rate-of-change>0.0028</max-rate-of-change>-->
-		<max-rate-of-change>0.0133</max-rate-of-change>
+		<!--<max-rate-of-change>0.0133</max-rate-of-change>-->
+		<max-rate-of-change>35</max-rate-of-change>
 	</filter>
 	
+	<!-- set the cabin pressure -->
+	<filter>
+		<type>gain</type>
+		<name>set cabin pressure in psi</name>
+		<gain>1.0</gain>
+		<input>
+			<expression>
+				<prod>
+					<value>14.7</value>
+					<pow>
+						<value>2.71828</value>
+						<prod>
+							<value>-0.21</value>
+							<prod>
+								<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+								<value>0.000189394</value>
+							</prod>
+						</prod>
+					</pow>					
+				</prod>
+			</expression>
+		</input>
+		<output>
+			<property>/instrumentation/pressurization/cabin-pressure-psi</property>
+		</output>
+	</filter>
+		
 	<!-- calculate rate of change -->
 	<filter>
 		<name>cabin pressure rate computer</name>
@@ -363,35 +413,6 @@
 		<output>
 			<property>/instrumentation/pressurization/pressure-difference-psi</property>
 			<property>/instrumentation/pressurization/pressure-difference-psi</property>
-		</output>
-	</filter>
-	
-	<!-- set the cabin altitude in ft -->
-	<filter>
-		<type>gain</type>
-		<name>set cabin pressure in ft</name>
-		<gain>1.0</gain>
-		<input>
-			<expression>
-				<prod>
-					<value>3.28</value>
-					<prod>
-						<value>100</value>
-						<div>
-							<log>
-								<div>
-									<property>/instrumentation/pressurization/cabin-pressure-psi</property>
-									<value>14.7</value>
-								</div>
-							</log>
-							<value>-0.012</value>
-						</div>
-					</prod>
-				</prod>
-			</expression>
-		</input>
-		<output>
-			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
 		</output>
 	</filter>
 
