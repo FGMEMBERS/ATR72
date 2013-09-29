@@ -214,6 +214,8 @@
 					<property>/controls/pressurization/descent-engaged</property>
 					<property>/controls/pressurization/engaged</property>
 					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
+					<not><property>/controls/pressurization/ditch</property></not>
+					<not><property>/controls/pressurization/dump</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -250,6 +252,8 @@
 					<property>/controls/pressurization/ascent-engaged</property>
 					<property>/controls/pressurization/engaged</property>
 					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
+					<not><property>/controls/pressurization/ditch</property></not>
+					<not><property>/controls/pressurization/dump</property></not>					
 				</and>
 			</condition>
 		</enable>
@@ -286,6 +290,8 @@
 				<and>
 					<property>/controls/pressurization/engaged</property>
 					<property>/controls/pressurization/manual-mode-engaged</property>
+					<not><property>/controls/pressurization/ditch</property></not>
+					<not><property>/controls/pressurization/dump</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -306,6 +312,23 @@
 		</output>	
 	</filter>
 
+	<!-- calculate target ditch mode -->
+	<!-- should freeze cabin pressure -->
+	<filter>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<name>set target for ditch mode</name>
+		<enable>
+			<property>/controls/pressurization/ditch</property>
+		</enable>
+		<input>
+			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+		</input>
+		<output>
+			<property>/instrumentation/pressurization/target-cabin-altitude-ft</property>
+		</output>	
+	</filter>
+	
 	<!-- adjust cabin pressure towards target pressure in manual mode -->
 	<!-- max-rate-of-change actually is the feet per second -->
 	<filter>
