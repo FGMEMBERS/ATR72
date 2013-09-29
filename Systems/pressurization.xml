@@ -329,6 +329,58 @@
 		</output>	
 	</filter>
 	
+	<filter>
+		<type>gain</type>
+		<name>set dump mode ratio</name>
+		<gain>3.0</gain>
+		<enable>
+			<property>/controls/pressurization/dump</property>
+		</enable>
+		<input>
+			<expression>
+				<div>
+					<dif>
+						<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+						<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+					</dif>
+					<value>2500</value>
+				</div>
+			</expression>
+		</input>
+		<output>
+			<property>/controls/pressurization/dump-ratio</property>
+<!--			<min>-0.6</min>
+			<max>0.6</max>
+-->
+		</output>
+	</filter>
+	
+	<!-- calculate target dump mode -->
+	<!-- should be equal to external pressure -->
+	<filter>
+		<type>gain</type>
+		<name>set target for dump mode</name>
+		<gain>1.0</gain>
+		<enable>
+			<property>/controls/pressurization/dump</property>
+		</enable>
+		<input>
+			<expression>
+				<sum>
+					<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+					<property>/controls/pressurization/dump-ratio</property>
+				</sum>
+			</expression>
+		</input>
+		<output>
+			<property>/instrumentation/pressurization/target-cabin-altitude-ft</property>
+			<min>0</min>
+			<max>
+				<property>/instrumentation/altimeter/indicated-altitude-ft</property>
+			</max>
+		</output>
+	</filter>
+	
 	<!-- adjust cabin pressure towards target pressure in manual mode -->
 	<!-- max-rate-of-change actually is the feet per second -->
 	<filter>
@@ -372,6 +424,7 @@
 					<property>/controls/pressurization/engaged</property>
 					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 					<property>/controls/pressurization/ascent-engaged</property>
+					<not><property>/controls/pressurization/dump</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -401,6 +454,7 @@
 					<property>/controls/pressurization/engaged</property>
 					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 					<property>/controls/pressurization/descent-engaged</property>
+					<not><property>/controls/pressurization/dump</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -417,6 +471,22 @@
 		<max-rate-of-change>
 			<property>/controls/pressurization/auto-descent-max-fps</property>
 		</max-rate-of-change>
+	</filter>
+	
+	<!-- adjust cabin to target when in dump mode -->
+	<filter>
+		<name>adjust cabin to target when dumping</name>
+		<type>noise-spike</type>
+		<debug>false</debug>
+		<feedback-if-disabled>false</feedback-if-disabled>
+		<enable>
+			<property>/controls/pressurization/dump</property>
+		</enable>
+		<input>/instrumentation/pressurization/target-cabin-altitude-ft</input>
+		<output>
+			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+		</output>
+		<max-rate-of-change>150</max-rate-of-change>	
 	</filter>
 	<!-- END AIRBORNE -->
 	
