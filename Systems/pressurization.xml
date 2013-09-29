@@ -203,16 +203,17 @@
 		<max>0.3</max>		
 	</filter>
 
-	<!-- calculate descent target -->
+	<!-- calculate descent target auto mode -->
 	<filter>
 		<type>gain</type>
 		<gain>1.0</gain>
-		<name>descent target calc</name>
+		<name>descent target calc auto mode</name>
 		<enable>
 			<condition>
 				<and>
 					<property>/controls/pressurization/descent-engaged</property>
 					<property>/controls/pressurization/engaged</property>
+					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -238,16 +239,17 @@
 		</output>
 	</filter>
 	
-	<!-- calculate ascent target -->
+	<!-- calculate ascent target auto mode -->
 	<filter>
 		<type>gain</type>
 		<gain>1.0</gain>
-		<name>ascent target calc</name>
+		<name>ascent target calc auto mode</name>
 		<enable>
 			<condition>
 				<and>
 					<property>/controls/pressurization/ascent-engaged</property>
 					<property>/controls/pressurization/engaged</property>
+					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 				</and>
 			</condition>
 		</enable>
@@ -274,10 +276,40 @@
 		<max-rate-of-change>300</max-rate-of-change>
 	</filter>	
 
-	<!-- adjust cabin pressure towards target pressure on ascent -->
-	<!-- this actually is the feet per second -->
+	<!-- calculate target manual mode -->
 	<filter>
-		<name>adjust cabin to target</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<name>target calc manual mode</name>
+		<enable>
+			<condition>
+				<and>
+					<property>/controls/pressurization/engaged</property>
+					<property>/controls/pressurization/manual-mode-engaged</property>
+				</and>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<sum>
+					<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+					<property>/controls/pressurization/manual-mode-rate-fps</property>
+				</sum>
+			</expression>
+		</input>
+		<output>
+			<property>/instrumentation/pressurization/target-cabin-altitude-ft</property>
+			<min>0</min>
+			<max>
+				<property>controls/pressurization/cabin-pressure-cruise-alt-ft</property>
+			</max>
+		</output>	
+	</filter>
+
+	<!-- adjust cabin pressure towards target pressure in manual mode -->
+	<!-- max-rate-of-change actually is the feet per second -->
+	<filter>
+		<name>adjust cabin to target in manual mode</name>
 		<type>noise-spike</type>
 		<debug>false</debug>
 		<feedback-if-disabled>false</feedback-if-disabled>
@@ -285,6 +317,37 @@
 			<condition>
 				<and>
 					<property>/controls/pressurization/engaged</property>
+					<property>/controls/pressurization/manual-mode-engaged</property>
+				</and>
+			</condition>
+		</enable>
+		<input>/instrumentation/pressurization/target-cabin-altitude-ft</input>
+		<output>
+			<property>/instrumentation/pressurization/cabin-altitude-ft</property>
+			<min>
+				<value>0</value>
+			</min>
+			<max>
+				<value>7000</value>
+			</max>
+		</output>
+		<max-rate-of-change>
+			<property>/controls/pressurization/manual-mode-rate-fps</property>
+		</max-rate-of-change>
+	</filter>	
+	
+	<!-- adjust cabin pressure towards target pressure on ascent -->
+	<!-- max-rate-of-change actually is the feet per second -->
+	<filter>
+		<name>adjust cabin to target for ascent</name>
+		<type>noise-spike</type>
+		<debug>false</debug>
+		<feedback-if-disabled>false</feedback-if-disabled>
+		<enable>
+			<condition>
+				<and>
+					<property>/controls/pressurization/engaged</property>
+					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 					<property>/controls/pressurization/ascent-engaged</property>
 				</and>
 			</condition>
@@ -313,6 +376,7 @@
 			<condition>
 				<and>
 					<property>/controls/pressurization/engaged</property>
+					<not><property>/controls/pressurization/manual-mode-engaged</property></not>
 					<property>/controls/pressurization/descent-engaged</property>
 				</and>
 			</condition>

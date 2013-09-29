@@ -477,8 +477,10 @@
 			<cabin-pressure-cruise-psi type="double">11.3</cabin-pressure-cruise-psi>
 			<cabin-pressure-cruise-alt-ft type="double">7000</cabin-pressure-cruise-alt-ft>
 			<outside-pressure-cruise-psi type="double">6.75</outside-pressure-cruise-psi> <!-- psi at 20,000 ft -->
-			<auto-descent-max-fpm type="double">-400</auto-descent-max-fpm>
-			<operation-mode type="string">auto</operation-mode>
+			<cruise-alt-ft type="double">20000</cruise-alt-ft> <!-- psi at 20,000 ft -->
+			<auto-descent-max-fps type="double">-6.667</auto-descent-max-fps> <!-- options are -6.667 fps (-400fpm) or -8.333 fps (-500fpm) -->
+			<manual-mode-engaged type="bool">false</manual-mode-engaged>
+			<manual-mode-rate-fps type="double">16.666</manual-mode-rate-fps>
 			<ditch type="bool">false</ditch>
 			<engaged type="bool">false</engaged>
 		</pressurization>	
