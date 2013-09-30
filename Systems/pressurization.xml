@@ -334,7 +334,13 @@
 		<name>set dump mode ratio</name>
 		<gain>3.0</gain>
 		<enable>
-			<property>/controls/pressurization/dump</property>
+			<condition>
+				<and>
+					<property>/controls/pressurization/dump</property>
+					<not><property>/controls/pressurization/ditch</property></not>
+				</and>
+			</condition>
+			
 		</enable>
 		<input>
 			<expression>
@@ -362,7 +368,13 @@
 		<name>set target for dump mode</name>
 		<gain>1.0</gain>
 		<enable>
-			<property>/controls/pressurization/dump</property>
+			<condition>
+				<and>
+					<property>/controls/pressurization/dump</property>
+					<not><property>/controls/pressurization/ditch</property></not>
+				</and>
+			</condition>
+			
 		</enable>
 		<input>
 			<expression>
