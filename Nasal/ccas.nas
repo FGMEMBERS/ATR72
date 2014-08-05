@@ -36,6 +36,8 @@ var ccas = {
 			me.oil_pressure_eng(1, me.engine2StartTime);			
 			me.prop_brk();
 			me.ldg_gear_not_down();
+			me.excess_cabin_pressure();
+			me.excess_cabin_altitude();
 			
 			##cautions
 			me.flaps_unlk();
@@ -275,7 +277,35 @@ var ccas = {
 				me.remove_warning(propertyName, lastGearWarningStatus);
 				}
 			},
+		
+	excess_cabin_pressure : func {
+			var propertyName = "/aircraft/ccas/warnings/excess-cab-press-change-fault";
+			var lastPressureStatus = getprop(propertyName);
 			
+			if (me.turn_light_off(propertyName)) return;
+			
+			if (getprop("/instrumentation/pressurization/pressure-difference-psi") >= 6.35) {
+				me.add_warning(propertyName, lastPressureStatus);
+				}
+			else {
+				me.remove_warning(propertyName, lastPressureStatus);
+				}			
+			},
+			
+	excess_cabin_altitude : func {
+			var propertyName = "/aircraft/ccas/warnings/excess-cab-alt-fault";
+			var lastAltitudeStatus = getprop(propertyName);
+			
+			if (me.turn_light_off(propertyName)) return;
+			
+			if (getprop("/instrumentation/pressurization/cabin-altitude-ft") > 10000) {
+				me.add_warning(propertyName, lastAltitudeStatus);
+				}
+			else {
+				me.remove_warning(propertyName, lastAltitudeStatus);
+				}			
+			},
+	
 	add_caution : func(propertyName = "", propertyLastStatus = 0) {
 			setprop(propertyName, 1);
 			if (propertyLastStatus != 1) {

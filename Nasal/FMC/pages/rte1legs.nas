@@ -98,8 +98,8 @@ fmcPages["rte1legs"] = {
 				values[n].setText(getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/wp")).setColor(white);
 
 				var alt = getprop("/aircraft/fmc/rte1/legs/wp["~wp_id~"]/alt");
-
-				if (alt != "-----") {
+				
+				if ((alt != "") and (alt != "-----")) {
 
 					if (alt > getprop("/aircraft/fmc/perf/trans-alt")) {
 
