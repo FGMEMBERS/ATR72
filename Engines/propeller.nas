@@ -175,7 +175,7 @@ var prop = {
 		var fuelflow = 0;
 		
 		if (pwr_hp > 0)
-			fuelflow = (psfc * pwr_hp * 0.68); # Fuel flow is in KG/H
+			fuelflow = (psfc * pwr_hp * 0.58); # Fuel flow is in KG/H
 		
 		setprop(fuelflow_prop, fuelflow);
 	
