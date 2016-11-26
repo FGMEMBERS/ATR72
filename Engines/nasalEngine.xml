@@ -57,7 +57,8 @@
 	<maxn1>         100.0 </maxn1>
 	<maxstartenginetime>16</maxstartenginetime>
 
-<table name="EnginePowerVC">
+<function name="EnginePowerVC">
+<table>
   <description> Engine power, function of airspeed and pressure </description>
   <independentVar lookup="row">atmosphere/P-sl-psf</independentVar>
   <independentVar lookup="column">velocities/ve-kts</independentVar>
@@ -73,6 +74,7 @@
     2213   1.029  1.043  1.057  1.079  1.114  1.171		1.500
   </tableData>
 </table>
+</function>
 
 <table name="EnginePowerRPM_N1" type="internal">
   <description> Engine Power, function of RPM and N1 </description>
