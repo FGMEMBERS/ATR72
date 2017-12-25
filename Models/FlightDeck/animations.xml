@@ -5262,6 +5262,21 @@
 			<z-m>0.0865</z-m>
 		</center>
 	</animation>
+    
+    <animation>
+		<type>pick</type>
+		<object-name>parkbrk</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/gear/brake-parking</property>
+				<value>0</value>
+				<value>32</value>
+			</binding>
+		</action>
+	</animation>
 
 	<animation>
 		<type>rotate</type>
