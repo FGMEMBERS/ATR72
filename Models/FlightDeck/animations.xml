@@ -5058,6 +5058,21 @@
 			</binding>
 		</action>
 	</animation>
+    
+    	<animation>
+		<type>pick</type>
+		<object-name>gearlever</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/gear/gear-down</property>
+				<value>0</value>
+				<value>1</value>
+			</binding>
+		</action>
+	</animation>
 	
 	<animation>
 		<type>rotate</type>
@@ -5201,6 +5216,22 @@
 	</animation>
 
 	<!-- Throttle Quadrant -->
+    
+    	<animation>
+		<type>pick</type>
+		<object-name>flapsLever</object-name>
+		<action>
+			<button>0</button>
+			<repeatable type="bool">false</repeatable>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/flight/flaps</property>
+				<value>0</value>
+				<value>0.43</value>
+                <value>1</value>
+			</binding>
+		</action>
+	</animation>
 
 	<animation>
 		<type>rotate</type>
