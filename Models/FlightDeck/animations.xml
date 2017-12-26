@@ -5294,6 +5294,63 @@
 			<z-m>0.0865</z-m>
 		</center>
 	</animation>
+    
+    <animation>
+		<name>Engine 1 throttle lever pick</name>
+		<type>pick</type>
+		<object-name>throttleL</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/engines/engine[0]/throttle</property>
+				<step type="double">0.01</step>
+				<max>1</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/engines/engine[0]/throttle</property>
+				<step type="double">-0.01</step>
+				<min>0</min>
+			</binding>
+		</action>
+	</animation>
+    
+    <animation>
+		<name>Engine 2 throttle lever pick</name>
+		<type>pick</type>
+		<object-name>throttleR</object-name>
+		<action>
+			<button>0</button>
+			<button>3</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/engines/engine[1]/throttle</property>
+				<step type="double">0.01</step>
+				<max>1</max>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<button>4</button>
+			<repeatable type="bool">true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>controls/engines/engine[1]/throttle</property>
+				<step type="double">-0.01</step>
+				<min>0</min>
+			</binding>
+		</action>
+	</animation>
+    
 
 	<animation>
 		<type>rotate</type>
