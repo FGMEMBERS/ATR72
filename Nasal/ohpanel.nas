@@ -42,12 +42,12 @@ var ohpanel = {
     		setprop(ohp~ "acbus2", 0); }
     		
     	if (getprop("/systems/electric/elec-buses/dc-bus1/volts") < 8) {
-    		setprop(ohp~ "dcbus1", 2); }
+    		setprop(ohp~ "dcbus1", 1); }
     	else {
     		setprop(ohp~ "dcbus1", 0); }
     		
-    	if (getprop("/systems/electric/elec-buses/ac-bus2/volts") < 8) {
-    		setprop(ohp~ "dcbus2", 2); }
+    	if (getprop("/systems/electric/elec-buses/dc-bus2/volts") < 8) {
+    		setprop(ohp~ "dcbus2", 1); }
     	else {
     		setprop(ohp~ "dcbus2", 0); }
     	
