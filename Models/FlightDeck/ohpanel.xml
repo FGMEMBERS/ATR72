@@ -488,7 +488,7 @@
 			<repeatable type="bool">false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/controls/elec_panel/gen1</property>
+				<property>/controls/elec_panel/ACWgen1</property>
 			</binding>
 		</action>
 	</animation>
@@ -501,7 +501,7 @@
 			<repeatable type="bool">false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/controls/elec_panel/gen2</property>
+				<property>/controls/elec_panel/ACWgen2</property>
 			</binding>
 		</action>
 	</animation>
@@ -634,6 +634,119 @@
 		</axis>
 	</animation>
 	
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_1a</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_1a/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_1b</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_1b/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_2a</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_2a/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_2b</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_2b/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+
 	<animation>
 		<type>rotate</type>
 		<object-name>startmode</object-name>
@@ -848,7 +961,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acbus1ind</object-name>
-		<property>/controls/ohpanel/acbus1</property>
+		<property>/controls/ohpanel/acwbus1</property>
 		<factor>-0.0625</factor>
 		<axis>
 			<y>1</y>
@@ -858,7 +971,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acbus2ind</object-name>
-		<property>/controls/ohpanel/acbus2</property>
+		<property>/controls/ohpanel/acwbus2</property>
 		<factor>-0.0625</factor>
 		<axis>
 			<y>1</y>
@@ -878,7 +991,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acgen1</object-name>
-		<property>/controls/ohpanel/gen1</property>
+		<property>/controls/ohpanel/acwgen1</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
@@ -888,7 +1001,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acgen2</object-name>
-		<property>/controls/ohpanel/gen2</property>
+		<property>/controls/ohpanel/acwgen2</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
@@ -1109,7 +1222,6 @@
 	</animation>
 	<animation>
 		<type>material</type>
-		<object-name>ohp</object-name>
 		<object-name>fuelxfeed</object-name>
 		<object-name>eng1fuelLP</object-name>
 		<object-name>eng2fuelLP</object-name>
@@ -1123,16 +1235,14 @@
 		<object-name>call_mech</object-name>
 		<object-name>selcal_emercall</object-name>
 		<object-name>selcal_call</object-name>
-		<object-name>doors_cabsvcok</object-name>
 		<object-name>doors_emersvce</object-name>
 		<object-name>doors_cabincargo</object-name>
 		<object-name>doors_fwdcompt</object-name>
 		<object-name>fltctl_fault</object-name>
 		<object-name>fltctl_splr</object-name>
-		<object-name>mfc_1a</object-name>
-		<object-name>mfc_1b</object-name>
-		<object-name>mfc_2a</object-name>
-		<object-name>mfc_2b</object-name>
+		<object-name>ldggearl</object-name>
+		<object-name>ldggearn</object-name>
+		<object-name>ldggearr</object-name>
 		<object-name>lside_agent1</object-name>
 		<object-name>lside_agent2</object-name>
 		<object-name>lside_loopa</object-name>
@@ -1150,7 +1260,6 @@
 		<object-name>util.sw</object-name>
 		<object-name>dcgen1.sw</object-name>
 		<object-name>dcgen2.sw</object-name>
-		<object-name>extpwr.sw</object-name>
 		<object-name>batamp</object-name>
 		<object-name>batamp_needle</object-name>
 		<object-name>acbus1</object-name>
@@ -1220,6 +1329,40 @@
 		<object-name>rside_loopa</object-name>
 		<object-name>rside_loopb</object-name>		
 		<diffuse>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<or>
+					<property>/aircraft/mfc_1a/online</property>
+					<property>/aircraft/mfc_2a/online</property>
+				</or>
+			</not>
+		</condition>
+	</animation>
+
+	<!-- keep the background paint matte -->
+	<animation>
+		<type>material</type>
+		<object-name>ohp</object-name>	
+		<diffuse>
 			<red>1</red>
 			<green>1</green>
 			<blue>1</blue>
@@ -1239,10 +1382,31 @@
 			<green>0</green>
 			<blue>0</blue>
 		</emission>
-		<condition>
-			<not>
-				<property>/systems/electric/outputs/avionics</property>
-			</not>
-		</condition>
-	</animation>	
+	</animation>
+
+	<!-- disable CAB OK/SVCE OK (they'd be activated by SW TEST if it was implemented)-->
+	<animation>
+		<type>material</type>
+		<object-name>doors_cabsvcok</object-name>
+		<diffuse>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+	</animation>
 </PropertyList>
