@@ -1122,7 +1122,6 @@
 		<object-name>call_mech</object-name>
 		<object-name>selcal_emercall</object-name>
 		<object-name>selcal_call</object-name>
-		<object-name>doors_cabsvcok</object-name>
 		<object-name>doors_emersvce</object-name>
 		<object-name>doors_cabincargo</object-name>
 		<object-name>doors_fwdcompt</object-name>
@@ -1258,6 +1257,32 @@
 			<red>1</red>
 			<green>1</green>
 			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+	</animation>
+
+	<!-- disable CAB OK/SVCE OK (they'd be activated by SW TEST if it was implemented)-->
+	<animation>
+		<type>material</type>
+		<object-name>doors_cabsvcok</object-name>
+		<diffuse>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
 		</ambient>
 		<specular>
 			<red>0</red>
