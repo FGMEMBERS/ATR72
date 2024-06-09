@@ -635,6 +635,119 @@
 	</animation>
 	
 	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_1a</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_1a/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_1b</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_1b/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_2a</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_2a/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+	<animation>
+		<type>texmultiple</type>
+		<object-name>mfc_2b</object-name>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/sim/fdm-initialized</property>
+			<factor>0.5</factor>
+			<axis>
+				<x>1</x>
+			</axis>
+		</transform>
+		<transform>
+			<subtype>textranslate</subtype>
+			<property>/aircraft/mfc_2b/reset_blink</property>
+			<factor>-0.5</factor>
+			<axis>
+				<y>1</y>
+			</axis>
+		</transform>
+	</animation>
+
+	<animation>
 		<type>rotate</type>
 		<object-name>startmode</object-name>
 		<property>/controls/elec_panel/start-mode</property>
@@ -1127,10 +1240,6 @@
 		<object-name>doors_fwdcompt</object-name>
 		<object-name>fltctl_fault</object-name>
 		<object-name>fltctl_splr</object-name>
-		<object-name>mfc_1a</object-name>
-		<object-name>mfc_1b</object-name>
-		<object-name>mfc_2a</object-name>
-		<object-name>mfc_2b</object-name>
 		<object-name>ldggearl</object-name>
 		<object-name>ldggearn</object-name>
 		<object-name>ldggearr</object-name>
@@ -1241,7 +1350,10 @@
 		</emission>
 		<condition>
 			<not>
-				<property>/systems/electric/outputs/avionics</property>
+				<or>
+					<property>/aircraft/mfc_1a/online</property>
+					<property>/aircraft/mfc_2a/online</property>
+				</or>
 			</not>
 		</condition>
 	</animation>
