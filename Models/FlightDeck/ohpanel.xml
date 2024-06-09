@@ -488,7 +488,7 @@
 			<repeatable type="bool">false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/controls/elec_panel/gen1</property>
+				<property>/controls/elec_panel/ACWgen1</property>
 			</binding>
 		</action>
 	</animation>
@@ -501,7 +501,7 @@
 			<repeatable type="bool">false</repeatable>
 			<binding>
 				<command>property-toggle</command>
-				<property>/controls/elec_panel/gen2</property>
+				<property>/controls/elec_panel/ACWgen2</property>
 			</binding>
 		</action>
 	</animation>
@@ -848,7 +848,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acbus1ind</object-name>
-		<property>/controls/ohpanel/acbus1</property>
+		<property>/controls/ohpanel/acwbus1</property>
 		<factor>-0.0625</factor>
 		<axis>
 			<y>1</y>
@@ -858,7 +858,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acbus2ind</object-name>
-		<property>/controls/ohpanel/acbus2</property>
+		<property>/controls/ohpanel/acwbus2</property>
 		<factor>-0.0625</factor>
 		<axis>
 			<y>1</y>
@@ -878,7 +878,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acgen1</object-name>
-		<property>/controls/ohpanel/gen1</property>
+		<property>/controls/ohpanel/acwgen1</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
@@ -888,7 +888,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>acgen2</object-name>
-		<property>/controls/ohpanel/gen2</property>
+		<property>/controls/ohpanel/acwgen2</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
