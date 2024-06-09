@@ -1109,7 +1109,6 @@
 	</animation>
 	<animation>
 		<type>material</type>
-		<object-name>ohp</object-name>
 		<object-name>fuelxfeed</object-name>
 		<object-name>eng1fuelLP</object-name>
 		<object-name>eng2fuelLP</object-name>
@@ -1244,5 +1243,31 @@
 				<property>/systems/electric/outputs/avionics</property>
 			</not>
 		</condition>
-	</animation>	
+	</animation>
+
+	<!-- keep the background paint matte -->
+	<animation>
+		<type>material</type>
+		<object-name>ohp</object-name>	
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+	</animation>
 </PropertyList>
