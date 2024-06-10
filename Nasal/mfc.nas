@@ -31,6 +31,16 @@ mfc2a_reset_timer.singleShot = 1;
 mfc2a_reset_timer.simulatedTime = 1;
 
 setprop("/aircraft/mfc/blink", 0);
+
+setprop("/aircraft/mfc_1a/online", 0);
+setprop("/aircraft/mfc_1a/resetting", 0);
+setprop("/aircraft/mfc_1b/online", 0);
+setprop("/aircraft/mfc_1b/resetting", 0);
+setprop("/aircraft/mfc_2a/online", 0);
+setprop("/aircraft/mfc_2a/resetting", 0);
+setprop("/aircraft/mfc_2b/online", 0);
+setprop("/aircraft/mfc_2b/resetting", 0);
+
 var blink_timer = maketimer(0.25, func {
     var last = getprop("/aircraft/mfc/blink");
     setprop("/aircraft/mfc/blink", !last);
@@ -41,11 +51,6 @@ var blink_timer = maketimer(0.25, func {
 });
 blink_timer.start();
 
-setprop("/aircraft/mfc_1a/online", 0);
-setprop("/aircraft/mfc_1a/resetting", 0);
-setprop("/aircraft/mfc_2a/online", 0);
-setprop("/aircraft/mfc_2a/resetting", 0);
-
 var last_state = 0;
 
 setlistener("/systems/electric/outputs/avionics", func {
@@ -53,15 +58,23 @@ setlistener("/systems/electric/outputs/avionics", func {
         if (getprop("/systems/electric/outputs/avionics") == 1) {
             setprop("/aircraft/mfc_1a/online", 0);
             setprop("/aircraft/mfc_1a/resetting", 1);
+            setprop("/aircraft/mfc_1b/online", 0);
+            setprop("/aircraft/mfc_1b/resetting", 0);
             setprop("/aircraft/mfc_2a/online", 0);
             setprop("/aircraft/mfc_2a/resetting", 1);
+            setprop("/aircraft/mfc_2b/online", 0);
+            setprop("/aircraft/mfc_2b/resetting", 0);
             mfc1a_reset_timer.start();
             mfc2a_reset_timer.start();
         } else {
             setprop("/aircraft/mfc_1a/online", 0);
             setprop("/aircraft/mfc_1a/resetting", 0);
+            setprop("/aircraft/mfc_1b/online", 0);
+            setprop("/aircraft/mfc_1b/resetting", 0);
             setprop("/aircraft/mfc_2a/online", 0);
             setprop("/aircraft/mfc_2a/resetting", 0);
+            setprop("/aircraft/mfc_2b/online", 0);
+            setprop("/aircraft/mfc_2b/resetting", 0);
         }
     }
     last_state = getprop("/systems/electric/outputs/avionics");
