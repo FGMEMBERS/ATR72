@@ -1231,22 +1231,6 @@
 		<object-name>fuelpresspointer</object-name>
 		<object-name>rfuelind</object-name>
 		<object-name>lfuelind</object-name>
-		<object-name>call_attend</object-name>
-		<object-name>call_mech</object-name>
-		<object-name>selcal_emercall</object-name>
-		<object-name>selcal_call</object-name>
-		<object-name>doors_emersvce</object-name>
-		<object-name>doors_cabincargo</object-name>
-		<object-name>doors_fwdcompt</object-name>
-		<object-name>fltctl_fault</object-name>
-		<object-name>fltctl_splr</object-name>
-		<object-name>ldggearl</object-name>
-		<object-name>ldggearn</object-name>
-		<object-name>ldggearr</object-name>
-		<object-name>lside_agent1</object-name>
-		<object-name>lside_agent2</object-name>
-		<object-name>lside_loopa</object-name>
-		<object-name>lside_loopb</object-name>
 		<object-name>propbrakeunlock</object-name>
 		<object-name>propbrakefail</object-name>
 		<object-name>mainign</object-name>
@@ -1286,16 +1270,121 @@
 		<object-name>probeshtg_stby</object-name>
 		<object-name>probeshtg_capt</object-name>
 		<object-name>tatalpha_capt</object-name>
-		<object-name>tatalpha_fo</object-name>
 		<object-name>pitottat_capt</object-name>
 		<object-name>pitottat_stby</object-name>
-		<object-name>pitottat_fo</object-name>
 		<object-name>acgen1</object-name>
 		<object-name>acgen2</object-name>
 		<object-name>acextpwr</object-name>
 		<object-name>ac.btc</object-name>
 		<object-name>acbus1ind</object-name>
 		<object-name>acbus2ind</object-name>
+		<object-name>bluepump.sw</object-name>
+		<object-name>greenpump.sw</object-name>
+		<object-name>aux.pump</object-name>
+		<object-name>hydxfeed</object-name>
+		<object-name>hydgreenind</object-name>
+		<object-name>hydblueind</object-name>
+		<object-name>unknown_korrybtn</object-name>
+		<object-name>e1bleed</object-name>
+		<object-name>e2bleed</object-name>
+		<object-name>pack1</object-name>
+		<object-name>pack2</object-name>
+		<object-name>eng1bleed_deicing</object-name>
+		<object-name>eng2bleed_deicing</object-name>
+		<object-name>airbleedxfeed</object-name>
+		<object-name>compt_flow</object-name>
+		<object-name>rtempselauto</object-name>
+		<object-name>ltempselauto</object-name>
+		<object-name>recingfan1</object-name>
+		<object-name>recingfan2</object-name>
+		<object-name>exhaustmode</object-name>
+		<object-name>compttemp_guage</object-name>
+		<object-name>compttemp_guage_needle1</object-name>
+		<object-name>compttemp_guage_needle2</object-name>
+		<object-name>oxyguage_needle</object-name>
+		<object-name>oxyguage</object-name>
+		<object-name>oxymain</object-name>
+		<object-name>oxypax</object-name>
+		<object-name>aft_compt</object-name>		
+		<diffuse>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</diffuse>
+		<ambient>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</ambient>
+		<specular>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</specular>
+		<emission>
+			<red>0</red>
+			<green>0</green>
+			<blue>0</blue>
+		</emission>
+		<condition>
+			<not>
+				<or>
+					<property>/aircraft/mfc_1a/online</property>
+					<property>/aircraft/mfc_2a/online</property>
+				</or>
+			</not>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>material</type>
+		<object-name>call_attend</object-name>
+		<object-name>call_mech</object-name>
+		<object-name>selcal_emercall</object-name>
+		<object-name>selcal_call</object-name>
+		<object-name>doors_emersvce</object-name>
+		<object-name>doors_cabincargo</object-name>
+		<object-name>doors_fwdcompt</object-name>
+		<object-name>fltctl_fault</object-name>
+		<object-name>fltctl_splr</object-name>
+		<object-name>ldggearl</object-name>
+		<object-name>ldggearn</object-name>
+		<object-name>ldggearr</object-name>
+		<object-name>lside_agent1</object-name>
+		<object-name>lside_agent2</object-name>
+		<object-name>lside_loopa</object-name>
+		<object-name>lside_loopb</object-name>
+		<object-name>propbrakeunlock</object-name>
+		<object-name>propbrakefail</object-name>
+		<object-name>mainign</object-name>
+		<object-name>eng1start</object-name>
+		<object-name>eng2start</object-name>
+		<object-name>emerbatchg</object-name>
+		<object-name>emerbus_essbus</object-name>
+		<object-name>stbybus</object-name>
+		<object-name>tru</object-name>
+		<object-name>util.sw</object-name>
+		<object-name>afrairbleed</object-name>
+		<object-name>airframedeice</object-name>
+		<object-name>fastdeice</object-name>
+		<object-name>eng1deice</object-name>
+		<object-name>eng2deice</object-name>
+		<object-name>modeselauto</object-name>
+		<object-name>normdeice</object-name>
+		<object-name>deicing_disarm</object-name>
+		<object-name>antiicing_modesel</object-name>
+		<object-name>windowsantiice</object-name>
+		<object-name>relevantiice</object-name>
+		<object-name>lelevantiice</object-name>
+		<object-name>prop1antiice</object-name>
+		<object-name>prop2antiice</object-name>
+		<object-name>rwindowheat</object-name>
+		<object-name>lwindowheat</object-name>
+		<object-name>probeshtg_fo</object-name>
+		<object-name>probeshtg_stby</object-name>
+		<object-name>probeshtg_capt</object-name>
+		<object-name>tatalpha_fo</object-name>
+		<object-name>pitottat_fo</object-name>
 		<object-name>bluepump.sw</object-name>
 		<object-name>greenpump.sw</object-name>
 		<object-name>aux.pump</object-name>
@@ -1349,12 +1438,10 @@
 			<blue>0</blue>
 		</emission>
 		<condition>
-			<not>
-				<or>
-					<property>/aircraft/mfc_1a/online</property>
-					<property>/aircraft/mfc_2a/online</property>
-				</or>
-			</not>
+			<less-than>
+				<property>/systems/electric/elec-buses/dc-bus1/volts</property>
+				<value>8</value>
+			</less-than>
 		</condition>
 	</animation>
 
