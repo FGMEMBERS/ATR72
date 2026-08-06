@@ -5217,7 +5217,7 @@
 
 	<!-- Throttle Quadrant -->
     
-    	<animation>
+	<animation>
 		<type>pick</type>
 		<object-name>flapsLever</object-name>
 		<action>
@@ -5361,7 +5361,7 @@
 				<property>/controls/reverse-pitch</property>
 			</not>
 		</condition>
-		<factor>-57</factor>
+		<factor>-75</factor>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -5403,7 +5403,7 @@
 				<property>/controls/reverse-pitch</property>
 			</not>
 		</condition>
-		<factor>-57</factor>
+		<factor>-75</factor>
 		<axis>
 			<x>0</x>
 			<y>1</y>
@@ -5436,6 +5436,41 @@
 		</center>
 	</animation>
     
+	<animation>
+		<type>rotate</type>
+		<object-name>conditionL</object-name>
+		<property>/controls/engines/engine[0]/mixture</property>
+		<factor>-55</factor>
+		<offset-deg>25</offset-deg>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.0865</z-m>
+		</center>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>conditionR</object-name>
+		<property>/controls/engines/engine[1]/mixture</property>
+		<factor>-55</factor>
+		<offset-deg>25</offset-deg>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.7944</x-m>
+			<y-m>0</y-m>
+			<z-m>0.0865</z-m>
+		</center>
+	</animation>
+
     <animation>
 		<type>pick</type>
         <object-name>reverse1</object-name>

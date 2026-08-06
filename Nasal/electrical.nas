@@ -7,8 +7,18 @@ var electrical = {
     },
     update : func {
         var ext_pwr = getprop("/controls/elec_panel/ext-pwr");
-        var dc_gen_1_ok = getprop("/engines/engine/n1") > 61.5 and getprop("/controls/elec_panel/DCgen1") and !ext_pwr;
-        var dc_gen_2_ok = getprop("/engines/engine[1]/n1") > 61.5 and getprop("/controls/elec_panel/DCgen2") and !ext_pwr;
+        var dc_gen_1_ok = getprop("/engines/engine[0]/n1") >= 61.5 and !ext_pwr;
+        var dc_gen_2_ok = getprop("/engines/engine[1]/n1") >= 61.5 and !ext_pwr;
+
+        if (dc_gen_1_ok and !getprop("/controls/elec_panel/DCgen1")) {
+            # Connect DC generator if it's serviceable and there's no external power.
+            setprop("/controls/elec_panel/DCgen1", 1);
+        }
+
+        if (dc_gen_2_ok and !getprop("/controls/elec_panel/DCgen2")) {
+            # Connect DC generator if it's serviceable and there's no external power.
+            setprop("/controls/elec_panel/DCgen2", 1);
+        }
 
         # DC BUS 1
         if (dc_gen_1_ok) {
@@ -56,18 +66,38 @@ var electrical = {
         }
 
         # ACW BUS 1
-        if (getprop("/engines/engine/thruster/prop_rpm") > 350 and getprop("/controls/elec_panel/ACWgen1")) {
+        var acw_gen_1_ok = getprop("/engines/engine[0]/thruster/rpm") >= (1200 * 0.655);
+
+        if (acw_gen_1_ok and !getprop("/controls/elec_panel/ACWgen1")) {
+            # Connect ACW generator if it's serviceable.
+            setprop("/controls/elec_panel/ACWgen1", 1);
+        }
+
+        if (acw_gen_1_ok and getprop("/controls/elec_panel/ACWgen1")) {
             setprop("/systems/electric/elec-buses/acw-bus1/volts", 115);
             setprop("/systems/electric/elec-buses/acw-bus1/amps", 400);
+        } elsif (getprop("/controls/elec_panel/acw-btc") and getprop("/systems/electric/elec-buses/acw-bus2/volts") >= getprop("/systems/electric/elec-buses/acw-bus1/volts")) {
+            setprop("/systems/electric/elec-buses/acw-bus1/volts", getprop("/systems/electric/elec-buses/acw-bus2/volts"));
+            setprop("/systems/electric/elec-buses/acw-bus1/amps", getprop("/systems/electric/elec-buses/acw-bus2/amps"));
         } else {
             setprop("/systems/electric/elec-buses/acw-bus1/volts", 0);
             setprop("/systems/electric/elec-buses/acw-bus1/amps", 0);
         }
 
         # ACW BUS 2
-        if (getprop("/engines/engine[1]/thruster/prop_rpm") > 350 and getprop("/controls/elec_panel/ACWgen2")) {
+        var acw_gen_2_ok = getprop("/engines/engine[1]/thruster/rpm") >= (1200 * 0.655);
+
+        if (acw_gen_2_ok and !getprop("/controls/elec_panel/ACWgen2")) {
+            # Connect ACW generator if it's serviceable.
+            setprop("/controls/elec_panel/ACWgen2", 1);
+        }
+
+        if (acw_gen_2_ok and getprop("/controls/elec_panel/ACWgen2")) {
             setprop("/systems/electric/elec-buses/acw-bus2/volts", 115);
             setprop("/systems/electric/elec-buses/acw-bus2/amps", 400);
+        } elsif (getprop("/controls/elec_panel/acw-btc") and getprop("/systems/electric/elec-buses/acw-bus1/volts") >= getprop("/systems/electric/elec-buses/acw-bus2/volts")) {
+            setprop("/systems/electric/elec-buses/acw-bus2/volts", getprop("/systems/electric/elec-buses/acw-bus1/volts"));
+            setprop("/systems/electric/elec-buses/acw-bus2/amps", getprop("/systems/electric/elec-buses/acw-bus1/amps"));
         } else {
             setprop("/systems/electric/elec-buses/acw-bus2/volts", 0);
             setprop("/systems/electric/elec-buses/acw-bus2/amps", 0);
@@ -103,6 +133,12 @@ var electrical = {
             setprop("/controls/elec_panel/dc-btc", 1);
         else
             setprop("/controls/elec_panel/dc-btc", 0);
+        
+        # AC WILD BUS TIE CONNECTOR
+        if ((acw_gen_1_ok and !acw_gen_2_ok) or (!acw_gen_1_ok and acw_gen_2_ok))
+            setprop("/controls/elec_panel/acw-btc", true);
+        else
+            setprop("/controls/elec_panel/acw-btc", false);
 	},
 
     reset : func {

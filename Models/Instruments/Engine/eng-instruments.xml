@@ -75,8 +75,8 @@
 	<animation>
     	<type>rotate</type>
     	<object-name>torque0</object-name>
-    	<property>engines/engine[0]/thruster/prop_torque</property>
-    	<factor>0.05</factor>
+    	<property>engines/engine[0]/thruster/torque</property>
+    	<factor>-0.0155</factor>
     	<center>
     		<x-m>0</x-m>
     		<y-m>-0.0389</y-m>
@@ -92,8 +92,8 @@
     <animation>
     	<type>rotate</type>
     	<object-name>torque1</object-name>
-    	<property>engines/engine[1]/thruster/prop_torque</property>
-    	<factor>0.05</factor>
+    	<property>engines/engine[1]/thruster/torque</property>
+    	<factor>0.0155</factor>
     	<center>
     		<x-m>0</x-m>
     		<y-m>0.0372</y-m>
@@ -109,7 +109,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>np0</object-name>
-    	<property>engines/engine[0]/thruster/prop_rpm</property>
+    	<property>engines/engine[0]/thruster/rpm</property>
     	<factor>0.176</factor>
     	<center>
     		<x-m>0</x-m>
@@ -126,7 +126,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>np1</object-name>
-    	<property>engines/engine[1]/thruster/prop_rpm</property>
+    	<property>engines/engine[1]/thruster/rpm</property>
     	<factor>0.176</factor>
     	<center>
     		<x-m>0</x-m>
@@ -245,7 +245,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>ff0</object-name>
-    	<property>engines/engine[0]/fuelflow-kgph</property>
+    	<property>engines/engine[0]/fuel-flow_pph</property>
     	<interpolation>
     		<entry>
     			<ind>0</ind>
@@ -275,7 +275,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>ff1</object-name>
-    	<property>engines/engine[1]/fuelflow-kgph</property>
+    	<property>engines/engine[1]/fuel-flow_pph</property>
     	<interpolation>
     		<entry>
     			<ind>0</ind>
@@ -305,7 +305,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>oilpress0</object-name>
-    	<property>engines/engine[0]/oil-pressure-psi-adjusted</property>
+    	<property>engines/engine[0]/oil-pressure-psi</property>
     	<interpolation>
     		<entry>
     			<ind>0</ind>
@@ -365,7 +365,7 @@
     <animation>
     	<type>rotate</type>
     	<object-name>oilpress1</object-name>
-    	<property>engines/engine[1]/oil-pressure-psi-adjusted</property>
+    	<property>engines/engine[1]/oil-pressure-psi</property>
     	<interpolation>
     		<entry>
     			<ind>0</ind>
@@ -433,7 +433,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%3.1f</format>
-		<property>/engines/engine[0]/thruster/prop_torque-percent</property>
+		<property>/fdm/jsbsim/systems/engine/torque-percent[0]</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -456,8 +456,8 @@
 		<alignment>center-center</alignment>
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
-		<format type="string">%3.1f</format>
-		<property>/engines/engine[1]/thruster/prop_torque-percent</property>
+		<format type="string">%03.1f</format>
+		<property>/fdm/jsbsim/systems/engine/torque-percent[1]</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -481,7 +481,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%3.1f</format>
-		<property>/engines/engine[0]/thruster/prop_rpm-percent</property>
+		<property>/fdm/jsbsim/systems/engine/rpm-percent[0]</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -505,7 +505,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%3.1f</format>
-		<property>/engines/engine[1]/thruster/prop_rpm-percent</property>
+		<property>/fdm/jsbsim/systems/engine/rpm-percent[1]</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -626,7 +626,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%4.1f</format>
-		<property>/engines/engine[0]/fuelflow-kgph</property>
+		<property>/engines/engine[0]/fuel-flow_pph</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>
@@ -650,7 +650,7 @@
 		<axis-alignment>yz-plane</axis-alignment>
 		<type type="string">number-value</type>
 		<format type="string">%4.1f</format>
-		<property>/engines/engine[1]/fuelflow-kgph</property>
+		<property>/engines/engine[1]/fuel-flow_pph</property>
 		<truncate type="bool">false</truncate>
 		<font type="string">led.txf</font>
 		<draw-text type="bool">true</draw-text>

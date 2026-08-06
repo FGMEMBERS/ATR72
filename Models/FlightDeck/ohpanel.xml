@@ -176,32 +176,6 @@
 	
 	<animation>
 		<type>pick</type>
-		<object-name>eng1fuelLP</object-name>
-		<action>
-			<button>0</button>
-			<repeatable type="bool">false</repeatable>
-			<binding>
-				<command>property-toggle</command>
-				<property>/controls/engines/engine/cutoff</property>
-			</binding>
-		</action>
-	</animation>
-	
-	<animation>
-		<type>pick</type>
-		<object-name>eng2fuelLP</object-name>
-		<action>
-			<button>0</button>
-			<repeatable type="bool">false</repeatable>
-			<binding>
-				<command>property-toggle</command>
-				<property>/controls/engines/engine[1]/cutoff</property>
-			</binding>
-		</action>
-	</animation>
-	
-	<animation>
-		<type>pick</type>
 		<object-name>fuelxfeed</object-name>
 		<action>
 			<button>0</button>
@@ -771,7 +745,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>eng1start</object-name>
-		<property>/controls/engines/engine[0]/starter</property>
+		<property>/engines/engine[0]/starting</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>
@@ -781,7 +755,7 @@
 	<animation>
 		<type>textranslate</type>
 		<object-name>eng2start</object-name>
-		<property>/controls/engines/engine[1]/starter</property>
+		<property>/engines/engine[1]/starting</property>
 		<factor>-0.25</factor>
 		<axis>
 			<y>1</y>

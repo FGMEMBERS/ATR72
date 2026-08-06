@@ -1028,7 +1028,7 @@
         <object-name>lprop4</object-name>
         <object-name>lpropblur</object-name>
         <object-name>nosecone0</object-name>
-        <property>/engines/engine[0]/thruster/prop_rpm</property>
+        <property>/engines/engine[0]/thruster/rpm</property>
         <factor>-1</factor>
         <axis>
             <x>1</x>
@@ -1050,7 +1050,7 @@
         <object-name>rprop4</object-name>
         <object-name>rpropblur</object-name>
         <object-name>nosecone1</object-name>
-        <property>/engines/engine[1]/thruster/prop_rpm</property>
+        <property>/engines/engine[1]/thruster/rpm</property>
         <factor>-1</factor>
         <axis>
             <x>1</x>
@@ -1069,7 +1069,7 @@
     <animation>
 	  <type>rotate</type>
 	  <object-name>lprop1</object-name>
-	  <property>/engines/engine[0]/thruster/prop_pitch</property>
+	  <property>/engines/engine[0]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1087,7 +1087,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>lprop4</object-name>
-	  <property>/engines/engine[0]/thruster/prop_pitch</property>
+	  <property>/engines/engine[0]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1105,7 +1105,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>lprop2</object-name>
-	  <property>/engines/engine[0]/thruster/prop_pitch</property>
+	  <property>/engines/engine[0]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1123,7 +1123,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>lprop3</object-name>
-	  <property>/engines/engine[0]/thruster/prop_pitch</property>
+	  <property>/engines/engine[0]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1141,7 +1141,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>rprop1</object-name>
-	  <property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <property>/engines/engine[1]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1159,7 +1159,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>rprop4</object-name>
-	  <property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <property>/engines/engine[1]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1177,7 +1177,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>rprop2</object-name>
-	  <property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <property>/engines/engine[1]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1195,7 +1195,7 @@
 	<animation>
 	  <type>rotate</type>
 	  <object-name>rprop3</object-name>
-	  <property>/engines/engine[1]/thruster/prop_pitch</property>
+	  <property>/engines/engine[1]/thruster/pitch</property>
 		<offset-deg>35</offset-deg>
 		<factor>-1</factor>
 	  <center>
@@ -1217,7 +1217,7 @@
 		<object-name>lpropblur</object-name>
 		<condition>
 			<greater-than>
-				<property>engines/engine[0]/thruster/prop_rpm</property>
+				<property>engines/engine[0]/thruster/rpm</property>
 				<value>450</value>
 			</greater-than>
 		</condition>
@@ -1228,7 +1228,7 @@
 		<object-name>rpropblur</object-name>
 		<condition>
 			<greater-than>
-				<property>engines/engine[1]/thruster/prop_rpm</property>
+				<property>engines/engine[1]/thruster/rpm</property>
 				<value>450</value>
 			</greater-than>
 		</condition>
@@ -1242,7 +1242,7 @@
         <object-name>lprop4</object-name>
 		<condition>
 			<less-than-equals>
-				<property>engines/engine[0]/thruster/prop_rpm</property>
+				<property>engines/engine[0]/thruster/rpm</property>
 				<value>450</value>
 			</less-than-equals>
 		</condition>
@@ -1256,7 +1256,7 @@
         <object-name>rprop4</object-name>
 		<condition>
 			<less-than-equals>
-				<property>engines/engine[1]/thruster/prop_rpm</property>
+				<property>engines/engine[1]/thruster/rpm</property>
 				<value>450</value>
 			</less-than-equals>
 		</condition>
@@ -1267,7 +1267,7 @@
 	<animation>
 		<type>scale</type>
 		<object-name>lpropblur</object-name>
-		<property>/engines/engine[0]/thruster/prop_pitch</property>
+		<property>/engines/engine[0]/thruster/pitch</property>
 		<x-min>1.4</x-min>
 		<y-min>1</y-min>
 		<z-min>1</z-min>
@@ -1282,7 +1282,7 @@
 	<animation>
 		<type>scale</type>
 		<object-name>rpropblur</object-name>
-		<property>/engines/engine[1]/thruster/prop_pitch</property>
+		<property>/engines/engine[1]/thruster/pitch</property>
 		<x-min>1.4</x-min>
 		<y-min>1</y-min>
 		<z-min>1</z-min>

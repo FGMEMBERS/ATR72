@@ -55,11 +55,10 @@ var general_loop_1 = {
 			me.disableTakeoffInhibit();
 			me.convertIttDegreesToCelsius();
 			me.convertOilTemperatureToCelsius();
-			me.convertTorqueAndRpmToPercentage();
-			# me.fuelCrossFeed(); Now managed with xml
 			me.setAutoPilotAltModeVerticalSpeeds();
 			me.setGlideslopeFilter();
 			me.updateFmcSettings();
+			me.updateFuelCutoff();
 		},
 	
 		copilotCallouts : func {
@@ -231,35 +230,6 @@ var general_loop_1 = {
 			setprop("/engines/engine[0]/oil-temperature-degc", get_degC(oiltemp0));
 			setprop("/engines/engine[1]/oil-temperature-degc", get_degC(oiltemp1));
 		},
-	
-		convertTorqueAndRpmToPercentage : func {		
-			var torque0 = getprop("/engines/engine[0]/thruster/prop_torque");
-			var torque1 = getprop("/engines/engine[1]/thruster/prop_torque");
-			
-			var rpm0 = getprop("/engines/engine[0]/thruster/prop_rpm");
-			var rpm1 = getprop("/engines/engine[1]/thruster/prop_rpm");
-			
-			setprop("/engines/engine[0]/thruster/prop_torque-percent", get_percent(torque0, 3800));
-			setprop("/engines/engine[1]/thruster/prop_torque-percent", get_percent(torque1, 3800));
-			
-			setprop("/engines/engine[0]/thruster/prop_rpm-percent", get_percent(rpm0, 1200));
-			setprop("/engines/engine[1]/thruster/prop_rpm-percent", get_percent(rpm1, 1200));
-		},
-		
-		fuelCrossFeed : func {		
-			if ((getprop("/controls/engines/x-feed")) and (getprop("/systems/electric/outputs/x-feed"))) {
-				var ltank = getprop("/consumables/fuel/tank[0]/level-kg");
-				var rtank = getprop("/consumables/fuel/tank[1]/level-kg");
-				
-				if (ltank > rtank and ltank > 5) {
-					setprop("/consumables/fuel/tank[0]/level-kg", ltank - 0.25);
-					setprop("/consumables/fuel/tank[1]/level-kg", rtank + 0.25);
-				} elsif (rtank > ltank and rtank > 5) {
-					setprop("/consumables/fuel/tank[0]/level-kg", ltank + 0.25);
-					setprop("/consumables/fuel/tank[1]/level-kg", rtank - 0.25);
-				}
-			}
-		},
 		
 		setAutoPilotAltModeVerticalSpeeds : func {		
 			if (getprop("/sim/aero") == "ATR72-500") {
@@ -324,6 +294,15 @@ var general_loop_1 = {
 				tasKt = airspeed;
 			}
 			setprop("/aircraft/tas-kt", tasKt);		
+		},
+
+		updateFuelCutoff : func {
+			var left_condition = getprop("/controls/engines/engine[0]/mixture");
+			var right_condition = getprop("/controls/engines/engine[1]/mixture");
+			setprop("/controls/engines/engine[0]/cutoff", left_condition < 0.1);
+			setprop("/controls/engines/engine[1]/cutoff", right_condition < 0.1);
+			setprop("/controls/engines/engine[0]/propeller-feather", left_condition < 0.5);
+			setprop("/controls/engines/engine[1]/propeller-feather", right_condition < 0.5);
 		},
 
 		get_percent : func(val, max) {

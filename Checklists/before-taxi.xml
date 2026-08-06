@@ -1,0 +1,519 @@
+<PropertyList>
+    <title>Before Taxi Procedure</title>
+    <page>
+        <item>
+            <name>Fuel Pump Engine 2</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[1]/fuel-pump</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[1]/fuel-pump</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Wing Lights</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/controls/lighting/wing</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/lighting/wing</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Propeller Brake</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/aircraft/prop-brake</property>
+                    <value>true</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/aircraft/prop-brake</property>
+                <value>true</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine Start Switch</name>
+            <value>START A &amp; B</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/start-mode</property>
+                    <value>4</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>4</value>
+            </binding>
+            <binding> <!-- hack because changing start-mode does not set these -->
+                <command>property-assign</command>
+                <property>/controls/electric/engine[0]/generator</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/electric/engine[1]/generator</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 2 Start</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/engines/engine[1]/starting</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[1]/starter</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 2 NH</name>
+            <value>10%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[1]/n1</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Condition Lever 2</name>
+            <value>FEATHER</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[1]/mixture</property>
+                    <value>0.2</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[1]/mixture</property>
+                <value>0.2</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 2 NH</name>
+            <value>45%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[1]/n1</property>
+                    <value>45</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Engine 2 Starter</name>
+            <value>CHECK OFF</value>
+            <condition>
+                <equals>
+                    <property>/engines/engine[1]/starting</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>Engine 2 NH</name>
+            <value>61.5%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[1]/n1</property>
+                    <value>61.5</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Engine Start Switch</name>
+            <value>OFF &amp; START ABORT</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/start-mode</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>0</value>
+            </binding>
+            <binding> <!-- hack because changing start-mode does not set these -->
+                <command>property-assign</command>
+                <property>/controls/electric/engine[0]/generator</property>
+                <value>0</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/electric/engine[1]/generator</property>
+                <value>0</value>
+            </binding>
+        </item>
+        <item>
+            <name>DC Gen 2 Voltage</name>
+            <value>CHECK</value>
+            <condition>
+                <greater-than>
+                    <property>/systems/electric/elec-buses/dc-bus2/volts</property>
+                    <value>24</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>DC External Power</name>
+            <value>OFF</value>
+            <condition>
+                <or>
+                    <equals> <!-- external power not available -->
+                        <property>/controls/ohpanel/extpwr</property>
+                        <value>0</value>
+                    </equals>
+                    <equals> <!-- external power not selected -->
+                        <property>/controls/ohpanel/extpwr</property>
+                        <value>1</value>
+                    </equals>
+                </or>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/elec_panel/ext-pwr</property>
+                <value>false</value>
+            </binding>
+        </item>
+        <item>
+            <name>DC Gen 2</name>
+            <value>FAULT EXTINGUISHED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/DCgen2</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>DC BTC</name>
+            <value>CLOSED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/dc-btc</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>Beacon</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/controls/lighting/beacon</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/lighting/beacon</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Propeller Brake</name>
+            <value>OFF &amp; GUARDED</value>
+            <condition>
+                <equals>
+                    <property>/aircraft/prop-brake</property>
+                    <value>false</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/aircraft/prop-brake</property>
+                <value>false</value>
+            </binding>
+        </item>
+        <item>
+            <name>Condition Lever 2</name>
+            <value>AUTO</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[1]/mixture</property>
+                    <value>0.5</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[1]/mixture</property>
+                <value>0.5</value>
+            </binding>
+        </item>
+        <item>
+            <name>AC Wild Generator 2</name>
+            <value>FAULT EXTINGUISHED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/ACWgen2</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>ACW BTC</name>
+            <value>CHECK CLOSED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/acw-btc</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>Hydraulic Pressure</name>
+            <value>CHECK</value>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>/systems/hydraulic/blue-pressure-psi</property>
+                        <value>1500</value>
+                    </greater-than>
+                    <greater-than>
+                        <property>/systems/hydraulic/green-pressure-psi</property>
+                        <value>1500</value>
+                    </greater-than>
+                </and>
+            </condition>
+        </item>
+        <item>
+            <name>Flaps</name>
+            <value>15 DEGREES</value>
+            <condition>
+                <equals>
+                    <property>/controls/flight/flaps</property>
+                    <value>0.428</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/flight/flaps</property>
+                <value>0.428</value>
+            </binding>
+        </item>
+    </page>
+    <page>
+        <item>
+            <name>Fuel Pump Engine 1</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[0]/fuel-pump</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[0]/fuel-pump</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine Start Switch</name>
+            <value>START A &amp; B</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/start-mode</property>
+                    <value>4</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>4</value>
+            </binding>
+            <binding> <!-- hack because changing start-mode does not set these -->
+                <command>property-assign</command>
+                <property>/controls/electric/engine[0]/generator</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/electric/engine[1]/generator</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 1 Start</name>
+            <value>ON</value>
+            <condition>
+                <equals>
+                    <property>/engines/engine[0]/starting</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[0]/starter</property>
+                <value>1</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 1 NH</name>
+            <value>10%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[0]/n1</property>
+                    <value>10</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Condition Lever 1</name>
+            <value>FEATHER</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[0]/mixture</property>
+                    <value>0.2</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[0]/mixture</property>
+                <value>0.2</value>
+            </binding>
+        </item>
+        <item>
+            <name>Engine 1 NH</name>
+            <value>45%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[0]/n1</property>
+                    <value>45</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Engine 1 Starter</name>
+            <value>CHECK OFF</value>
+            <condition>
+                <equals>
+                    <property>/engines/engine[0]/starting</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>Engine 1 NH</name>
+            <value>61.5%</value>
+            <condition>
+                <greater-than>
+                    <property>engines/engine[0]/n1</property>
+                    <value>61.5</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>Engine Start Switch</name>
+            <value>OFF &amp; START ABORT</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/start-mode</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>0</value>
+            </binding>
+            <binding> <!-- hack because changing start-mode does not set these -->
+                <command>property-assign</command>
+                <property>/controls/electric/engine[0]/generator</property>
+                <value>0</value>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/electric/engine[1]/generator</property>
+                <value>0</value>
+            </binding>
+        </item>
+        <item>
+            <name>DC Gen 1 Voltage</name>
+            <value>CHECK</value>
+            <condition>
+                <greater-than>
+                    <property>/systems/electric/elec-buses/dc-bus1/volts</property>
+                    <value>24</value>
+                </greater-than>
+            </condition>
+        </item>
+        <item>
+            <name>DC Gen 1</name>
+            <value>FAULT EXTINGUISHED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/DCgen1</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>DC BTC</name>
+            <value>OPEN</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/dc-btc</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>Condition Lever 1</name>
+            <value>AUTO</value>
+            <condition>
+                <equals>
+                    <property>/controls/engines/engine[0]/mixture</property>
+                    <value>0.5</value>
+                </equals>
+            </condition>
+            <binding>
+                <command>property-assign</command>
+                <property>/controls/engines/engine[0]/mixture</property>
+                <value>0.5</value>
+            </binding>
+        </item>
+        <item>
+            <name>AC Wild Generator 1</name>
+            <value>FAULT EXTINGUISHED</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/ACWgen1</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </item>
+        <item>
+            <name>ACW BTC</name>
+            <value>CHECK OPEN</value>
+            <condition>
+                <equals>
+                    <property>/controls/elec_panel/acw-btc</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+        </item>
+    </page>
+</PropertyList>

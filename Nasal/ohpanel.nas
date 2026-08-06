@@ -84,14 +84,14 @@ var ohpanel = {
     		setprop(ohp~ "dcgen2", 1);
     	}
 
-    	if (getprop("/engines/engine/thruster/prop_rpm") < 350)
+    	if (getprop("/engines/engine[0]/thruster/rpm") < (1200 * 0.655))
     		setprop(ohp~ "acwgen1", 2);
 		elsif (getprop("/controls/elec_panel/ACWgen1"))
     		setprop(ohp~ "acwgen1", 0);
     	else
     		setprop(ohp~ "acwgen1", 1);
 
-		if (getprop("/engines/engine[1]/thruster/prop_rpm") < 350)
+		if (getprop("/engines/engine[1]/thruster/rpm") < (1200 * 0.655))
     		setprop(ohp~ "acwgen2", 2);
 		elsif (getprop("/controls/elec_panel/ACWgen2"))
     		setprop(ohp~ "acwgen2", 0);
@@ -106,13 +106,14 @@ var ohpanel = {
     		setprop(ohp~ "extpwr", 0);
     	}
 
-    	if (getprop("/engines/engine[0]/fuelflow-kgph") < 300) {
+		# 300 kg/h ~= 661.5 lb/h
+    	if (getprop("/engines/engine/fuel-flow_pph") < 661.5) {
     		setprop(ohp~ "lfuelind", 1);
     	} else {
     		setprop(ohp~ "lfuelind", 0);
     	}
 
-    	if (getprop("/engines/engine[1]/fuelflow-kgph") < 300) {
+    	if (getprop("/engines/engine[1]/fuel-flow_pph") < 661.5) {
     		setprop(ohp~ "rfuelind", 1);
     	} else {
     		setprop(ohp~ "rfuelind", 0);
