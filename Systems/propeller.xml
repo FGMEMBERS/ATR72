@@ -44,7 +44,7 @@
             </clipto>
         </summer>
 
-        <fcs_function name="systems/propeller/ground-mode/target-blade-angle-deg[0]">
+        <fcs_function name="systems/propeller/ground-mode/blade-angle-table-deg[0]">
             <function>
                 <table>
                     <independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
@@ -60,9 +60,20 @@
             </function>
         </fcs_function>
 
+        <switch name="systems/propeller/ground-mode/target-blade-angle-deg[0]">
+            <default value="systems/propeller/ground-mode/blade-angle-table-deg[0]"/>
+            <test value="-14">
+                /controls/engines/engine[0]/reverser NE 0
+            </test>
+            <test value="78.5">
+                /controls/engines/engine[0]/propeller-feather NE 0
+            </test>
+        </switch>
+
         <summer name="systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[0]">
             <input>propulsion/engine[0]/propeller-rpm</input>
-            <bias>-1230.0</bias>
+            <!-- on ground, a limit of 118% Np is allowed for transition to reverse thrust. -->
+            <bias>-1416.0</bias>
             <clipto>
                 <min> 0.0</min>
                 <max> 0.3333333333</max>
@@ -84,16 +95,13 @@
             <input>systems/propeller/ground-mode/delta-blade-angle-deg[0]</input>
             <input>systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[0]</input>
             <clipto>
-                <min>-1.0</min>
-                <max>78.5</max>
+                <min>-14.0</min>
+                <max> 78.5</max>
             </clipto>
         </summer>
 
         <switch name="propulsion/engine[0]/blade-angle">
             <default value="systems/propeller/ground-mode/blade-angle-deg[0]"/>
-            <test value="78.5">
-                /controls/engines/engine[0]/propeller-feather NE 0
-            </test>
             <test value="systems/propeller/flight-mode/blade-angle-deg[0]">
                 gear/wow == 0
             </test>
@@ -120,7 +128,7 @@
             </clipto>
         </summer>
 
-        <fcs_function name="systems/propeller/ground-mode/target-blade-angle-deg[1]">
+        <fcs_function name="systems/propeller/ground-mode/blade-angle-table-deg[1]">
             <function>
                 <table>
                     <independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
@@ -136,9 +144,20 @@
             </function>
         </fcs_function>
 
+        <switch name="systems/propeller/ground-mode/target-blade-angle-deg[1]">
+            <default value="systems/propeller/ground-mode/blade-angle-table-deg[1]"/>
+            <test value="-14">
+                /controls/engines/engine[1]/reverser NE 0
+            </test>
+            <test value="78.5">
+                /controls/engines/engine[1]/propeller-feather NE 0
+            </test>
+        </switch>
+
         <summer name="systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[1]">
             <input>propulsion/engine[1]/propeller-rpm</input>
-            <bias>-1230.0</bias>
+            <!-- on ground, a limit of 118% Np is allowed for transition to reverse thrust. -->
+            <bias>-1416.0</bias>
             <clipto>
                 <min> 0.0</min>
                 <max> 0.3333333333</max>
@@ -160,16 +179,13 @@
             <input>systems/propeller/ground-mode/delta-blade-angle-deg[1]</input>
             <input>systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[1]</input>
             <clipto>
-                <min>-1.0</min>
-                <max>78.5</max>
+                <min>-14.0</min>
+                <max> 78.5</max>
             </clipto>
         </summer>
 
         <switch name="propulsion/engine[1]/blade-angle">
             <default value="systems/propeller/ground-mode/blade-angle-deg[1]"/>
-            <test value="78.5">
-                /controls/engines/engine[1]/propeller-feather NE 0
-            </test>
             <test value="systems/propeller/flight-mode/blade-angle-deg[1]">
                 gear/wow == 0
             </test>

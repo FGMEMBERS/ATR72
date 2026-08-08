@@ -5358,7 +5358,7 @@
 		<property>/controls/engines/engine[0]/throttle</property>
 		<condition>
 			<not>
-				<property>/controls/reverse-pitch</property>
+				<property>/controls/engines/engine[0]/reverser</property>
 			</not>
 		</condition>
 		<factor>-75</factor>
@@ -5379,7 +5379,7 @@
 		<object-name>throttleL</object-name>
 		<property>/controls/engines/engine[0]/throttle</property>
 		<condition>
-			<property>/controls/reverse-pitch</property>
+			<property>/controls/engines/engine[0]/reverser</property>
 		</condition>
 		<factor>15</factor>
 		<axis>
@@ -5400,7 +5400,7 @@
 		<property>/controls/engines/engine[1]/throttle</property>
 		<condition>
 			<not>
-				<property>/controls/reverse-pitch</property>
+				<property>/controls/engines/engine[1]/reverser</property>
 			</not>
 		</condition>
 		<factor>-75</factor>
@@ -5421,7 +5421,7 @@
 		<object-name>throttleR</object-name>
 		<property>/controls/engines/engine[1]/throttle</property>
 		<condition>
-			<property>/controls/reverse-pitch</property>
+			<property>/controls/engines/engine[1]/reverser</property>
 		</condition>
 		<factor>15</factor>
 		<axis>
@@ -5480,18 +5480,40 @@
 			<repeatable type="bool">false</repeatable>
 			<binding>
 				<command>property-cycle</command>
-				<property>/controls/reverse-pitch</property>
+				<property>/controls/engines/engine[0]/reverser</property>
+				<value>0</value>
+				<value>1</value>
+			</binding>
+			<binding>
+				<command>property-cycle</command>
+				<property>/controls/engines/engine[1]/reverser</property>
 				<value>0</value>
 				<value>1</value>
 			</binding>
 		</action>
 	</animation>
-	
+
 	<animation>
 		<type>rotate</type>
 		<object-name>reverse1</object-name>
+		<property>/controls/engines/engine[0]/reverser</property>
+		<factor>60</factor>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+		<center>
+			<x-m>-10.6226</x-m>
+			<y-m>0</y-m>
+			<z-m>0.3396</z-m>
+		</center>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
 		<object-name>reverse2</object-name>
-		<property>/controls/reverse-pitch</property>
+		<property>/controls/engines/engine[1]/reverser</property>
 		<factor>60</factor>
 		<axis>
 			<x>0</x>

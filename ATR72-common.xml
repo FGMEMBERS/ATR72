@@ -218,7 +218,11 @@
 						<label>Toggle Reverse-Pitch (r)</label>
 						<binding>
 							<command>property-toggle</command>
-							<property>/controls/reverse-pitch</property>
+							<property>/controls/engines/engine[0]/reverser</property>
+						</binding>
+						<binding>
+							<command>property-toggle</command>
+							<property>/controls/engines/engine[1]/reverser</property>
 						</binding>
 					</item>
 					<item>
@@ -755,7 +759,11 @@
 				<desc>Toggle Reverse Pitch</desc>
 				<binding>
 					<command>property-toggle</command>
-					<property>/controls/reverse-pitch</property>
+					<property>/controls/engines/engine[0]/reverser</property>
+				</binding>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/engines/engine[1]/reverser</property>
 				</binding>
 			</key>
 			

@@ -301,8 +301,8 @@ var general_loop_1 = {
 			var right_condition = getprop("/controls/engines/engine[1]/mixture");
 			setprop("/controls/engines/engine[0]/cutoff", left_condition < 0.1);
 			setprop("/controls/engines/engine[1]/cutoff", right_condition < 0.1);
-			setprop("/controls/engines/engine[0]/propeller-feather", left_condition < 0.5);
-			setprop("/controls/engines/engine[1]/propeller-feather", right_condition < 0.5);
+			setprop("/controls/engines/engine[0]/propeller-feather", left_condition < 0.6);
+			setprop("/controls/engines/engine[1]/propeller-feather", right_condition < 0.6);
 		},
 
 		get_percent : func(val, max) {

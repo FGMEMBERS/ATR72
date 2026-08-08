@@ -19,14 +19,14 @@ var hydraulics_loop = {
     	# BLUE and AUX Hydraulics Pump
     	
     	if (getprop(hyd_ctrl~ "blue-pump") == 1)
-    		hyd_blue.elec_pump(getprop("/systems/electric/elec-buses/ac-bus1/amps"));
+    		hyd_blue.elec_pump(getprop("/systems/electric/elec-buses/acw-bus1/amps"));
     	else
     		hydraulics.blue_psi = 0;
     		
     	# GREEN Hydraulics Pump
     	
     	if (getprop(hyd_ctrl~ "green-pump") == 1)
-    		hyd_green.elec_pump(getprop("/systems/electric/elec-buses/ac-bus2/amps"));
+    		hyd_green.elec_pump(getprop("/systems/electric/elec-buses/acw-bus2/amps"));
     	else
     		hydraulics.green_psi = 0;
     		
