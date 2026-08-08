@@ -1,110 +1,57 @@
 <PropertyList>
-    <title>Before Taxi</title>
+    <title>Before Propeller Rotation</title>
+    <item>
+        <name>CM1</name>
+        <value>INFORM GROUND CREW</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Ground from cockpit, ready to start engine 2 in hotel mode. Confirm service door closed and area clear.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Fuel Pump Engine 2</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/engines/engine[1]/fuel-pump</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/fuel-pump</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>Wing Lights</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/lighting/wing</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/lighting/wing</property>
+            <value>1</value>
+        </binding>
+    </item>
     <item>
         <name>Propeller Brake</name>
-        <value>OFF &amp; GUARDED</value>
+        <value>ON</value>
         <condition>
             <equals>
                 <property>/aircraft/prop-brake</property>
-                <value>false</value>
+                <value>true</value>
             </equals>
         </condition>
         <binding>
             <command>property-assign</command>
             <property>/aircraft/prop-brake</property>
-            <value>false</value>
-        </binding>
-    </item>
-    <item>
-        <name>Condition Lever 2</name>
-        <value>AUTO</value>
-        <condition>
-            <greater-than>
-                <property>/controls/engines/engine[1]/mixture</property>
-                <value>0.80</value>
-            </greater-than>
-        </condition>
-        <binding>
-            <command>property-assign</command>
-            <property>/controls/engines/engine[1]/mixture</property>
-            <value>0.83</value>
-        </binding>
-        <binding>
-            <command>property-assign</command>
-            <property>/sim/messages/copilot</property>
-            <value>Single channel, low pitch.</value>
-        </binding>
-    </item>
-    <item>
-        <name>AC Wild Generator 2</name>
-        <value>FAULT EXTINGUISHED</value>
-        <condition>
-            <equals>
-                <property>/controls/elec_panel/ACWgen2</property>
-                <value>1</value>
-            </equals>
-        </condition>
-    </item>
-    <item>
-        <name>ACW BTC</name>
-        <value>CHECK CLOSED</value>
-        <condition>
-            <equals>
-                <property>/controls/elec_panel/acw-btc</property>
-                <value>1</value>
-            </equals>
-        </condition>
-    </item>
-    <item>
-        <name>Hydraulic Pressure</name>
-        <value>CHECK</value>
-        <condition>
-            <and>
-                <greater-than>
-                    <property>/systems/hydraulic/blue-pressure-psi</property>
-                    <value>1500</value>
-                </greater-than>
-                <greater-than>
-                    <property>/systems/hydraulic/green-pressure-psi</property>
-                    <value>1500</value>
-                </greater-than>
-            </and>
-        </condition>
-    </item>
-    <item>
-        <name>Flaps</name>
-        <value>15 DEGREES</value>
-        <condition>
-            <and>
-                <greater-than>
-                    <property>/controls/flight/flaps</property>
-                    <value>0.400</value>
-                </greater-than>
-                <less-than>
-                    <property>/controls/flight/flaps</property>
-                    <value>0.450</value>
-                </less-than>
-            </and>
-        </condition>
-        <binding>
-            <command>property-assign</command>
-            <property>/controls/flight/flaps</property>
-            <value>0.428</value>
-        </binding>
-    </item>
-    <item>
-        <name>Fuel Pump Engine 1</name>
-        <value>ON</value>
-        <condition>
-            <equals>
-                <property>/controls/engines/engine[0]/fuel-pump</property>
-                <value>1</value>
-            </equals>
-        </condition>
-        <binding>
-            <command>property-assign</command>
-            <property>/controls/engines/engine[0]/fuel-pump</property>
-            <value>1</value>
+            <value>true</value>
         </binding>
     </item>
     <item>
@@ -133,17 +80,35 @@
         </binding>
     </item>
     <item>
-        <name>Engine 1 Start</name>
+        <name>CM2</name>
+        <value>READY</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Right side clear, ready to start engine 2?</value>
+        </binding>
+    </item>
+    <item>
+        <name>CM1</name>
+        <value>READY</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>I am ready.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine 2 Start</name>
         <value>ON</value>
         <condition>
             <equals>
-                <property>/engines/engine[0]/starting</property>
+                <property>/engines/engine[1]/starting</property>
                 <value>1</value>
             </equals>
         </condition>
         <binding>
             <command>property-assign</command>
-            <property>/controls/engines/engine[0]/starter</property>
+            <property>/controls/engines/engine[1]/starter</property>
             <value>1</value>
         </binding>
         <binding>
@@ -153,27 +118,27 @@
         </binding>
     </item>
     <item>
-        <name>Engine 1 NH</name>
+        <name>Engine 2 NH</name>
         <value>10%</value>
         <condition>
             <greater-than>
-                <property>engines/engine[0]/n1</property>
+                <property>engines/engine[1]/n1</property>
                 <value>10</value>
             </greater-than>
         </condition>
     </item>
     <item>
-        <name>Condition Lever 1</name>
+        <name>Condition Lever 2</name>
         <value>FEATHER</value>
         <condition>
             <greater-than>
-                <property>/controls/engines/engine[0]/mixture</property>
+                <property>/controls/engines/engine[1]/mixture</property>
                 <value>0.48</value>
             </greater-than>
         </condition>
         <binding>
             <command>property-assign</command>
-            <property>/controls/engines/engine[0]/mixture</property>
+            <property>/controls/engines/engine[1]/mixture</property>
             <value>0.5</value>
         </binding>
         <binding>
@@ -183,54 +148,65 @@
         </binding>
     </item>
     <item>
-        <name>Engine 1 ITT</name>
+        <name>Engine 2 ITT</name>
         <value>INCREASING</value>
         <condition>
             <greater-than>
-                <property>/engines/engine[0]/itt_degc</property>
+                <property>/engines/engine[1]/itt_degc</property>
                 <value>400</value>
             </greater-than>
         </condition>
     </item>
     <item>
-        <name>Engine 1 NH</name>
+        <name>Engine 2 NH</name>
         <value>INCREASING</value>
         <condition>
             <greater-than>
-                <property>engines/engine[0]/n1</property>
+                <property>engines/engine[1]/n1</property>
                 <value>35</value>
             </greater-than>
         </condition>
     </item>
     <item>
-        <name>Engine 1 NH</name>
+        <name>Engine 2 NH</name>
         <value>45%</value>
         <condition>
             <greater-than>
-                <property>engines/engine[0]/n1</property>
+                <property>engines/engine[1]/n1</property>
                 <value>45</value>
             </greater-than>
         </condition>
     </item>
     <item>
-        <name>Engine 1 Starter</name>
+        <name>Engine 2 Starter</name>
         <value>CHECK OFF</value>
         <condition>
             <equals>
-                <property>/engines/engine[0]/starting</property>
+                <property>/engines/engine[1]/starting</property>
                 <value>0</value>
             </equals>
         </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>45%.</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Starter off.</value>
+        </binding>
     </item>
     <item>
-        <name>Engine 1 NH</name>
+        <name>Engine 2 NH</name>
         <value>61.5%</value>
         <condition>
             <greater-than>
-                <property>engines/engine[0]/n1</property>
+                <property>engines/engine[1]/n1</property>
                 <value>61.5</value>
             </greater-than>
         </condition>
+
     </item>
     <item>
         <name>Engine Start Switch</name>
@@ -263,74 +239,79 @@
         </binding>
     </item>
     <item>
-        <name>DC Gen 1 Voltage</name>
+        <name>DC Gen 2 Voltage</name>
         <value>CHECK</value>
         <condition>
             <greater-than>
-                <property>/systems/electric/elec-buses/dc-bus1/volts</property>
+                <property>/systems/electric/elec-buses/dc-bus2/volts</property>
                 <value>24</value>
             </greater-than>
         </condition>
     </item>
     <item>
-        <name>DC Gen 1</name>
+        <name>DC External Power</name>
+        <value>OFF</value>
+        <condition>
+            <or>
+                <equals> <!-- external power not available -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>0</value>
+                </equals>
+                <equals> <!-- external power not selected -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>1</value>
+                </equals>
+            </or>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/ext-pwr</property>
+            <value>false</value>
+        </binding>
+    </item>
+    <item>
+        <name>DC Gen 2</name>
         <value>FAULT EXTINGUISHED</value>
         <condition>
             <equals>
-                <property>/controls/elec_panel/DCgen1</property>
+                <property>/controls/elec_panel/DCgen2</property>
                 <value>1</value>
             </equals>
         </condition>
     </item>
     <item>
         <name>DC BTC</name>
-        <value>OPEN</value>
+        <value>CHECK CLOSED</value>
         <condition>
             <equals>
                 <property>/controls/elec_panel/dc-btc</property>
-                <value>0</value>
-            </equals>
-        </condition>
-    </item>
-    <item>
-        <name>Condition Lever 1</name>
-        <value>AUTO</value>
-        <condition>
-            <greater-than>
-                <property>/controls/engines/engine[0]/mixture</property>
-                <value>0.80</value>
-            </greater-than>
-        </condition>
-        <binding>
-            <command>property-assign</command>
-            <property>/controls/engines/engine[0]/mixture</property>
-            <value>0.83</value>
-        </binding>
-        <binding>
-            <command>property-assign</command>
-            <property>/sim/messages/copilot</property>
-            <value>Single channel, low pitch.</value>
-        </binding>
-    </item>
-    <item>
-        <name>AC Wild Generator 1</name>
-        <value>FAULT EXTINGUISHED</value>
-        <condition>
-            <equals>
-                <property>/controls/elec_panel/ACWgen1</property>
                 <value>1</value>
             </equals>
         </condition>
     </item>
     <item>
-        <name>ACW BTC</name>
-        <value>CHECK OPEN</value>
+        <name>CM1</name>
+        <value>INFORM GROUND CREW</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Ground from cockpit, you can disconnect GPU.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Beacon</name>
+        <value>ON</value>
         <condition>
             <equals>
-                <property>/controls/elec_panel/acw-btc</property>
-                <value>0</value>
+                <property>/controls/lighting/beacon</property>
+                <value>1</value>
             </equals>
         </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/lighting/beacon</property>
+            <value>1</value>
+        </binding>
     </item>
     <item>
         <name>CM2</name>
