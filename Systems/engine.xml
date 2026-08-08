@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+<system name="engine">
+    <channel name="Fuel Cutoff">
+        <switch name="/controls/engines/engine[0]/cutoff">
+            <default value="1.0"/>
+            <test value="0.0">
+                fcs/mixture-cmd-norm[0] GE 0.40
+            </test>
+        </switch>
+
+        <switch name="/controls/engines/engine[1]/cutoff">
+            <default value="1.0"/>
+            <test value="0.0">
+                fcs/mixture-cmd-norm[1] GE 0.40
+            </test>
+        </switch>
+    </channel>
+
+    <channel name="Engine Control">
+        <!-- target shaft horsepower depends on PWR MGT setting -->
+        <fcs_function name="systems/engine/flight-mode/target-torque-percent[0]">
+            <function>
+                <table>
+                    <independentVar lookup="row">/controls/power-setting</independentVar>
+                    <independentVar lookup="column">fcs/throttle-cmd-norm[0]</independentVar>
+                    <!--
+                        Columns:
+                                0.50    0.65    0.70    0.80    0.85    0.95
+                                        NOTCH   NOTCH   RAMP    RAMP    WALL
+                        
+                        Rows:
+                        0.82    CRZ
+                        0.88    CLB
+                        0.96    MCT
+                        1.00    TO
+                    -->
+                    <tableData>
+                                0.50    0.65    0.70    0.80    0.85    0.95
+                        0.82    45.0    94.5    94.5    100.0   100.0   115.0
+                        0.88    45.0    97.0    97.0    100.0   100.0   115.0
+                        0.96    45.0    90.9    90.9    100.0   100.0   115.0
+                        1.00    45.0    90.0    90.0    100.0   100.0   115.0
+                    </tableData>
+                </table>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/engine/torque-percent[0]">
+            <function>
+                <quotient>
+                    <property>propulsion/engine[0]/propeller-torque-ftlb</property>
+                    <value>-105.04</value>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <summer name="systems/engine/flight-mode/delta-throttle[0]">
+            <input> systems/engine/flight-mode/target-torque-percent[0]</input>
+            <input>-systems/engine/torque-percent[0]</input>
+            <clipto>
+                <min>-0.008333333333</min>
+                <max> 0.008333333333</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/engine/flight-mode/throttle[0]">
+            <input> systems/engine/flight-mode/throttle[0]</input>
+            <input> systems/engine/flight-mode/delta-throttle[0]</input>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+        </summer>
+
+        <fcs_function name="systems/engine/rpm-percent[0]">
+            <function>
+                <quotient>
+                    <property>propulsion/engine[0]/propeller-rpm</property>
+                    <value>12.0</value>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <summer name="systems/engine/ground-mode/delta-throttle[0]">
+            <input>-systems/engine/rpm-percent[0]</input>
+            <bias>70.8</bias>
+            <clipto>
+                <min>-0.0001</min>
+                <max> 0.0001</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/engine/ground-mode/throttle[0]">
+            <input> systems/engine/ground-mode/throttle[0]</input>
+            <input> systems/engine/ground-mode/delta-throttle[0]</input>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+        </summer>
+
+        <switch name="fcs/throttle-pos-norm[0]">
+            <default value="fcs/throttle-pos-norm[0]"/>
+            <test value="systems/engine/flight-mode/throttle[0]">
+                fcs/throttle-cmd-norm[1] GE 0.50
+            </test>
+        </switch>
+
+        <fcs_function name="systems/engine/flight-mode/target-torque-percent[1]">
+            <function>
+                <table>
+                    <independentVar lookup="row">/controls/power-setting</independentVar>
+                    <independentVar lookup="column">fcs/throttle-cmd-norm[0]</independentVar>
+                    <!--
+                        Columns:
+                                0.50    0.65    0.70    0.80    0.85    0.95
+                                        NOTCH   NOTCH   RAMP    RAMP    WALL
+                        
+                        Rows:
+                        0.82    CRZ
+                        0.88    CLB
+                        0.96    MCT
+                        1.00    TO
+                    -->
+                    <tableData>
+                                0.50    0.65    0.70    0.80    0.85    0.95
+                        0.82    45.0    94.5    94.5    100.0   100.0   115.0
+                        0.88    45.0    97.0    97.0    100.0   100.0   115.0
+                        0.96    45.0    90.9    90.9    100.0   100.0   115.0
+                        1.00    45.0    90.0    90.0    100.0   100.0   115.0
+                    </tableData>
+                </table>
+            </function>
+        </fcs_function>
+
+        <fcs_function name="systems/engine/torque-percent[1]">
+            <function>
+                <quotient>
+                    <property>propulsion/engine[1]/propeller-torque-ftlb</property>
+                    <value> 105.04</value>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <summer name="systems/engine/flight-mode/delta-throttle[1]">
+            <input> systems/engine/flight-mode/target-torque-percent[1]</input>
+            <input>-systems/engine/torque-percent[1]</input>
+            <clipto>
+                <min>-0.008333333333</min>
+                <max> 0.008333333333</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/engine/flight-mode/throttle[1]">
+            <input> systems/engine/flight-mode/throttle[1]</input>
+            <input> systems/engine/flight-mode/delta-throttle[1]</input>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+        </summer>
+
+        <fcs_function name="systems/engine/rpm-percent[1]">
+            <function>
+                <quotient>
+                    <property>propulsion/engine[1]/propeller-rpm</property>
+                    <value>12.0</value>
+                </quotient>
+            </function>
+        </fcs_function>
+
+        <summer name="systems/engine/ground-mode/delta-throttle[1]">
+            <input>-systems/engine/rpm-percent[1]</input>
+            <bias>70.8</bias>
+            <clipto>
+                <min>-0.0001</min>
+                <max> 0.0001</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/engine/ground-mode/throttle[1]">
+            <input> systems/engine/ground-mode/throttle[1]</input>
+            <input> systems/engine/ground-mode/delta-throttle[1]</input>
+            <clipto>
+                <min>0.0</min>
+                <max>1.0</max>
+            </clipto>
+        </summer>
+
+        <switch name="fcs/throttle-pos-norm[1]">
+            <default value="fcs/throttle-cmd-norm[1]"/>
+            <test value="systems/engine/flight-mode/throttle[1]">
+                fcs/throttle-cmd-norm[1] GE 0.50
+            </test>
+        </switch>
+    </channel>
+</system>

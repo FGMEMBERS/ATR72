@@ -28,6 +28,17 @@
 			<path>Aircraft/ATR72/Systems/instrumentation.xml</path>
 		</instrumentation>
 
+		<checklists>
+			<checklist include="Checklists/powering-up.xml"/>
+			<checklist include="Checklists/before-propeller-rotation.xml"/>
+			<checklist include="Checklists/before-taxi.xml"/>
+			<startup>
+				<index n="0">0</index> <!-- Powering Up -->
+				<index n="1">1</index> <!-- Before Propeller Rotation -->
+				<index n="2">2</index> <!-- Before Taxi -->
+			</startup>
+		</checklists>
+
 	<view n="0">
 		<name>Pilot View</name>
 		<type>lookfrom</type>
@@ -171,7 +182,7 @@
                         <binding>
 							<command>nasal</command>
 							<script>
-								atr.autostart();
+								autochecklist.complete_checklists("startup");
 							</script>
                         </binding>
                     </item>
@@ -209,7 +220,11 @@
 						<label>Toggle Reverse-Pitch (r)</label>
 						<binding>
 							<command>property-toggle</command>
-							<property>/controls/reverse-pitch</property>
+							<property>/controls/engines/engine[0]/reverser</property>
+						</binding>
+						<binding>
+							<command>property-toggle</command>
+							<property>/controls/engines/engine[1]/reverser</property>
 						</binding>
 					</item>
 					<item>
@@ -300,22 +315,22 @@
 				</signal>
 				<signal>
 					<type>float</type>
-					<property type="string">/engines/engine[0]/thruster/prop_rpm</property>
+					<property type="string">/engines/engine[0]/thruster/rpm</property>
 					<interpolation>linear</interpolation>
 				</signal>
 				<signal>
 					<type>float</type>
-					<property type="string">/engines/engine[0]/thruster/prop_pitch</property>
+					<property type="string">/engines/engine[0]/thruster/pitch</property>
 					<interpolation>linear</interpolation>
 				</signal>
 				<signal>
 					<type>float</type>
-					<property type="string">/engines/engine[1]/thruster/prop_rpm</property>
+					<property type="string">/engines/engine[1]/thruster/rpm</property>
 					<interpolation>linear</interpolation>
 				</signal>
 				<signal>
 					<type>float</type>
-					<property type="string">/engines/engine[1]/thruster/prop_pitch</property>
+					<property type="string">/engines/engine[1]/thruster/pitch</property>
 					<interpolation>linear</interpolation>
 				</signal>
 			</config>
@@ -746,7 +761,11 @@
 				<desc>Toggle Reverse Pitch</desc>
 				<binding>
 					<command>property-toggle</command>
-					<property>/controls/reverse-pitch</property>
+					<property>/controls/engines/engine[0]/reverser</property>
+				</binding>
+				<binding>
+					<command>property-toggle</command>
+					<property>/controls/engines/engine[1]/reverser</property>
 				</binding>
 			</key>
 			
@@ -852,8 +871,6 @@
 			<file>Aircraft/ATR72/Nasal/FMC/pages/arrivals.nas</file>
 		</fmc>
 		<atr>
-			<file>Aircraft/ATR72/Nasal/autostart.nas</file>
-			<file>Aircraft/ATR72/Engines/propeller.nas</file>
 			<file>Aircraft/ATR72/Nasal/general_loop.nas</file>
 			<file>Aircraft/ATR72/Nasal/electrical.nas</file>
 			<file>Aircraft/ATR72/Nasal/ccas.nas</file>
@@ -875,6 +892,9 @@
 		<!-- arducockpit>
 			<file>Aircraft/ATR72/Nasal/yoke.nas</file>
 		</arducockpit -->
+		<autochecklist>
+			<file>Aircraft/Generic/autochecklist.nas</file>
+		</autochecklist>
 	</nasal>
 
 </PropertyList>

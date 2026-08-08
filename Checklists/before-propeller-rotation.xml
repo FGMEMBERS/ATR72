@@ -1,0 +1,325 @@
+<PropertyList>
+    <title>Before Propeller Rotation</title>
+    <item>
+        <name>CM1</name>
+        <value>INFORM GROUND CREW</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Ground from cockpit, ready to start engine 2 in hotel mode. Confirm service door closed and area clear.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Fuel Pump Engine 2</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/engines/engine[1]/fuel-pump</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/fuel-pump</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>Wing Lights</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/lighting/wing</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/lighting/wing</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>Propeller Brake</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/aircraft/prop-brake</property>
+                <value>true</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/aircraft/prop-brake</property>
+            <value>true</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine Start Switch</name>
+        <value>START A &amp; B</value>
+        <condition>
+            <equals>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>4</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/start-mode</property>
+            <value>4</value>
+        </binding>
+        <binding> <!-- hack because changing start-mode does not set these -->
+            <command>property-assign</command>
+            <property>/controls/electric/engine[0]/generator</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/electric/engine[1]/generator</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>CM2</name>
+        <value>READY</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Right side clear, ready to start engine 2?</value>
+        </binding>
+    </item>
+    <item>
+        <name>CM1</name>
+        <value>READY</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>I am ready.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine 2 Start</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/engines/engine[1]/starting</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/starter</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Starter on.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine 2 NH</name>
+        <value>10%</value>
+        <condition>
+            <greater-than>
+                <property>engines/engine[1]/n1</property>
+                <value>10</value>
+            </greater-than>
+        </condition>
+    </item>
+    <item>
+        <name>Condition Lever 2</name>
+        <value>FEATHER</value>
+        <condition>
+            <greater-than>
+                <property>/controls/engines/engine[1]/mixture</property>
+                <value>0.48</value>
+            </greater-than>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/mixture</property>
+            <value>0.5</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Fuel open.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine 2 ITT</name>
+        <value>INCREASING</value>
+        <condition>
+            <greater-than>
+                <property>/engines/engine[1]/itt_degc</property>
+                <value>400</value>
+            </greater-than>
+        </condition>
+    </item>
+    <item>
+        <name>Engine 2 NH</name>
+        <value>INCREASING</value>
+        <condition>
+            <greater-than>
+                <property>engines/engine[1]/n1</property>
+                <value>35</value>
+            </greater-than>
+        </condition>
+    </item>
+    <item>
+        <name>Engine 2 NH</name>
+        <value>45%</value>
+        <condition>
+            <greater-than>
+                <property>engines/engine[1]/n1</property>
+                <value>45</value>
+            </greater-than>
+        </condition>
+    </item>
+    <item>
+        <name>Engine 2 Starter</name>
+        <value>CHECK OFF</value>
+        <condition>
+            <equals>
+                <property>/engines/engine[1]/starting</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>45%.</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Starter off.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Engine 2 NH</name>
+        <value>61.5%</value>
+        <condition>
+            <greater-than>
+                <property>engines/engine[1]/n1</property>
+                <value>61.5</value>
+            </greater-than>
+        </condition>
+
+    </item>
+    <item>
+        <name>Engine Start Switch</name>
+        <value>OFF &amp; START ABORT</value>
+        <condition>
+            <equals>
+                <property>/controls/elec_panel/start-mode</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/start-mode</property>
+            <value>0</value>
+        </binding>
+        <binding> <!-- hack because changing start-mode does not set these -->
+            <command>property-assign</command>
+            <property>/controls/electric/engine[0]/generator</property>
+            <value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/electric/engine[1]/generator</property>
+            <value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Parameters stabilised.</value>
+        </binding>
+    </item>
+    <item>
+        <name>DC Gen 2 Voltage</name>
+        <value>CHECK</value>
+        <condition>
+            <greater-than>
+                <property>/systems/electric/elec-buses/dc-bus2/volts</property>
+                <value>24</value>
+            </greater-than>
+        </condition>
+    </item>
+    <item>
+        <name>DC External Power</name>
+        <value>OFF</value>
+        <condition>
+            <or>
+                <equals> <!-- external power not available -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>0</value>
+                </equals>
+                <equals> <!-- external power not selected -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>1</value>
+                </equals>
+            </or>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/ext-pwr</property>
+            <value>false</value>
+        </binding>
+    </item>
+    <item>
+        <name>DC Gen 2</name>
+        <value>FAULT EXTINGUISHED</value>
+        <condition>
+            <equals>
+                <property>/controls/elec_panel/DCgen2</property>
+                <value>1</value>
+            </equals>
+        </condition>
+    </item>
+    <item>
+        <name>DC BTC</name>
+        <value>CHECK CLOSED</value>
+        <condition>
+            <equals>
+                <property>/controls/elec_panel/dc-btc</property>
+                <value>1</value>
+            </equals>
+        </condition>
+    </item>
+    <item>
+        <name>CM1</name>
+        <value>INFORM GROUND CREW</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/pilot</property>
+            <value>Ground from cockpit, you can disconnect GPU.</value>
+        </binding>
+    </item>
+    <item>
+        <name>Beacon</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/lighting/beacon</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/lighting/beacon</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>CM2</name>
+        <value>C/L COMPLETE</value>
+        <binding>
+            <command>property-assign</command>
+            <property>/sim/messages/copilot</property>
+            <value>Checklist complete.</value>
+        </binding>
+    </item>
+</PropertyList>

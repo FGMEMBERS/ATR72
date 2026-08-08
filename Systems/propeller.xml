@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+
+<system name="propeller">
+    <channel name="Propeller Control">
+        <!-- target propeller RPM depends on PWR MGT setting -->
+        <fcs_function name="systems/propeller/flight-mode/target-rpm">
+            <function>
+                <table>
+                    <independentVar>/controls/power-setting</independentVar>
+                    <!--
+                        0.82    CRZ
+                        0.88    CLB
+                        0.96    MCT
+                        1.00    TO
+                    -->
+                    <tableData>
+                        0.82     984.0
+                        0.88     984.0
+                        0.96    1200.0
+                        1.00    1200.0
+                    </tableData>
+                </table>
+            </function>
+        </fcs_function>
+
+        <!-- engine 0 propeller control -->
+        <summer name="systems/propeller/flight-mode/delta-blade-angle-deg[0]">
+            <input> propulsion/engine[0]/propeller-rpm</input>
+            <input>-systems/propeller/flight-mode/target-rpm</input>
+            <!-- maximum pitch change speed is 20 degrees per second, so 1/6 degree per tick at 120Hz -->
+            <clipto>
+                <min>-0.1666666667</min>
+                <max> 0.1666666667</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/propeller/flight-mode/blade-angle-deg[0]">
+            <input>systems/propeller/flight-mode/blade-angle-deg[0]</input>
+            <input>systems/propeller/flight-mode/delta-blade-angle-deg[0]</input>
+            <clipto>
+                <!-- secondary low pitch stop prevents propeller pitch below 13 degrees in flight -->
+                <min>13.0</min>
+                <max>78.5</max>
+            </clipto>
+        </summer>
+
+        <fcs_function name="systems/propeller/ground-mode/blade-angle-table-deg[0]">
+            <function>
+                <table>
+                    <independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
+                    <independentVar lookup="column">velocities/vtrue-kts</independentVar>
+                    <tableData>
+                                50      100     150     200     250     300
+                        0.02    -1.0    -1.0    -1.0    -1.0    -1.0    -1.0
+                        0.18    14.0    14.0    14.0    14.0    14.0    14.0
+                        0.22    14.0    14.0    14.0    14.0    14.0    14.0
+                        0.40    15.0    16.0    17.0    19.0    21.0    23.0
+                    </tableData>
+                </table>
+            </function>
+        </fcs_function>
+
+        <switch name="systems/propeller/ground-mode/target-blade-angle-deg[0]">
+            <default value="systems/propeller/ground-mode/blade-angle-table-deg[0]"/>
+            <test value="-14">
+                /controls/engines/engine[0]/reverser NE 0
+            </test>
+            <test value="78.5">
+                /controls/engines/engine[0]/propeller-feather NE 0
+            </test>
+        </switch>
+
+        <summer name="systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[0]">
+            <input>propulsion/engine[0]/propeller-rpm</input>
+            <!-- on ground, a limit of 118% Np is allowed for transition to reverse thrust. -->
+            <bias>-1416.0</bias>
+            <clipto>
+                <min> 0.0</min>
+                <max> 0.3333333333</max>
+            </clipto>
+        </summer>
+        
+        <summer name="systems/propeller/ground-mode/delta-blade-angle-deg[0]">
+            <input> systems/propeller/ground-mode/target-blade-angle-deg[0]</input>
+            <input>-systems/propeller/ground-mode/blade-angle-deg[0]</input>
+            <!-- maximum pitch change speed is 20 degrees per second, so 1/6 degree per tick at 120Hz -->
+            <clipto>
+                <min>-0.1666666667</min>
+                <max> 0.1666666667</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/propeller/ground-mode/blade-angle-deg[0]">
+            <input>systems/propeller/ground-mode/blade-angle-deg[0]</input>
+            <input>systems/propeller/ground-mode/delta-blade-angle-deg[0]</input>
+            <input>systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[0]</input>
+            <clipto>
+                <min>-14.0</min>
+                <max> 78.5</max>
+            </clipto>
+        </summer>
+
+        <switch name="propulsion/engine[0]/blade-angle">
+            <default value="systems/propeller/ground-mode/blade-angle-deg[0]"/>
+            <test value="systems/propeller/flight-mode/blade-angle-deg[0]">
+                gear/wow == 0
+            </test>
+        </switch>
+
+        <!-- engine 1 propeller control -->
+        <summer name="systems/propeller/flight-mode/delta-blade-angle-deg[1]">
+            <input> propulsion/engine[1]/propeller-rpm</input>
+            <input>-systems/propeller/flight-mode/target-rpm</input>
+            <!-- maximum pitch change speed is 20 degrees per second, so 1/6 degree per tick at 120Hz -->
+            <clipto>
+                <min>-0.1666666667</min>
+                <max> 0.1666666667</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/propeller/flight-mode/blade-angle-deg[1]">
+            <input>systems/propeller/flight-mode/blade-angle-deg[1]</input>
+            <input>systems/propeller/flight-mode/delta-blade-angle-deg[1]</input>
+            <clipto>
+                <!-- secondary low pitch stop prevents propeller pitch below 13 degrees in flight -->
+                <min>13.0</min>
+                <max>78.5</max>
+            </clipto>
+        </summer>
+
+        <fcs_function name="systems/propeller/ground-mode/blade-angle-table-deg[1]">
+            <function>
+                <table>
+                    <independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
+                    <independentVar lookup="column">velocities/vtrue-kts</independentVar>
+                    <tableData>
+                                50      100     150     200     250     300
+                        0.02    -1.0    -1.0    -1.0    -1.0    -1.0    -1.0
+                        0.18    14.0    14.0    14.0    14.0    14.0    14.0
+                        0.22    14.0    14.0    14.0    14.0    14.0    14.0
+                        0.40    15.0    16.0    17.0    19.0    21.0    23.0
+                    </tableData>
+                </table>
+            </function>
+        </fcs_function>
+
+        <switch name="systems/propeller/ground-mode/target-blade-angle-deg[1]">
+            <default value="systems/propeller/ground-mode/blade-angle-table-deg[1]"/>
+            <test value="-14">
+                /controls/engines/engine[1]/reverser NE 0
+            </test>
+            <test value="78.5">
+                /controls/engines/engine[1]/propeller-feather NE 0
+            </test>
+        </switch>
+
+        <summer name="systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[1]">
+            <input>propulsion/engine[1]/propeller-rpm</input>
+            <!-- on ground, a limit of 118% Np is allowed for transition to reverse thrust. -->
+            <bias>-1416.0</bias>
+            <clipto>
+                <min> 0.0</min>
+                <max> 0.3333333333</max>
+            </clipto>
+        </summer>
+        
+        <summer name="systems/propeller/ground-mode/delta-blade-angle-deg[1]">
+            <input> systems/propeller/ground-mode/target-blade-angle-deg[1]</input>
+            <input>-systems/propeller/ground-mode/blade-angle-deg[1]</input>
+            <!-- maximum pitch change speed is 20 degrees per second, so 1/6 degree per tick at 120Hz -->
+            <clipto>
+                <min>-0.1666666667</min>
+                <max> 0.1666666667</max>
+            </clipto>
+        </summer>
+
+        <summer name="systems/propeller/ground-mode/blade-angle-deg[1]">
+            <input>systems/propeller/ground-mode/blade-angle-deg[1]</input>
+            <input>systems/propeller/ground-mode/delta-blade-angle-deg[1]</input>
+            <input>systems/propeller/ground-mode/over-rev-delta-blade-angle-deg[1]</input>
+            <clipto>
+                <min>-14.0</min>
+                <max> 78.5</max>
+            </clipto>
+        </summer>
+
+        <switch name="propulsion/engine[1]/blade-angle">
+            <default value="systems/propeller/ground-mode/blade-angle-deg[1]"/>
+            <test value="systems/propeller/flight-mode/blade-angle-deg[1]">
+                gear/wow == 0
+            </test>
+        </switch>
+    </channel>
+</system>

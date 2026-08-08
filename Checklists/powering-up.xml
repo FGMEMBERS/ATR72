@@ -1,0 +1,151 @@
+<PropertyList>
+    <title>Powering Up</title>
+    <item>
+        <name>Power Levers</name>
+        <value>GROUND IDLE</value>
+        <condition>
+            <and>
+                <equals>
+                    <property>/controls/engines/engine[0]/throttle</property>
+                    <value>0.0</value>
+                </equals>
+                <equals>
+                    <property>/controls/engines/engine[1]/throttle</property>
+                    <value>0.0</value>
+                </equals>
+            </and>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[0]/throttle</property>
+            <value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/throttle</property>
+            <value>0</value>
+        </binding>
+    </item>
+    <item>
+        <name>Condition Levers</name>
+        <value>FUEL SHUTOFF</value>
+        <condition>
+            <and>
+                <equals>
+                    <property>/controls/engines/engine[0]/mixture</property>
+                    <value>0.0</value>
+                </equals>
+                <equals>
+                    <property>/controls/engines/engine[1]/mixture</property>
+                    <value>0.0</value>
+                </equals>
+            </and>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[0]/mixture</property>
+            <value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/engines/engine[1]/mixture</property>
+            <value>0</value>
+        </binding>
+    </item>
+    <item>
+        <name>Battery Switch</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/elec_panel/battery</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/battery</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>MFC Self-Test</name>
+        <value>NO FAULTS</value>
+        <condition>
+            <and>
+                <equals>
+                    <property>/aircraft/mfc_1a/online</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/aircraft/mfc_1b/online</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/aircraft/mfc_2a/online</property>
+                    <value>1</value>
+                </equals>
+                <equals>
+                    <property>/aircraft/mfc_2b/online</property>
+                    <value>1</value>
+                </equals>
+            </and>
+        </condition>
+    </item>
+    <item>
+        <name>Navigation Lights</name>
+        <value>ON</value>
+        <condition>
+            <equals>
+                <property>/controls/lighting/nav-lights</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/lighting/nav-lights</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>Master Caution</name>
+        <value>CLEAR</value>
+        <condition>
+            <or>
+                <equals> <!-- no master caution -->
+                    <property>/aircraft/ccas/master-caution</property>
+                    <value>0</value>
+                </equals>
+                <equals> <!-- master caution dismissed -->
+                    <property>/aircraft/ccas/master-caution-selected</property>
+                    <value>1</value>
+                </equals>
+            </or>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/aircraft/ccas/master-caution-selected</property>
+            <value>1</value>
+        </binding>
+    </item>
+    <item>
+        <name>DC External Power</name>
+        <value>ON IF AVAILABLE</value>
+        <condition>
+            <or>
+                <equals> <!-- external power not available -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>0</value>
+                </equals>
+                <equals> <!-- external power selected -->
+                    <property>/controls/ohpanel/extpwr</property>
+                    <value>2</value>
+                </equals>
+            </or>
+        </condition>
+        <binding>
+            <command>property-assign</command>
+            <property>/controls/elec_panel/ext-pwr</property>
+            <value>true</value>
+        </binding>
+    </item>
+</PropertyList>

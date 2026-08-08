@@ -92,28 +92,27 @@ var ccas = {
 	},
 	
 	oil_pressure_eng : func(engineNumber, engineStartTime) {
-			##must be suppressed for first 30s after engine start
-			var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
-			var lastOilPressStatus = getprop(propertyName);
-			
-			if (me.turn_light_off(propertyName)) return;
-			
-			if (engineStartTime == nil) {
+		##must be suppressed for first 30s after engine start
+		var propertyName = "/aircraft/ccas/warnings/oil-pressure-eng" ~ engineNumber;
+		var lastOilPressStatus = getprop(propertyName);
+		
+		if (me.turn_light_off(propertyName)) return;
+		
+		if (engineStartTime == nil) {
+			me.remove_warning(propertyName, lastOilPressStatus);
+			return;
+		}
+		
+		if (me.toInhib) return;
+					
+		if ((systime() - engineStartTime) > 30) {		
+			if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi") < 20) {
+				me.add_warning(propertyName, lastOilPressStatus);
+			} else {
 				me.remove_warning(propertyName, lastOilPressStatus);
-				return;
-				}
-			
-			if (me.toInhib) return;
-						
-			if ((systime() - engineStartTime) > 30) {		
-				if (getprop("/engines/engine[" ~ engineNumber ~ "]/oil-pressure-psi-adjusted") < 40) {
-					me.add_warning(propertyName, lastOilPressStatus);
-					}
-				else {
-					me.remove_warning(propertyName, lastOilPressStatus);
-					}
-				}
-			},
+			}
+		}
+	},
 			
 	flaps_unlk : func {
 			var propertyName = "/aircraft/ccas/cautions/flaps-unlk-fault";
